@@ -1,0 +1,17 @@
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\bin\Debug\net6.0-windows\Projekt_Auftragsverwaltung.exe
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\bin\Debug\net6.0-windows\Projekt_Auftragsverwaltung.deps.json
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\bin\Debug\net6.0-windows\Projekt_Auftragsverwaltung.runtimeconfig.json
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\bin\Debug\net6.0-windows\Projekt_Auftragsverwaltung.dll
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\bin\Debug\net6.0-windows\Projekt_Auftragsverwaltung.pdb
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\obj\Debug\net6.0-windows\Projekt_Auftragsverwaltung.csproj.AssemblyReference.cache
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\obj\Debug\net6.0-windows\Projekt_Auftragsverwaltung.Form1.resources
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\obj\Debug\net6.0-windows\Projekt_Auftragsverwaltung.csproj.GenerateResource.cache
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\obj\Debug\net6.0-windows\Projekt_Auftragsverwaltung.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\obj\Debug\net6.0-windows\Projekt_Auftragsverwaltung.AssemblyInfoInputs.cache
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\obj\Debug\net6.0-windows\Projekt_Auftragsverwaltung.AssemblyInfo.cs
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\obj\Debug\net6.0-windows\Projekt_Auftragsverwaltung.csproj.CoreCompileInputs.cache
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\obj\Debug\net6.0-windows\Projekt_Auftragsverwaltung.dll
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\obj\Debug\net6.0-windows\refint\Projekt_Auftragsverwaltung.dll
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\obj\Debug\net6.0-windows\Projekt_Auftragsverwaltung.pdb
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\obj\Debug\net6.0-windows\Projekt_Auftragsverwaltung.genruntimeconfig.cache
+C:\Users\nick9\OneDrive\Desktop\Projekt Januar\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\obj\Debug\net6.0-windows\ref\Projekt_Auftragsverwaltung.dll
