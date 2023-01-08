@@ -14,8 +14,21 @@ namespace Projekt_Auftragsverwaltung
             InitializeComponent();
             EditGuiArticleGroup = new MainEditArticleGroup();
             EditGuiCustomer = new MainEditCustomer();
-            EditGuiArticle = new MainEditCustomer();
-            EditGuiPosition = new MainEditCustomer();
+            EditGuiArticle = new MainEditArticle();
+            EditGuiPosition = new MainEditPosition();   
+            EditGuiOrder = new MainEditOrder();
+            
+        }
+
+        private void ClearTextBoxes()
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c is TextBox)
+                {
+                    ((TextBox)c).Clear();
+                }
+            }
         }
 
         private void CmdCreateArticleGroup_Click(Object sender, EventArgs e)
@@ -45,7 +58,6 @@ namespace Projekt_Auftragsverwaltung
         }
 
 
-
         private void CmdEditArticleGroup_Click(Object sender, EventArgs e)
         {
             EditGuiArticleGroup.ShowDialog();
@@ -71,6 +83,11 @@ namespace Projekt_Auftragsverwaltung
         private void CmdEditOrder_Click(object sender, EventArgs e)
         {
             EditGuiOrder.ShowDialog();
+        }
+
+        private void CmdCustomerClearFields_Click(object sender, EventArgs e)
+        {
+            ClearTextBoxes();
         }
     }
 }

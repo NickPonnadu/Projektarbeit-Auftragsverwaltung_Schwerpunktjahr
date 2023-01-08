@@ -40,7 +40,6 @@
             this.TxtCustomerPassword = new System.Windows.Forms.TextBox();
             this.LblCustomerPassword = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.CmdCustomerClearFields = new System.Windows.Forms.Button();
             this.CmdSearchResetCustomer = new System.Windows.Forms.Button();
             this.CmdCustomerSearch = new System.Windows.Forms.Button();
             this.CmdEditCustomer = new System.Windows.Forms.Button();
@@ -59,7 +58,6 @@
             this.TxtArticleGroupArticle = new System.Windows.Forms.TextBox();
             this.LblArticleGroupArticle = new System.Windows.Forms.Label();
             this.CmdDeleteArticleGroup = new System.Windows.Forms.Button();
-            this.CmdClearFieldsArticleGroup = new System.Windows.Forms.Button();
             this.CmdSearchResetArticleGroup = new System.Windows.Forms.Button();
             this.CmdSearchArticleGroup = new System.Windows.Forms.Button();
             this.CmdEditArticleGroup = new System.Windows.Forms.Button();
@@ -82,7 +80,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.CmdDeleteArticle = new System.Windows.Forms.Button();
-            this.CmdClearFieldsArticle = new System.Windows.Forms.Button();
             this.CmdSearchResetArticle = new System.Windows.Forms.Button();
             this.CmdSearchArticle = new System.Windows.Forms.Button();
             this.CmdEditArticle = new System.Windows.Forms.Button();
@@ -100,7 +97,6 @@
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.TxtSearchOrderProperty = new System.Windows.Forms.TextBox();
             this.CmdDeleteOrder = new System.Windows.Forms.Button();
-            this.CmdClearFieldsOrder = new System.Windows.Forms.Button();
             this.CmdSearchResetOrder = new System.Windows.Forms.Button();
             this.CmdSearchOrder = new System.Windows.Forms.Button();
             this.CmdEditOrder = new System.Windows.Forms.Button();
@@ -118,7 +114,6 @@
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.TxtSearchPositionProperty = new System.Windows.Forms.TextBox();
             this.CmdDeletePosition = new System.Windows.Forms.Button();
-            this.CmdClearFieldsPosition = new System.Windows.Forms.Button();
             this.CmdSearchResetPosition = new System.Windows.Forms.Button();
             this.CmdSearchPosition = new System.Windows.Forms.Button();
             this.CmdEditPosition = new System.Windows.Forms.Button();
@@ -155,6 +150,7 @@
             // 
             this.TxtCustomerNumber.Location = new System.Drawing.Point(190, 64);
             this.TxtCustomerNumber.Name = "TxtCustomerNumber";
+            this.TxtCustomerNumber.ReadOnly = true;
             this.TxtCustomerNumber.Size = new System.Drawing.Size(191, 27);
             this.TxtCustomerNumber.TabIndex = 7;
             // 
@@ -192,7 +188,6 @@
             this.Kunden.Controls.Add(this.TxtCustomerPassword);
             this.Kunden.Controls.Add(this.LblCustomerPassword);
             this.Kunden.Controls.Add(this.dataGridView1);
-            this.Kunden.Controls.Add(this.CmdCustomerClearFields);
             this.Kunden.Controls.Add(this.CmdSearchResetCustomer);
             this.Kunden.Controls.Add(this.CmdCustomerSearch);
             this.Kunden.Controls.Add(this.CmdEditCustomer);
@@ -255,6 +250,7 @@
             // 
             this.TxtCustomerPassword.Location = new System.Drawing.Point(622, 209);
             this.TxtCustomerPassword.Name = "TxtCustomerPassword";
+            this.TxtCustomerPassword.ReadOnly = true;
             this.TxtCustomerPassword.Size = new System.Drawing.Size(190, 27);
             this.TxtCustomerPassword.TabIndex = 35;
             // 
@@ -276,15 +272,6 @@
             this.dataGridView1.RowTemplate.Height = 29;
             this.dataGridView1.Size = new System.Drawing.Size(1259, 299);
             this.dataGridView1.TabIndex = 33;
-            // 
-            // CmdCustomerClearFields
-            // 
-            this.CmdCustomerClearFields.Location = new System.Drawing.Point(419, 36);
-            this.CmdCustomerClearFields.Name = "CmdCustomerClearFields";
-            this.CmdCustomerClearFields.Size = new System.Drawing.Size(129, 30);
-            this.CmdCustomerClearFields.TabIndex = 32;
-            this.CmdCustomerClearFields.Text = "Felder leeren";
-            this.CmdCustomerClearFields.UseVisualStyleBackColor = true;
             // 
             // CmdSearchResetCustomer
             // 
@@ -328,6 +315,7 @@
             // 
             this.TxtCustomerWebsite.Location = new System.Drawing.Point(622, 153);
             this.TxtCustomerWebsite.Name = "TxtCustomerWebsite";
+            this.TxtCustomerWebsite.ReadOnly = true;
             this.TxtCustomerWebsite.Size = new System.Drawing.Size(190, 27);
             this.TxtCustomerWebsite.TabIndex = 27;
             // 
@@ -335,6 +323,7 @@
             // 
             this.TxtCustomerMail.Location = new System.Drawing.Point(622, 103);
             this.TxtCustomerMail.Name = "TxtCustomerMail";
+            this.TxtCustomerMail.ReadOnly = true;
             this.TxtCustomerMail.Size = new System.Drawing.Size(190, 27);
             this.TxtCustomerMail.TabIndex = 26;
             // 
@@ -360,6 +349,7 @@
             // 
             this.TxtCustomerLocation.Location = new System.Drawing.Point(190, 209);
             this.TxtCustomerLocation.Name = "TxtCustomerLocation";
+            this.TxtCustomerLocation.ReadOnly = true;
             this.TxtCustomerLocation.Size = new System.Drawing.Size(190, 27);
             this.TxtCustomerLocation.TabIndex = 23;
             // 
@@ -367,6 +357,7 @@
             // 
             this.TxtCustomerPostcode.Location = new System.Drawing.Point(190, 160);
             this.TxtCustomerPostcode.Name = "TxtCustomerPostcode";
+            this.TxtCustomerPostcode.ReadOnly = true;
             this.TxtCustomerPostcode.Size = new System.Drawing.Size(190, 27);
             this.TxtCustomerPostcode.TabIndex = 22;
             // 
@@ -392,6 +383,7 @@
             // 
             this.TxtCustomerName.Location = new System.Drawing.Point(190, 106);
             this.TxtCustomerName.Name = "TxtCustomerName";
+            this.TxtCustomerName.ReadOnly = true;
             this.TxtCustomerName.Size = new System.Drawing.Size(191, 27);
             this.TxtCustomerName.TabIndex = 14;
             // 
@@ -409,7 +401,6 @@
             this.Artikelgruppen.Controls.Add(this.TxtArticleGroupArticle);
             this.Artikelgruppen.Controls.Add(this.LblArticleGroupArticle);
             this.Artikelgruppen.Controls.Add(this.CmdDeleteArticleGroup);
-            this.Artikelgruppen.Controls.Add(this.CmdClearFieldsArticleGroup);
             this.Artikelgruppen.Controls.Add(this.CmdSearchResetArticleGroup);
             this.Artikelgruppen.Controls.Add(this.CmdSearchArticleGroup);
             this.Artikelgruppen.Controls.Add(this.CmdEditArticleGroup);
@@ -430,15 +421,16 @@
             // 
             // TxtArticleGroupArticle
             // 
-            this.TxtArticleGroupArticle.Location = new System.Drawing.Point(656, 108);
+            this.TxtArticleGroupArticle.Location = new System.Drawing.Point(260, 128);
             this.TxtArticleGroupArticle.Name = "TxtArticleGroupArticle";
+            this.TxtArticleGroupArticle.ReadOnly = true;
             this.TxtArticleGroupArticle.Size = new System.Drawing.Size(125, 27);
             this.TxtArticleGroupArticle.TabIndex = 47;
             // 
             // LblArticleGroupArticle
             // 
             this.LblArticleGroupArticle.AutoSize = true;
-            this.LblArticleGroupArticle.Location = new System.Drawing.Point(460, 111);
+            this.LblArticleGroupArticle.Location = new System.Drawing.Point(64, 131);
             this.LblArticleGroupArticle.Name = "LblArticleGroupArticle";
             this.LblArticleGroupArticle.Size = new System.Drawing.Size(52, 20);
             this.LblArticleGroupArticle.TabIndex = 46;
@@ -452,15 +444,6 @@
             this.CmdDeleteArticleGroup.TabIndex = 45;
             this.CmdDeleteArticleGroup.Text = "Löschen";
             this.CmdDeleteArticleGroup.UseVisualStyleBackColor = true;
-            // 
-            // CmdClearFieldsArticleGroup
-            // 
-            this.CmdClearFieldsArticleGroup.Location = new System.Drawing.Point(656, 42);
-            this.CmdClearFieldsArticleGroup.Name = "CmdClearFieldsArticleGroup";
-            this.CmdClearFieldsArticleGroup.Size = new System.Drawing.Size(129, 30);
-            this.CmdClearFieldsArticleGroup.TabIndex = 44;
-            this.CmdClearFieldsArticleGroup.Text = "Felder leeren";
-            this.CmdClearFieldsArticleGroup.UseVisualStyleBackColor = true;
             // 
             // CmdSearchResetArticleGroup
             // 
@@ -528,15 +511,16 @@
             // 
             // TxtArticleGroupName
             // 
-            this.TxtArticleGroupName.Location = new System.Drawing.Point(656, 166);
+            this.TxtArticleGroupName.Location = new System.Drawing.Point(260, 186);
             this.TxtArticleGroupName.Name = "TxtArticleGroupName";
+            this.TxtArticleGroupName.ReadOnly = true;
             this.TxtArticleGroupName.Size = new System.Drawing.Size(125, 27);
             this.TxtArticleGroupName.TabIndex = 3;
             // 
             // LblArticleGroupName
             // 
             this.LblArticleGroupName.AutoSize = true;
-            this.LblArticleGroupName.Location = new System.Drawing.Point(460, 166);
+            this.LblArticleGroupName.Location = new System.Drawing.Point(64, 186);
             this.LblArticleGroupName.Name = "LblArticleGroupName";
             this.LblArticleGroupName.Size = new System.Drawing.Size(103, 20);
             this.LblArticleGroupName.TabIndex = 2;
@@ -565,7 +549,6 @@
             this.Artikel.Controls.Add(this.label2);
             this.Artikel.Controls.Add(this.label1);
             this.Artikel.Controls.Add(this.CmdDeleteArticle);
-            this.Artikel.Controls.Add(this.CmdClearFieldsArticle);
             this.Artikel.Controls.Add(this.CmdSearchResetArticle);
             this.Artikel.Controls.Add(this.CmdSearchArticle);
             this.Artikel.Controls.Add(this.CmdEditArticle);
@@ -602,6 +585,7 @@
             // 
             this.TxtArticleNumber.Location = new System.Drawing.Point(269, 121);
             this.TxtArticleNumber.Name = "TxtArticleNumber";
+            this.TxtArticleNumber.ReadOnly = true;
             this.TxtArticleNumber.Size = new System.Drawing.Size(125, 27);
             this.TxtArticleNumber.TabIndex = 61;
             // 
@@ -609,6 +593,7 @@
             // 
             this.TxtArticleDescription.Location = new System.Drawing.Point(269, 177);
             this.TxtArticleDescription.Name = "TxtArticleDescription";
+            this.TxtArticleDescription.ReadOnly = true;
             this.TxtArticleDescription.Size = new System.Drawing.Size(125, 27);
             this.TxtArticleDescription.TabIndex = 60;
             // 
@@ -616,6 +601,7 @@
             // 
             this.TxtArticlePrice.Location = new System.Drawing.Point(269, 226);
             this.TxtArticlePrice.Name = "TxtArticlePrice";
+            this.TxtArticlePrice.ReadOnly = true;
             this.TxtArticlePrice.Size = new System.Drawing.Size(125, 27);
             this.TxtArticlePrice.TabIndex = 59;
             // 
@@ -623,6 +609,7 @@
             // 
             this.TxtArticleArticlegroup.Location = new System.Drawing.Point(269, 269);
             this.TxtArticleArticlegroup.Name = "TxtArticleArticlegroup";
+            this.TxtArticleArticlegroup.ReadOnly = true;
             this.TxtArticleArticlegroup.Size = new System.Drawing.Size(125, 27);
             this.TxtArticleArticlegroup.TabIndex = 58;
             // 
@@ -670,15 +657,6 @@
             this.CmdDeleteArticle.TabIndex = 53;
             this.CmdDeleteArticle.Text = "Löschen";
             this.CmdDeleteArticle.UseVisualStyleBackColor = true;
-            // 
-            // CmdClearFieldsArticle
-            // 
-            this.CmdClearFieldsArticle.Location = new System.Drawing.Point(269, 50);
-            this.CmdClearFieldsArticle.Name = "CmdClearFieldsArticle";
-            this.CmdClearFieldsArticle.Size = new System.Drawing.Size(129, 30);
-            this.CmdClearFieldsArticle.TabIndex = 52;
-            this.CmdClearFieldsArticle.Text = "Felder leeren";
-            this.CmdClearFieldsArticle.UseVisualStyleBackColor = true;
             // 
             // CmdSearchResetArticle
             // 
@@ -755,7 +733,6 @@
             this.Aufträge.Controls.Add(this.dataGridView4);
             this.Aufträge.Controls.Add(this.TxtSearchOrderProperty);
             this.Aufträge.Controls.Add(this.CmdDeleteOrder);
-            this.Aufträge.Controls.Add(this.CmdClearFieldsOrder);
             this.Aufträge.Controls.Add(this.CmdSearchResetOrder);
             this.Aufträge.Controls.Add(this.CmdSearchOrder);
             this.Aufträge.Controls.Add(this.CmdEditOrder);
@@ -773,6 +750,7 @@
             // 
             // DtpOrderDate
             // 
+            this.DtpOrderDate.Enabled = false;
             this.DtpOrderDate.Location = new System.Drawing.Point(273, 193);
             this.DtpOrderDate.Name = "DtpOrderDate";
             this.DtpOrderDate.Size = new System.Drawing.Size(250, 27);
@@ -782,6 +760,7 @@
             // 
             this.TxtOrderCustomer.Location = new System.Drawing.Point(273, 254);
             this.TxtOrderCustomer.Name = "TxtOrderCustomer";
+            this.TxtOrderCustomer.ReadOnly = true;
             this.TxtOrderCustomer.Size = new System.Drawing.Size(125, 27);
             this.TxtOrderCustomer.TabIndex = 79;
             // 
@@ -789,6 +768,7 @@
             // 
             this.TxtOrderNumber.Location = new System.Drawing.Point(273, 137);
             this.TxtOrderNumber.Name = "TxtOrderNumber";
+            this.TxtOrderNumber.ReadOnly = true;
             this.TxtOrderNumber.Size = new System.Drawing.Size(125, 27);
             this.TxtOrderNumber.TabIndex = 78;
             // 
@@ -844,15 +824,6 @@
             this.CmdDeleteOrder.TabIndex = 70;
             this.CmdDeleteOrder.Text = "Löschen";
             this.CmdDeleteOrder.UseVisualStyleBackColor = true;
-            // 
-            // CmdClearFieldsOrder
-            // 
-            this.CmdClearFieldsOrder.Location = new System.Drawing.Point(273, 45);
-            this.CmdClearFieldsOrder.Name = "CmdClearFieldsOrder";
-            this.CmdClearFieldsOrder.Size = new System.Drawing.Size(129, 30);
-            this.CmdClearFieldsOrder.TabIndex = 69;
-            this.CmdClearFieldsOrder.Text = "Felder leeren";
-            this.CmdClearFieldsOrder.UseVisualStyleBackColor = true;
             // 
             // CmdSearchResetOrder
             // 
@@ -929,7 +900,6 @@
             this.Positionen.Controls.Add(this.dataGridView5);
             this.Positionen.Controls.Add(this.TxtSearchPositionProperty);
             this.Positionen.Controls.Add(this.CmdDeletePosition);
-            this.Positionen.Controls.Add(this.CmdClearFieldsPosition);
             this.Positionen.Controls.Add(this.CmdSearchResetPosition);
             this.Positionen.Controls.Add(this.CmdSearchPosition);
             this.Positionen.Controls.Add(this.CmdEditPosition);
@@ -949,6 +919,7 @@
             // 
             this.TxtPositionNumber.Location = new System.Drawing.Point(286, 104);
             this.TxtPositionNumber.Name = "TxtPositionNumber";
+            this.TxtPositionNumber.ReadOnly = true;
             this.TxtPositionNumber.Size = new System.Drawing.Size(125, 27);
             this.TxtPositionNumber.TabIndex = 87;
             // 
@@ -956,6 +927,7 @@
             // 
             this.TxtPositionArticle.Location = new System.Drawing.Point(286, 162);
             this.TxtPositionArticle.Name = "TxtPositionArticle";
+            this.TxtPositionArticle.ReadOnly = true;
             this.TxtPositionArticle.Size = new System.Drawing.Size(125, 27);
             this.TxtPositionArticle.TabIndex = 86;
             // 
@@ -963,6 +935,7 @@
             // 
             this.TxtPositionQuantity.Location = new System.Drawing.Point(286, 220);
             this.TxtPositionQuantity.Name = "TxtPositionQuantity";
+            this.TxtPositionQuantity.ReadOnly = true;
             this.TxtPositionQuantity.Size = new System.Drawing.Size(125, 27);
             this.TxtPositionQuantity.TabIndex = 85;
             // 
@@ -1018,15 +991,6 @@
             this.CmdDeletePosition.TabIndex = 79;
             this.CmdDeletePosition.Text = "Löschen";
             this.CmdDeletePosition.UseVisualStyleBackColor = true;
-            // 
-            // CmdClearFieldsPosition
-            // 
-            this.CmdClearFieldsPosition.Location = new System.Drawing.Point(295, 26);
-            this.CmdClearFieldsPosition.Name = "CmdClearFieldsPosition";
-            this.CmdClearFieldsPosition.Size = new System.Drawing.Size(129, 30);
-            this.CmdClearFieldsPosition.TabIndex = 78;
-            this.CmdClearFieldsPosition.Text = "Felder leeren";
-            this.CmdClearFieldsPosition.UseVisualStyleBackColor = true;
             // 
             // CmdSearchResetPosition
             // 
@@ -1152,7 +1116,6 @@
         private TabPage Positionen;
         private TabPage Kunden;
         private DataGridView dataGridView1;
-        private Button CmdCustomerClearFields;
         private Button CmdSearchResetCustomer;
         private Button CmdCustomerSearch;
         private Button CmdEditCustomer;
@@ -1176,7 +1139,6 @@
         private TextBox TxtArticleGroupArticle;
         private Label LblArticleGroupArticle;
         private Button CmdDeleteArticleGroup;
-        private Button CmdClearFieldsArticleGroup;
         private Button CmdSearchResetArticleGroup;
         private Button CmdSearchArticleGroup;
         private Button CmdEditArticleGroup;
@@ -1198,7 +1160,6 @@
         private Label label2;
         private Label label1;
         private Button CmdDeleteArticle;
-        private Button CmdClearFieldsArticle;
         private Button CmdSearchResetArticle;
         private Button CmdSearchArticle;
         private Button CmdEditArticle;
@@ -1215,7 +1176,6 @@
         private DataGridView dataGridView4;
         private TextBox TxtSearchOrderProperty;
         private Button CmdDeleteOrder;
-        private Button CmdClearFieldsOrder;
         private Button CmdSearchResetOrder;
         private Button CmdSearchOrder;
         private Button CmdEditOrder;
@@ -1226,7 +1186,6 @@
         private DataGridView dataGridView5;
         private TextBox TxtSearchPositionProperty;
         private Button CmdDeletePosition;
-        private Button CmdClearFieldsPosition;
         private Button CmdSearchResetPosition;
         private Button CmdSearchPosition;
         private Button CmdEditPosition;

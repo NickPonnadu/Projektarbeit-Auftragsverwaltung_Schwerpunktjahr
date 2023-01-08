@@ -43,7 +43,7 @@
             // 
             this.LblArticle.AutoSize = true;
             this.LblArticle.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblArticle.Location = new System.Drawing.Point(110, 80);
+            this.LblArticle.Location = new System.Drawing.Point(47, 38);
             this.LblArticle.Name = "LblArticle";
             this.LblArticle.Size = new System.Drawing.Size(111, 35);
             this.LblArticle.TabIndex = 62;
@@ -51,7 +51,7 @@
             // 
             // CmdCreateOrderCancel
             // 
-            this.CmdCreateOrderCancel.Location = new System.Drawing.Point(617, 210);
+            this.CmdCreateOrderCancel.Location = new System.Drawing.Point(554, 188);
             this.CmdCreateOrderCancel.Name = "CmdCreateOrderCancel";
             this.CmdCreateOrderCancel.Size = new System.Drawing.Size(133, 80);
             this.CmdCreateOrderCancel.TabIndex = 72;
@@ -61,7 +61,7 @@
             // 
             // CmdCreateOrderSave
             // 
-            this.CmdCreateOrderSave.Location = new System.Drawing.Point(617, 97);
+            this.CmdCreateOrderSave.Location = new System.Drawing.Point(554, 83);
             this.CmdCreateOrderSave.Name = "CmdCreateOrderSave";
             this.CmdCreateOrderSave.Size = new System.Drawing.Size(133, 80);
             this.CmdCreateOrderSave.TabIndex = 71;
@@ -71,21 +71,21 @@
             // 
             // DtpOrderDate
             // 
-            this.DtpOrderDate.Location = new System.Drawing.Point(339, 222);
+            this.DtpOrderDate.Location = new System.Drawing.Point(276, 180);
             this.DtpOrderDate.Name = "DtpOrderDate";
             this.DtpOrderDate.Size = new System.Drawing.Size(250, 27);
             this.DtpOrderDate.TabIndex = 86;
             // 
             // TxtOrderCustomer
             // 
-            this.TxtOrderCustomer.Location = new System.Drawing.Point(339, 283);
+            this.TxtOrderCustomer.Location = new System.Drawing.Point(276, 241);
             this.TxtOrderCustomer.Name = "TxtOrderCustomer";
             this.TxtOrderCustomer.Size = new System.Drawing.Size(125, 27);
             this.TxtOrderCustomer.TabIndex = 85;
             // 
             // TxtOrderNumber
             // 
-            this.TxtOrderNumber.Location = new System.Drawing.Point(339, 166);
+            this.TxtOrderNumber.Location = new System.Drawing.Point(276, 124);
             this.TxtOrderNumber.Name = "TxtOrderNumber";
             this.TxtOrderNumber.Size = new System.Drawing.Size(125, 27);
             this.TxtOrderNumber.TabIndex = 84;
@@ -93,7 +93,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(119, 169);
+            this.label9.Location = new System.Drawing.Point(56, 127);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(120, 20);
             this.label9.TabIndex = 83;
@@ -102,7 +102,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(119, 222);
+            this.label8.Location = new System.Drawing.Point(56, 180);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(54, 20);
             this.label8.TabIndex = 82;
@@ -111,7 +111,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(119, 286);
+            this.label7.Location = new System.Drawing.Point(56, 244);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(51, 20);
             this.label7.TabIndex = 81;

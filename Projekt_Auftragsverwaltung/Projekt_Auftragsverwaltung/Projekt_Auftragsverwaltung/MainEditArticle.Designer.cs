@@ -43,28 +43,28 @@
             // 
             // TxtArticleNumber
             // 
-            this.TxtArticleNumber.Location = new System.Drawing.Point(339, 170);
+            this.TxtArticleNumber.Location = new System.Drawing.Point(230, 123);
             this.TxtArticleNumber.Name = "TxtArticleNumber";
             this.TxtArticleNumber.Size = new System.Drawing.Size(125, 27);
             this.TxtArticleNumber.TabIndex = 70;
             // 
             // TxtArticleDescription
             // 
-            this.TxtArticleDescription.Location = new System.Drawing.Point(339, 226);
+            this.TxtArticleDescription.Location = new System.Drawing.Point(230, 179);
             this.TxtArticleDescription.Name = "TxtArticleDescription";
             this.TxtArticleDescription.Size = new System.Drawing.Size(125, 27);
             this.TxtArticleDescription.TabIndex = 69;
             // 
             // TxtArticlePrice
             // 
-            this.TxtArticlePrice.Location = new System.Drawing.Point(339, 275);
+            this.TxtArticlePrice.Location = new System.Drawing.Point(230, 228);
             this.TxtArticlePrice.Name = "TxtArticlePrice";
             this.TxtArticlePrice.Size = new System.Drawing.Size(125, 27);
             this.TxtArticlePrice.TabIndex = 68;
             // 
             // TxtArticleArticlegroup
             // 
-            this.TxtArticleArticlegroup.Location = new System.Drawing.Point(339, 318);
+            this.TxtArticleArticlegroup.Location = new System.Drawing.Point(230, 271);
             this.TxtArticleArticlegroup.Name = "TxtArticleArticlegroup";
             this.TxtArticleArticlegroup.Size = new System.Drawing.Size(125, 27);
             this.TxtArticleArticlegroup.TabIndex = 67;
@@ -72,7 +72,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(155, 226);
+            this.label4.Location = new System.Drawing.Point(46, 179);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 20);
             this.label4.TabIndex = 66;
@@ -81,7 +81,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(155, 275);
+            this.label3.Location = new System.Drawing.Point(46, 228);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 20);
             this.label3.TabIndex = 65;
@@ -90,7 +90,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(155, 321);
+            this.label2.Location = new System.Drawing.Point(46, 274);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 20);
             this.label2.TabIndex = 64;
@@ -99,7 +99,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(155, 170);
+            this.label1.Location = new System.Drawing.Point(46, 123);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(107, 20);
             this.label1.TabIndex = 63;
@@ -109,7 +109,7 @@
             // 
             this.LblArticle.AutoSize = true;
             this.LblArticle.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblArticle.Location = new System.Drawing.Point(110, 80);
+            this.LblArticle.Location = new System.Drawing.Point(46, 31);
             this.LblArticle.Name = "LblArticle";
             this.LblArticle.Size = new System.Drawing.Size(85, 35);
             this.LblArticle.TabIndex = 62;
@@ -117,7 +117,7 @@
             // 
             // CmdCreateArticleancel
             // 
-            this.CmdCreateArticleancel.Location = new System.Drawing.Point(617, 210);
+            this.CmdCreateArticleancel.Location = new System.Drawing.Point(466, 228);
             this.CmdCreateArticleancel.Name = "CmdCreateArticleancel";
             this.CmdCreateArticleancel.Size = new System.Drawing.Size(133, 80);
             this.CmdCreateArticleancel.TabIndex = 72;
@@ -127,7 +127,7 @@
             // 
             // CmdCreateArticleSave
             // 
-            this.CmdCreateArticleSave.Location = new System.Drawing.Point(617, 97);
+            this.CmdCreateArticleSave.Location = new System.Drawing.Point(466, 123);
             this.CmdCreateArticleSave.Name = "CmdCreateArticleSave";
             this.CmdCreateArticleSave.Size = new System.Drawing.Size(133, 80);
             this.CmdCreateArticleSave.TabIndex = 71;
@@ -152,7 +152,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LblArticle);
             this.Name = "MainEditArticle";
-            this.Text = "EditGuiCustomer";
+            this.Text = "Kunde speichern / bearbeiten";
             this.ResumeLayout(false);
             this.PerformLayout();
 

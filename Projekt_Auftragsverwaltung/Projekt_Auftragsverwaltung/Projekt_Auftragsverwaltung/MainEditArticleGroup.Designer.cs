@@ -41,7 +41,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(200, 71);
+            this.label3.Location = new System.Drawing.Point(51, 35);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(180, 35);
             this.label3.TabIndex = 67;
@@ -49,7 +49,7 @@
             // 
             // CmdCreateArticleGroupSave
             // 
-            this.CmdCreateArticleGroupSave.Location = new System.Drawing.Point(532, 171);
+            this.CmdCreateArticleGroupSave.Location = new System.Drawing.Point(494, 129);
             this.CmdCreateArticleGroupSave.Name = "CmdCreateArticleGroupSave";
             this.CmdCreateArticleGroupSave.Size = new System.Drawing.Size(133, 80);
             this.CmdCreateArticleGroupSave.TabIndex = 66;
@@ -59,14 +59,14 @@
             // 
             // TxtArticleGroupEditArticle
             // 
-            this.TxtArticleGroupEditArticle.Location = new System.Drawing.Point(282, 168);
+            this.TxtArticleGroupEditArticle.Location = new System.Drawing.Point(244, 126);
             this.TxtArticleGroupEditArticle.Name = "TxtArticleGroupEditArticle";
             this.TxtArticleGroupEditArticle.Size = new System.Drawing.Size(197, 27);
             this.TxtArticleGroupEditArticle.TabIndex = 65;
             // 
             // TxtArticleGroupEditArticleGroup
             // 
-            this.TxtArticleGroupEditArticleGroup.Location = new System.Drawing.Point(282, 226);
+            this.TxtArticleGroupEditArticleGroup.Location = new System.Drawing.Point(244, 184);
             this.TxtArticleGroupEditArticleGroup.Name = "TxtArticleGroupEditArticleGroup";
             this.TxtArticleGroupEditArticleGroup.Size = new System.Drawing.Size(197, 27);
             this.TxtArticleGroupEditArticleGroup.TabIndex = 64;
@@ -74,7 +74,7 @@
             // labelArticleGroup
             // 
             this.labelArticleGroup.AutoSize = true;
-            this.labelArticleGroup.Location = new System.Drawing.Point(89, 175);
+            this.labelArticleGroup.Location = new System.Drawing.Point(51, 133);
             this.labelArticleGroup.Name = "labelArticleGroup";
             this.labelArticleGroup.Size = new System.Drawing.Size(52, 20);
             this.labelArticleGroup.TabIndex = 68;
@@ -83,7 +83,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(89, 233);
+            this.label1.Location = new System.Drawing.Point(51, 191);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 20);
             this.label1.TabIndex = 69;
@@ -91,7 +91,7 @@
             // 
             // CmdCreateArticleGroupCancel
             // 
-            this.CmdCreateArticleGroupCancel.Location = new System.Drawing.Point(532, 284);
+            this.CmdCreateArticleGroupCancel.Location = new System.Drawing.Point(494, 242);
             this.CmdCreateArticleGroupCancel.Name = "CmdCreateArticleGroupCancel";
             this.CmdCreateArticleGroupCancel.Size = new System.Drawing.Size(133, 80);
             this.CmdCreateArticleGroupCancel.TabIndex = 70;
@@ -112,7 +112,7 @@
             this.Controls.Add(this.TxtArticleGroupEditArticle);
             this.Controls.Add(this.TxtArticleGroupEditArticleGroup);
             this.Name = "MainEditArticleGroup";
-            this.Text = "EditGuiArticleGroup";
+            this.Text = "Artikelgruppe speichern / bearbeiten";
             this.ResumeLayout(false);
             this.PerformLayout();
 
