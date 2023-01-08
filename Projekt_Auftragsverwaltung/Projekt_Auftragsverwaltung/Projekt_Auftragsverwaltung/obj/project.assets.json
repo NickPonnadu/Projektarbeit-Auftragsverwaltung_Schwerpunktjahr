@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nick9\\OneDrive\\Desktop\\Projekt Januar\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
+      "projectUniqueName": "C:\\Users\\nick9\\source\\repos\\Projektarbeit-Auftragsverwaltung_Schwerpunktjahr_gui_123\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
       "projectName": "Projekt_Auftragsverwaltung",
-      "projectPath": "C:\\Users\\nick9\\OneDrive\\Desktop\\Projekt Januar\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
+      "projectPath": "C:\\Users\\nick9\\source\\repos\\Projektarbeit-Auftragsverwaltung_Schwerpunktjahr_gui_123\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
       "packagesPath": "C:\\Users\\nick9\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nick9\\OneDrive\\Desktop\\Projekt Januar\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\obj\\",
+      "outputPath": "C:\\Users\\nick9\\source\\repos\\Projektarbeit-Auftragsverwaltung_Schwerpunktjahr_gui_123\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

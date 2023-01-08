@@ -1,6 +1,6 @@
 ﻿namespace Projekt_Auftragsverwaltung
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         ///  Required designer variable.
@@ -312,6 +312,7 @@
             this.CmdEditCustomer.TabIndex = 29;
             this.CmdEditCustomer.Text = "Bearbeiten";
             this.CmdEditCustomer.UseVisualStyleBackColor = true;
+            this.CmdEditCustomer.Click += new System.EventHandler(this.CmdEditCustomer_Click);
             // 
             // CmdCreateCustomer
             // 
@@ -321,6 +322,7 @@
             this.CmdCreateCustomer.TabIndex = 28;
             this.CmdCreateCustomer.Text = "Erstellen";
             this.CmdCreateCustomer.UseVisualStyleBackColor = true;
+            this.CmdCreateCustomer.Click += new System.EventHandler(this.CmdCreateCustomer_Click);
             // 
             // TxtCustomerWebsite
             // 
@@ -486,6 +488,7 @@
             this.CmdEditArticleGroup.TabIndex = 41;
             this.CmdEditArticleGroup.Text = "Bearbeiten";
             this.CmdEditArticleGroup.UseVisualStyleBackColor = true;
+            this.CmdEditArticleGroup.Click += new System.EventHandler(this.CmdEditArticleGroup_Click);
             // 
             // CmdCreateArticleGroup
             // 
@@ -495,6 +498,7 @@
             this.CmdCreateArticleGroup.TabIndex = 40;
             this.CmdCreateArticleGroup.Text = "Erstellen";
             this.CmdCreateArticleGroup.UseVisualStyleBackColor = true;
+            this.CmdCreateArticleGroup.Click += new System.EventHandler(this.CmdCreateArticleGroup_Click);
             // 
             // dataGridView2
             // 
@@ -702,6 +706,7 @@
             this.CmdEditArticle.TabIndex = 49;
             this.CmdEditArticle.Text = "Bearbeiten";
             this.CmdEditArticle.UseVisualStyleBackColor = true;
+            this.CmdEditArticle.Click += new System.EventHandler(this.CmdEditArticle_Click);
             // 
             // CmdCreateArticle
             // 
@@ -711,6 +716,7 @@
             this.CmdCreateArticle.TabIndex = 48;
             this.CmdCreateArticle.Text = "Erstellen";
             this.CmdCreateArticle.UseVisualStyleBackColor = true;
+            this.CmdCreateArticle.Click += new System.EventHandler(this.CmdCreateArticle_Click);
             // 
             // TxtSearchArticlePropertyFilter
             // 
@@ -874,6 +880,7 @@
             this.CmdEditOrder.TabIndex = 66;
             this.CmdEditOrder.Text = "Bearbeiten";
             this.CmdEditOrder.UseVisualStyleBackColor = true;
+            this.CmdEditOrder.Click += new System.EventHandler(this.CmdEditOrder_Click);
             // 
             // CmdCreateOrder
             // 
@@ -883,6 +890,7 @@
             this.CmdCreateOrder.TabIndex = 65;
             this.CmdCreateOrder.Text = "Erstellen";
             this.CmdCreateOrder.UseVisualStyleBackColor = true;
+            this.CmdCreateOrder.Click += new System.EventHandler(this.CmdCreateOrder_Click);
             // 
             // TxtSearchOrderPropertyFilter
             // 
@@ -1046,6 +1054,7 @@
             this.CmdEditPosition.TabIndex = 75;
             this.CmdEditPosition.Text = "Bearbeiten";
             this.CmdEditPosition.UseVisualStyleBackColor = true;
+            this.CmdEditPosition.Click += new System.EventHandler(this.CmdEditPosition_Click);
             // 
             // CmdCreatePosition
             // 
@@ -1055,6 +1064,7 @@
             this.CmdCreatePosition.TabIndex = 74;
             this.CmdCreatePosition.Text = "Erstellen";
             this.CmdCreatePosition.UseVisualStyleBackColor = true;
+            this.CmdCreatePosition.Click += new System.EventHandler(this.CmdCreatePosition_Click);
             // 
             // TxtSearchPositionPropertyFilter
             // 
@@ -1102,15 +1112,14 @@
             this.AbfrageRechnungen.Text = "Abfrage Rechnungen";
             this.AbfrageRechnungen.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1507, 806);
             this.Controls.Add(this.TabControl);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Name = "Main";
+            this.Text = "Auftragsverwaltung";
             this.TabControl.ResumeLayout(false);
             this.Kunden.ResumeLayout(false);
             this.Kunden.PerformLayout();
