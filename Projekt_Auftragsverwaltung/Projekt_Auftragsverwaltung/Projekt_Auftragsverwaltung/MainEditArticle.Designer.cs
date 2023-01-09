@@ -170,6 +170,6 @@
         private Label label1;
         private Label LblArticle;
         private Button CmdCreateArticleancel;
-        private Button CmdCreateArticleSave;
+        public Button CmdCreateArticleSave;
     }
 }

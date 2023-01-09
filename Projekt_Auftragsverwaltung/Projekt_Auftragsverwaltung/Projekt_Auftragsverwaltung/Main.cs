@@ -1,23 +1,29 @@
+using System.Reflection.Metadata;
+
 namespace Projekt_Auftragsverwaltung
 
 {
     public partial class Main : Form
     {
-        Form EditGuiArticleGroup;
-        Form EditGuiCustomer;
-        Form EditGuiArticle;
-        Form EditGuiOrder;
-        Form EditGuiPosition;
+        private Form EditGuiArticleGroup;
+        private Form EditGuiCustomer;
+        private Form EditGuiArticle;
+        private Form EditGuiOrder;
+        private Form EditGuiPosition;
+
+
+        //public Entity Article
+
 
         public Main()
         {
             InitializeComponent();
-            EditGuiArticleGroup = new MainEditArticleGroup();
-            EditGuiCustomer = new MainEditCustomer();
-            EditGuiArticle = new MainEditArticle();
-            EditGuiPosition = new MainEditPosition();   
-            EditGuiOrder = new MainEditOrder();
-            
+            this.EditGuiArticleGroup = new MainEditArticleGroup();
+            this.EditGuiCustomer = new MainEditCustomer();
+            this.EditGuiArticle = new MainEditArticle(this);
+            this.EditGuiPosition = new MainEditPosition();
+            this.EditGuiOrder = new MainEditOrder();
+
         }
 
         private void ClearTextBoxes()
@@ -33,61 +39,60 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdCreateArticleGroup_Click(Object sender, EventArgs e)
         {
-            EditGuiArticleGroup.ShowDialog();
-           
+            this.EditGuiArticleGroup.ShowDialog();
+
         }
 
         private void CmdCreateCustomer_Click(object sender, EventArgs e)
         {
-            EditGuiCustomer.ShowDialog();   
+            this.EditGuiCustomer.ShowDialog();
         }
 
         private void CmdCreateArticle_Click(object sender, EventArgs e)
         {
-            EditGuiArticle.ShowDialog();
+            this.EditGuiArticle.ShowDialog();
+
+
         }
 
         private void CmdCreateOrder_Click(object sender, EventArgs e)
         {
-            EditGuiOrder.ShowDialog();
+            this.EditGuiOrder.ShowDialog();
         }
 
         private void CmdCreatePosition_Click(object sender, EventArgs e)
         {
-            EditGuiPosition.ShowDialog();
+            this.EditGuiPosition.ShowDialog();
         }
 
 
         private void CmdEditArticleGroup_Click(Object sender, EventArgs e)
         {
-            EditGuiArticleGroup.ShowDialog();
+            this.EditGuiArticleGroup.ShowDialog();
 
         }
 
         private void CmdEditCustomer_Click(object sender, EventArgs e)
         {
-            EditGuiCustomer.ShowDialog();
+            this.EditGuiCustomer.ShowDialog();
         }
 
         private void CmdEditArticle_Click(object sender, EventArgs e)
         {
-            EditGuiArticle.ShowDialog();
+            this.EditGuiArticle.ShowDialog();
         }
 
-       
+
         private void CmdEditPosition_Click(object sender, EventArgs e)
         {
-            EditGuiPosition.ShowDialog();
+            this.EditGuiPosition.ShowDialog();
         }
 
         private void CmdEditOrder_Click(object sender, EventArgs e)
         {
-            EditGuiOrder.ShowDialog();
+            this.EditGuiOrder.ShowDialog();
         }
 
-        private void CmdCustomerClearFields_Click(object sender, EventArgs e)
-        {
-            ClearTextBoxes();
-        }
+
     }
 }
