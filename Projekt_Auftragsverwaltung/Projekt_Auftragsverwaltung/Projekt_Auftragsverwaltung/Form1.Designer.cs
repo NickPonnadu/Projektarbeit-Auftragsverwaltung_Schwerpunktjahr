@@ -36,38 +36,43 @@
             // LblKunden
             // 
             this.LblKunden.AutoSize = true;
-            this.LblKunden.Location = new System.Drawing.Point(71, 45);
+            this.LblKunden.Location = new System.Drawing.Point(89, 56);
+            this.LblKunden.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LblKunden.Name = "LblKunden";
-            this.LblKunden.Size = new System.Drawing.Size(59, 20);
+            this.LblKunden.Size = new System.Drawing.Size(72, 25);
             this.LblKunden.TabIndex = 0;
             this.LblKunden.Text = "Kunden";
             // 
             // CmdCreate
             // 
-            this.CmdCreate.Location = new System.Drawing.Point(468, 54);
+            this.CmdCreate.Location = new System.Drawing.Point(585, 68);
+            this.CmdCreate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CmdCreate.Name = "CmdCreate";
-            this.CmdCreate.Size = new System.Drawing.Size(94, 29);
+            this.CmdCreate.Size = new System.Drawing.Size(118, 36);
             this.CmdCreate.TabIndex = 1;
             this.CmdCreate.Text = "Erstellen";
             this.CmdCreate.UseVisualStyleBackColor = true;
+            this.CmdCreate.Click += new System.EventHandler(this.CmdCreate_Click);
             // 
             // CmdEdit
             // 
-            this.CmdEdit.Location = new System.Drawing.Point(468, 110);
+            this.CmdEdit.Location = new System.Drawing.Point(585, 138);
+            this.CmdEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CmdEdit.Name = "CmdEdit";
-            this.CmdEdit.Size = new System.Drawing.Size(94, 29);
+            this.CmdEdit.Size = new System.Drawing.Size(118, 36);
             this.CmdEdit.TabIndex = 2;
             this.CmdEdit.Text = "Bearbeiten";
             this.CmdEdit.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1000, 562);
             this.Controls.Add(this.CmdEdit);
             this.Controls.Add(this.CmdCreate);
             this.Controls.Add(this.LblKunden);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);

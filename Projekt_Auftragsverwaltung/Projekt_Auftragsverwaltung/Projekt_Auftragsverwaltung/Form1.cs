@@ -6,5 +6,10 @@ namespace Projekt_Auftragsverwaltung
         {
             InitializeComponent();
         }
+
+        private void CmdCreate_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
