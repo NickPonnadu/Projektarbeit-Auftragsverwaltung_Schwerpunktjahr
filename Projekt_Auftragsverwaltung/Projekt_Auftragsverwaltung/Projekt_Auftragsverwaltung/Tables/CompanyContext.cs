@@ -22,11 +22,12 @@ namespace DatenbankProjekt.Tables
 
 
         // Wenn wir verschieden ConnectionString haben, müssen wir das anders lösen
+        // Aus Sicherheitsgründen ist es Sinnvoller die ConnectionStrings im App.config File zu hinterlegen.
+        // Eine andere Methode, um verschieden ConnectionStrings zu nutzten, die aber innerhalb des Codes niedergeschrieben werden, ist die Verwendung des StringBuilders.
+        // Info zu StringBuilder: https://www.youtube.com/watch?v=V3EPT1R6seQ
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=DESKTOP-8S98QH8\\ZBWSERVER;Database=EfCoreDemo;Trusted_Connection=True;");
         }
-
-
     }
 }
