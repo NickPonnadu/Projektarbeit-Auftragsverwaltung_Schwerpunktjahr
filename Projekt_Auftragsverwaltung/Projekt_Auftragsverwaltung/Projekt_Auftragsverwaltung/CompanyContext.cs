@@ -1,14 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using DatenbankProjekt.Tables;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DatenbankProjekt.Tables
+namespace Projekt_Auftragsverwaltung
 {
     public class CompanyContext : DbContext
     {
@@ -27,7 +26,15 @@ namespace DatenbankProjekt.Tables
         // Info zu StringBuilder: https://www.youtube.com/watch?v=V3EPT1R6seQ
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-8S98QH8\\ZBWSERVER;Database=EfCoreDemo;Trusted_Connection=True;");
+            string connectionString = ConfigurationManager.ConnectionStrings["Gabor"].ConnectionString;
+
+            // optionsBuilder.UseSqlServer("Data Source=DESKTOP-8S98QH8\\ZBWSERVER;Database=EfCoreDemo;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(connectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
         }
     }
 }

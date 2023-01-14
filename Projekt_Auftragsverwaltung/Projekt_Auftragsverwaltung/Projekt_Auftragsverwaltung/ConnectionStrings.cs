@@ -9,25 +9,18 @@ namespace Projekt_Auftragsverwaltung
     public class ConnectionStrings 
     {
         public string server { get; set; }
-        public string database { get; set; }  = "your_database";
-        public string username { get; set; }  = "your_username";
-        public string password { get; set; }  = "your_password";
+        public string database { get; set; }  
 
-        private StringBuilder connectionStringBuilder = new StringBuilder();
+        public StringBuilder connectionStringBuilder = new StringBuilder();
 
-        public ConnectionStrings(StringBuilder connectionString)
+        public ConnectionStrings()
         {
-            connectionString.Append("Server=" + server + ";");
-            connectionString.Append("Database=" + database + ";");
-            connectionString.Append("User=" + username + ";");
-            connectionString.Append("Password=" + password + ";");
+            connectionStringBuilder.Append("Database Source=" + server + ";");
+            connectionStringBuilder.Append("Database=" + database + ";");
 
-            connectionString.AppendFormat("Server={0};Database={1};User={2};Password={3};", server, database, username, password);
-
-            string realConnectionString = connectionString.ToString();
+            connectionStringBuilder.AppendFormat("Database Source={0};Database=={1}; Trusted_Connection=True;", server, database);
+            // Muster String: "Data Source=.; Database=EFCoreDemo; Trusted_Connection=True"
+            string realConnectionString = connectionStringBuilder.ToString();
         }
-
-
-
     }
 }

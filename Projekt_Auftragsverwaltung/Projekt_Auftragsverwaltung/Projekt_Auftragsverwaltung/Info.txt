@@ -1,0 +1,4 @@
+﻿Weil wir mit lokalen SQL Servern arbeiten, 
+braucht es verschieden ConnectionStrings um eine Verbindung auf dem jeweiligen Rechner herstellen zu können.
+
+Um viel Code, aufwand und Einfachheit wird der ConnectionString in der App.cofig Datei hinterlegt und auf diesen wird dann im Code mit der "ConfigurationManager-Klasse" darauf zugegriffen.

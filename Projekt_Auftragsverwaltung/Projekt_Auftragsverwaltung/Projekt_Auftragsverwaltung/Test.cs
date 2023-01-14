@@ -1,3 +1,5 @@
+using System.Configuration;
+
 namespace Projekt_Auftragsverwaltung
 {
     public partial class Form1 : Form
