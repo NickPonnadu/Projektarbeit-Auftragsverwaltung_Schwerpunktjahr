@@ -11,7 +11,7 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdCreate_Click(object sender, EventArgs e)
         {
-
+            using (var session = new CompanyContext()) { }
         }
     }
 }

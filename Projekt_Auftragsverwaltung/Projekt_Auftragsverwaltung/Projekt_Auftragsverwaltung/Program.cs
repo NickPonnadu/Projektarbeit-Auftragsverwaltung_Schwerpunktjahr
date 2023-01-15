@@ -10,16 +10,8 @@ namespace Projekt_Auftragsverwaltung
         {
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
-            Start();
-        }
 
-        static void Start()
-        {
-            using (var session = new CompanyContext()
-            {
-
-            }
-            
+            using (var session = new CompanyContext()) { }
         }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using DatenbankProjekt.Tables;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Projekt_Auftragsverwaltung
 {
@@ -19,17 +14,13 @@ namespace Projekt_Auftragsverwaltung
         public DbSet<Order> Orders { get; set; }
         public DbSet<ArticlePosition> ArticlePositions { get; set; }
 
-
-        // Wenn wir verschieden ConnectionString haben, müssen wir das anders lösen
-        // Aus Sicherheitsgründen ist es Sinnvoller die ConnectionStrings im App.config File zu hinterlegen.
-        // Eine andere Methode, um verschieden ConnectionStrings zu nutzten, die aber innerhalb des Codes niedergeschrieben werden, ist die Verwendung des StringBuilders.
-        // Info zu StringBuilder: https://www.youtube.com/watch?v=V3EPT1R6seQ
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["Gabor"].ConnectionString;
+            // zieht von der App.config Datei den connectionString
+            string connectionString = ConfigurationManager.ConnectionStrings["GaborNeueString"].ConnectionString;
+            optionsBuilder.UseSqlServer(connectionString);
 
             // optionsBuilder.UseSqlServer("Data Source=DESKTOP-8S98QH8\\ZBWSERVER;Database=EfCoreDemo;Trusted_Connection=True;");
-            optionsBuilder.UseSqlServer(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
