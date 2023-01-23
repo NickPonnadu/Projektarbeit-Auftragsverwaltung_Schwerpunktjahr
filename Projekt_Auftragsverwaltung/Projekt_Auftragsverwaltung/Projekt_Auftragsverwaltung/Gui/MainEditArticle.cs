@@ -5,13 +5,10 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditArticle : Form
 
     {
-        Form ownerForm = null;
-
         public MainEditArticle(Form ownerForm)
         {
             InitializeComponent();
-            this.ownerForm = ownerForm;
-            
+           
         }
 
         private void CmdCreateArticleSave_Click(object sender, EventArgs e)
@@ -49,7 +46,9 @@ namespace Projekt_Auftragsverwaltung
             }
         }
 
-
-
+        private void MainEditArticle_VisibleChanged(object sender, EventArgs e)
+        {
+            this.ClearTextBoxes();
+        }
     }
 }

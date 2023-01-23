@@ -1084,6 +1084,7 @@
             this.Controls.Add(this.TabControl);
             this.Name = "Main";
             this.Text = "Auftragsverwaltung";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.TabControl.ResumeLayout(false);
             this.Kunden.ResumeLayout(false);
             this.Kunden.PerformLayout();

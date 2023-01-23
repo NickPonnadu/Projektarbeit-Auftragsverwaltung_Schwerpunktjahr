@@ -42,5 +42,12 @@ namespace Projekt_Auftragsverwaltung
             }
 
         }
+
+        private void Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+
     }
 }

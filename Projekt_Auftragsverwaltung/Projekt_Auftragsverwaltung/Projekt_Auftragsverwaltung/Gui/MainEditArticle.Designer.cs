@@ -153,6 +153,7 @@
             this.Controls.Add(this.LblArticle);
             this.Name = "MainEditArticle";
             this.Text = "Kunde speichern / bearbeiten";
+            this.VisibleChanged += new System.EventHandler(this.MainEditArticle_VisibleChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

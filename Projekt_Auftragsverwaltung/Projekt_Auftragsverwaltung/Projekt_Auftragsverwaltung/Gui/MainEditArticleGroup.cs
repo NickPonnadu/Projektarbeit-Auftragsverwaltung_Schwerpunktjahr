@@ -25,5 +25,20 @@ namespace Projekt_Auftragsverwaltung
             
             this.Hide();
         }
+
+        private void ClearTextBoxes()
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c is TextBox)
+                {
+                    ((TextBox)c).Clear();
+                }
+            }
+        }
+        private void MainEditArticleGroup_VisibleChanged(object sender, EventArgs e)
+        {
+            this.ClearTextBoxes();
+        }
     }
 }

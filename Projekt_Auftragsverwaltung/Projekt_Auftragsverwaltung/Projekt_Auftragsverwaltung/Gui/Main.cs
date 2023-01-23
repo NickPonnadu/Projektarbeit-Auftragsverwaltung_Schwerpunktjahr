@@ -45,6 +45,7 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdCreateCustomer_Click(object sender, EventArgs e)
         {
+            this.EditGuiCustomer.Location = new Point(15,15);
             this.EditGuiCustomer.ShowDialog();
         }
 
@@ -93,6 +94,9 @@ namespace Projekt_Auftragsverwaltung
             this.EditGuiOrder.ShowDialog();
         }
 
-
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
