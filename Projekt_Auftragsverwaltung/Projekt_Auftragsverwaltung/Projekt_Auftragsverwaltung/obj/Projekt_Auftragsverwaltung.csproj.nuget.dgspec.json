@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "C:\\Users\\nick9\\source\\repos\\Projektarbeit-Auftragsverwaltung_Schwerpunktjahr_\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj": {}
   },
   "projects": {
@@ -13,25 +12,12 @@
         "projectPath": "C:\\Users\\nick9\\source\\repos\\Projektarbeit-Auftragsverwaltung_Schwerpunktjahr_\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
         "packagesPath": "C:\\Users\\nick9\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\nick9\\source\\repos\\Projektarbeit-Auftragsverwaltung_Schwerpunktjahr_\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\obj\\",
-=======
-    "C:\\Users\\gabor\\Desktop\\Projekt\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\gabor\\Desktop\\Projekt\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\gabor\\Desktop\\Projekt\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
-        "projectName": "Projekt_Auftragsverwaltung",
-        "projectPath": "C:\\Users\\gabor\\Desktop\\Projekt\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
-        "packagesPath": "C:\\Users\\gabor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gabor\\Desktop\\Projekt\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\obj\\",
->>>>>>> CodeFirstDb
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\gabor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nick9\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

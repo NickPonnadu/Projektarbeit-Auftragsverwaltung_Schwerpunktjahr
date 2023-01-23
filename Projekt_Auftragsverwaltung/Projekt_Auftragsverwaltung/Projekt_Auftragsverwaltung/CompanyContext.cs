@@ -1,5 +1,5 @@
-﻿using DatenbankProjekt.Tables;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Projekt_Auftragsverwaltung.Tables;
 using System.Configuration;
 
 namespace Projekt_Auftragsverwaltung

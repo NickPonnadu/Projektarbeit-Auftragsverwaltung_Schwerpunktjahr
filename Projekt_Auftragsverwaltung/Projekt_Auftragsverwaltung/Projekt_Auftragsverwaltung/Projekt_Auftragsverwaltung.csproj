@@ -19,16 +19,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="MainEditPosition.cs">
+    <Compile Update="Gui\MainEditPosition.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MainEditOrder.cs">
+    <Compile Update="Gui\MainEditOrder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MainEditArticle.cs">
+    <Compile Update="Gui\MainEditArticle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MainEditCustomer.cs">
+    <Compile Update="Gui\MainEditCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
