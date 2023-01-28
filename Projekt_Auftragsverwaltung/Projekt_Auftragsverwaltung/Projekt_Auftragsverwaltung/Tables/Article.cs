@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projekt_Auftragsverwaltung.Tables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ namespace DatenbankProjekt.Tables
         public decimal price { get; set; }
 
 
+        public int ArticleGroupId { get; set; }
+        public ArticleGroup ArticleGroup { get; set; }
         public virtual ICollection<OrderPosition> OrderPositions { get; set; }
 
 

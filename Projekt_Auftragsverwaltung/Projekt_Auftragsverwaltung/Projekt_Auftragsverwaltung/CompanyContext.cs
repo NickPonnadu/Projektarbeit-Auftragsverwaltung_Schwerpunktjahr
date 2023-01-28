@@ -1,5 +1,7 @@
 ﻿using DatenbankProjekt.Tables;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
+using Projekt_Auftragsverwaltung.Tables;
 using System.Configuration;
 
 namespace Projekt_Auftragsverwaltung
@@ -13,6 +15,7 @@ namespace Projekt_Auftragsverwaltung
         public DbSet<OrderPosition> OrderPositions { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ArticlePosition> ArticlePositions { get; set; }
+        public DbSet<ArticleGroup> ArticleGroups { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
