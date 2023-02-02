@@ -28,7 +28,6 @@ namespace Projekt_Auftragsverwaltung
         {
             modelBuilder.Entity<AddressLocation>()
                 .HasKey(e => e.ZipCode);
-        
 
             //modelBuilder.Entity<Address>()
             //    .HasOne(a => a.Customer)
