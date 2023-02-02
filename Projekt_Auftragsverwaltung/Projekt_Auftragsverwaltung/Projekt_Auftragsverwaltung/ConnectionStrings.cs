@@ -24,12 +24,5 @@ namespace Projekt_Auftragsverwaltung
             connectionStringBuilder.Append("Database=" + database + "; ");
             connectionStringBuilder.Append(" Trusted_Connection=True; Encrypt=false");
         }
-
-
-
-        public override string? ToString()
-        {
-            return connectionStringBuilder.ToString();
-        }
     }
 }

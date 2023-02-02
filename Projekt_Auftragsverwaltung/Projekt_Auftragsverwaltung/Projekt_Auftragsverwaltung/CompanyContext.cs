@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using Projekt_Auftragsverwaltung.Tables;
 using System.Configuration;
+using System.DirectoryServices;
 
 namespace Projekt_Auftragsverwaltung
 {
@@ -25,45 +26,48 @@ namespace Projekt_Auftragsverwaltung
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            modelBuilder.Entity<Address>()
-                .HasOne(a => a.Customer)
-                .WithOne(c => c.Address)
-                .HasForeignKey<Customer>(c => c.AddressId);
-
             modelBuilder.Entity<AddressLocation>()
-                .HasKey(al => al.ZipCode);
+                .HasKey(e => e.ZipCode);
+        
 
-            modelBuilder.Entity<AddressLocation>()
-                .HasOne(al => al.Address)
-                .WithMany(a => a.AdressLocations)
-                .HasForeignKey(al => al.AddressId);
+            //modelBuilder.Entity<Address>()
+            //    .HasOne(a => a.Customer)
+            //    .WithOne(c => c.Address)
+            //    .HasForeignKey<Customer>(c => c.AddressId);
 
-            modelBuilder.Entity<Article>()
-                .HasMany(a => a.OrderPositions)
-                .WithOne(op => op.Articles)
-                .HasForeignKey(op => op.ArticleId);
+            //modelBuilder.Entity<AddressLocation>()
+            //    .HasKey(al => al.ZipCode);
 
-            modelBuilder.Entity<ArticlePosition>()
-                .HasMany(ap => ap.Articles)
-                .WithOne(a => a.ArticlePosition)
-                .HasForeignKey(a => a.ArticlePositionId);
+            //modelBuilder.Entity<AddressLocation>()
+            //    .HasOne(al => al.Address)
+            //    .WithMany(a => a.AdressLocations)
+            //    .HasForeignKey(al => al.AddressId);
 
-            modelBuilder.Entity<Customer>()
-                .HasMany(c => c.Orders)
-                .WithOne(o => o.Customers)
-                .HasForeignKey(o => o.CustomerId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<Article>()
+            //    .HasMany(a => a.OrderPositions)
+            //    .WithOne(op => op.Articles)
+            //    .HasForeignKey(op => op.ArticleId);
 
-            modelBuilder.Entity<Order>()
-                .HasMany(o => o.OrderPositions)
-                .WithOne(op => op.Orders)
-                .HasForeignKey(op => op.OrderId);
+            //modelBuilder.Entity<ArticlePosition>()
+            //    .HasMany(ap => ap.Articles)
+            //    .WithOne(a => a.ArticlePosition)
+            //    .HasForeignKey(a => a.ArticlePositionId);
 
-            modelBuilder.Entity<OrderPosition>()
-                .HasMany(op => op.ArticlePositions)
-                .WithOne(a => a.OrderPosition)
-                .HasForeignKey(a => a.OrderPositionId);
+            //modelBuilder.Entity<Customer>()
+            //    .HasMany(c => c.Orders)
+            //    .WithOne(o => o.Customers)
+            //    .HasForeignKey(o => o.CustomerId)
+            //    .OnDelete(DeleteBehavior.Cascade);
+
+            //modelBuilder.Entity<Order>()
+            //    .HasMany(o => o.OrderPositions)
+            //    .WithOne(op => op.Orders)
+            //    .HasForeignKey(op => op.OrderId);
+
+            //modelBuilder.Entity<OrderPosition>()
+            //    .HasMany(op => op.ArticlePositions)
+            //    .WithOne(a => a.OrderPosition)
+            //    .HasForeignKey(a => a.OrderPositionId);
         }
     }
 }
