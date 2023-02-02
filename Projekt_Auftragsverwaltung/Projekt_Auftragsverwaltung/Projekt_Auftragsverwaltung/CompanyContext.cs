@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Projekt_Auftragsverwaltung.Tables;
 using System.Configuration;
 
@@ -14,18 +15,55 @@ namespace Projekt_Auftragsverwaltung
         public DbSet<Order> Orders { get; set; }
         public DbSet<ArticlePosition> ArticlePositions { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // zieht von der App.config Datei den connectionString
-            string connectionString = ConfigurationManager.ConnectionStrings["GaborNeueString"].ConnectionString;
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer("Server=DESKTOP-G8PTADT\\MSSQLSERVERZBWGA; Database=myDataBase; Trusted_Connection=True;Encrypt=false;");
 
-            // optionsBuilder.UseSqlServer("Data Source=DESKTOP-8S98QH8\\ZBWSERVER;Database=EfCoreDemo;Trusted_Connection=True;");
+            // optionsBuilder.UseSqlServer("Server=DESKTOP-G8PTADT\MSSQLSERVERZBWGA; Database=myDataBase; Trusted_Connection=True;Encrypt=false;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
+            modelBuilder.Entity<Address>()
+                .HasOne(a => a.Customer)
+                .WithOne(c => c.Address)
+                .HasForeignKey<Customer>(c => c.AddressId);
+
+            modelBuilder.Entity<AddressLocation>()
+                .HasKey(al => al.ZipCode);
+
+            modelBuilder.Entity<AddressLocation>()
+                .HasOne(al => al.Address)
+                .WithMany(a => a.AdressLocations)
+                .HasForeignKey(al => al.AddressId);
+
+            modelBuilder.Entity<Article>()
+                .HasMany(a => a.OrderPositions)
+                .WithOne(op => op.Articles)
+                .HasForeignKey(op => op.ArticleId);
+
+            modelBuilder.Entity<ArticlePosition>()
+                .HasMany(ap => ap.Articles)
+                .WithOne(a => a.ArticlePosition)
+                .HasForeignKey(a => a.ArticlePositionId);
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(c => c.Orders)
+                .WithOne(o => o.Customers)
+                .HasForeignKey(o => o.CustomerId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.OrderPositions)
+                .WithOne(op => op.Orders)
+                .HasForeignKey(op => op.OrderId);
+
+            modelBuilder.Entity<OrderPosition>()
+                .HasMany(op => op.ArticlePositions)
+                .WithOne(a => a.OrderPosition)
+                .HasForeignKey(a => a.OrderPositionId);
         }
     }
 }

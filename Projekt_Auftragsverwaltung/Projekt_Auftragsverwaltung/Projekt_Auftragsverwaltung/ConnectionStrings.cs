@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,19 +10,26 @@ namespace Projekt_Auftragsverwaltung
 {
     public class ConnectionStrings 
     {
-        public string server { get; set; }
-        public string database { get; set; }  
+        private string _Server;
+        private string _Database;
 
         public StringBuilder connectionStringBuilder = new StringBuilder();
 
-        public ConnectionStrings()
+        public ConnectionStrings(string server, string database)
         {
-            connectionStringBuilder.Append("Database Source=" + server + ";");
-            connectionStringBuilder.Append("Database=" + database + ";");
+            _Server = server;
+            _Database = database;
 
-            connectionStringBuilder.AppendFormat("Database Source={0};Database=={1}; Trusted_Connection=True;", server, database);
-            // Muster String: "Data Source=.; Database=EFCoreDemo; Trusted_Connection=True"
-            string realConnectionString = connectionStringBuilder.ToString();
+            connectionStringBuilder.Append("Server=" + server + "; ");
+            connectionStringBuilder.Append("Database=" + database + "; ");
+            connectionStringBuilder.Append(" Trusted_Connection=True; Encrypt=false");
+        }
+
+
+
+        public override string? ToString()
+        {
+            return connectionStringBuilder.ToString();
         }
     }
 }

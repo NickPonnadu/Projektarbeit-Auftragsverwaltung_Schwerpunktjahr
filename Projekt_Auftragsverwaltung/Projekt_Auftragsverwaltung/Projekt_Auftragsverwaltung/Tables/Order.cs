@@ -16,7 +16,7 @@ namespace Projekt_Auftragsverwaltung.Tables
         public Customer Customers { get; set; }
 
 
-        public List<OrderPosition> OrderPositions { get; set; }
+        public ICollection<OrderPosition> OrderPositions { get; set; }
 
     }
 }

@@ -12,7 +12,7 @@ namespace Projekt_Auftragsverwaltung.Tables
         public OrderPosition OrderPosition { get; set; }
 
         public int ArticleId { get; set; }
-        public Article Article { get; set; }
+        public Article Articles { get; set; }
 
     }
 }

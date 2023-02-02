@@ -12,11 +12,7 @@ namespace Projekt_Auftragsverwaltung.Tables
         public string ArticleName { get; set; }
         public decimal price { get; set; }
 
-
         public virtual ICollection<OrderPosition> OrderPositions { get; set; }
-
-
-
 
     }
 }
