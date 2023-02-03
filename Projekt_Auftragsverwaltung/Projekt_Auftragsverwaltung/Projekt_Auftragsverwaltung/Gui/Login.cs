@@ -1,22 +1,9 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+﻿using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Projekt_Auftragsverwaltung
 {
     public partial class Login : Form
     {
-
         private bool Connection;
 
         private Form MainGui;
@@ -30,26 +17,29 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdTestConnection_Click(object sender, EventArgs e)
         {
-            string dataBase = TxtDBName.Text;
-            string server = TxtDBServer.Text;
-            ConnectionStrings testString = new ConnectionStrings(server, dataBase);
-
-            using (var context = new CompanyContext())
+            // Prüft Textfelder auf Wert, nur Inhalt
+            if (!string.IsNullOrEmpty(TxtDBServer.Text) && !string.IsNullOrEmpty(TxtDBName.Text))
             {
-                context.Database.Migrate();
-                this.Connection = true;
+                //Gibt Wert and DataManager weiter welcher dann auf Context zugreift und DB erstellt.
+                string connectionString = DatabaseManager.BuildConnectionString(TxtDBServer.Text, TxtDBName.Text);
+                DatabaseManager.UseDbContext(connectionString);
+
+                if (this.Connection)
+                {
+                    LblConnection.Text = "DB ist Verbunden";
+                    CmdStartApplication.Enabled = true;
+                }
+                else
+                {
+                    LblConnection.ForeColor = Color.Red;
+                    LblConnection.Text = "Keine Verbindung mit der Datenbank";
+                    this.Connection = false;
+                }
             }
-
-            if (this.Connection)
-                LblConnection.Text = "DB ist Verbunden";         
             else
-                LblConnection.Text = "Keine Verbindung mit der Datenbank";
-
-            // Mit diesem Buttonclick wird die Verbindung geprüft.
-
-            // Verbindung bestehend -> Label soll Text anzeigen, dass DB verbunden ist und Connection auf true setzen. Button Apllikation starten auf enabled setzen
-
-            // Keine Verbindung -> Text zeigt an, dass keine Verbindung besteht. Kein Login möglich.
+            {
+                MessageBox.Show("Beide Textfelder müssen mit einem Wert gefüllt werden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CmdStartApplication_Click(object sender, EventArgs e)
