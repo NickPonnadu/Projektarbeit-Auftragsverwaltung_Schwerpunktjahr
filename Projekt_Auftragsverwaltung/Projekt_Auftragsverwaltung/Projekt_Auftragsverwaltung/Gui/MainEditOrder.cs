@@ -1,8 +1,10 @@
 ﻿
+using Projekt_Auftragsverwaltung.Gui;
+
 namespace Projekt_Auftragsverwaltung
 {
 
-    public partial class MainEditOrder : Form
+    public partial class MainEditOrder : FormController
 
     {
 
@@ -16,12 +18,12 @@ namespace Projekt_Auftragsverwaltung
         private void CmdCreateOrderSave_Click(object sender, EventArgs e)
         {
             // Auftrag speichern / updaten
-            this.Hide();
+            CloseForm();
         }
 
         private void CmdCreateOrderCancel_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            CloseForm();
         }
     }
 }

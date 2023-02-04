@@ -113,7 +113,6 @@
             this.Controls.Add(this.TxtArticleGroupEditArticleGroup);
             this.Name = "MainEditArticleGroup";
             this.Text = "Artikelgruppe speichern / bearbeiten";
-            this.VisibleChanged += new System.EventHandler(this.MainEditArticleGroup_VisibleChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

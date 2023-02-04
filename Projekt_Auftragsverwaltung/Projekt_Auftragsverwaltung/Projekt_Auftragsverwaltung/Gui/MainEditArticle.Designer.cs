@@ -28,10 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TxtArticleNumber = new System.Windows.Forms.TextBox();
             this.TxtArticleDescription = new System.Windows.Forms.TextBox();
-            this.TxtArticlePrice = new System.Windows.Forms.TextBox();
-            this.TxtArticleArticlegroup = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,14 +36,12 @@
             this.LblArticle = new System.Windows.Forms.Label();
             this.CmdCreateArticleancel = new System.Windows.Forms.Button();
             this.CmdCreateArticleSave = new System.Windows.Forms.Button();
+            this.NumArticleNumber = new System.Windows.Forms.NumericUpDown();
+            this.NumArticlePrice = new System.Windows.Forms.NumericUpDown();
+            this.CmbArticleGroup = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.NumArticleNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumArticlePrice)).BeginInit();
             this.SuspendLayout();
-            // 
-            // TxtArticleNumber
-            // 
-            this.TxtArticleNumber.Location = new System.Drawing.Point(230, 123);
-            this.TxtArticleNumber.Name = "TxtArticleNumber";
-            this.TxtArticleNumber.Size = new System.Drawing.Size(125, 27);
-            this.TxtArticleNumber.TabIndex = 70;
             // 
             // TxtArticleDescription
             // 
@@ -54,20 +49,6 @@
             this.TxtArticleDescription.Name = "TxtArticleDescription";
             this.TxtArticleDescription.Size = new System.Drawing.Size(125, 27);
             this.TxtArticleDescription.TabIndex = 69;
-            // 
-            // TxtArticlePrice
-            // 
-            this.TxtArticlePrice.Location = new System.Drawing.Point(230, 228);
-            this.TxtArticlePrice.Name = "TxtArticlePrice";
-            this.TxtArticlePrice.Size = new System.Drawing.Size(125, 27);
-            this.TxtArticlePrice.TabIndex = 68;
-            // 
-            // TxtArticleArticlegroup
-            // 
-            this.TxtArticleArticlegroup.Location = new System.Drawing.Point(230, 271);
-            this.TxtArticleArticlegroup.Name = "TxtArticleArticlegroup";
-            this.TxtArticleArticlegroup.Size = new System.Drawing.Size(125, 27);
-            this.TxtArticleArticlegroup.TabIndex = 67;
             // 
             // label4
             // 
@@ -135,17 +116,40 @@
             this.CmdCreateArticleSave.UseVisualStyleBackColor = true;
             this.CmdCreateArticleSave.Click += new System.EventHandler(this.CmdCreateArticleSave_Click);
             // 
+            // NumArticleNumber
+            // 
+            this.NumArticleNumber.Location = new System.Drawing.Point(230, 123);
+            this.NumArticleNumber.Name = "NumArticleNumber";
+            this.NumArticleNumber.Size = new System.Drawing.Size(125, 27);
+            this.NumArticleNumber.TabIndex = 73;
+            // 
+            // NumArticlePrice
+            // 
+            this.NumArticlePrice.DecimalPlaces = 2;
+            this.NumArticlePrice.Location = new System.Drawing.Point(230, 226);
+            this.NumArticlePrice.Name = "NumArticlePrice";
+            this.NumArticlePrice.Size = new System.Drawing.Size(125, 27);
+            this.NumArticlePrice.TabIndex = 74;
+            // 
+            // CmbArticleGroup
+            // 
+            this.CmbArticleGroup.FormattingEnabled = true;
+            this.CmbArticleGroup.Location = new System.Drawing.Point(230, 271);
+            this.CmbArticleGroup.Name = "CmbArticleGroup";
+            this.CmbArticleGroup.Size = new System.Drawing.Size(125, 28);
+            this.CmbArticleGroup.TabIndex = 75;
+            // 
             // MainEditArticle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1213, 641);
+            this.Controls.Add(this.CmbArticleGroup);
+            this.Controls.Add(this.NumArticlePrice);
+            this.Controls.Add(this.NumArticleNumber);
             this.Controls.Add(this.CmdCreateArticleancel);
             this.Controls.Add(this.CmdCreateArticleSave);
-            this.Controls.Add(this.TxtArticleNumber);
             this.Controls.Add(this.TxtArticleDescription);
-            this.Controls.Add(this.TxtArticlePrice);
-            this.Controls.Add(this.TxtArticleArticlegroup);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -153,18 +157,15 @@
             this.Controls.Add(this.LblArticle);
             this.Name = "MainEditArticle";
             this.Text = "Kunde speichern / bearbeiten";
-            this.VisibleChanged += new System.EventHandler(this.MainEditArticle_VisibleChanged);
+            ((System.ComponentModel.ISupportInitialize)(this.NumArticleNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumArticlePrice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private TextBox TxtArticleNumber;
         private TextBox TxtArticleDescription;
-        private TextBox TxtArticlePrice;
-        private TextBox TxtArticleArticlegroup;
         private Label label4;
         private Label label3;
         private Label label2;
@@ -172,5 +173,8 @@
         private Label LblArticle;
         private Button CmdCreateArticleancel;
         public Button CmdCreateArticleSave;
+        private NumericUpDown NumArticleNumber;
+        private NumericUpDown NumArticlePrice;
+        private ComboBox CmbArticleGroup;
     }
 }

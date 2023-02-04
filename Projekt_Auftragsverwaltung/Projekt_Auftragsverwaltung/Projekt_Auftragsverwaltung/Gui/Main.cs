@@ -1,9 +1,10 @@
 using System.Reflection.Metadata;
+using Projekt_Auftragsverwaltung.Gui;
 
 namespace Projekt_Auftragsverwaltung
 
 {
-    public partial class Main : Form
+    public partial class Main : FormController
     {
         private Form EditGuiArticleGroup;
         private Form EditGuiCustomer;
@@ -26,16 +27,6 @@ namespace Projekt_Auftragsverwaltung
 
         }
 
-        private void ClearTextBoxes()
-        {
-            foreach (Control c in this.Controls)
-            {
-                if (c is TextBox)
-                {
-                    ((TextBox)c).Clear();
-                }
-            }
-        }
 
         private void CmdCreateArticleGroup_Click(Object sender, EventArgs e)
         {
@@ -52,7 +43,6 @@ namespace Projekt_Auftragsverwaltung
         private void CmdCreateArticle_Click(object sender, EventArgs e)
         {
             this.EditGuiArticle.ShowDialog();
-
 
         }
 
@@ -97,6 +87,14 @@ namespace Projekt_Auftragsverwaltung
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+
+        private void UpdateArticleGroup()
+        {
+            // Artikelgruppe Liste updaten.
+
+
         }
     }
 }

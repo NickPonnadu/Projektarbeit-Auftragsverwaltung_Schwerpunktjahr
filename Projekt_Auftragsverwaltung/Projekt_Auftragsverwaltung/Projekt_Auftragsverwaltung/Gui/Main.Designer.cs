@@ -34,7 +34,6 @@
             this.TabControl = new System.Windows.Forms.TabControl();
             this.Kunden = new System.Windows.Forms.TabPage();
             this.CmdDeleteCustomer = new System.Windows.Forms.Button();
-            this.TxtCustomerSearchPropertyFilter = new System.Windows.Forms.TextBox();
             this.TxtCustomerSearchProperty = new System.Windows.Forms.TextBox();
             this.LblCustomerSearchField = new System.Windows.Forms.Label();
             this.TxtCustomerPassword = new System.Windows.Forms.TextBox();
@@ -123,6 +122,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.Jahresvergleich = new System.Windows.Forms.TabPage();
             this.AbfrageRechnungen = new System.Windows.Forms.TabPage();
+            this.CmbCustomerSearchProperty = new System.Windows.Forms.ComboBox();
             this.TabControl.SuspendLayout();
             this.Kunden.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -181,8 +181,8 @@
             // Kunden
             // 
             this.Kunden.AccessibleName = "";
+            this.Kunden.Controls.Add(this.CmbCustomerSearchProperty);
             this.Kunden.Controls.Add(this.CmdDeleteCustomer);
-            this.Kunden.Controls.Add(this.TxtCustomerSearchPropertyFilter);
             this.Kunden.Controls.Add(this.TxtCustomerSearchProperty);
             this.Kunden.Controls.Add(this.LblCustomerSearchField);
             this.Kunden.Controls.Add(this.TxtCustomerPassword);
@@ -221,14 +221,6 @@
             this.CmdDeleteCustomer.TabIndex = 39;
             this.CmdDeleteCustomer.Text = "Löschen";
             this.CmdDeleteCustomer.UseVisualStyleBackColor = true;
-            // 
-            // TxtCustomerSearchPropertyFilter
-            // 
-            this.TxtCustomerSearchPropertyFilter.AllowDrop = true;
-            this.TxtCustomerSearchPropertyFilter.Location = new System.Drawing.Point(172, 290);
-            this.TxtCustomerSearchPropertyFilter.Name = "TxtCustomerSearchPropertyFilter";
-            this.TxtCustomerSearchPropertyFilter.Size = new System.Drawing.Size(125, 27);
-            this.TxtCustomerSearchPropertyFilter.TabIndex = 38;
             // 
             // TxtCustomerSearchProperty
             // 
@@ -1076,6 +1068,14 @@
             this.AbfrageRechnungen.Text = "Abfrage Rechnungen";
             this.AbfrageRechnungen.UseVisualStyleBackColor = true;
             // 
+            // CmbCustomerSearchProperty
+            // 
+            this.CmbCustomerSearchProperty.FormattingEnabled = true;
+            this.CmbCustomerSearchProperty.Location = new System.Drawing.Point(139, 292);
+            this.CmbCustomerSearchProperty.Name = "CmbCustomerSearchProperty";
+            this.CmbCustomerSearchProperty.Size = new System.Drawing.Size(151, 28);
+            this.CmbCustomerSearchProperty.TabIndex = 40;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -1133,7 +1133,6 @@
         private Label LblCustomerName;
         private TextBox TxtCustomerPassword;
         private Label LblCustomerPassword;
-        private TextBox TxtCustomerSearchPropertyFilter;
         private TextBox TxtCustomerSearchProperty;
         private Label LblCustomerSearchField;
         private Button CmdDeleteCustomer;
@@ -1202,5 +1201,6 @@
         private Label label12;
         private TabPage Jahresvergleich;
         private TabPage AbfrageRechnungen;
+        private ComboBox CmbCustomerSearchProperty;
     }
 }

@@ -1,8 +1,10 @@
 ﻿
+using Projekt_Auftragsverwaltung.Gui;
+
 namespace Projekt_Auftragsverwaltung
 {
 
-    public partial class MainEditCustomer : Form
+    public partial class MainEditCustomer : FormController
 
     {
 
@@ -16,12 +18,12 @@ namespace Projekt_Auftragsverwaltung
         private void CmdEditCustomerSave_Click(object sender, EventArgs e)
         {
             // Kunde speichern / updaten
-            this.Hide();
+            CloseForm();
         }
 
         private void CmdEditCustomerCancel_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            CloseForm();
         }
     }
 }
