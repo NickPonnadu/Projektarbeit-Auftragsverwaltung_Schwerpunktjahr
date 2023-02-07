@@ -3512,11 +3512,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gabor\\Desktop\\ProjektKomplett\\Projekt\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
+      "projectUniqueName": "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\SchulprojektSemester2\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
       "projectName": "Projekt_Auftragsverwaltung",
-      "projectPath": "C:\\Users\\gabor\\Desktop\\ProjektKomplett\\Projekt\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
-      "packagesPath": "C:\\Users\\gabor\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gabor\\Desktop\\ProjektKomplett\\Projekt\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\obj\\",
+      "projectPath": "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\SchulprojektSemester2\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
+      "packagesPath": "C:\\Users\\marco\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\SchulprojektSemester2\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3590,13 +3590,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\SchulprojektSemester2\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
