@@ -1,7 +1,9 @@
 ﻿using DatenbankProjekt.Tables;
+using Projekt_Auftragsverwaltung.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -67,7 +69,14 @@ namespace Projekt_Auftragsverwaltung
                 new Article{ArticleName = "Kiwi", price = Convert.ToDecimal(1.35)},
                 new Article{ArticleName = "Pfirsich", price = Convert.ToDecimal(1.40)},
                 new Article{ArticleName = "Zitrone", price = Convert.ToDecimal(1.60)}
+            };
 
+            List<ArticleGroup> articleGroups = new List<ArticleGroup>
+            {
+                new ArticleGroup{Name = "Früchte"},
+                new ArticleGroup{Name = "Getränke"},
+                new ArticleGroup{Name = "Fleisch"},
+                new ArticleGroup{Name = "Hülsenfrüchte"}
             };
 
             using (var context = new CompanyContext())
@@ -78,6 +87,8 @@ namespace Projekt_Auftragsverwaltung
                 context.Orders.AddRange(orders);
                 context.OrderPositions.AddRange(orderPositions);
                 context.ArticlePositions.AddRange(articlePositions);
+                context.Articles.AddRange(articles);
+                context.ArticleGroups.AddRange(articleGroups);
 
 
                 context.SaveChanges();
