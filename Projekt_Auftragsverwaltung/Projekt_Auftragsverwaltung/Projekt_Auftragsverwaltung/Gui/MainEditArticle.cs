@@ -1,55 +1,56 @@
 ﻿
+using Microsoft.Data.SqlClient;
+using Projekt_Auftragsverwaltung.Gui;
+using Projekt_Auftragsverwaltung.Tables;
+
 namespace Projekt_Auftragsverwaltung
 {
 
-    public partial class MainEditArticle : Form
+    public partial class MainEditArticle : FormController
 
     {
-        Form ownerForm = null;
+
+
 
         public MainEditArticle(Form ownerForm)
         {
             InitializeComponent();
-            this.ownerForm = ownerForm;
-            
+           
         }
 
         private void CmdCreateArticleSave_Click(object sender, EventArgs e)
         {
             // Artikel speichern / updaten
-            this.Hide();
-            ClearTextBoxes();
+            CloseForm();
         }
 
 
-
-        private void ActivationEvent(object sender, EventArgs e)
-        {
-            // Befüllung der Felder, wenn Form aktiviert wird
-            this.Hide();
-            ClearTextBoxes();
-        }
 
 
         private void CmdCreateArticleancel_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            ClearTextBoxes();
+            CloseForm();
         }
 
 
-        private void ClearTextBoxes()
-        {
-            foreach (Control c in this.Controls)
-            {
-                if (c is TextBox)
-                {
-                    ((TextBox)c).Clear();
-                }
-            }
-        }
+        //private void CreateNewArticle()
+        //{
+        //    string articleNumber = Convert.ToString(NumArticleNumber.Value);
+        //    string articleDecscription = TxtArticleDescription.Text;
+        //    string articlePrice = Convert.ToString(NumArticlePrice.Value);
+        //    string articleGroup = CmbArticleGroup.Text;  
 
 
+        //    var conn = new SqlConnection();
+        //    var cmd = new SqlCommand();
 
+
+        //    cmd.CommandText = $"insert into artikel (1,2,3,4) values (";
+
+        //    cmd.Parameters.AddWithValue(«@bezeichnung», bezeichnung);
+        //    cmd.ExecuteReader();
+
+
+        //}
     }
 }

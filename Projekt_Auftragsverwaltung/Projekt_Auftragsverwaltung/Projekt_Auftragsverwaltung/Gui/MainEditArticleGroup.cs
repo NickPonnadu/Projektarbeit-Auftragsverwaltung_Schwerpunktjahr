@@ -1,8 +1,10 @@
 ﻿
+using Projekt_Auftragsverwaltung.Gui;
+
 namespace Projekt_Auftragsverwaltung
 {
-    
-    public partial class MainEditArticleGroup : Form
+
+    public partial class MainEditArticleGroup : FormController
 
     {
        
@@ -17,13 +19,14 @@ namespace Projekt_Auftragsverwaltung
         private void CmdCreateArticleGroupSave_Click(object sender, EventArgs e)
         {
             // Artikelgruppe speichern / updaten
-            this.Hide();
+            CloseForm();
         }
 
         private void CmdCreateArticleGroupCancel_Click(object sender, EventArgs e)
         {
-            
-            this.Hide();
+
+            CloseForm();
         }
+                 
     }
 }

@@ -1,8 +1,10 @@
 ﻿
+using Projekt_Auftragsverwaltung.Gui;
+
 namespace Projekt_Auftragsverwaltung
 {
 
-    public partial class MainEditPosition : Form
+    public partial class MainEditPosition : FormController
 
     {
 
@@ -16,12 +18,12 @@ namespace Projekt_Auftragsverwaltung
         private void CmdCreatePositionSave_Click(object sender, EventArgs e)
         {
             // Position speichern / updaten
-            this.Hide();
+            CloseForm();
         }
 
         private void CmdCreatePositionCancel_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            CloseForm();
         }
     }
 }
