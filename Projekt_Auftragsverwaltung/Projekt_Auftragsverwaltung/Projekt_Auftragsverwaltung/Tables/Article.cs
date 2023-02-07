@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DatenbankProjekt.Tables
+namespace Projekt_Auftragsverwaltung.Tables
 {
     public class Article
     {
@@ -17,9 +17,6 @@ namespace DatenbankProjekt.Tables
         public int ArticleGroupId { get; set; }
         public ArticleGroup ArticleGroup { get; set; }
         public virtual ICollection<OrderPosition> OrderPositions { get; set; }
-
-
-
 
     }
 }

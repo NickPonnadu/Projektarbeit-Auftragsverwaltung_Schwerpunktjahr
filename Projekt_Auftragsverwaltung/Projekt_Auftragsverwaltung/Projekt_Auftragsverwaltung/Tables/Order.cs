@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DatenbankProjekt.Tables
+namespace Projekt_Auftragsverwaltung.Tables
 {
     public class Order
     {
@@ -16,7 +16,7 @@ namespace DatenbankProjekt.Tables
         public Customer Customers { get; set; }
 
 
-        public List<OrderPosition> OrderPositions { get; set; }
+        public ICollection<OrderPosition> OrderPositions { get; set; }
 
     }
 }

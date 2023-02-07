@@ -1,5 +1,4 @@
-﻿using DatenbankProjekt.Tables;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using Projekt_Auftragsverwaltung.Tables;
 using System.Configuration;
@@ -17,18 +16,24 @@ namespace Projekt_Auftragsverwaltung
         public DbSet<ArticlePosition> ArticlePositions { get; set; }
         public DbSet<ArticleGroup> ArticleGroups { get; set; }
 
+
+        private string _ConnectionString;
+
+        public CompanyContext(string connectionString)
+        {
+            _ConnectionString= connectionString;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // zieht von der App.config Datei den connectionString
-            string connectionString = ConfigurationManager.ConnectionStrings["GaborNeueString"].ConnectionString;
-            optionsBuilder.UseSqlServer(connectionString);
-
-            // optionsBuilder.UseSqlServer("Data Source=DESKTOP-8S98QH8\\ZBWSERVER;Database=EfCoreDemo;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(_ConnectionString);
+            // optionsBuilder.UseSqlServer("Server=DESKTOP-G8PTADT\MSSQLSERVERZBWGA; Database=myDataBase; Trusted_Connection=True;Encrypt=false;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<AddressLocation>()
+                .HasKey(e => e.ZipCode);
         }
     }
 }

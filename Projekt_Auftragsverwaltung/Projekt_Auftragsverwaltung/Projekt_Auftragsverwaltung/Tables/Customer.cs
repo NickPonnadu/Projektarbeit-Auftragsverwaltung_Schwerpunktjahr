@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DatenbankProjekt.Tables
+namespace Projekt_Auftragsverwaltung.Tables
 {
     public class Customer
     {
@@ -15,7 +15,7 @@ namespace DatenbankProjekt.Tables
         public string Password { get; set; }
 
 
-        public List<Order> Orders { get; set; }
+        public ICollection<Order> Orders { get; set; }
 
 
         public int AddressId { get; set; }
