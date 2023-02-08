@@ -96,5 +96,10 @@ namespace Projekt_Auftragsverwaltung
 
 
         }
+
+        private void Kunden_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
