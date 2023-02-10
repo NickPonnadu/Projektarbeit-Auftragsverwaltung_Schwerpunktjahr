@@ -32,8 +32,18 @@ namespace Projekt_Auftragsverwaltung
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AddressLocation>()
-                .HasKey(e => e.ZipCode);
+            modelBuilder.Entity<ArticlePosition>()
+                .HasKey(sc => new { sc.OrderPositionId, sc.ArticleId });
+
+            modelBuilder.Entity<ArticlePosition>()
+                .HasOne(sc => sc.OrderPosition)
+                .WithMany(s => s.Articles)
+                .HasForeignKey(sc => sc.OrderPositionId);
+
+            modelBuilder.Entity<ArticlePosition>()
+                .HasOne(sc => sc.Article)
+                .WithMany(c => c.OrderPositions)
+                .HasForeignKey(sc => sc.ArticleId);
         }
     }
 }

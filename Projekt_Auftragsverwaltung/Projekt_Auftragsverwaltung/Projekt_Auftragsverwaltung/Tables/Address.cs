@@ -13,7 +13,7 @@ namespace Projekt_Auftragsverwaltung.Tables
         public string HouseNumber { get; set; }
         public int ZipCode { get; set; }
 
-        public List<AddressLocation> AdressLocations { get; set; }
+        public List<AddressLocation> AddressLocations { get; set; }
 
         public Customer Customer { get; set; }
     }

@@ -13,10 +13,10 @@ namespace Projekt_Auftragsverwaltung.Tables
 
 
         public int CustomerId { get; set; }
-        public Customer Customers { get; set; }
+        public Customer Customer { get; set; }
 
 
-        public ICollection<OrderPosition> OrderPositions { get; set; }
+        public List<OrderPosition> OrderPositions { get; set; }
 
     }
 }

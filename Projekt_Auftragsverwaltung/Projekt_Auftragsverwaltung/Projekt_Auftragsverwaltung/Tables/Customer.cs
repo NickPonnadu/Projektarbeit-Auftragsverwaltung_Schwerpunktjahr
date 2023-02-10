@@ -15,7 +15,7 @@ namespace Projekt_Auftragsverwaltung.Tables
         public string Password { get; set; }
 
 
-        public ICollection<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; }
 
 
         public int AddressId { get; set; }
