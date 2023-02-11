@@ -13,7 +13,6 @@ namespace Projekt_Auftragsverwaltung
         public DbSet<Customer> Customers { get; set; }
         public DbSet<OrderPosition> OrderPositions { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<ArticlePosition> ArticlePositions { get; set; }
         public DbSet<ArticleGroup> ArticleGroups { get; set; }
 
 
