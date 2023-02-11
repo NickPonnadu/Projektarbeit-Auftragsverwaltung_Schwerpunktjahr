@@ -21,7 +21,7 @@ namespace Projekt_Auftragsverwaltung
 
         public CompanyContext(string connectionString)
         {
-            _ConnectionString= connectionString;
+            _ConnectionString = connectionString;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -32,6 +32,10 @@ namespace Projekt_Auftragsverwaltung
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AddressLocation>()
+                .HasKey(b => b.ZipCode);
+
+
             //1:n Beziehung zwischen Address und AddressLocation
             modelBuilder.Entity<AddressLocation>()
                 .HasOne(at => at.Address)
