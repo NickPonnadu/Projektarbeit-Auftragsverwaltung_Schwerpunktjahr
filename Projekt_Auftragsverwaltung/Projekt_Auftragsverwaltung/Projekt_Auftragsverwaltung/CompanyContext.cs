@@ -14,6 +14,7 @@ namespace Projekt_Auftragsverwaltung
         public DbSet<OrderPosition> OrderPositions { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ArticleGroup> ArticleGroups { get; set; }
+        public DbSet<ArticlePosition> ArticlePositions { get; set; }
 
 
         private string _ConnectionString;
