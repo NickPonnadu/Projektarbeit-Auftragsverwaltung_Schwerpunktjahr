@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\SchulprojektSemester2\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj": {}
+    "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\DatenbankProjekt\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj": {}
   },
   "projects": {
-    "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\SchulprojektSemester2\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj": {
+    "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\DatenbankProjekt\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\SchulprojektSemester2\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
+        "projectUniqueName": "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\DatenbankProjekt\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
         "projectName": "Projekt_Auftragsverwaltung",
-        "projectPath": "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\SchulprojektSemester2\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
+        "projectPath": "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\DatenbankProjekt\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
         "packagesPath": "C:\\Users\\marco\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\SchulprojektSemester2\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\obj\\",
+        "outputPath": "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\DatenbankProjekt\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
