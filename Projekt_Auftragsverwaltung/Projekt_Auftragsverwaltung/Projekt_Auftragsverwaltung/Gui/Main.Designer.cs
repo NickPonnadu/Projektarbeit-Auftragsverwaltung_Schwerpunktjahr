@@ -36,7 +36,7 @@
             this.CmdDeleteCustomer = new System.Windows.Forms.Button();
             this.TxtCustomerSearchProperty = new System.Windows.Forms.TextBox();
             this.LblCustomerSearchField = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.DGWCustomers = new System.Windows.Forms.DataGridView();
             this.CmdSearchResetCustomer = new System.Windows.Forms.Button();
             this.CmdCustomerSearch = new System.Windows.Forms.Button();
             this.CmdEditCustomer = new System.Windows.Forms.Button();
@@ -133,7 +133,7 @@
             this.Kunden.Controls.Add(this.CmdDeleteCustomer);
             this.Kunden.Controls.Add(this.TxtCustomerSearchProperty);
             this.Kunden.Controls.Add(this.LblCustomerSearchField);
-            this.Kunden.Controls.Add(this.dataGridView1);
+            this.Kunden.Controls.Add(this.DGWCustomers);
             this.Kunden.Controls.Add(this.CmdSearchResetCustomer);
             this.Kunden.Controls.Add(this.CmdCustomerSearch);
             this.Kunden.Controls.Add(this.CmdEditCustomer);
@@ -146,22 +146,13 @@
             this.Kunden.TabIndex = 4;
             this.Kunden.Text = "Kunden";
             this.Kunden.UseVisualStyleBackColor = true;
-            this.Kunden.Click += new System.EventHandler(this.Kunden_Click);
             // 
             // CmbCustomerSearchProperty
             // 
             this.CmbCustomerSearchProperty.FormattingEnabled = true;
-            this.CmbCustomerSearchProperty.Location = new System.Drawing.Point(200, 82);
+            this.CmbCustomerSearchProperty.Location = new System.Drawing.Point(197, 83);
             this.CmbCustomerSearchProperty.Name = "CmbCustomerSearchProperty";
-            this.CmbCustomerSearchProperty.Size = new System.Drawing.Size(151, 28);
-            this.CmbCustomerSearchProperty.TabIndex = 40;
-            // 
-            // CmbCustomerSearchProperty
-            // 
-            this.CmbCustomerSearchProperty.FormattingEnabled = true;
-            this.CmbCustomerSearchProperty.Location = new System.Drawing.Point(139, 292);
-            this.CmbCustomerSearchProperty.Name = "CmbCustomerSearchProperty";
-            this.CmbCustomerSearchProperty.Size = new System.Drawing.Size(151, 28);
+            this.CmbCustomerSearchProperty.Size = new System.Drawing.Size(141, 28);
             this.CmbCustomerSearchProperty.TabIndex = 40;
             // 
             // CmdDeleteCustomer
@@ -191,14 +182,14 @@
             // 
             // DGWCustomers
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(35, 149);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(1200, 500);
-            this.dataGridView1.TabIndex = 33;
+            this.DGWCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGWCustomers.Location = new System.Drawing.Point(35, 149);
+            this.DGWCustomers.Name = "DGWCustomers";
+            this.DGWCustomers.ReadOnly = true;
+            this.DGWCustomers.RowHeadersWidth = 51;
+            this.DGWCustomers.RowTemplate.Height = 29;
+            this.DGWCustomers.Size = new System.Drawing.Size(1200, 500);
+            this.DGWCustomers.TabIndex = 33;
             // 
             // CmdSearchResetCustomer
             // 
