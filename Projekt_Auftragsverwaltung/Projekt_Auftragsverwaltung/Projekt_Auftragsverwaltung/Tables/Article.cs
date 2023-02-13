@@ -16,7 +16,7 @@ namespace Projekt_Auftragsverwaltung.Tables
 
         public int ArticleGroupId { get; set; }
         public ArticleGroup ArticleGroup { get; set; }
-        public virtual ICollection<OrderPosition> OrderPositions { get; set; }
+        public virtual List<ArticlePosition> OrderPositions { get; set; }
 
     }
 }

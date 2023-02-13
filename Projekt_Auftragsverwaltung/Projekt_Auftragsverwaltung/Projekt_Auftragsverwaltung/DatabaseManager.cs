@@ -13,7 +13,18 @@ namespace Projekt_Auftragsverwaltung
         {
             using (var context = new CompanyContext(connectionString))
             {
-                context.Database.Migrate();
+                context.Database.EnsureCreated();
+
+
+                /*  Hier TestDaten einfügen   */
+
+
+
+
+
+
+
+                //context.Database.Migrate();
             }
         }
     }

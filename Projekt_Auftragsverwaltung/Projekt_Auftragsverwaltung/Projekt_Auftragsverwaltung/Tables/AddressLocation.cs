@@ -10,7 +10,6 @@ namespace Projekt_Auftragsverwaltung.Tables
 {
     public class AddressLocation
     {
-
         public int ZipCode { get; set; }
         public string Location { get; set; }
 
