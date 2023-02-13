@@ -91,12 +91,13 @@ namespace Projekt_Auftragsverwaltung
             );
 
             modelBuilder.Entity<AddressLocation>().HasData(
-               new AddressLocation { ZipCode = 12345, Location = "Testort 1", AddressId = 1 },
-               new AddressLocation { ZipCode = 12345, Location = "Testort 2", AddressId = 2 },
-               new AddressLocation { ZipCode = 12345, Location = "Testort 3", AddressId = 3 },
-               new AddressLocation { ZipCode = 12345, Location = "Testort 4", AddressId = 4 },
-               new AddressLocation { ZipCode = 12345, Location = "Testort 5", AddressId = 5 }
-           );
+                new AddressLocation { ZipCode = 12345, Location = "Testort 1", AddressId = 1 },
+                new AddressLocation { ZipCode = 123456, Location = "Testort 2", AddressId = 2 },
+                new AddressLocation { ZipCode = 123457, Location = "Testort 3", AddressId = 3 },
+                new AddressLocation { ZipCode = 123458, Location = "Testort 4", AddressId = 4 },
+                new AddressLocation { ZipCode = 123459, Location = "Testort 5", AddressId = 5 }
+            );
+
 
             modelBuilder.Entity<Article>().HasData(
                 new Article { ArticleId = 1, ArticleName = "Artikel 1", Price = 10.0M, ArticleGroupId = 1 },
