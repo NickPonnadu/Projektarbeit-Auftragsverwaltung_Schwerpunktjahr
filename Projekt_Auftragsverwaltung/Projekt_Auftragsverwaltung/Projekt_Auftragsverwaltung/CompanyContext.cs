@@ -17,7 +17,7 @@ namespace Projekt_Auftragsverwaltung
         public DbSet<ArticlePosition> ArticlePositions { get; set; }
 
 
-        private string _ConnectionString;
+        public string _ConnectionString;
 
         public CompanyContext(string connectionString)
         {

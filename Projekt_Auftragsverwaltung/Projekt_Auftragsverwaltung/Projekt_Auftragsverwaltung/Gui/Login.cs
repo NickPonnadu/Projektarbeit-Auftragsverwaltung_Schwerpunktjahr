@@ -8,6 +8,8 @@ namespace Projekt_Auftragsverwaltung
 
         private Form MainGui;
 
+        public string DBconnectionString;
+
         public Login()
         {
             InitializeComponent();
@@ -28,6 +30,7 @@ namespace Projekt_Auftragsverwaltung
                 {
                     LblConnection.Text = "DB ist Verbunden";
                     CmdStartApplication.Enabled = true;
+                    DBconnectionString = connectionString;
                 }
                 else
                 {
@@ -47,7 +50,7 @@ namespace Projekt_Auftragsverwaltung
             if (this.Connection)
             {
                 this.Hide();
-                this.MainGui = new Main();
+                this.MainGui = new Main(DBconnectionString);
                 this.MainGui.Show();
             }
         }

@@ -1,4 +1,6 @@
+using Microsoft.Data.SqlClient;
 using Projekt_Auftragsverwaltung.Gui;
+using System.Data;
 using System.Reflection.Metadata;
 
 namespace Projekt_Auftragsverwaltung
@@ -12,11 +14,10 @@ namespace Projekt_Auftragsverwaltung
         private Form EditGuiOrder;
         private Form EditGuiPosition;
 
+        public string ConnectionString;
 
-        //public Entity Article
 
-
-        public Main()
+        public Main(string connectionString)
         {
             InitializeComponent();
             this.EditGuiArticleGroup = new MainEditArticleGroup();
@@ -24,7 +25,8 @@ namespace Projekt_Auftragsverwaltung
             this.EditGuiArticle = new MainEditArticle(this);
             this.EditGuiPosition = new MainEditPosition();
             this.EditGuiOrder = new MainEditOrder();
-
+            this.ConnectionString = connectionString;
+            GetCustomers();
         }
 
 
@@ -36,7 +38,7 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdCreateCustomer_Click(object sender, EventArgs e)
         {
-            this.EditGuiCustomer.Location = new Point(15,15);
+            this.EditGuiCustomer.Location = new Point(15, 15);
             this.EditGuiCustomer.ShowDialog();
         }
 
@@ -95,6 +97,25 @@ namespace Projekt_Auftragsverwaltung
             // Artikelgruppe Liste updaten.
 
 
+        }
+
+        private void GetCustomers()
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Customers";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        DGWCustomers.DataSource = dataTable;
+
+                    }
+                }
+            }
         }
     }
 }
