@@ -13,9 +13,9 @@ namespace Projekt_Auftragsverwaltung
         private Form EditGuiArticle;
         private Form EditGuiOrder;
         private Form EditGuiPosition;
-
+        
         public string ConnectionString;
-
+        private DataController DataController;
 
         public Main(string connectionString)
         {
@@ -26,7 +26,11 @@ namespace Projekt_Auftragsverwaltung
             this.EditGuiPosition = new MainEditPosition();
             this.EditGuiOrder = new MainEditOrder();
             this.ConnectionString = connectionString;
-            GetCustomers();
+            DataController = new DataController(ConnectionString);
+            UpdateLists();
+            SetDataBindings();
+
+
         }
 
 
@@ -92,30 +96,48 @@ namespace Projekt_Auftragsverwaltung
         }
 
 
-        private void UpdateArticleGroup()
+
+       
+              public void SetDataBindings()
         {
-            // Artikelgruppe Liste updaten.
-
-
+            CmbCustomerSearchProperty.DataSource = new String[] { "Kundennummer", "Name", "Telefonnummer","Email","Website","Strasse","Hausnummer","PLZ","Ort" };
         }
 
-        private void GetCustomers()
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                string query = "SELECT * FROM Customers";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                    {
-                        DataTable dataTable = new DataTable();
-                        adapter.Fill(dataTable);
-                        DGWCustomers.DataSource = dataTable;
 
-                    }
-                }
-            }
+        public void UpdateLists()
+        {
+            UpdateCustomers();
+            UpdateArticles();
+            UpdateOrders();
+            UpdateOrderPositions();
+        }
+        private void UpdateCustomers()
+        {
+            var data = DataController.ReturnCustomers();
+            DGWCustomers.DataSource = data;
+        }
+
+        private void UpdateArticles()
+        {
+            var data = DataController.ReturnArticles();
+            DGWArticles.DataSource = data;
+        }
+
+        private void UpdateOrders()
+        {
+            var data = DataController.ReturnOrders();
+            DGWOrders.DataSource = data;
+        }
+
+        private void UpdateOrderPositions()
+        {
+            var data = DataController.ReturnOrderPositions();
+            DGWPositions.DataSource = data;
+        }
+
+        private void CmdCustomerSearch_Click(object sender, EventArgs e)
+        {
+            DataController.ReturnCustomersSearch(CmbCustomerSearchProperty.Text, TxtCustomerSearchProperty.Text);
         }
     }
 }

@@ -87,6 +87,7 @@
             // 
             this.TxtOrderNumber.Location = new System.Drawing.Point(276, 124);
             this.TxtOrderNumber.Name = "TxtOrderNumber";
+            this.TxtOrderNumber.ReadOnly = true;
             this.TxtOrderNumber.Size = new System.Drawing.Size(125, 27);
             this.TxtOrderNumber.TabIndex = 84;
             // 

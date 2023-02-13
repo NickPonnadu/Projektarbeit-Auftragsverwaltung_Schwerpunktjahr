@@ -120,6 +120,7 @@
             // 
             this.NumArticleNumber.Location = new System.Drawing.Point(230, 123);
             this.NumArticleNumber.Name = "NumArticleNumber";
+            this.NumArticleNumber.ReadOnly = true;
             this.NumArticleNumber.Size = new System.Drawing.Size(125, 27);
             this.NumArticleNumber.TabIndex = 73;
             // 

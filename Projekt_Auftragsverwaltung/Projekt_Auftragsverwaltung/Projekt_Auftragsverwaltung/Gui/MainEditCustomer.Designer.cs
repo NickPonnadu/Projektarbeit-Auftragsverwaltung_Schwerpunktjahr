@@ -156,6 +156,7 @@
             // 
             this.TxtCustomerNumber.Location = new System.Drawing.Point(210, 96);
             this.TxtCustomerNumber.Name = "TxtCustomerNumber";
+            this.TxtCustomerNumber.ReadOnly = true;
             this.TxtCustomerNumber.Size = new System.Drawing.Size(191, 27);
             this.TxtCustomerNumber.TabIndex = 37;
             // 

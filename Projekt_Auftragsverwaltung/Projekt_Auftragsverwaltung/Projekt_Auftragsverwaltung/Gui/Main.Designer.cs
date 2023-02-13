@@ -33,6 +33,7 @@
             this.TabControl = new System.Windows.Forms.TabControl();
             this.Kunden = new System.Windows.Forms.TabPage();
             this.CmbCustomerSearchProperty = new System.Windows.Forms.ComboBox();
+            this.addressBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.CmdDeleteCustomer = new System.Windows.Forms.Button();
             this.TxtCustomerSearchProperty = new System.Windows.Forms.TextBox();
             this.LblCustomerSearchField = new System.Windows.Forms.Label();
@@ -47,13 +48,13 @@
             this.CmdSearchArticleGroup = new System.Windows.Forms.Button();
             this.CmdEditArticleGroup = new System.Windows.Forms.Button();
             this.CmdCreateArticleGroup = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.DGWArticleGroups = new System.Windows.Forms.DataGridView();
             this.TxtArticleGroupSearchName = new System.Windows.Forms.TextBox();
             this.LblArticleGroupSearch = new System.Windows.Forms.Label();
             this.LblArticleGroups = new System.Windows.Forms.Label();
             this.Artikel = new System.Windows.Forms.TabPage();
             this.CmbArticleSearchProperty = new System.Windows.Forms.ComboBox();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.DGWArticles = new System.Windows.Forms.DataGridView();
             this.TxtSearchArticleProperty = new System.Windows.Forms.TextBox();
             this.CmdDeleteArticle = new System.Windows.Forms.Button();
             this.CmdSearchResetArticle = new System.Windows.Forms.Button();
@@ -64,7 +65,7 @@
             this.LblArticle = new System.Windows.Forms.Label();
             this.Aufträge = new System.Windows.Forms.TabPage();
             this.CmdOrderSearchProperty = new System.Windows.Forms.ComboBox();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.DGWOrders = new System.Windows.Forms.DataGridView();
             this.TxtSearchOrderProperty = new System.Windows.Forms.TextBox();
             this.CmdDeleteOrder = new System.Windows.Forms.Button();
             this.CmdSearchResetOrder = new System.Windows.Forms.Button();
@@ -75,7 +76,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.Positionen = new System.Windows.Forms.TabPage();
             this.CmdPositionSeaerchProperty = new System.Windows.Forms.ComboBox();
-            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.DGWPositions = new System.Windows.Forms.DataGridView();
             this.TxtSearchPositionProperty = new System.Windows.Forms.TextBox();
             this.CmdDeletePosition = new System.Windows.Forms.Button();
             this.CmdSearchResetPosition = new System.Windows.Forms.Button();
@@ -89,15 +90,16 @@
             this.articleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.TabControl.SuspendLayout();
             this.Kunden.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGWCustomers)).BeginInit();
             this.Artikelgruppen.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGWArticleGroups)).BeginInit();
             this.Artikel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGWArticles)).BeginInit();
             this.Aufträge.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGWOrders)).BeginInit();
             this.Positionen.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGWPositions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.articleBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -149,11 +151,16 @@
             // 
             // CmbCustomerSearchProperty
             // 
+            this.CmbCustomerSearchProperty.DataSource = this.addressBindingSource;
             this.CmbCustomerSearchProperty.FormattingEnabled = true;
             this.CmbCustomerSearchProperty.Location = new System.Drawing.Point(197, 83);
             this.CmbCustomerSearchProperty.Name = "CmbCustomerSearchProperty";
             this.CmbCustomerSearchProperty.Size = new System.Drawing.Size(141, 28);
             this.CmbCustomerSearchProperty.TabIndex = 40;
+            // 
+            // addressBindingSource
+            // 
+            this.addressBindingSource.DataSource = typeof(Projekt_Auftragsverwaltung.Tables.Address);
             // 
             // CmdDeleteCustomer
             // 
@@ -182,6 +189,8 @@
             // 
             // DGWCustomers
             // 
+            this.DGWCustomers.AllowUserToAddRows = false;
+            this.DGWCustomers.AllowUserToDeleteRows = false;
             this.DGWCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGWCustomers.Location = new System.Drawing.Point(35, 149);
             this.DGWCustomers.Name = "DGWCustomers";
@@ -208,6 +217,7 @@
             this.CmdCustomerSearch.TabIndex = 30;
             this.CmdCustomerSearch.Text = "Suchen";
             this.CmdCustomerSearch.UseVisualStyleBackColor = true;
+            this.CmdCustomerSearch.Click += new System.EventHandler(this.CmdCustomerSearch_Click);
             // 
             // CmdEditCustomer
             // 
@@ -236,7 +246,7 @@
             this.Artikelgruppen.Controls.Add(this.CmdSearchArticleGroup);
             this.Artikelgruppen.Controls.Add(this.CmdEditArticleGroup);
             this.Artikelgruppen.Controls.Add(this.CmdCreateArticleGroup);
-            this.Artikelgruppen.Controls.Add(this.dataGridView2);
+            this.Artikelgruppen.Controls.Add(this.DGWArticleGroups);
             this.Artikelgruppen.Controls.Add(this.TxtArticleGroupSearchName);
             this.Artikelgruppen.Controls.Add(this.LblArticleGroupSearch);
             this.Artikelgruppen.Controls.Add(this.LblArticleGroups);
@@ -295,15 +305,15 @@
             this.CmdCreateArticleGroup.UseVisualStyleBackColor = true;
             this.CmdCreateArticleGroup.Click += new System.EventHandler(this.CmdCreateArticleGroup_Click);
             // 
-            // dataGridView2
+            // DGWArticleGroups
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(35, 149);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersWidth = 51;
-            this.dataGridView2.RowTemplate.Height = 29;
-            this.dataGridView2.Size = new System.Drawing.Size(1200, 500);
-            this.dataGridView2.TabIndex = 6;
+            this.DGWArticleGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGWArticleGroups.Location = new System.Drawing.Point(35, 149);
+            this.DGWArticleGroups.Name = "DGWArticleGroups";
+            this.DGWArticleGroups.RowHeadersWidth = 51;
+            this.DGWArticleGroups.RowTemplate.Height = 29;
+            this.DGWArticleGroups.Size = new System.Drawing.Size(1200, 500);
+            this.DGWArticleGroups.TabIndex = 6;
             // 
             // TxtArticleGroupSearchName
             // 
@@ -334,7 +344,7 @@
             // Artikel
             // 
             this.Artikel.Controls.Add(this.CmbArticleSearchProperty);
-            this.Artikel.Controls.Add(this.dataGridView3);
+            this.Artikel.Controls.Add(this.DGWArticles);
             this.Artikel.Controls.Add(this.TxtSearchArticleProperty);
             this.Artikel.Controls.Add(this.CmdDeleteArticle);
             this.Artikel.Controls.Add(this.CmdSearchResetArticle);
@@ -359,15 +369,15 @@
             this.CmbArticleSearchProperty.Size = new System.Drawing.Size(141, 28);
             this.CmbArticleSearchProperty.TabIndex = 64;
             // 
-            // dataGridView3
+            // DGWArticles
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(35, 149);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowHeadersWidth = 51;
-            this.dataGridView3.RowTemplate.Height = 29;
-            this.dataGridView3.Size = new System.Drawing.Size(1200, 500);
-            this.dataGridView3.TabIndex = 63;
+            this.DGWArticles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGWArticles.Location = new System.Drawing.Point(35, 149);
+            this.DGWArticles.Name = "DGWArticles";
+            this.DGWArticles.RowHeadersWidth = 51;
+            this.DGWArticles.RowTemplate.Height = 29;
+            this.DGWArticles.Size = new System.Drawing.Size(1200, 500);
+            this.DGWArticles.TabIndex = 63;
             // 
             // TxtSearchArticleProperty
             // 
@@ -445,7 +455,7 @@
             // Aufträge
             // 
             this.Aufträge.Controls.Add(this.CmdOrderSearchProperty);
-            this.Aufträge.Controls.Add(this.dataGridView4);
+            this.Aufträge.Controls.Add(this.DGWOrders);
             this.Aufträge.Controls.Add(this.TxtSearchOrderProperty);
             this.Aufträge.Controls.Add(this.CmdDeleteOrder);
             this.Aufträge.Controls.Add(this.CmdSearchResetOrder);
@@ -470,15 +480,15 @@
             this.CmdOrderSearchProperty.Size = new System.Drawing.Size(141, 28);
             this.CmdOrderSearchProperty.TabIndex = 73;
             // 
-            // dataGridView4
+            // DGWOrders
             // 
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(35, 149);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.RowHeadersWidth = 51;
-            this.dataGridView4.RowTemplate.Height = 29;
-            this.dataGridView4.Size = new System.Drawing.Size(1200, 500);
-            this.dataGridView4.TabIndex = 72;
+            this.DGWOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGWOrders.Location = new System.Drawing.Point(35, 149);
+            this.DGWOrders.Name = "DGWOrders";
+            this.DGWOrders.RowHeadersWidth = 51;
+            this.DGWOrders.RowTemplate.Height = 29;
+            this.DGWOrders.Size = new System.Drawing.Size(1200, 500);
+            this.DGWOrders.TabIndex = 72;
             // 
             // TxtSearchOrderProperty
             // 
@@ -556,7 +566,7 @@
             // Positionen
             // 
             this.Positionen.Controls.Add(this.CmdPositionSeaerchProperty);
-            this.Positionen.Controls.Add(this.dataGridView5);
+            this.Positionen.Controls.Add(this.DGWPositions);
             this.Positionen.Controls.Add(this.TxtSearchPositionProperty);
             this.Positionen.Controls.Add(this.CmdDeletePosition);
             this.Positionen.Controls.Add(this.CmdSearchResetPosition);
@@ -581,15 +591,15 @@
             this.CmdPositionSeaerchProperty.Size = new System.Drawing.Size(141, 28);
             this.CmdPositionSeaerchProperty.TabIndex = 82;
             // 
-            // dataGridView5
+            // DGWPositions
             // 
-            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Location = new System.Drawing.Point(35, 149);
-            this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.RowHeadersWidth = 51;
-            this.dataGridView5.RowTemplate.Height = 29;
-            this.dataGridView5.Size = new System.Drawing.Size(1200, 500);
-            this.dataGridView5.TabIndex = 81;
+            this.DGWPositions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGWPositions.Location = new System.Drawing.Point(35, 149);
+            this.DGWPositions.Name = "DGWPositions";
+            this.DGWPositions.RowHeadersWidth = 51;
+            this.DGWPositions.RowTemplate.Height = 29;
+            this.DGWPositions.Size = new System.Drawing.Size(1200, 500);
+            this.DGWPositions.TabIndex = 81;
             // 
             // TxtSearchPositionProperty
             // 
@@ -700,19 +710,20 @@
             this.TabControl.ResumeLayout(false);
             this.Kunden.ResumeLayout(false);
             this.Kunden.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGWCustomers)).EndInit();
             this.Artikelgruppen.ResumeLayout(false);
             this.Artikelgruppen.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGWArticleGroups)).EndInit();
             this.Artikel.ResumeLayout(false);
             this.Artikel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGWArticles)).EndInit();
             this.Aufträge.ResumeLayout(false);
             this.Aufträge.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGWOrders)).EndInit();
             this.Positionen.ResumeLayout(false);
             this.Positionen.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGWPositions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.articleBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -740,11 +751,11 @@
         private Button CmdSearchArticleGroup;
         private Button CmdEditArticleGroup;
         private Button CmdCreateArticleGroup;
-        private DataGridView dataGridView2;
+        private DataGridView DGWArticleGroups;
         private TextBox TxtArticleGroupSearchName;
         private Label LblArticleGroupSearch;
         private Label LblArticleGroups;
-        private DataGridView dataGridView3;
+        private DataGridView DGWArticles;
         private TextBox TxtSearchArticleProperty;
         private Button CmdDeleteArticle;
         private Button CmdSearchResetArticle;
@@ -753,7 +764,7 @@
         private Button CmdCreateArticle;
         private Label LblSearchName;
         private Label LblArticle;
-        private DataGridView dataGridView4;
+        private DataGridView DGWOrders;
         private TextBox TxtSearchOrderProperty;
         private Button CmdDeleteOrder;
         private Button CmdSearchResetOrder;
@@ -762,7 +773,7 @@
         private Button CmdCreateOrder;
         private Label label6;
         private Label label5;
-        private DataGridView dataGridView5;
+        private DataGridView DGWPositions;
         private TextBox TxtSearchPositionProperty;
         private Button CmdDeletePosition;
         private Button CmdSearchResetPosition;
@@ -778,5 +789,6 @@
         private ComboBox CmbArticleSearchProperty;
         private ComboBox CmdOrderSearchProperty;
         private ComboBox CmdPositionSeaerchProperty;
+        private BindingSource addressBindingSource;
     }
 }
