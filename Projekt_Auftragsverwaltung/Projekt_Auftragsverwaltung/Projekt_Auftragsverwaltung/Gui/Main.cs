@@ -6,6 +6,7 @@ using System.Reflection.Metadata;
 namespace Projekt_Auftragsverwaltung
 
 {
+    
     public partial class Main : FormController
     {
         private Form EditGuiArticleGroup;
@@ -13,7 +14,7 @@ namespace Projekt_Auftragsverwaltung
         private Form EditGuiArticle;
         private Form EditGuiOrder;
         private Form EditGuiPosition;
-        
+
         public string ConnectionString;
         private DataController DataController;
 
@@ -29,8 +30,6 @@ namespace Projekt_Auftragsverwaltung
             DataController = new DataController(ConnectionString);
             UpdateLists();
             SetDataBindings();
-
-
         }
 
 
@@ -95,14 +94,12 @@ namespace Projekt_Auftragsverwaltung
             Application.Exit();
         }
 
-
-
-       
-              public void SetDataBindings()
+        public void SetDataBindings()
         {
-            CmbCustomerSearchProperty.DataSource = new String[] { "Kundennummer", "Name", "Telefonnummer","Email","Website","Strasse","Hausnummer","PLZ","Ort" };
+            CmbCustomerSearchProperty.DataSource = new String[] { "Kundennummer", "Name", "Telefonnummer", "Email", "Website", "Strasse", "Hausnummer", "PLZ", "Ort" };
         }
 
+       
 
         public void UpdateLists()
         {
@@ -137,7 +134,13 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdCustomerSearch_Click(object sender, EventArgs e)
         {
-            DataController.ReturnCustomersSearch(CmbCustomerSearchProperty.Text, TxtCustomerSearchProperty.Text);
+           var dataFound = DataController.ReturnCustomersSearch(CmbCustomerSearchProperty.Text, TxtCustomerSearchProperty.Text);
+            DGWCustomers.DataSource = dataFound;    
+        }
+
+        private void CmdSearchResetCustomer_Click(object sender, EventArgs e)
+        {
+            UpdateCustomers();
         }
     }
 }

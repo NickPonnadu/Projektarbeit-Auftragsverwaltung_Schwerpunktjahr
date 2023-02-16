@@ -208,6 +208,7 @@
             this.CmdSearchResetCustomer.TabIndex = 31;
             this.CmdSearchResetCustomer.Text = "Suche zurücksetzen";
             this.CmdSearchResetCustomer.UseVisualStyleBackColor = true;
+            this.CmdSearchResetCustomer.Click += new System.EventHandler(this.CmdSearchResetCustomer_Click);
             // 
             // CmdCustomerSearch
             // 

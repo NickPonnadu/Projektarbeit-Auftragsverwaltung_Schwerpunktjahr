@@ -154,6 +154,8 @@ namespace Projekt_Auftragsverwaltung
 
         public DataTable ReturnCustomersSearch(string propertyFilter, string searchFilter)
         {
+            propertyFilter = ConvertDataBindingsCustomers(propertyFilter);
+
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -162,14 +164,51 @@ namespace Projekt_Auftragsverwaltung
                 {
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
-                        command.Parameters.AddWithValue("@propertyfilter", propertyFilter);
-                        command.Parameters.AddWithValue("@filter", "%" + searchFilter + "%");
+                        command.Parameters.AddWithValue("@propertyFilter", propertyFilter);
+                        command.Parameters.AddWithValue("@filter", "'%" + searchFilter + "%'");
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
 
                         return dataTable;
                     }
                 }
+            }
+        }
+
+        public string ConvertDataBindingsCustomers(string ToConvert)
+        {
+            switch (ToConvert)
+
+            {
+                case "Kundennummer":
+                    ToConvert = "CustomerId";
+                    return ToConvert;
+                case "Name":
+                    ToConvert = "Name";
+                    return ToConvert;
+                case "Telefonnummer":
+                    ToConvert = "PhoneNumber";
+                    return ToConvert;
+                case "Email":
+                    ToConvert = "EMail";
+                    return ToConvert;
+                case "Website":
+                    ToConvert = "Website";
+                    return ToConvert;
+                case "Strasse":
+                    ToConvert = "Street";
+                    return ToConvert;
+                case "Hausnummer":
+                    ToConvert = "HouseNumber";
+                    return ToConvert;
+                case "PLZ":
+                    ToConvert = "Zipcode";
+                    return ToConvert;
+                case "Ort":
+                    ToConvert = "Location";
+                    return ToConvert;
+                default:
+                    return ToConvert;
             }
         }
     }
