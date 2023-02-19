@@ -45,136 +45,148 @@
             this.LblKunden = new System.Windows.Forms.Label();
             this.CmdEditCustomerSave = new System.Windows.Forms.Button();
             this.CmdEditCustomerCancel = new System.Windows.Forms.Button();
+            this.TxtCustomerPhoneNumber = new System.Windows.Forms.TextBox();
+            this.LblTxtCustomerPhoneNumber = new System.Windows.Forms.Label();
+            this.TxtCustomerStreet = new System.Windows.Forms.TextBox();
+            this.LblTxtCustomerStreet = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TxtCustomerPassword
             // 
-            this.TxtCustomerPassword.Location = new System.Drawing.Point(642, 241);
+            this.TxtCustomerPassword.Location = new System.Drawing.Point(562, 178);
+            this.TxtCustomerPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TxtCustomerPassword.Name = "TxtCustomerPassword";
-            this.TxtCustomerPassword.Size = new System.Drawing.Size(190, 27);
+            this.TxtCustomerPassword.Size = new System.Drawing.Size(167, 23);
             this.TxtCustomerPassword.TabIndex = 50;
             // 
             // LblCustomerPassword
             // 
             this.LblCustomerPassword.AutoSize = true;
-            this.LblCustomerPassword.Location = new System.Drawing.Point(508, 244);
+            this.LblCustomerPassword.Location = new System.Drawing.Point(448, 186);
             this.LblCustomerPassword.Name = "LblCustomerPassword";
-            this.LblCustomerPassword.Size = new System.Drawing.Size(66, 20);
+            this.LblCustomerPassword.Size = new System.Drawing.Size(54, 15);
             this.LblCustomerPassword.TabIndex = 49;
             this.LblCustomerPassword.Text = "Passwort";
             // 
             // TxtCustomerWebsite
             // 
-            this.TxtCustomerWebsite.Location = new System.Drawing.Point(642, 185);
+            this.TxtCustomerWebsite.Location = new System.Drawing.Point(562, 139);
+            this.TxtCustomerWebsite.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TxtCustomerWebsite.Name = "TxtCustomerWebsite";
-            this.TxtCustomerWebsite.Size = new System.Drawing.Size(190, 27);
+            this.TxtCustomerWebsite.Size = new System.Drawing.Size(167, 23);
             this.TxtCustomerWebsite.TabIndex = 48;
             // 
             // TxtCustomerMail
             // 
-            this.TxtCustomerMail.Location = new System.Drawing.Point(642, 135);
+            this.TxtCustomerMail.Location = new System.Drawing.Point(562, 101);
+            this.TxtCustomerMail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TxtCustomerMail.Name = "TxtCustomerMail";
-            this.TxtCustomerMail.Size = new System.Drawing.Size(190, 27);
+            this.TxtCustomerMail.Size = new System.Drawing.Size(167, 23);
             this.TxtCustomerMail.TabIndex = 47;
             // 
             // LblCustomerWebsite
             // 
             this.LblCustomerWebsite.AutoSize = true;
-            this.LblCustomerWebsite.Location = new System.Drawing.Point(512, 192);
+            this.LblCustomerWebsite.Location = new System.Drawing.Point(445, 147);
             this.LblCustomerWebsite.Name = "LblCustomerWebsite";
-            this.LblCustomerWebsite.Size = new System.Drawing.Size(62, 20);
+            this.LblCustomerWebsite.Size = new System.Drawing.Size(49, 15);
             this.LblCustomerWebsite.TabIndex = 46;
             this.LblCustomerWebsite.Text = "Website";
             // 
             // LblCustomerMail
             // 
             this.LblCustomerMail.AutoSize = true;
-            this.LblCustomerMail.Location = new System.Drawing.Point(509, 141);
+            this.LblCustomerMail.Location = new System.Drawing.Point(453, 107);
             this.LblCustomerMail.Name = "LblCustomerMail";
-            this.LblCustomerMail.Size = new System.Drawing.Size(52, 20);
+            this.LblCustomerMail.Size = new System.Drawing.Size(41, 15);
             this.LblCustomerMail.TabIndex = 45;
             this.LblCustomerMail.Text = "E-Mail";
             // 
             // TxtCustomerLocation
             // 
-            this.TxtCustomerLocation.Location = new System.Drawing.Point(210, 241);
+            this.TxtCustomerLocation.Location = new System.Drawing.Point(185, 221);
+            this.TxtCustomerLocation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TxtCustomerLocation.Name = "TxtCustomerLocation";
-            this.TxtCustomerLocation.Size = new System.Drawing.Size(190, 27);
+            this.TxtCustomerLocation.Size = new System.Drawing.Size(167, 23);
             this.TxtCustomerLocation.TabIndex = 44;
             // 
             // TxtCustomerPostcode
             // 
-            this.TxtCustomerPostcode.Location = new System.Drawing.Point(210, 192);
+            this.TxtCustomerPostcode.Location = new System.Drawing.Point(185, 184);
+            this.TxtCustomerPostcode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TxtCustomerPostcode.Name = "TxtCustomerPostcode";
-            this.TxtCustomerPostcode.Size = new System.Drawing.Size(190, 27);
+            this.TxtCustomerPostcode.Size = new System.Drawing.Size(167, 23);
             this.TxtCustomerPostcode.TabIndex = 43;
             // 
             // LblCustomerLocation
             // 
             this.LblCustomerLocation.AutoSize = true;
-            this.LblCustomerLocation.Location = new System.Drawing.Point(60, 241);
+            this.LblCustomerLocation.Location = new System.Drawing.Point(53, 229);
             this.LblCustomerLocation.Name = "LblCustomerLocation";
-            this.LblCustomerLocation.Size = new System.Drawing.Size(30, 20);
+            this.LblCustomerLocation.Size = new System.Drawing.Size(24, 15);
             this.LblCustomerLocation.TabIndex = 42;
             this.LblCustomerLocation.Text = "Ort";
             // 
             // LblCustomerPostcode
             // 
             this.LblCustomerPostcode.AutoSize = true;
-            this.LblCustomerPostcode.Location = new System.Drawing.Point(60, 199);
+            this.LblCustomerPostcode.Location = new System.Drawing.Point(53, 189);
             this.LblCustomerPostcode.Name = "LblCustomerPostcode";
-            this.LblCustomerPostcode.Size = new System.Drawing.Size(33, 20);
+            this.LblCustomerPostcode.Size = new System.Drawing.Size(27, 15);
             this.LblCustomerPostcode.TabIndex = 41;
             this.LblCustomerPostcode.Text = "PLZ";
             // 
             // TxtCustomerName
             // 
-            this.TxtCustomerName.Location = new System.Drawing.Point(210, 138);
+            this.TxtCustomerName.Location = new System.Drawing.Point(184, 104);
+            this.TxtCustomerName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TxtCustomerName.Name = "TxtCustomerName";
-            this.TxtCustomerName.Size = new System.Drawing.Size(191, 27);
+            this.TxtCustomerName.Size = new System.Drawing.Size(168, 23);
             this.TxtCustomerName.TabIndex = 40;
             // 
             // LblCustomerName
             // 
             this.LblCustomerName.AutoSize = true;
-            this.LblCustomerName.Location = new System.Drawing.Point(55, 145);
+            this.LblCustomerName.Location = new System.Drawing.Point(53, 109);
             this.LblCustomerName.Name = "LblCustomerName";
-            this.LblCustomerName.Size = new System.Drawing.Size(49, 20);
+            this.LblCustomerName.Size = new System.Drawing.Size(39, 15);
             this.LblCustomerName.TabIndex = 39;
             this.LblCustomerName.Text = "Name";
             // 
             // LblCustomerNumber
             // 
             this.LblCustomerNumber.AutoSize = true;
-            this.LblCustomerNumber.Location = new System.Drawing.Point(55, 96);
+            this.LblCustomerNumber.Location = new System.Drawing.Point(48, 72);
             this.LblCustomerNumber.Name = "LblCustomerNumber";
-            this.LblCustomerNumber.Size = new System.Drawing.Size(114, 20);
+            this.LblCustomerNumber.Size = new System.Drawing.Size(94, 15);
             this.LblCustomerNumber.TabIndex = 38;
             this.LblCustomerNumber.Text = "Kundennummer";
             // 
             // TxtCustomerNumber
             // 
-            this.TxtCustomerNumber.Location = new System.Drawing.Point(210, 96);
+            this.TxtCustomerNumber.Location = new System.Drawing.Point(184, 72);
+            this.TxtCustomerNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TxtCustomerNumber.Name = "TxtCustomerNumber";
             this.TxtCustomerNumber.ReadOnly = true;
-            this.TxtCustomerNumber.Size = new System.Drawing.Size(191, 27);
+            this.TxtCustomerNumber.Size = new System.Drawing.Size(168, 23);
             this.TxtCustomerNumber.TabIndex = 37;
             // 
             // LblKunden
             // 
             this.LblKunden.AutoSize = true;
             this.LblKunden.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblKunden.Location = new System.Drawing.Point(55, 43);
+            this.LblKunden.Location = new System.Drawing.Point(48, 32);
             this.LblKunden.Name = "LblKunden";
-            this.LblKunden.Size = new System.Drawing.Size(100, 35);
+            this.LblKunden.Size = new System.Drawing.Size(79, 28);
             this.LblKunden.TabIndex = 36;
             this.LblKunden.Text = "Kunden";
             // 
             // CmdEditCustomerSave
             // 
-            this.CmdEditCustomerSave.Location = new System.Drawing.Point(885, 66);
+            this.CmdEditCustomerSave.Location = new System.Drawing.Point(774, 50);
+            this.CmdEditCustomerSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CmdEditCustomerSave.Name = "CmdEditCustomerSave";
-            this.CmdEditCustomerSave.Size = new System.Drawing.Size(133, 80);
+            this.CmdEditCustomerSave.Size = new System.Drawing.Size(116, 60);
             this.CmdEditCustomerSave.TabIndex = 67;
             this.CmdEditCustomerSave.Text = "Speichern";
             this.CmdEditCustomerSave.UseVisualStyleBackColor = true;
@@ -182,19 +194,58 @@
             // 
             // CmdEditCustomerCancel
             // 
-            this.CmdEditCustomerCancel.Location = new System.Drawing.Point(885, 211);
+            this.CmdEditCustomerCancel.Location = new System.Drawing.Point(774, 158);
+            this.CmdEditCustomerCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CmdEditCustomerCancel.Name = "CmdEditCustomerCancel";
-            this.CmdEditCustomerCancel.Size = new System.Drawing.Size(133, 80);
+            this.CmdEditCustomerCancel.Size = new System.Drawing.Size(116, 60);
             this.CmdEditCustomerCancel.TabIndex = 68;
             this.CmdEditCustomerCancel.Text = "Abbrechen";
             this.CmdEditCustomerCancel.UseVisualStyleBackColor = true;
             this.CmdEditCustomerCancel.Click += new System.EventHandler(this.CmdEditCustomerCancel_Click);
             // 
+            // TxtCustomerPhoneNumber
+            // 
+            this.TxtCustomerPhoneNumber.Location = new System.Drawing.Point(562, 221);
+            this.TxtCustomerPhoneNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TxtCustomerPhoneNumber.Name = "TxtCustomerPhoneNumber";
+            this.TxtCustomerPhoneNumber.Size = new System.Drawing.Size(167, 23);
+            this.TxtCustomerPhoneNumber.TabIndex = 69;
+            // 
+            // LblTxtCustomerPhoneNumber
+            // 
+            this.LblTxtCustomerPhoneNumber.AutoSize = true;
+            this.LblTxtCustomerPhoneNumber.Location = new System.Drawing.Point(442, 228);
+            this.LblTxtCustomerPhoneNumber.Name = "LblTxtCustomerPhoneNumber";
+            this.LblTxtCustomerPhoneNumber.Size = new System.Drawing.Size(91, 15);
+            this.LblTxtCustomerPhoneNumber.TabIndex = 70;
+            this.LblTxtCustomerPhoneNumber.Text = "Telefonnummer";
+            // 
+            // TxtCustomerStreet
+            // 
+            this.TxtCustomerStreet.Location = new System.Drawing.Point(184, 147);
+            this.TxtCustomerStreet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TxtCustomerStreet.Name = "TxtCustomerStreet";
+            this.TxtCustomerStreet.Size = new System.Drawing.Size(167, 23);
+            this.TxtCustomerStreet.TabIndex = 71;
+            // 
+            // LblTxtCustomerStreet
+            // 
+            this.LblTxtCustomerStreet.AutoSize = true;
+            this.LblTxtCustomerStreet.Location = new System.Drawing.Point(53, 150);
+            this.LblTxtCustomerStreet.Name = "LblTxtCustomerStreet";
+            this.LblTxtCustomerStreet.Size = new System.Drawing.Size(43, 15);
+            this.LblTxtCustomerStreet.TabIndex = 72;
+            this.LblTxtCustomerStreet.Text = "Strasse";
+            // 
             // MainEditCustomer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1213, 641);
+            this.ClientSize = new System.Drawing.Size(1061, 481);
+            this.Controls.Add(this.LblTxtCustomerStreet);
+            this.Controls.Add(this.TxtCustomerStreet);
+            this.Controls.Add(this.LblTxtCustomerPhoneNumber);
+            this.Controls.Add(this.TxtCustomerPhoneNumber);
             this.Controls.Add(this.CmdEditCustomerCancel);
             this.Controls.Add(this.CmdEditCustomerSave);
             this.Controls.Add(this.TxtCustomerPassword);
@@ -212,6 +263,7 @@
             this.Controls.Add(this.LblCustomerNumber);
             this.Controls.Add(this.TxtCustomerNumber);
             this.Controls.Add(this.LblKunden);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainEditCustomer";
             this.Text = "Kunde speichern / bearbeiten";
             this.ResumeLayout(false);
@@ -238,5 +290,9 @@
         private Label LblKunden;
         private Button CmdEditCustomerSave;
         private Button CmdEditCustomerCancel;
+        private TextBox TxtCustomerPhoneNumber;
+        private Label LblTxtCustomerPhoneNumber;
+        private TextBox TxtCustomerStreet;
+        private Label LblTxtCustomerStreet;
     }
 }

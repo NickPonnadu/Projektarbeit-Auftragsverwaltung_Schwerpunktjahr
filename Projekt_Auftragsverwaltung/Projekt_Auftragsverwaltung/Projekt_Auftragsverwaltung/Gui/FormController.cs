@@ -10,6 +10,8 @@ namespace Projekt_Auftragsverwaltung.Gui
 {
     public class FormController : Form
     {
+        public string ConnectionString;
+
         public void ClearTextBoxes()
         {
             foreach (Control c in Controls)

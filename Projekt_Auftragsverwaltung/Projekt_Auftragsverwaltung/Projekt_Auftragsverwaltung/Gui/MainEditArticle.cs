@@ -9,12 +9,14 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditArticle : FormController
 
     {
+        DataController dataController;
+        public string ConnectionString;
 
-
-
-        public MainEditArticle(Form ownerForm)
+        public MainEditArticle(string connectionString)
         {
             InitializeComponent();
+            ConnectionString= connectionString;
+            dataController = new DataController(ConnectionString);
            
         }
 
@@ -25,32 +27,11 @@ namespace Projekt_Auftragsverwaltung
         }
 
 
-
-
         private void CmdCreateArticleancel_Click(object sender, EventArgs e)
         {
             CloseForm();
         }
 
 
-        //private void CreateNewArticle()
-        //{
-        //    string articleNumber = Convert.ToString(NumArticleNumber.Value);
-        //    string articleDecscription = TxtArticleDescription.Text;
-        //    string articlePrice = Convert.ToString(NumArticlePrice.Value);
-        //    string articleGroup = CmbArticleGroup.Text;  
-
-
-        //    var conn = new SqlConnection();
-        //    var cmd = new SqlCommand();
-
-
-        //    cmd.CommandText = $"insert into artikel (1,2,3,4) values (";
-
-        //    cmd.Parameters.AddWithValue(«@bezeichnung», bezeichnung);
-        //    cmd.ExecuteReader();
-
-
-        //}
     }
 }

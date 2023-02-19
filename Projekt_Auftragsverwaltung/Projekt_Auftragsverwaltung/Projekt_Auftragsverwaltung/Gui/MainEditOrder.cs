@@ -8,10 +8,13 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditOrder : FormController
 
     {
-
-        public MainEditOrder()
+        DataController dataController;
+        public string ConnectionString;
+        public MainEditOrder(string connectionString)
         {
             InitializeComponent();
+            ConnectionString = connectionString;
+            dataController = new DataController(ConnectionString);
 
         }
 

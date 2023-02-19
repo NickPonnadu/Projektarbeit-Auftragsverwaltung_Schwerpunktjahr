@@ -37,17 +37,15 @@ namespace Projekt_Auftragsverwaltung
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                string query = "SELECT CustomerId as Kundennummer,Name as Name,PhoneNumber as Telefonnummer,EMail as EMail,Password as Passwort,Street as Strasse,HouseNumber as Hausnummer,Addresses.ZipCode as PLZ,Location as Ort FROM[poapsdoapsodasd].[dbo].[Customers] INNER JOIN Addresses ON Customers.AddressId = Addresses.AddressId INNER JOIN AddressLocations ON Addresses.ZipCode = AddressLocations.ZipCode";
+                string query = "SELECT CustomerId as Kundennummer,Name as Name,PhoneNumber as Telefonnummer,EMail as EMail,Password as Passwort,Street as Strasse,HouseNumber as Hausnummer,Addresses.ZipCode as PLZ,Location as Ort FROM Customers INNER JOIN Addresses ON Customers.AddressId = Addresses.AddressId INNER JOIN AddressLocations ON Addresses.ZipCode = AddressLocations.ZipCode";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
-
-                        CurrentCustomerId = dataTable.Rows.Count;
-
-                        CurrentAddressId = dataTable.Rows.Count;
+                                               CurrentCustomerId = Convert.ToInt32(dataTable.Rows.Count);
+                        CurrentAddressId = Convert.ToInt32(dataTable.Rows.Count);
                         return dataTable;
                     }
                 }
@@ -65,7 +63,7 @@ namespace Projekt_Auftragsverwaltung
                     {
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
-                        CurrentArticleId = dataTable.Rows.Count;
+                        CurrentArticleId = Convert.ToInt32(dataTable.Rows.Count);
                         return dataTable;
                     }
                 }
@@ -102,7 +100,7 @@ namespace Projekt_Auftragsverwaltung
                     {
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
-                        CurrentOrderId = dataTable.Rows.Count;
+                        CurrentOrderId = Convert.ToInt32(dataTable.Rows.Count);                       
                         return dataTable;
                     }
                 }
@@ -121,36 +119,59 @@ namespace Projekt_Auftragsverwaltung
                     {
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
-                        CurrentOrderPositionId = dataTable.Rows.Count;
+                        CurrentOrderPositionId = Convert.ToInt32(dataTable.Rows.Count);
                         return dataTable;
                     }
                 }
             }
         }
 
-        public void CreateCustomer()
+        public void CreateCustomer(string name,string phoneNumber,string eMail,string password)
         {
             // Verbindung mit der Datenbank herstellen
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-
+                string adressNumber = Convert.ToString(CurrentAddressId + 1);
                 // SQL-Befehl definieren
-                string sqlStatement = "INSERT INTO Customers (Column1, Column2, Column3) VALUES (@value1, @value2, @value3)";
+                string sqlStatement = $"INSERT INTO Customers (Name, PhoneNumber, EMail, Password, AddressId) VALUES ('{@name}','{@phoneNumber}','{@eMail}','{@password}',{adressNumber})";
 
                 // SqlCommand-Objekt erstellen und mit Verbindung und SQL-Befehl initialisieren
                 using (SqlCommand command = new SqlCommand(sqlStatement, connection))
                 {
                     // Werte der Textboxen als Parameter definieren
-                    command.Parameters.AddWithValue("@Kundennummer", "YourValue1");
-                    command.Parameters.AddWithValue("@value2", "YourValue2");
-                    command.Parameters.AddWithValue("@value3", "YourValue3");
-
+                    //command.Parameters.AddWithValue("@name", name);
+                    //command.Parameters.AddWithValue("@phoneNumber", phoneNumber);
+                    //command.Parameters.AddWithValue("@eMail", eMail);
+                    //command.Parameters.AddWithValue("@password", password);
+                    //command.Parameters.AddWithValue("@adressNumber", adressNumber);
                     // Ausführen des SQL-Befehls
                     command.ExecuteNonQuery();
                 }
             }
         }
+
+
+        public void CreateAddress(string street, string houseNumber, string zipCode)
+        {
+            // Verbindung mit der Datenbank herstellen
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                string adressNumber = Convert.ToString(CurrentAddressId + 1);
+                // SQL-Befehl definieren
+                string sqlStatement = $"INSERT INTO Addresses (AddressId, Street, HouseNumber, ZipCode) VALUES (10,'{street}','{houseNumber}',{zipCode})";
+
+                // SqlCommand-Objekt erstellen und mit Verbindung und SQL-Befehl initialisieren
+                using (SqlCommand command = new SqlCommand(sqlStatement, connection))
+                {
+                   // Ausführen des SQL-Befehls
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+
 
         public DataTable ReturnCustomersSearch(string propertyFilter, string searchFilter)
         {
@@ -159,7 +180,7 @@ namespace Projekt_Auftragsverwaltung
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                string query = $"SELECT CustomerId as Kundennummer,Name as Name,PhoneNumber as Telefonnummer,EMail as EMail,Password as Passwort,Street as Strasse,HouseNumber as Hausnummer,Addresses.ZipCode as PLZ,Location as Ort FROM[poapsdoapsodasd].[dbo].[Customers] INNER JOIN Addresses ON Customers.AddressId = Addresses.AddressId INNER JOIN AddressLocations ON Addresses.ZipCode = AddressLocations.ZipCode where {@propertyFilter} LIKE '%{@searchFilter}%'";
+                string query = $"SELECT CustomerId as Kundennummer,Name as Name,PhoneNumber as Telefonnummer,EMail as EMail,Password as Passwort,Street as Strasse,HouseNumber as Hausnummer,Addresses.ZipCode as PLZ,Location as Ort FROM Customers LEFT JOIN Addresses ON Customers.AddressId = Addresses.AddressId LEFT JOIN AddressLocations ON Addresses.ZipCode = AddressLocations.ZipCode where {@propertyFilter} LIKE '%{@searchFilter}%'";
 
 
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -172,11 +193,12 @@ namespace Projekt_Auftragsverwaltung
 
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
-
+                        CurrentCustomerId = Convert.ToInt32(dataTable.Rows.Count);
+                        CurrentAddressId = Convert.ToInt32(dataTable.Rows.Count);
                         return dataTable;
                     }
                 }
-            }
+            } 
         }
 
         public DataTable ReturnArticlesSearch(string propertyFilter, string searchFilter)
@@ -199,7 +221,7 @@ namespace Projekt_Auftragsverwaltung
 
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
-
+                        CurrentArticleId = Convert.ToInt32(dataTable.Rows.Count);
                         return dataTable;
                     }
                 }
@@ -226,13 +248,12 @@ namespace Projekt_Auftragsverwaltung
 
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
-
+                        CurrentOrderPositionId = Convert.ToInt32(dataTable.Rows.Count);
                         return dataTable;
                     }
                 }
             }
         }
-
 
         public DataTable ReturnOrdersSearch(string propertyFilter, string searchFilter)
         {
@@ -254,7 +275,7 @@ namespace Projekt_Auftragsverwaltung
 
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
-
+                        CurrentOrderId = Convert.ToInt32(dataTable.Rows.Count);
                         return dataTable;
                     }
                 }

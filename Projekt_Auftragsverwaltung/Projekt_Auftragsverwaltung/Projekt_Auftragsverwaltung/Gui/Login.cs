@@ -51,6 +51,7 @@ namespace Projekt_Auftragsverwaltung
             {
                 this.Hide();
                 this.MainGui = new Main(DBconnectionString);
+                
                 this.MainGui.Show();
             }
         }

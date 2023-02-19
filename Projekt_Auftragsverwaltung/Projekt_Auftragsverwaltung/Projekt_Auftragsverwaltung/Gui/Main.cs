@@ -22,12 +22,13 @@ namespace Projekt_Auftragsverwaltung
         public Main(string connectionString)
         {
             InitializeComponent();
-            this.EditGuiArticleGroup = new MainEditArticleGroup();
-            this.EditGuiCustomer = new MainEditCustomer();
-            this.EditGuiArticle = new MainEditArticle(this);
-            this.EditGuiPosition = new MainEditPosition();
-            this.EditGuiOrder = new MainEditOrder();
             this.ConnectionString = connectionString;
+            this.EditGuiArticleGroup = new MainEditArticleGroup(ConnectionString);
+            this.EditGuiCustomer = new MainEditCustomer(ConnectionString);
+            this.EditGuiArticle = new MainEditArticle(ConnectionString);
+            this.EditGuiPosition = new MainEditPosition(ConnectionString);
+            this.EditGuiOrder = new MainEditOrder(ConnectionString);
+            
             DataController = new DataController(ConnectionString);
             UpdateLists();
             SetDataBindings();
