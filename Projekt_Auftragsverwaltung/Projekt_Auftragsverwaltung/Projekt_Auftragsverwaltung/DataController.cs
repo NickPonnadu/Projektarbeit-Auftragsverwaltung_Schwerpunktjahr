@@ -114,7 +114,7 @@ namespace Projekt_Auftragsverwaltung
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                string query = "SELECT OrderPositionId as Positionsnummer,CustomerId as Kundennummer,amount as Betrag, FORMAT(date,'dd.MM.yyyy') as Datum, Orders.OrderId as Auftragsnummer FROM OrderPositions INNER JOIN Orders ON OrderPositions.OrderPositionId = Orders.OrderId\r\n";
+                string query = "SELECT OrderPositionId as Positionsnummer,CustomerId as Kundennummer,amount as Betrag, FORMAT(date,'dd.MM.yyyy') as Datum, Orders.OrderId as Auftragsnummer FROM OrderPositions INNER JOIN Orders ON OrderPositions.OrderPositionId = Orders.OrderId";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
@@ -159,13 +159,99 @@ namespace Projekt_Auftragsverwaltung
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                string query = "SELECT CustomerId as Kundennummer,Name as Name,PhoneNumber as Telefonnummer,EMail as EMail,Password as Passwort,Street as Strasse,HouseNumber as Hausnummer,Addresses.ZipCode as PLZ,Location as Ort FROM[poapsdoapsodasd].[dbo].[Customers] INNER JOIN Addresses ON Customers.AddressId = Addresses.AddressId INNER JOIN AddressLocations ON Addresses.ZipCode = AddressLocations.ZipCode where @propertyFilter LIKE @filter";
+                string query = $"SELECT CustomerId as Kundennummer,Name as Name,PhoneNumber as Telefonnummer,EMail as EMail,Password as Passwort,Street as Strasse,HouseNumber as Hausnummer,Addresses.ZipCode as PLZ,Location as Ort FROM[poapsdoapsodasd].[dbo].[Customers] INNER JOIN Addresses ON Customers.AddressId = Addresses.AddressId INNER JOIN AddressLocations ON Addresses.ZipCode = AddressLocations.ZipCode where {@propertyFilter} LIKE '%{@searchFilter}%'";
+
+
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@propertyFilter", propertyFilter);
+                    command.Parameters.AddWithValue("@searchFilter", searchFilter);
+
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
-                        command.Parameters.AddWithValue("@propertyFilter", propertyFilter);
-                        command.Parameters.AddWithValue("@filter", "'%" + searchFilter + "%'");
+
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        return dataTable;
+                    }
+                }
+            }
+        }
+
+        public DataTable ReturnArticlesSearch(string propertyFilter, string searchFilter)
+        {
+            propertyFilter = ConvertDataBindingsArticles(propertyFilter);
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                string query = $"SELECT ArticleId as ArtikelId, ArticleName as Artikelname, Price as Preis,ArticleGroups.Name as Artikelgruppe FROM Articles INNER JOIN ArticleGroups ON Articles.ArticleGroupId = ArticleGroups.ArticleGroupId where {@propertyFilter} LIKE '%{@searchFilter}%'";
+
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@propertyFilter", propertyFilter);
+                    command.Parameters.AddWithValue("@searchFilter", searchFilter);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        return dataTable;
+                    }
+                }
+            }
+        }
+
+        public DataTable ReturnPositionsSearch(string propertyFilter, string searchFilter)
+        {
+            propertyFilter = ConvertDataBindingsPositions(propertyFilter);
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                string query = $"SELECT OrderPositionId as Positionsnummer,CustomerId as Kundennummer,amount as Betrag, FORMAT(date,'dd.MM.yyyy') as Datum, Orders.OrderId as Auftragsnummer FROM OrderPositions INNER JOIN Orders ON OrderPositions.OrderPositionId = Orders.OrderId where {@propertyFilter} LIKE '%{@searchFilter}%'";
+
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@propertyFilter", propertyFilter);
+                    command.Parameters.AddWithValue("@searchFilter", searchFilter);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        return dataTable;
+                    }
+                }
+            }
+        }
+
+
+        public DataTable ReturnOrdersSearch(string propertyFilter, string searchFilter)
+        {
+            propertyFilter = ConvertDataBindingsOrders(propertyFilter);
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                string query = $"SELECT Orders.OrderId as Auftragsnummer, FORMAT(Date,'dd.MM.yyyy') as Datum, Name as Name,'XXX' as Positionen FROM Orders INNER JOIN OrderPositions ON Orders.CustomerId = Orders.CustomerId INNER JOIN Customers ON Orders.CustomerId = Customers.CustomerId where {@propertyFilter} LIKE '%{@searchFilter}%'";
+
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@propertyFilter", propertyFilter);
+                    command.Parameters.AddWithValue("@searchFilter", searchFilter);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+
                         DataTable dataTable = new DataTable();
                         adapter.Fill(dataTable);
 
@@ -196,20 +282,90 @@ namespace Projekt_Auftragsverwaltung
                     ToConvert = "Website";
                     return ToConvert;
                 case "Strasse":
-                    ToConvert = "Street";
+                    ToConvert = "Addresses.Street";
                     return ToConvert;
                 case "Hausnummer":
-                    ToConvert = "HouseNumber";
+                    ToConvert = "Addresses.HouseNumber";
                     return ToConvert;
                 case "PLZ":
-                    ToConvert = "Zipcode";
+                    ToConvert = "Addresses.ZipCode";
                     return ToConvert;
                 case "Ort":
-                    ToConvert = "Location";
+                    ToConvert = "Addresses.Location";
                     return ToConvert;
                 default:
                     return ToConvert;
             }
         }
+
+        public string ConvertDataBindingsPositions(string ToConvert)
+        {
+            switch (ToConvert)
+
+            {
+                case "Positionsnummer":
+                    ToConvert = "OrderPositionId";
+                    return ToConvert;
+                case "Kundennummer":
+                    ToConvert = "CustomerId";
+                    return ToConvert;
+                case "Betrag":
+                    ToConvert = "amount";
+                    return ToConvert;
+                case "Datum":
+                    ToConvert = "date";
+                    return ToConvert;
+                case "Auftragsnummer":
+                    ToConvert = "Orders.OrderId";
+                    return ToConvert;
+                default:
+                    return ToConvert;
+            }
+        }
+
+        public string ConvertDataBindingsArticles(string ToConvert)
+        {
+            switch (ToConvert)
+
+            {
+                case "ArtikelId":
+                    ToConvert = "ArticleId";
+                    return ToConvert;
+                case "Artikelname":
+                    ToConvert = "ArticleName";
+                    return ToConvert;
+                case "Preis":
+                    ToConvert = "Price";
+                    return ToConvert;
+                case "Artikelgruppe":
+                    ToConvert = "ArticleGroups.Name";
+                    return ToConvert;
+                default:
+                    return ToConvert;
+            }
+        }
+
+        public string ConvertDataBindingsOrders(string ToConvert)
+        {
+            switch (ToConvert)
+
+            {
+                case "Auftragsnummer":
+                    ToConvert = "Orders.OrderId";
+                    return ToConvert;
+                case "Datum":
+                    ToConvert = "Date";
+                    return ToConvert;
+                case "Name":
+                    ToConvert = "Name";
+                    return ToConvert;
+                case "Positionen":
+                    ToConvert = "'XXX'";
+                    return ToConvert;
+                default:
+                    return ToConvert;
+            }
+        }
+       
     }
 }

@@ -1,12 +1,13 @@
 using Microsoft.Data.SqlClient;
 using Projekt_Auftragsverwaltung.Gui;
+using System;
 using System.Data;
 using System.Reflection.Metadata;
 
 namespace Projekt_Auftragsverwaltung
 
 {
-    
+
     public partial class Main : FormController
     {
         private Form EditGuiArticleGroup;
@@ -97,9 +98,10 @@ namespace Projekt_Auftragsverwaltung
         public void SetDataBindings()
         {
             CmbCustomerSearchProperty.DataSource = new String[] { "Kundennummer", "Name", "Telefonnummer", "Email", "Website", "Strasse", "Hausnummer", "PLZ", "Ort" };
+            CmdPositionSearchProperty.DataSource = new String[] { "Positionsnummer", "Kundennummer", "Betrag", "Datum", "Auftragsnummer" };
+            CmbArticleSearchProperty.DataSource = new String[] { "ArtikelId", "Artikelname", "Preis", "Artikelgruppe" };
+            CmbOrderSearchProperty.DataSource = new String[] { "Auftragsnummer", "Datum", "Name", "Positionen" };
         }
-
-       
 
         public void UpdateLists()
         {
@@ -134,13 +136,46 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdCustomerSearch_Click(object sender, EventArgs e)
         {
-           var dataFound = DataController.ReturnCustomersSearch(CmbCustomerSearchProperty.Text, TxtCustomerSearchProperty.Text);
-            DGWCustomers.DataSource = dataFound;    
+            var dataFound = DataController.ReturnCustomersSearch(CmbCustomerSearchProperty.Text, TxtCustomerSearchProperty.Text);
+            DGWCustomers.DataSource = dataFound;
         }
 
         private void CmdSearchResetCustomer_Click(object sender, EventArgs e)
         {
             UpdateCustomers();
+        }
+
+        private void CmdSearchArticle_Click(object sender, EventArgs e)
+        {
+            var dataFound = DataController.ReturnArticlesSearch(CmbArticleSearchProperty.Text, TxtSearchArticleProperty.Text);
+            DGWArticles.DataSource = dataFound;
+        }
+
+        private void CmdSearchResetArticle_Click(object sender, EventArgs e)
+        {
+            UpdateArticles();
+        }
+
+        private void CmdSearchPosition_Click(object sender, EventArgs e)
+        {
+            var dataFound = DataController.ReturnPositionsSearch(CmdPositionSearchProperty.Text, TxtSearchPositionProperty.Text);
+            DGWPositions.DataSource = dataFound;
+        }
+
+        private void CmdSearchResetPosition_Click(object sender, EventArgs e)
+        {
+            UpdateOrderPositions();
+        }
+
+        private void CmdSearchOrder_Click(object sender, EventArgs e)
+        {
+            var dataFound = DataController.ReturnOrdersSearch(CmbOrderSearchProperty.Text, TxtSearchOrderProperty.Text);
+            DGWOrders.DataSource = dataFound;
+        }
+
+        private void CmdSearchResetOrder_Click(object sender, EventArgs e)
+        {
+            UpdateOrders();
         }
     }
 }
