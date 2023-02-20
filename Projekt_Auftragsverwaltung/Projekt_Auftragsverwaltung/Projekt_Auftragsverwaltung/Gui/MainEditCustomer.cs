@@ -23,11 +23,9 @@ namespace Projekt_Auftragsverwaltung
         private void CmdEditCustomerSave_Click(object sender, EventArgs e)
         {
             dataController.ReturnCustomers();
-            dataController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text);
-            System.Threading.Thread.Sleep(1000);
-            dataController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
-           
-            
+            var address = dataController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
+            dataController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text,address);
+            dataController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text,address);
             CloseForm();
         }
 
