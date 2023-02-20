@@ -22,8 +22,12 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdEditCustomerSave_Click(object sender, EventArgs e)
         {
+            dataController.ReturnCustomers();
             dataController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text);
-            //dataController.CreateAddress(TxtCustomer, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text);
+            System.Threading.Thread.Sleep(1000);
+            dataController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
+           
+            
             CloseForm();
         }
 
@@ -31,7 +35,6 @@ namespace Projekt_Auftragsverwaltung
         {
             CloseForm();
         }
-
-      
+              
     }
 }

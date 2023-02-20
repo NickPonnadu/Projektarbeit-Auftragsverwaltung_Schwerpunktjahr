@@ -22,7 +22,7 @@ namespace Projekt_Auftragsverwaltung
       
         private void CmdCreateArticleGroupSave_Click(object sender, EventArgs e)
         {
-            // Artikelgruppe speichern / updaten
+            dataController.CreateArticleGroup(TxtArticleGroupEditArticleGroup.Text);
             CloseForm();
         }
 
@@ -31,6 +31,7 @@ namespace Projekt_Auftragsverwaltung
 
             CloseForm();
         }
-                 
+
+       
     }
 }
