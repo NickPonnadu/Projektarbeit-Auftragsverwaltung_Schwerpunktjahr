@@ -15,14 +15,24 @@ namespace Projekt_Auftragsverwaltung
         public MainEditArticle(string connectionString)
         {
             InitializeComponent();
-            ConnectionString= connectionString;
+            ConnectionString = connectionString;
             dataController = new DataController(ConnectionString);
-           
+
         }
 
         private void CmdCreateArticleSave_Click(object sender, EventArgs e)
         {
-            // Artikel speichern / updaten
+            if (DGWChooseArticleGroup.SelectedRows.Count > 0)
+            {
+                var rows = DGWChooseArticleGroup.SelectedRows[0];
+                int articleGroupId = Convert.ToInt32(rows.Cells[0].Value);
+
+
+                //dataController.CreateArticle(DtpOrderDate.Value, customerId);
+                CloseForm();
+            }
+            else
+            { throw new Exception("Bitte Artikelgruppe auswählen"); }
             CloseForm();
         }
 
@@ -32,7 +42,13 @@ namespace Projekt_Auftragsverwaltung
             CloseForm();
         }
 
-       
-       
+        private void UpdateArticleGroupList(object sender, EventArgs e)
+        {
+            if (dataController != null)
+            {
+                var data = dataController.ReturnArticleGroups();
+                DGWChooseArticleGroup.DataSource = data;
+            }
+        }
     }
 }

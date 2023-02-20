@@ -21,19 +21,6 @@ namespace Projekt_Auftragsverwaltung
     public class DataController
     {
         public string ConnectionString;
-
-        public int CurrentCustomerId;
-
-        public int CurrentAddressId;
-
-        public int CurrentOrderId;
-
-        public int CurrentOrderPositionId;
-
-        public int CurrentArticleGroupId;
-
-        public int CurrentArticleId;
-
         public DataController(string connectionString)
         {
             ConnectionString = connectionString;
@@ -165,7 +152,6 @@ namespace Projekt_Auftragsverwaltung
                                        Preis = a.Price,
                                        Artikelgruppe = ag.Name,
                                    };
-
                     var list = articles.ToList();
                     var dataTable = CreateDataTableArticles();
                     // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
@@ -173,12 +159,10 @@ namespace Projekt_Auftragsverwaltung
                     {
                         dataTable.Rows.Add(item.ArtikelId, item.Artikelname, item.Preis, item.Artikelgruppe);
                     }
-
                     // Verwende die DataTable als DataSource für das DataGridView
                     return dataTable;
                 }
             }
-
         }
         public DataTable ReturnArticlesSearch(string columnName, string filterValue)
         {
@@ -369,6 +353,36 @@ namespace Projekt_Auftragsverwaltung
                 }
             }
         }
+
+        public DataTable ReturnArticleGroups()
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                using (var dbContext = new CompanyContext(ConnectionString))
+                {
+                    var articleGroups = from a in dbContext.ArticleGroups
+                                        select new
+                                        {
+                                            ArtikelgruppeId = a.ArticleGroupId,
+                                            Name = a.Name
+                                        };
+
+                    var list = articleGroups.ToList();
+                    var dataTable = CreateDataTableArticleGroups();
+                    // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
+                    foreach (var item in list)
+                    {
+                        dataTable.Rows.Add(item.ArtikelgruppeId, item.Name);
+                    }
+
+                    // Verwende die DataTable als DataSource für das DataGridView
+                    return dataTable;
+                }
+            }
+
+        }
+
         public void CreateCustomer(string name, string phoneNumber, string eMail, string password, Address address)
         {
             // Verbindung mit der Datenbank herstellen
@@ -435,45 +449,47 @@ namespace Projekt_Auftragsverwaltung
                 }
             }
         }
-        public void CreateOrder(DateTime datetime, string customerNumber)
+        public void CreateOrder(DateTime date, int customerId)
         {
             // Verbindung mit der Datenbank herstellen
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (var dbContext = new CompanyContext(ConnectionString))
             {
-                connection.Open();
-
-                string dateTimeString = Convert.ToString(datetime).Substring(0, 10);
-                // SQL-Befehl definieren
-                string sqlStatement = $"INSERT INTO Orders (Date,CustomerId) VALUES('{dateTimeString}',{customerNumber})";
-
-                // SqlCommand-Objekt erstellen und mit Verbindung und SQL-Befehl initialisieren
-                using (SqlCommand command = new SqlCommand(sqlStatement, connection))
+                var order = new Order
                 {
-                    // Ausführen des SQL-Befehls
-                    command.ExecuteNonQuery();
-                }
+                    Date = date,
+                    CustomerId = customerId
+                };
+                dbContext.Orders.Add(order);
+                dbContext.SaveChanges();
             }
         }
+
         public void CreateArticleGroup(string name)
         {
             // Verbindung mit der Datenbank herstellen
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (var dbContext = new CompanyContext(ConnectionString))
             {
-                connection.Open();
-
-                // SQL-Befehl definieren
-                string sqlStatement = $"INSERT INTO ArticleGroups(Name) VALUES('{name}')";
-
-                // SqlCommand-Objekt erstellen und mit Verbindung und SQL-Befehl initialisieren
-                using (SqlCommand command = new SqlCommand(sqlStatement, connection))
-                {
-                    // Ausführen des SQL-Befehls
-                    command.ExecuteNonQuery();
-
-                }
+                var articleGroup = new ArticleGroup { Name = name };
+                dbContext.ArticleGroups.Add(articleGroup);
+                dbContext.SaveChanges();
             }
+        }
+        public void CreateArticle(string name, decimal price, int articleGroupId)
+        {
+            // Verbindung mit der Datenbank herstellen
+            using (var dbContext = new CompanyContext(ConnectionString))
+            {
+                var article = new Article
+                {
 
+                    ArticleName = name,
+                    Price = price,
+                    ArticleGroupId = articleGroupId
 
+                };
+                dbContext.Articles.Add(article);
+                dbContext.SaveChanges();
+            }
         }
         public DataTable CreateDataTableCustomer()
         {
@@ -491,7 +507,6 @@ namespace Projekt_Auftragsverwaltung
             dataTable.Columns.Add("Ort", typeof(string));
             return dataTable;
         }
-
         public DataTable CreateDataTableArticles()
         {
             // Erstelle eine neue DataTable
@@ -503,7 +518,15 @@ namespace Projekt_Auftragsverwaltung
             dataTable.Columns.Add("Artikelgruppe", typeof(string));
             return dataTable;
         }
-
+        public DataTable CreateDataTableArticleGroups()
+        {
+            // Erstelle eine neue DataTable
+            DataTable dataTable = new DataTable();
+            // Erstelle Spalten in der DataTable
+            dataTable.Columns.Add("ArtikelgruppeId", typeof(int));
+            dataTable.Columns.Add("Name", typeof(string));
+            return dataTable;
+        }
         public DataTable CreateDataTableOrders()
         {
             DataTable dataTable = new DataTable();
@@ -525,143 +548,6 @@ namespace Projekt_Auftragsverwaltung
             return dataTable;
         }
 
-
-
-
-        public DataTable ReturnPositionsSearch(string propertyFilter, string searchFilter)
-        {
-            propertyFilter = ConvertDataBindingsPositions(propertyFilter);
-
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                string query = $"SELECT OrderPositionId as Positionsnummer,CustomerId as Kundennummer,amount as Betrag, FORMAT(date,'dd.MM.yyyy') as Datum, Orders.OrderId as Auftragsnummer FROM OrderPositions INNER JOIN Orders ON OrderPositions.OrderPositionId = Orders.OrderId where {@propertyFilter} LIKE '%{@searchFilter}%'";
-
-
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@propertyFilter", propertyFilter);
-                    command.Parameters.AddWithValue("@searchFilter", searchFilter);
-
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                    {
-
-                        DataTable dataTable = new DataTable();
-                        adapter.Fill(dataTable);
-                        CurrentOrderPositionId = Convert.ToInt32(dataTable.Rows.Count);
-                        return dataTable;
-                    }
-                }
-            }
-        }
-
-
-
-        public string ConvertDataBindingsCustomers(string ToConvert)
-        {
-            switch (ToConvert)
-
-            {
-                case "Kundennummer":
-                    ToConvert = "CustomerId";
-                    return ToConvert;
-                case "Name":
-                    ToConvert = "Name";
-                    return ToConvert;
-                case "Telefonnummer":
-                    ToConvert = "PhoneNumber";
-                    return ToConvert;
-                case "Email":
-                    ToConvert = "EMail";
-                    return ToConvert;
-                case "Website":
-                    ToConvert = "Website";
-                    return ToConvert;
-                case "Strasse":
-                    ToConvert = "Addresses.Street";
-                    return ToConvert;
-                case "Hausnummer":
-                    ToConvert = "Addresses.HouseNumber";
-                    return ToConvert;
-                case "PLZ":
-                    ToConvert = "Addresses.ZipCode";
-                    return ToConvert;
-                case "Ort":
-                    ToConvert = "Addresses.Location";
-                    return ToConvert;
-                default:
-                    return ToConvert;
-            }
-        }
-
-        public string ConvertDataBindingsPositions(string ToConvert)
-        {
-            switch (ToConvert)
-
-            {
-                case "Positionsnummer":
-                    ToConvert = "OrderPositionId";
-                    return ToConvert;
-                case "Kundennummer":
-                    ToConvert = "CustomerId";
-                    return ToConvert;
-                case "Betrag":
-                    ToConvert = "amount";
-                    return ToConvert;
-                case "Datum":
-                    ToConvert = "date";
-                    return ToConvert;
-                case "Auftragsnummer":
-                    ToConvert = "Orders.OrderId";
-                    return ToConvert;
-                default:
-                    return ToConvert;
-            }
-        }
-
-        public string ConvertDataBindingsArticles(string ToConvert)
-        {
-            switch (ToConvert)
-
-            {
-                case "ArtikelId":
-                    ToConvert = "ArticleId";
-                    return ToConvert;
-                case "Artikelname":
-                    ToConvert = "ArticleName";
-                    return ToConvert;
-                case "Preis":
-                    ToConvert = "Price";
-                    return ToConvert;
-                case "Artikelgruppe":
-                    ToConvert = "ArticleGroups.Name";
-                    return ToConvert;
-                default:
-                    return ToConvert;
-            }
-        }
-
-        public string ConvertDataBindingsOrders(string ToConvert)
-        {
-            switch (ToConvert)
-
-            {
-                case "Auftragsnummer":
-                    ToConvert = "Orders.OrderId";
-                    return ToConvert;
-                case "Datum":
-                    ToConvert = "Date";
-                    return ToConvert;
-                case "Name":
-                    ToConvert = "Name";
-                    return ToConvert;
-                case "Positionen":
-                    ToConvert = "'XXX'";
-                    return ToConvert;
-                default:
-                    return ToConvert;
-            }
-        }
 
     }
 }

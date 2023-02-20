@@ -36,8 +36,9 @@
             this.CmdCreateArticleancel = new System.Windows.Forms.Button();
             this.CmdCreateArticleSave = new System.Windows.Forms.Button();
             this.NumArticlePrice = new System.Windows.Forms.NumericUpDown();
-            this.CmbArticleGroup = new System.Windows.Forms.ComboBox();
+            this.DGWChooseArticleGroup = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.NumArticlePrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGWChooseArticleGroup)).BeginInit();
             this.SuspendLayout();
             // 
             // TxtArticleDescription
@@ -70,9 +71,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(50, 206);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 20);
+            this.label2.Size = new System.Drawing.Size(176, 20);
             this.label2.TabIndex = 64;
-            this.label2.Text = "Artikelgruppe";
+            this.label2.Text = "Artikelgruppe auswählen:";
             // 
             // LblArticle
             // 
@@ -112,20 +113,26 @@
             this.NumArticlePrice.Size = new System.Drawing.Size(125, 27);
             this.NumArticlePrice.TabIndex = 74;
             // 
-            // CmbArticleGroup
+            // DGWChooseArticleGroup
             // 
-            this.CmbArticleGroup.FormattingEnabled = true;
-            this.CmbArticleGroup.Location = new System.Drawing.Point(234, 203);
-            this.CmbArticleGroup.Name = "CmbArticleGroup";
-            this.CmbArticleGroup.Size = new System.Drawing.Size(125, 28);
-            this.CmbArticleGroup.TabIndex = 75;
+            this.DGWChooseArticleGroup.AllowUserToAddRows = false;
+            this.DGWChooseArticleGroup.AllowUserToDeleteRows = false;
+            this.DGWChooseArticleGroup.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.DGWChooseArticleGroup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGWChooseArticleGroup.Location = new System.Drawing.Point(46, 312);
+            this.DGWChooseArticleGroup.Name = "DGWChooseArticleGroup";
+            this.DGWChooseArticleGroup.RowHeadersWidth = 51;
+            this.DGWChooseArticleGroup.RowTemplate.Height = 29;
+            this.DGWChooseArticleGroup.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DGWChooseArticleGroup.Size = new System.Drawing.Size(562, 545);
+            this.DGWChooseArticleGroup.TabIndex = 88;
             // 
             // MainEditArticle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1213, 893);
-            this.Controls.Add(this.CmbArticleGroup);
+            this.Controls.Add(this.DGWChooseArticleGroup);
             this.Controls.Add(this.NumArticlePrice);
             this.Controls.Add(this.CmdCreateArticleancel);
             this.Controls.Add(this.CmdCreateArticleSave);
@@ -136,7 +143,9 @@
             this.Controls.Add(this.LblArticle);
             this.Name = "MainEditArticle";
             this.Text = "Kunde speichern / bearbeiten";
+            this.VisibleChanged += new System.EventHandler(this.UpdateArticleGroupList);
             ((System.ComponentModel.ISupportInitialize)(this.NumArticlePrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGWChooseArticleGroup)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,6 +160,6 @@
         private Button CmdCreateArticleancel;
         public Button CmdCreateArticleSave;
         private NumericUpDown NumArticlePrice;
-        private ComboBox CmbArticleGroup;
+        private DataGridView DGWChooseArticleGroup;
     }
 }

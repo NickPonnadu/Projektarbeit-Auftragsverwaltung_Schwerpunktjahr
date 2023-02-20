@@ -104,12 +104,21 @@ namespace Projekt_Auftragsverwaltung
             CmbOrderSearchProperty.DataSource = new String[] { "Auftragsnummer", "Datum", "Name", "Positionen" };
         }
 
+        public void UpdateListsEvent(object sender, EventArgs e)
+        {
+            UpdateCustomers();
+            UpdateArticles();
+            UpdateOrders();
+            UpdateOrderPositions();
+            UpdateArticleGroups();
+        }
         public void UpdateLists()
         {
             UpdateCustomers();
             UpdateArticles();
             UpdateOrders();
             UpdateOrderPositions();
+            UpdateArticleGroups();
         }
         private void UpdateCustomers()
         {
@@ -134,7 +143,11 @@ namespace Projekt_Auftragsverwaltung
             var data = DataController.ReturnOrderPositions();
             DGWPositions.DataSource = data;
         }
-
+        private void UpdateArticleGroups()
+        {
+            var data = DataController.ReturnArticleGroups();
+            DGWArticleGroups.DataSource = data;
+        }
         private void CmdCustomerSearch_Click(object sender, EventArgs e)
         {
             var dataFound = DataController.ReturnCustomersSearch(CmbCustomerSearchProperty.Text, TxtCustomerSearchProperty.Text);
@@ -159,7 +172,7 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdSearchPosition_Click(object sender, EventArgs e)
         {
-            var dataFound = DataController.ReturnPositionsSearch(CmdPositionSearchProperty.Text, TxtSearchPositionProperty.Text);
+            var dataFound = DataController.ReturnOrderPositionsSearch(CmdPositionSearchProperty.Text, TxtSearchPositionProperty.Text);
             DGWPositions.DataSource = dataFound;
         }
 
@@ -177,6 +190,11 @@ namespace Projekt_Auftragsverwaltung
         private void CmdSearchResetOrder_Click(object sender, EventArgs e)
         {
             UpdateOrders();
+        }
+
+        private void CmdSearchResetArticleGroup_Click(object sender, EventArgs e)
+        {
+            UpdateArticleGroups();
         }
     }
 }

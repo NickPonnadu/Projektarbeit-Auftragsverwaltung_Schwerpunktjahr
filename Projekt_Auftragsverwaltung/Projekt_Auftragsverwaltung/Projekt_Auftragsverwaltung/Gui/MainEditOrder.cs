@@ -31,7 +31,7 @@ namespace Projekt_Auftragsverwaltung
                 string customerId = rows.Cells[0].Value.ToString();
 
 
-                dataController.CreateOrder(DtpOrderDate.Value, customerId);
+                //dataController.CreateOrder(DtpOrderDate.Value, customerId);
                 CloseForm();
             }
             else
