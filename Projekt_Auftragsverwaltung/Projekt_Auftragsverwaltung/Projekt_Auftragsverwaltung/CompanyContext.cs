@@ -32,8 +32,33 @@ namespace Projekt_Auftragsverwaltung
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Address>()
+                .HasKey(b => b.AddressId);
+
             modelBuilder.Entity<AddressLocation>()
                 .HasKey(b => b.ZipCode);
+
+            modelBuilder.Entity<Article>()
+                .HasKey(b => b.ArticleId);
+
+            modelBuilder.Entity<ArticleGroup>()
+                .HasKey(b => b.ArticleGroupId);
+
+            modelBuilder.Entity<ArticlePosition>()
+                .HasKey(b => b.ArticlePositionId);
+
+            modelBuilder.Entity<Customer>()
+                .HasKey(b => b.CustomerId);
+
+            modelBuilder.Entity<Order>()
+               .HasKey(b => b.OrderId);
+
+            modelBuilder.Entity<OrderPosition>()
+               .HasKey(b => b.OrderPositionId);
+
+
+
+
 
 
             //1:n Beziehung zwischen Address und AddressLocation
