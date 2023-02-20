@@ -60,51 +60,51 @@ namespace Projekt_Auftragsverwaltung
 
 
 
+            // define the relationship between Address and AddressLocation
+            modelBuilder.Entity<Address>()
+                .HasMany(a => a.AddressLocations)
+                .WithOne(al => al.Address)
+                .HasForeignKey(al => al.AddressId);
 
-            //1:n Beziehung zwischen Address und AddressLocation
-            modelBuilder.Entity<AddressLocation>()
-                .HasOne(at => at.Address)
-                .WithMany(a => a.AddressLocations)
-                .HasForeignKey(at => at.AddressId);
+            // define the relationship between Article and ArticleGroup
+            modelBuilder.Entity<Article>()
+                .HasOne(a => a.ArticleGroup)
+                .WithMany(ag => ag.Articles)
+                .HasForeignKey(a => a.ArticleGroupId);
 
-            //1:1 Beziehung zwischen Customer und Address
+            // define the relationship between Customer and Address
             modelBuilder.Entity<Customer>()
                 .HasOne(c => c.Address)
                 .WithOne(a => a.Customer)
-                .HasForeignKey<Address>(a => a.AddressId);
+                .HasForeignKey<Customer>(c => c.AddressId);
 
-            //1:n Beziehung zwischen Customer und Order
+            // define the relationship between Order and Customer
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.Customer)
                 .WithMany(c => c.Orders)
                 .HasForeignKey(o => o.CustomerId);
 
-            //1:n Beziehung zwischen Order und OrderPosition
+            // define the relationship between OrderPosition and Order
             modelBuilder.Entity<OrderPosition>()
-               .HasOne(op => op.Order)
-               .WithMany(o => o.OrderPositions)
-               .HasForeignKey(op => op.OrderId);
+                .HasOne(op => op.Order)
+                .WithMany(o => o.OrderPositions)
+                .HasForeignKey(op => op.OrderId);
 
-            //n:m Beziehung zweischen OrderPosition und Article
+            // define the relationship between OrderPosition and ArticlePosition
+            modelBuilder.Entity<OrderPosition>()
+                .HasMany(op => op.Articles)
+                .WithOne(ap => ap.OrderPosition)
+                .HasForeignKey(ap => ap.OrderPositionId);
+
+            // define the relationship between ArticlePosition and Article
             modelBuilder.Entity<ArticlePosition>()
-                .HasKey(sc => new { sc.OrderPositionId, sc.ArticleId });
-
-            modelBuilder.Entity<ArticlePosition>()
-                .HasOne(sc => sc.OrderPosition)
-                .WithMany(s => s.Articles)
-                .HasForeignKey(sc => sc.OrderPositionId);
-
-            modelBuilder.Entity<ArticlePosition>()
-                .HasOne(sc => sc.Article)
-                .WithMany(c => c.OrderPositions)
-                .HasForeignKey(sc => sc.ArticleId);
+                .HasOne(ap => ap.Article)
+                .WithMany()
+                .HasForeignKey(ap => ap.ArticleId);
 
 
-            //1:n Beziehung zwischen ArticleGroup und Article
-            modelBuilder.Entity<Article>()
-                .HasOne(a => a.ArticleGroup)
-                .WithMany(ag => ag.Articles)
-                .HasForeignKey(a => a.ArticleGroupId);
+
+
 
 
             modelBuilder.Entity<Address>().HasData(
