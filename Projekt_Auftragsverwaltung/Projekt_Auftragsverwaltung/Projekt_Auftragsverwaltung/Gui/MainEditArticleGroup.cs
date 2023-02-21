@@ -8,18 +8,21 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditArticleGroup : FormController
 
     {
-       
-
-        public MainEditArticleGroup()
+        DataController dataController;
+        public string ConnectionString;
+        public MainEditArticleGroup(string connectionString)
         {
             InitializeComponent();
+            ConnectionString = connectionString;
             
+            dataController = new DataController(ConnectionString);
+
         }
 
       
         private void CmdCreateArticleGroupSave_Click(object sender, EventArgs e)
         {
-            // Artikelgruppe speichern / updaten
+            dataController.CreateArticleGroup(TxtArticleGroupEditArticleGroup.Text);
             CloseForm();
         }
 
@@ -28,6 +31,7 @@ namespace Projekt_Auftragsverwaltung
 
             CloseForm();
         }
-                 
+
+       
     }
 }

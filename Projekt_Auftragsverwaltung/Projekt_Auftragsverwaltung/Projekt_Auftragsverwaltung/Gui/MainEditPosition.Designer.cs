@@ -43,6 +43,7 @@
             // 
             this.TxtPositionNumber.Location = new System.Drawing.Point(282, 123);
             this.TxtPositionNumber.Name = "TxtPositionNumber";
+            this.TxtPositionNumber.ReadOnly = true;
             this.TxtPositionNumber.Size = new System.Drawing.Size(125, 27);
             this.TxtPositionNumber.TabIndex = 94;
             // 

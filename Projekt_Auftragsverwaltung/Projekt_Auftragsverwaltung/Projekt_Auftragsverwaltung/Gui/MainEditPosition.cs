@@ -8,11 +8,13 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditPosition : FormController
 
     {
-
-        public MainEditPosition()
+        DataController dataController;
+        public string ConnectionString;
+        public MainEditPosition(string connectionString)
         {
             InitializeComponent();
-
+            ConnectionString = connectionString;
+            dataController = new DataController(ConnectionString);
         }
 
 

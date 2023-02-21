@@ -9,22 +9,32 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditArticle : FormController
 
     {
+        DataController dataController;
+        public string ConnectionString;
 
-
-
-        public MainEditArticle(Form ownerForm)
+        public MainEditArticle(string connectionString)
         {
             InitializeComponent();
-           
+            ConnectionString = connectionString;
+            dataController = new DataController(ConnectionString);
+
         }
 
         private void CmdCreateArticleSave_Click(object sender, EventArgs e)
         {
-            // Artikel speichern / updaten
+            if (DGWChooseArticleGroup.SelectedRows.Count > 0)
+            {
+                var rows = DGWChooseArticleGroup.SelectedRows[0];
+                int articleGroupId = Convert.ToInt32(rows.Cells[0].Value);
+
+
+                //dataController.CreateArticle(DtpOrderDate.Value, customerId);
+                CloseForm();
+            }
+            else
+            { throw new Exception("Bitte Artikelgruppe auswählen"); }
             CloseForm();
         }
-
-
 
 
         private void CmdCreateArticleancel_Click(object sender, EventArgs e)
@@ -32,25 +42,13 @@ namespace Projekt_Auftragsverwaltung
             CloseForm();
         }
 
-
-        //private void CreateNewArticle()
-        //{
-        //    string articleNumber = Convert.ToString(NumArticleNumber.Value);
-        //    string articleDecscription = TxtArticleDescription.Text;
-        //    string articlePrice = Convert.ToString(NumArticlePrice.Value);
-        //    string articleGroup = CmbArticleGroup.Text;  
-
-
-        //    var conn = new SqlConnection();
-        //    var cmd = new SqlCommand();
-
-
-        //    cmd.CommandText = $"insert into artikel (1,2,3,4) values (";
-
-        //    cmd.Parameters.AddWithValue(«@bezeichnung», bezeichnung);
-        //    cmd.ExecuteReader();
-
-
-        //}
+        private void UpdateArticleGroupList(object sender, EventArgs e)
+        {
+            if (dataController != null)
+            {
+                var data = dataController.ReturnArticleGroups();
+                DGWChooseArticleGroup.DataSource = data;
+            }
+        }
     }
 }

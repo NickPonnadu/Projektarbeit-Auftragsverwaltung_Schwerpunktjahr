@@ -40,16 +40,20 @@
             this.LblCustomerPostcode = new System.Windows.Forms.Label();
             this.TxtCustomerName = new System.Windows.Forms.TextBox();
             this.LblCustomerName = new System.Windows.Forms.Label();
-            this.LblCustomerNumber = new System.Windows.Forms.Label();
-            this.TxtCustomerNumber = new System.Windows.Forms.TextBox();
             this.LblKunden = new System.Windows.Forms.Label();
             this.CmdEditCustomerSave = new System.Windows.Forms.Button();
             this.CmdEditCustomerCancel = new System.Windows.Forms.Button();
+            this.TxtCustomerPhoneNumber = new System.Windows.Forms.TextBox();
+            this.LblTxtCustomerPhoneNumber = new System.Windows.Forms.Label();
+            this.TxtCustomerStreet = new System.Windows.Forms.TextBox();
+            this.LblTxtCustomerStreet = new System.Windows.Forms.Label();
+            this.LblTxtCustomerHouseNumber = new System.Windows.Forms.Label();
+            this.TxtCustomerHouseNumber = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // TxtCustomerPassword
             // 
-            this.TxtCustomerPassword.Location = new System.Drawing.Point(642, 241);
+            this.TxtCustomerPassword.Location = new System.Drawing.Point(642, 237);
             this.TxtCustomerPassword.Name = "TxtCustomerPassword";
             this.TxtCustomerPassword.Size = new System.Drawing.Size(190, 27);
             this.TxtCustomerPassword.TabIndex = 50;
@@ -57,7 +61,7 @@
             // LblCustomerPassword
             // 
             this.LblCustomerPassword.AutoSize = true;
-            this.LblCustomerPassword.Location = new System.Drawing.Point(508, 244);
+            this.LblCustomerPassword.Location = new System.Drawing.Point(512, 248);
             this.LblCustomerPassword.Name = "LblCustomerPassword";
             this.LblCustomerPassword.Size = new System.Drawing.Size(66, 20);
             this.LblCustomerPassword.TabIndex = 49;
@@ -80,7 +84,7 @@
             // LblCustomerWebsite
             // 
             this.LblCustomerWebsite.AutoSize = true;
-            this.LblCustomerWebsite.Location = new System.Drawing.Point(512, 192);
+            this.LblCustomerWebsite.Location = new System.Drawing.Point(509, 196);
             this.LblCustomerWebsite.Name = "LblCustomerWebsite";
             this.LblCustomerWebsite.Size = new System.Drawing.Size(62, 20);
             this.LblCustomerWebsite.TabIndex = 46;
@@ -89,7 +93,7 @@
             // LblCustomerMail
             // 
             this.LblCustomerMail.AutoSize = true;
-            this.LblCustomerMail.Location = new System.Drawing.Point(509, 141);
+            this.LblCustomerMail.Location = new System.Drawing.Point(518, 143);
             this.LblCustomerMail.Name = "LblCustomerMail";
             this.LblCustomerMail.Size = new System.Drawing.Size(52, 20);
             this.LblCustomerMail.TabIndex = 45;
@@ -97,14 +101,14 @@
             // 
             // TxtCustomerLocation
             // 
-            this.TxtCustomerLocation.Location = new System.Drawing.Point(210, 241);
+            this.TxtCustomerLocation.Location = new System.Drawing.Point(210, 348);
             this.TxtCustomerLocation.Name = "TxtCustomerLocation";
             this.TxtCustomerLocation.Size = new System.Drawing.Size(190, 27);
             this.TxtCustomerLocation.TabIndex = 44;
             // 
             // TxtCustomerPostcode
             // 
-            this.TxtCustomerPostcode.Location = new System.Drawing.Point(210, 192);
+            this.TxtCustomerPostcode.Location = new System.Drawing.Point(210, 291);
             this.TxtCustomerPostcode.Name = "TxtCustomerPostcode";
             this.TxtCustomerPostcode.Size = new System.Drawing.Size(190, 27);
             this.TxtCustomerPostcode.TabIndex = 43;
@@ -112,7 +116,7 @@
             // LblCustomerLocation
             // 
             this.LblCustomerLocation.AutoSize = true;
-            this.LblCustomerLocation.Location = new System.Drawing.Point(60, 241);
+            this.LblCustomerLocation.Location = new System.Drawing.Point(63, 348);
             this.LblCustomerLocation.Name = "LblCustomerLocation";
             this.LblCustomerLocation.Size = new System.Drawing.Size(30, 20);
             this.LblCustomerLocation.TabIndex = 42;
@@ -121,7 +125,7 @@
             // LblCustomerPostcode
             // 
             this.LblCustomerPostcode.AutoSize = true;
-            this.LblCustomerPostcode.Location = new System.Drawing.Point(60, 199);
+            this.LblCustomerPostcode.Location = new System.Drawing.Point(64, 291);
             this.LblCustomerPostcode.Name = "LblCustomerPostcode";
             this.LblCustomerPostcode.Size = new System.Drawing.Size(33, 20);
             this.LblCustomerPostcode.TabIndex = 41;
@@ -129,7 +133,7 @@
             // 
             // TxtCustomerName
             // 
-            this.TxtCustomerName.Location = new System.Drawing.Point(210, 138);
+            this.TxtCustomerName.Location = new System.Drawing.Point(210, 139);
             this.TxtCustomerName.Name = "TxtCustomerName";
             this.TxtCustomerName.Size = new System.Drawing.Size(191, 27);
             this.TxtCustomerName.TabIndex = 40;
@@ -137,27 +141,11 @@
             // LblCustomerName
             // 
             this.LblCustomerName.AutoSize = true;
-            this.LblCustomerName.Location = new System.Drawing.Point(55, 145);
+            this.LblCustomerName.Location = new System.Drawing.Point(61, 145);
             this.LblCustomerName.Name = "LblCustomerName";
             this.LblCustomerName.Size = new System.Drawing.Size(49, 20);
             this.LblCustomerName.TabIndex = 39;
             this.LblCustomerName.Text = "Name";
-            // 
-            // LblCustomerNumber
-            // 
-            this.LblCustomerNumber.AutoSize = true;
-            this.LblCustomerNumber.Location = new System.Drawing.Point(55, 96);
-            this.LblCustomerNumber.Name = "LblCustomerNumber";
-            this.LblCustomerNumber.Size = new System.Drawing.Size(114, 20);
-            this.LblCustomerNumber.TabIndex = 38;
-            this.LblCustomerNumber.Text = "Kundennummer";
-            // 
-            // TxtCustomerNumber
-            // 
-            this.TxtCustomerNumber.Location = new System.Drawing.Point(210, 96);
-            this.TxtCustomerNumber.Name = "TxtCustomerNumber";
-            this.TxtCustomerNumber.Size = new System.Drawing.Size(191, 27);
-            this.TxtCustomerNumber.TabIndex = 37;
             // 
             // LblKunden
             // 
@@ -171,7 +159,7 @@
             // 
             // CmdEditCustomerSave
             // 
-            this.CmdEditCustomerSave.Location = new System.Drawing.Point(885, 66);
+            this.CmdEditCustomerSave.Location = new System.Drawing.Point(885, 132);
             this.CmdEditCustomerSave.Name = "CmdEditCustomerSave";
             this.CmdEditCustomerSave.Size = new System.Drawing.Size(133, 80);
             this.CmdEditCustomerSave.TabIndex = 67;
@@ -181,7 +169,7 @@
             // 
             // CmdEditCustomerCancel
             // 
-            this.CmdEditCustomerCancel.Location = new System.Drawing.Point(885, 211);
+            this.CmdEditCustomerCancel.Location = new System.Drawing.Point(885, 304);
             this.CmdEditCustomerCancel.Name = "CmdEditCustomerCancel";
             this.CmdEditCustomerCancel.Size = new System.Drawing.Size(133, 80);
             this.CmdEditCustomerCancel.TabIndex = 68;
@@ -189,11 +177,65 @@
             this.CmdEditCustomerCancel.UseVisualStyleBackColor = true;
             this.CmdEditCustomerCancel.Click += new System.EventHandler(this.CmdEditCustomerCancel_Click);
             // 
+            // TxtCustomerPhoneNumber
+            // 
+            this.TxtCustomerPhoneNumber.Location = new System.Drawing.Point(642, 295);
+            this.TxtCustomerPhoneNumber.Name = "TxtCustomerPhoneNumber";
+            this.TxtCustomerPhoneNumber.Size = new System.Drawing.Size(190, 27);
+            this.TxtCustomerPhoneNumber.TabIndex = 69;
+            // 
+            // LblTxtCustomerPhoneNumber
+            // 
+            this.LblTxtCustomerPhoneNumber.AutoSize = true;
+            this.LblTxtCustomerPhoneNumber.Location = new System.Drawing.Point(505, 304);
+            this.LblTxtCustomerPhoneNumber.Name = "LblTxtCustomerPhoneNumber";
+            this.LblTxtCustomerPhoneNumber.Size = new System.Drawing.Size(113, 20);
+            this.LblTxtCustomerPhoneNumber.TabIndex = 70;
+            this.LblTxtCustomerPhoneNumber.Text = "Telefonnummer";
+            // 
+            // TxtCustomerStreet
+            // 
+            this.TxtCustomerStreet.Location = new System.Drawing.Point(210, 196);
+            this.TxtCustomerStreet.Name = "TxtCustomerStreet";
+            this.TxtCustomerStreet.Size = new System.Drawing.Size(190, 27);
+            this.TxtCustomerStreet.TabIndex = 71;
+            // 
+            // LblTxtCustomerStreet
+            // 
+            this.LblTxtCustomerStreet.AutoSize = true;
+            this.LblTxtCustomerStreet.Location = new System.Drawing.Point(61, 200);
+            this.LblTxtCustomerStreet.Name = "LblTxtCustomerStreet";
+            this.LblTxtCustomerStreet.Size = new System.Drawing.Size(55, 20);
+            this.LblTxtCustomerStreet.TabIndex = 72;
+            this.LblTxtCustomerStreet.Text = "Strasse";
+            // 
+            // LblTxtCustomerHouseNumber
+            // 
+            this.LblTxtCustomerHouseNumber.AutoSize = true;
+            this.LblTxtCustomerHouseNumber.Location = new System.Drawing.Point(63, 244);
+            this.LblTxtCustomerHouseNumber.Name = "LblTxtCustomerHouseNumber";
+            this.LblTxtCustomerHouseNumber.Size = new System.Drawing.Size(97, 20);
+            this.LblTxtCustomerHouseNumber.TabIndex = 73;
+            this.LblTxtCustomerHouseNumber.Text = "Hausnummer";
+            // 
+            // TxtCustomerHouseNumber
+            // 
+            this.TxtCustomerHouseNumber.Location = new System.Drawing.Point(210, 241);
+            this.TxtCustomerHouseNumber.Name = "TxtCustomerHouseNumber";
+            this.TxtCustomerHouseNumber.Size = new System.Drawing.Size(190, 27);
+            this.TxtCustomerHouseNumber.TabIndex = 74;
+            // 
             // MainEditCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1213, 641);
+            this.Controls.Add(this.TxtCustomerHouseNumber);
+            this.Controls.Add(this.LblTxtCustomerHouseNumber);
+            this.Controls.Add(this.LblTxtCustomerStreet);
+            this.Controls.Add(this.TxtCustomerStreet);
+            this.Controls.Add(this.LblTxtCustomerPhoneNumber);
+            this.Controls.Add(this.TxtCustomerPhoneNumber);
             this.Controls.Add(this.CmdEditCustomerCancel);
             this.Controls.Add(this.CmdEditCustomerSave);
             this.Controls.Add(this.TxtCustomerPassword);
@@ -208,8 +250,6 @@
             this.Controls.Add(this.LblCustomerPostcode);
             this.Controls.Add(this.TxtCustomerName);
             this.Controls.Add(this.LblCustomerName);
-            this.Controls.Add(this.LblCustomerNumber);
-            this.Controls.Add(this.TxtCustomerNumber);
             this.Controls.Add(this.LblKunden);
             this.Name = "MainEditCustomer";
             this.Text = "Kunde speichern / bearbeiten";
@@ -232,10 +272,14 @@
         private Label LblCustomerPostcode;
         private TextBox TxtCustomerName;
         private Label LblCustomerName;
-        private Label LblCustomerNumber;
-        private TextBox TxtCustomerNumber;
         private Label LblKunden;
         private Button CmdEditCustomerSave;
         private Button CmdEditCustomerCancel;
+        private TextBox TxtCustomerPhoneNumber;
+        private Label LblTxtCustomerPhoneNumber;
+        private TextBox TxtCustomerStreet;
+        private Label LblTxtCustomerStreet;
+        private Label LblTxtCustomerHouseNumber;
+        private TextBox TxtCustomerHouseNumber;
     }
 }

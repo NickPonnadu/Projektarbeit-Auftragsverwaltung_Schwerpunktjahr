@@ -32,11 +32,12 @@
             this.CmdCreateOrderCancel = new System.Windows.Forms.Button();
             this.CmdCreateOrderSave = new System.Windows.Forms.Button();
             this.DtpOrderDate = new System.Windows.Forms.DateTimePicker();
-            this.TxtOrderCustomer = new System.Windows.Forms.TextBox();
             this.TxtOrderNumber = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.DGWChooseCustomer = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.DGWChooseCustomer)).BeginInit();
             this.SuspendLayout();
             // 
             // LblArticle
@@ -76,17 +77,11 @@
             this.DtpOrderDate.Size = new System.Drawing.Size(250, 27);
             this.DtpOrderDate.TabIndex = 86;
             // 
-            // TxtOrderCustomer
-            // 
-            this.TxtOrderCustomer.Location = new System.Drawing.Point(276, 241);
-            this.TxtOrderCustomer.Name = "TxtOrderCustomer";
-            this.TxtOrderCustomer.Size = new System.Drawing.Size(125, 27);
-            this.TxtOrderCustomer.TabIndex = 85;
-            // 
             // TxtOrderNumber
             // 
             this.TxtOrderNumber.Location = new System.Drawing.Point(276, 124);
             this.TxtOrderNumber.Name = "TxtOrderNumber";
+            this.TxtOrderNumber.ReadOnly = true;
             this.TxtOrderNumber.Size = new System.Drawing.Size(125, 27);
             this.TxtOrderNumber.TabIndex = 84;
             // 
@@ -113,17 +108,32 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(56, 244);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(51, 20);
+            this.label7.Size = new System.Drawing.Size(127, 20);
             this.label7.TabIndex = 81;
-            this.label7.Text = "Kunde";
+            this.label7.Text = "Kunde auswählen:";
+            // 
+            // DGWChooseCustomer
+            // 
+            this.DGWChooseCustomer.AllowUserToAddRows = false;
+            this.DGWChooseCustomer.AllowUserToDeleteRows = false;
+            this.DGWChooseCustomer.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.DGWChooseCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGWChooseCustomer.Location = new System.Drawing.Point(56, 309);
+            this.DGWChooseCustomer.Name = "DGWChooseCustomer";
+            this.DGWChooseCustomer.RowHeadersWidth = 51;
+            this.DGWChooseCustomer.RowTemplate.Height = 29;
+            this.DGWChooseCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DGWChooseCustomer.Size = new System.Drawing.Size(1125, 472);
+            this.DGWChooseCustomer.TabIndex = 87;
+            this.DGWChooseCustomer.VisibleChanged += new System.EventHandler(this.UpdateCustomerList);
             // 
             // MainEditOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1213, 641);
+            this.ClientSize = new System.Drawing.Size(1213, 929);
+            this.Controls.Add(this.DGWChooseCustomer);
             this.Controls.Add(this.DtpOrderDate);
-            this.Controls.Add(this.TxtOrderCustomer);
             this.Controls.Add(this.TxtOrderNumber);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -133,6 +143,7 @@
             this.Controls.Add(this.LblArticle);
             this.Name = "MainEditOrder";
             this.Text = "Auftrag speichern / bearbeiten";
+            ((System.ComponentModel.ISupportInitialize)(this.DGWChooseCustomer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -143,10 +154,10 @@
         private Button CmdCreateOrderCancel;
         private Button CmdCreateOrderSave;
         private DateTimePicker DtpOrderDate;
-        private TextBox TxtOrderCustomer;
         private TextBox TxtOrderNumber;
         private Label label9;
         private Label label8;
         private Label label7;
+        private DataGridView DGWChooseCustomer;
     }
 }
