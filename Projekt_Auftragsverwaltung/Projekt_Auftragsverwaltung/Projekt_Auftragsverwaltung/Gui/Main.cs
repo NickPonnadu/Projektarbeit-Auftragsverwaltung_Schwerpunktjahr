@@ -101,7 +101,7 @@ namespace Projekt_Auftragsverwaltung
             CmbCustomerSearchProperty.DataSource = new String[] { "Kundennummer", "Name", "Telefonnummer", "Email", "Website", "Strasse", "Hausnummer", "PLZ", "Ort" };
             CmdPositionSearchProperty.DataSource = new String[] { "Positionsnummer", "Kundennummer", "Betrag", "Datum", "Auftragsnummer" };
             CmbArticleSearchProperty.DataSource = new String[] { "ArtikelId", "Artikelname", "Preis", "Artikelgruppe" };
-            CmbOrderSearchProperty.DataSource = new String[] { "Auftragsnummer", "Datum", "Name", "Positionen" };
+            CmbOrderSearchProperty.DataSource = new String[] { "Auftragsnummer", "Datum", "Name",  };
         }
 
         public void UpdateListsEvent(object sender, EventArgs e)

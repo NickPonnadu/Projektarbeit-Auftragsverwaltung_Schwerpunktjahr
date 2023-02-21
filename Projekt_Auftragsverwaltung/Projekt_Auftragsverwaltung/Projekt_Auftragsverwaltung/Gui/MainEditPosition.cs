@@ -20,7 +20,15 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdCreatePositionSave_Click(object sender, EventArgs e)
         {
-            // Position speichern / updaten
+            if (DGWChooseOrder.SelectedRows.Count > 0)
+            {
+                var rows = DGWChooseOrder.SelectedRows[0];
+                int orderId = Convert.ToInt32(rows.Cells[0].Value);
+                dataController.CreateOrderPosition(Convert.ToInt32(NumOrderPositionQuantity.Value), orderId);
+                CloseForm();
+            }
+            else
+            { throw new Exception("Bitte Auftrag auswählen"); }
             CloseForm();
         }
 
@@ -28,5 +36,17 @@ namespace Projekt_Auftragsverwaltung
         {
             CloseForm();
         }
+
+
+        private void UpdateOrderList(object sender, EventArgs e)
+        {
+            if (dataController != null)
+            {
+                var data = dataController.ReturnOrders();
+                DGWChooseOrder.DataSource = data;
+            }
+
+        }
+
     }
 }

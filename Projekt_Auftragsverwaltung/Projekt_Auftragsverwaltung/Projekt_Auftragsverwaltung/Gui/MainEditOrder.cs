@@ -28,10 +28,10 @@ namespace Projekt_Auftragsverwaltung
             if (DGWChooseCustomer.SelectedRows.Count > 0)
             {
                 var rows = DGWChooseCustomer.SelectedRows[0];
-                string customerId = rows.Cells[0].Value.ToString();
+                int customerId = Convert.ToInt32(rows.Cells[0].Value);
 
 
-                //dataController.CreateOrder(DtpOrderDate.Value, customerId);
+                dataController.CreateOrder(DtpOrderDate.Value, customerId);
                 CloseForm();
             }
             else

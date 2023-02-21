@@ -28,81 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TxtPositionNumber = new System.Windows.Forms.TextBox();
-            this.TxtPositionArticle = new System.Windows.Forms.TextBox();
-            this.TxtPositionQuantity = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.CmdCreatePositionCancel = new System.Windows.Forms.Button();
             this.CmdCreatePositionSave = new System.Windows.Forms.Button();
+            this.DGWChooseOrder = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.NumOrderPositionQuantity = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.DGWChooseOrder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumOrderPositionQuantity)).BeginInit();
             this.SuspendLayout();
-            // 
-            // TxtPositionNumber
-            // 
-            this.TxtPositionNumber.Location = new System.Drawing.Point(282, 123);
-            this.TxtPositionNumber.Name = "TxtPositionNumber";
-            this.TxtPositionNumber.ReadOnly = true;
-            this.TxtPositionNumber.Size = new System.Drawing.Size(125, 27);
-            this.TxtPositionNumber.TabIndex = 94;
-            // 
-            // TxtPositionArticle
-            // 
-            this.TxtPositionArticle.Location = new System.Drawing.Point(282, 181);
-            this.TxtPositionArticle.Name = "TxtPositionArticle";
-            this.TxtPositionArticle.Size = new System.Drawing.Size(125, 27);
-            this.TxtPositionArticle.TabIndex = 93;
-            // 
-            // TxtPositionQuantity
-            // 
-            this.TxtPositionQuantity.Location = new System.Drawing.Point(282, 239);
-            this.TxtPositionQuantity.Name = "TxtPositionQuantity";
-            this.TxtPositionQuantity.Size = new System.Drawing.Size(125, 27);
-            this.TxtPositionQuantity.TabIndex = 92;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(65, 242);
+            this.label14.Location = new System.Drawing.Point(54, 91);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(54, 20);
+            this.label14.Size = new System.Drawing.Size(43, 15);
             this.label14.TabIndex = 91;
             this.label14.Text = "Anzahl";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(62, 188);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(52, 20);
-            this.label13.TabIndex = 90;
-            this.label13.Text = "Artikel";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(62, 126);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(122, 20);
-            this.label12.TabIndex = 89;
-            this.label12.Text = "Positionsnummer";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(62, 48);
+            this.label10.Location = new System.Drawing.Point(54, 36);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(130, 35);
+            this.label10.Size = new System.Drawing.Size(103, 28);
             this.label10.TabIndex = 88;
             this.label10.Text = "Positionen";
             // 
             // CmdCreatePositionCancel
             // 
-            this.CmdCreatePositionCancel.Location = new System.Drawing.Point(545, 229);
+            this.CmdCreatePositionCancel.Location = new System.Drawing.Point(458, 107);
+            this.CmdCreatePositionCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CmdCreatePositionCancel.Name = "CmdCreatePositionCancel";
-            this.CmdCreatePositionCancel.Size = new System.Drawing.Size(133, 80);
+            this.CmdCreatePositionCancel.Size = new System.Drawing.Size(116, 60);
             this.CmdCreatePositionCancel.TabIndex = 96;
             this.CmdCreatePositionCancel.Text = "Abbrechen";
             this.CmdCreatePositionCancel.UseVisualStyleBackColor = true;
@@ -110,45 +71,76 @@
             // 
             // CmdCreatePositionSave
             // 
-            this.CmdCreatePositionSave.Location = new System.Drawing.Point(545, 96);
+            this.CmdCreatePositionSave.Location = new System.Drawing.Point(458, 24);
+            this.CmdCreatePositionSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CmdCreatePositionSave.Name = "CmdCreatePositionSave";
-            this.CmdCreatePositionSave.Size = new System.Drawing.Size(133, 80);
+            this.CmdCreatePositionSave.Size = new System.Drawing.Size(116, 60);
             this.CmdCreatePositionSave.TabIndex = 95;
             this.CmdCreatePositionSave.Text = "Speichern";
             this.CmdCreatePositionSave.UseVisualStyleBackColor = true;
             this.CmdCreatePositionSave.Click += new System.EventHandler(this.CmdCreatePositionSave_Click);
             // 
+            // DGWChooseOrder
+            // 
+            this.DGWChooseOrder.AllowUserToAddRows = false;
+            this.DGWChooseOrder.AllowUserToDeleteRows = false;
+            this.DGWChooseOrder.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.DGWChooseOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGWChooseOrder.Location = new System.Drawing.Point(54, 199);
+            this.DGWChooseOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DGWChooseOrder.Name = "DGWChooseOrder";
+            this.DGWChooseOrder.RowHeadersWidth = 51;
+            this.DGWChooseOrder.RowTemplate.Height = 29;
+            this.DGWChooseOrder.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DGWChooseOrder.Size = new System.Drawing.Size(682, 354);
+            this.DGWChooseOrder.TabIndex = 97;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(54, 152);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(103, 15);
+            this.label1.TabIndex = 98;
+            this.label1.Text = "Artikel auswählen:";
+            // 
+            // NumOrderPositionQuantity
+            // 
+            this.NumOrderPositionQuantity.Location = new System.Drawing.Point(228, 83);
+            this.NumOrderPositionQuantity.Name = "NumOrderPositionQuantity";
+            this.NumOrderPositionQuantity.Size = new System.Drawing.Size(120, 23);
+            this.NumOrderPositionQuantity.TabIndex = 99;
+            // 
             // MainEditPosition
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1213, 641);
+            this.ClientSize = new System.Drawing.Size(1274, 662);
+            this.Controls.Add(this.NumOrderPositionQuantity);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.DGWChooseOrder);
             this.Controls.Add(this.CmdCreatePositionCancel);
             this.Controls.Add(this.CmdCreatePositionSave);
-            this.Controls.Add(this.TxtPositionNumber);
-            this.Controls.Add(this.TxtPositionArticle);
-            this.Controls.Add(this.TxtPositionQuantity);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
             this.Controls.Add(this.label10);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainEditPosition";
             this.Text = "Position speichern / bearbeiten";
+            this.VisibleChanged += new System.EventHandler(this.UpdateOrderList);
+            ((System.ComponentModel.ISupportInitialize)(this.DGWChooseOrder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumOrderPositionQuantity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private TextBox TxtPositionNumber;
-        private TextBox TxtPositionArticle;
-        private TextBox TxtPositionQuantity;
         private Label label14;
-        private Label label13;
-        private Label label12;
         private Label label10;
         private Button CmdCreatePositionCancel;
         private Button CmdCreatePositionSave;
+        private DataGridView DGWChooseOrder;
+        private Label label1;
+        private NumericUpDown NumOrderPositionQuantity;
     }
 }

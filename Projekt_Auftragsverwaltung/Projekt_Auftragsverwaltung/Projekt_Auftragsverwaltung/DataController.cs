@@ -33,8 +33,10 @@ namespace Projekt_Auftragsverwaltung
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
                     var kunden = from k in dbContext.Customers
-                                 join a in dbContext.Addresses on k.AddressId equals a.AddressId
-                                 join l in dbContext.AddressLocations on a.ZipCode equals l.ZipCode
+                                 join a in dbContext.Addresses on k.AddressId equals a.AddressId into aGroup
+                                 from a in aGroup.DefaultIfEmpty()
+                                 join l in dbContext.AddressLocations on a.ZipCode equals l.ZipCode into lGroup
+                                 from l in lGroup.DefaultIfEmpty()
                                  select new
                                  {
                                      Kundennummer = k.CustomerId,
@@ -42,10 +44,10 @@ namespace Projekt_Auftragsverwaltung
                                      Telefonnummer = k.PhoneNumber,
                                      EMail = k.EMail,
                                      Passwort = k.Password,
-                                     Strasse = a.Street,
-                                     Hausnummer = a.HouseNumber,
-                                     PLZ = a.ZipCode,
-                                     Ort = l.Location
+                                     Strasse = a.Street != null ? a.Street : null,
+                                     Hausnummer = a.HouseNumber != null ? a.HouseNumber : null,
+                                     PLZ = a.ZipCode != 0 ? a.ZipCode : 0,
+                                     Ort = l.Location != null ? l.Location : null,
                                  };
                     var list = kunden.ToList();
                     var dataTable = CreateDataTableCustomer();
@@ -60,6 +62,7 @@ namespace Projekt_Auftragsverwaltung
                 }
             }
         }
+
         public DataTable ReturnCustomersSearch(string columnName, string searchValue)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -216,25 +219,28 @@ namespace Projekt_Auftragsverwaltung
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
                     var orders = from o in dbContext.Orders
-                                 join op in dbContext.OrderPositions on o.OrderId equals op.OrderId
+                                 join op in dbContext.OrderPositions on o.OrderId equals op.OrderId into opGroup
+                                 from op in opGroup.DefaultIfEmpty()
                                  join c in dbContext.Customers on o.CustomerId equals c.CustomerId
                                  select new
                                  {
                                      Auftragsnummer = o.OrderId,
                                      Datum = o.Date.ToString("dd.MM.yyyy"),
                                      Name = c.Name,
-                                     Positionen = "XXX",
+                                     
                                  };
                     var list = orders.ToList();
                     var dataTable = CreateDataTableOrders();
                     foreach (var order in list)
                     {
-                        dataTable.Rows.Add(order.Auftragsnummer, order.Datum, order.Name, order.Positionen);
+                        dataTable.Rows.Add(order.Auftragsnummer, order.Datum, order.Name);
                     }
+
                     return dataTable;
                 }
             }
         }
+
         public DataTable ReturnOrdersSearch(string column, string value)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -242,15 +248,19 @@ namespace Projekt_Auftragsverwaltung
                 connection.Open();
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
+
+
                     var orders = from o in dbContext.Orders
-                                 join op in dbContext.OrderPositions on o.OrderId equals op.OrderId
-                                 join c in dbContext.Customers on o.CustomerId equals c.CustomerId
+                                 join op in dbContext.OrderPositions on o.OrderId equals op.OrderId into ops
+                                 from op in ops.DefaultIfEmpty()
+                                 join c in dbContext.Customers on o.CustomerId equals c.CustomerId into cs
+                                 from c in cs.DefaultIfEmpty()
                                  select new
                                  {
                                      Auftragsnummer = o.OrderId,
                                      Datum = o.Date.ToString("dd.MM.yyyy"),
                                      Name = c.Name,
-                                     Positionen = "XXX",
+                                     
                                  };
 
                     switch (column)
@@ -264,21 +274,20 @@ namespace Projekt_Auftragsverwaltung
                         case "Name":
                             orders = orders.Where(o => o.Name.Contains(value));
                             break;
-                        case "Positionen":
-                            orders = orders.Where(o => o.Positionen.Contains(value));
-                            break;
+                       
                     }
 
                     var list = orders.ToList();
                     var dataTable = CreateDataTableOrders();
                     foreach (var order in list)
                     {
-                        dataTable.Rows.Add(order.Auftragsnummer, order.Datum, order.Name, order.Positionen);
+                        dataTable.Rows.Add(order.Auftragsnummer, order.Datum, order.Name);
                     }
                     return dataTable;
                 }
             }
         }
+
         public DataTable ReturnOrderPositions()
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -441,7 +450,8 @@ namespace Projekt_Auftragsverwaltung
                     {
                         ZipCode = Convert.ToInt32(zipCode),
                         Location = location,
-                        AddressId = address.AddressId
+                        AddressId = address.AddressId,
+                        //Address = address
                     };
                     dbContext.AddressLocations.Add(newAddressLocation);
                     dbContext.SaveChanges();
@@ -463,6 +473,23 @@ namespace Projekt_Auftragsverwaltung
                 dbContext.SaveChanges();
             }
         }
+
+        public void CreateOrderPosition(int amount, int orderId)
+        {
+            // Verbindung mit der Datenbank herstellen
+            using (var dbContext = new CompanyContext(ConnectionString))
+            {
+                var orderPosition = new OrderPosition
+                {
+                    amount= amount,
+                    OrderId = orderId
+                };
+                dbContext.OrderPositions.Add(orderPosition);
+                dbContext.SaveChanges();
+            }
+        }
+
+
 
         public void CreateArticleGroup(string name)
         {
@@ -533,7 +560,6 @@ namespace Projekt_Auftragsverwaltung
             dataTable.Columns.Add("Auftragsnummer", typeof(int));
             dataTable.Columns.Add("Datum", typeof(string));
             dataTable.Columns.Add("Name", typeof(string));
-            dataTable.Columns.Add("Positionen", typeof(string));
             return dataTable;
         }
 

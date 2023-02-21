@@ -28,7 +28,7 @@ namespace Projekt_Auftragsverwaltung
                 int articleGroupId = Convert.ToInt32(rows.Cells[0].Value);
 
 
-                //dataController.CreateArticle(DtpOrderDate.Value, customerId);
+                dataController.CreateArticle(TxtArticleDescription.Text,NumArticlePrice.Value, articleGroupId);
                 CloseForm();
             }
             else
