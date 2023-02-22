@@ -10,14 +10,14 @@ namespace Projekt_Auftragsverwaltung
 
     public partial class Main : FormController
     {
-        private Form EditGuiArticleGroup;
-        private Form EditGuiCustomer;
-        private Form EditGuiArticle;
-        private Form EditGuiOrder;
-        private Form EditGuiPosition;
+        public Form EditGuiArticleGroup;
+        public Form EditGuiCustomer;
+        public Form EditGuiArticle;
+        public Form EditGuiOrder;
+        public Form EditGuiPosition;
 
         public string ConnectionString;
-        private DataController DataController;
+        public DataController DataController;
 
         public Main(string connectionString)
         {
@@ -28,7 +28,7 @@ namespace Projekt_Auftragsverwaltung
             this.EditGuiArticle = new MainEditArticle(ConnectionString);
             this.EditGuiPosition = new MainEditPosition(ConnectionString);
             this.EditGuiOrder = new MainEditOrder(ConnectionString);
-            
+
             DataController = new DataController(ConnectionString);
             UpdateLists();
             SetDataBindings();
@@ -38,7 +38,6 @@ namespace Projekt_Auftragsverwaltung
         private void CmdCreateArticleGroup_Click(Object sender, EventArgs e)
         {
             this.EditGuiArticleGroup.ShowDialog();
-
         }
 
         private void CmdCreateCustomer_Click(object sender, EventArgs e)
@@ -73,14 +72,13 @@ namespace Projekt_Auftragsverwaltung
         private void CmdEditCustomer_Click(object sender, EventArgs e)
         {
             this.EditGuiCustomer.ShowDialog();
+
         }
 
         private void CmdEditArticle_Click(object sender, EventArgs e)
         {
             this.EditGuiArticle.ShowDialog();
         }
-
-
         private void CmdEditPosition_Click(object sender, EventArgs e)
         {
             this.EditGuiPosition.ShowDialog();
@@ -101,7 +99,7 @@ namespace Projekt_Auftragsverwaltung
             CmbCustomerSearchProperty.DataSource = new String[] { "Kundennummer", "Name", "Telefonnummer", "Email", "Website", "Strasse", "Hausnummer", "PLZ", "Ort" };
             CmdPositionSearchProperty.DataSource = new String[] { "Positionsnummer", "Kundennummer", "Betrag", "Datum", "Auftragsnummer" };
             CmbArticleSearchProperty.DataSource = new String[] { "ArtikelId", "Artikelname", "Preis", "Artikelgruppe" };
-            CmbOrderSearchProperty.DataSource = new String[] { "Auftragsnummer", "Datum", "Name",  };
+            CmbOrderSearchProperty.DataSource = new String[] { "Auftragsnummer", "Datum", "Name", };
         }
 
         public void UpdateListsEvent(object sender, EventArgs e)
@@ -119,6 +117,7 @@ namespace Projekt_Auftragsverwaltung
             UpdateOrders();
             UpdateOrderPositions();
             UpdateArticleGroups();
+
         }
         private void UpdateCustomers()
         {
@@ -195,6 +194,32 @@ namespace Projekt_Auftragsverwaltung
         private void CmdSearchResetArticleGroup_Click(object sender, EventArgs e)
         {
             UpdateArticleGroups();
+        }
+
+        private void CmdDeleteArticleGroup_Click(object sender, EventArgs e)
+        {
+            if (DGWArticleGroups.SelectedRows.Count > 0)
+            {
+                var rows = DGWArticleGroups.SelectedRows[0];
+                int articleGroupId = Convert.ToInt32(rows.Cells[0].Value);
+                DataController.DeleteArticleGroup(articleGroupId);
+                UpdateArticleGroups();
+            }
+            else
+            { MessageBox.Show("Bitte Artikelgruppe auswählen"); }
+        }
+
+        private void CmdDeleteArticle_Click(object sender, EventArgs e)
+        {
+            if (DGWArticles.SelectedRows.Count > 0)
+            {
+                var rows = DGWArticles.SelectedRows[0];
+                int articleId = Convert.ToInt32(rows.Cells[0].Value);
+                DataController.DeleteArticle(articleId);
+                UpdateArticles();
+            }
+            else
+            { MessageBox.Show("Bitte Artikel auswählen"); }
         }
     }
 }

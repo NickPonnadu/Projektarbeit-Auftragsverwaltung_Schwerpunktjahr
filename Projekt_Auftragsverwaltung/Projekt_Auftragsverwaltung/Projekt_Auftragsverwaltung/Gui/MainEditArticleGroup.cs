@@ -1,6 +1,4 @@
-﻿
-
-using Projekt_Auftragsverwaltung.Gui;
+﻿using Projekt_Auftragsverwaltung.Gui;
 
 namespace Projekt_Auftragsverwaltung
 {
@@ -8,18 +6,18 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditArticleGroup : FormController
 
     {
+        public bool EditMode;
         DataController dataController;
         public string ConnectionString;
         public MainEditArticleGroup(string connectionString)
         {
             InitializeComponent();
             ConnectionString = connectionString;
-            
             dataController = new DataController(ConnectionString);
 
         }
 
-      
+
         private void CmdCreateArticleGroupSave_Click(object sender, EventArgs e)
         {
             dataController.CreateArticleGroup(TxtArticleGroupEditArticleGroup.Text);
@@ -32,6 +30,6 @@ namespace Projekt_Auftragsverwaltung
             CloseForm();
         }
 
-       
+
     }
 }

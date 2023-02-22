@@ -1,4 +1,4 @@
-﻿
+﻿using Projekt_Auftragsverwaltung;
 using Microsoft.Data.SqlClient;
 using Projekt_Auftragsverwaltung.Gui;
 using Projekt_Auftragsverwaltung.Tables;
@@ -19,7 +19,7 @@ namespace Projekt_Auftragsverwaltung
             dataController = new DataController(ConnectionString);
 
         }
-
+               
         private void CmdCreateArticleSave_Click(object sender, EventArgs e)
         {
             if (DGWChooseArticleGroup.SelectedRows.Count > 0)
@@ -50,5 +50,7 @@ namespace Projekt_Auftragsverwaltung
                 DGWChooseArticleGroup.DataSource = data;
             }
         }
+
+        
     }
 }

@@ -227,7 +227,7 @@ namespace Projekt_Auftragsverwaltung
                                      Auftragsnummer = o.OrderId,
                                      Datum = o.Date.ToString("dd.MM.yyyy"),
                                      Name = c.Name,
-                                     
+
                                  };
                     var list = orders.ToList();
                     var dataTable = CreateDataTableOrders();
@@ -260,7 +260,7 @@ namespace Projekt_Auftragsverwaltung
                                      Auftragsnummer = o.OrderId,
                                      Datum = o.Date.ToString("dd.MM.yyyy"),
                                      Name = c.Name,
-                                     
+
                                  };
 
                     switch (column)
@@ -274,7 +274,7 @@ namespace Projekt_Auftragsverwaltung
                         case "Name":
                             orders = orders.Where(o => o.Name.Contains(value));
                             break;
-                       
+
                     }
 
                     var list = orders.ToList();
@@ -481,7 +481,7 @@ namespace Projekt_Auftragsverwaltung
             {
                 var orderPosition = new OrderPosition
                 {
-                    amount= amount,
+                    amount = amount,
                     OrderId = orderId
                 };
                 dbContext.OrderPositions.Add(orderPosition);
@@ -574,6 +574,44 @@ namespace Projekt_Auftragsverwaltung
             return dataTable;
         }
 
+        public void DeleteArticle(int articleId)
+        {
+            using (var db = new CompanyContext(ConnectionString)) // MyDbContext ist der Name der von EF Core generierten Datenbankkontextklasse
+            {
+                var recordToDelete = db.Articles.FirstOrDefault(r => r.ArticleId == articleId);
+                if (recordToDelete != null)
+                {
+                    db.Articles.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
+
+        public void DeleteArticleGroup(int ArticleGroupId)
+        {
+            using (var db = new CompanyContext(ConnectionString)) // MyDbContext ist der Name der von EF Core generierten Datenbankkontextklasse
+            {
+                var recordToDelete = db.ArticleGroups.FirstOrDefault(r => r.ArticleGroupId == ArticleGroupId);
+                if (recordToDelete != null)
+                {
+                    db.ArticleGroups.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
+
+        public void DeleteOrder(int orderId)
+        {
+            using (var db = new CompanyContext(ConnectionString)) // MyDbContext ist der Name der von EF Core generierten Datenbankkontextklasse
+            {
+                var recordToDelete = db.Orders.FirstOrDefault(r => r.OrderId == orderId);
+                if (recordToDelete != null)
+                {
+                    db.Orders.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
 
     }
 }
