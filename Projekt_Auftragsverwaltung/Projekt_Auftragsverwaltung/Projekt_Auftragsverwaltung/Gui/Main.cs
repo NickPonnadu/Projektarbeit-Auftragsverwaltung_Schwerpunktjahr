@@ -3,6 +3,7 @@ using Projekt_Auftragsverwaltung.Gui;
 using System;
 using System.Data;
 using System.Reflection.Metadata;
+using TreeView = Projekt_Auftragsverwaltung.Gui.TreeView;
 
 namespace Projekt_Auftragsverwaltung
 
@@ -195,6 +196,12 @@ namespace Projekt_Auftragsverwaltung
         private void CmdSearchResetArticleGroup_Click(object sender, EventArgs e)
         {
             UpdateArticleGroups();
+        }
+
+        private void CmdTreeView_Click(object sender, EventArgs e)
+        {
+            TreeView treeView = new TreeView();
+            treeView.Show();
         }
     }
 }

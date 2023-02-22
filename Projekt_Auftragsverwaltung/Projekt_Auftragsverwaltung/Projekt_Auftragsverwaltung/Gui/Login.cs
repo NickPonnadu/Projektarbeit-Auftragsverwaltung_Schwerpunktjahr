@@ -17,8 +17,13 @@ namespace Projekt_Auftragsverwaltung
             this.Connection = true;
         }
 
+        public static string server;
+        public static string name;
+
         private void CmdTestConnection_Click(object sender, EventArgs e)
         {
+            server = TxtDBServer.Text;
+            name = TxtDBServer.Text;
             // Prüft Textfelder auf Wert, nur Inhalt
             if (!string.IsNullOrEmpty(TxtDBServer.Text) && !string.IsNullOrEmpty(TxtDBName.Text))
             {
