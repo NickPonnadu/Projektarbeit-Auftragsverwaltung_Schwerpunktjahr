@@ -2,11 +2,9 @@
 using System.Runtime.CompilerServices;
 
 namespace Projekt_Auftragsverwaltung
-{
-   
+{   
     public class DatabaseManager
-    {
-       
+    {   
         public static string BuildConnectionString(string serverName, string databaseName)
         {
             return $"Server={serverName}; Database={databaseName}; Trusted_Connection=True; Encrypt=false";
@@ -16,9 +14,7 @@ namespace Projekt_Auftragsverwaltung
         {
             using (var context = new CompanyContext(connectionString))
             {
-                context.Database.EnsureCreated();
-                
-                
+                context.Database.EnsureCreated(); 
             }
         }
     }
