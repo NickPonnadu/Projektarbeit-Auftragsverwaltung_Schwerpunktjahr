@@ -714,30 +714,35 @@ namespace Projekt_Auftragsverwaltung
         {
             using (var db = new CompanyContext(ConnectionString))
             {
+
                 var recordToDelete = db.OrderPositions.FirstOrDefault(r => r.OrderPositionId == orderPositionId);
+
+                int articlePositionId = recordToDelete.OrderPositionId;
+
                 if (recordToDelete != null)
                 {
                     db.OrderPositions.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
                     db.SaveChanges(); // Änderungen speichern
                 }
+                
             }
-
         }
+             
 
-        public void DeleteCustomer(int orderPositionId)
+        public void DeleteAddress(int addressId)
         {
             using (var db = new CompanyContext(ConnectionString))
             {
-                var recordToDelete = db.OrderPositions.FirstOrDefault(r => r.OrderPositionId == orderPositionId);
+                var recordToDelete = db.Addresses.FirstOrDefault(r => r.AddressId == addressId);
                 if (recordToDelete != null)
                 {
-                    db.OrderPositions.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
+                    db.Addresses.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
                     db.SaveChanges(); // Änderungen speichern
                 }
             }
 
-            // Adresse und AdressLocations muss auch noch deleted werden
         }
+
 
     }
 }
