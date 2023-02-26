@@ -12,6 +12,7 @@ namespace Projekt_Auftragsverwaltung.Tables
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public string EMail { get; set; }
+        public string Website { get; set; }
         public string Password { get; set; }
 
 

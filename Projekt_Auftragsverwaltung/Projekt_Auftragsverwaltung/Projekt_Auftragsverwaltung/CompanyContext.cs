@@ -60,47 +60,39 @@ namespace Projekt_Auftragsverwaltung
 
 
 
-            // define the relationship between Address and AddressLocation
             modelBuilder.Entity<Address>()
-                .HasMany(a => a.AddressLocations)
-                .WithOne(al => al.Address)
-                .HasForeignKey(al => al.AddressId);
+               .HasOne(a => a.AddressLocation)
+               .WithMany(al => al.Addresses)
+               .HasForeignKey(a => a.ZipCode);
 
-            // define the relationship between Article and ArticleGroup
+            modelBuilder.Entity<Customer>()
+                .HasOne(c => c.Address)
+                .WithOne(a => a.Customer);
+
             modelBuilder.Entity<Article>()
                 .HasOne(a => a.ArticleGroup)
                 .WithMany(ag => ag.Articles)
                 .HasForeignKey(a => a.ArticleGroupId);
 
-            // define the relationship between Customer and Address
-            modelBuilder.Entity<Customer>()
-                .HasOne(c => c.Address)
-                .WithOne(a => a.Customer)
-                .HasForeignKey<Customer>(c => c.AddressId);
-
-            // define the relationship between Order and Customer
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.Customer)
                 .WithMany(c => c.Orders)
                 .HasForeignKey(o => o.CustomerId);
 
-            // define the relationship between OrderPosition and Order
             modelBuilder.Entity<OrderPosition>()
                 .HasOne(op => op.Order)
                 .WithMany(o => o.OrderPositions)
                 .HasForeignKey(op => op.OrderId);
 
-            // define the relationship between OrderPosition and ArticlePosition
-            modelBuilder.Entity<OrderPosition>()
-                .HasMany(op => op.Articles)
-                .WithOne(ap => ap.OrderPosition)
+            modelBuilder.Entity<ArticlePosition>()
+                .HasOne(ap => ap.OrderPosition)
+                .WithMany(op => op.Articles)
                 .HasForeignKey(ap => ap.OrderPositionId);
 
-            // define the relationship between ArticlePosition and Article
             modelBuilder.Entity<ArticlePosition>()
-                .HasOne(ap => ap.Article)
-                .WithMany()
-                .HasForeignKey(ap => ap.ArticleId);
+               .HasOne(ap => ap.Article)
+               .WithMany(a => a.OrderPositions)
+               .HasForeignKey(ap => ap.ArticleId);
 
 
 
@@ -116,11 +108,11 @@ namespace Projekt_Auftragsverwaltung
             );
 
             modelBuilder.Entity<AddressLocation>().HasData(
-                new AddressLocation { ZipCode = 12345, Location = "Testort 1", AddressId = 1 },
-                new AddressLocation { ZipCode = 123456, Location = "Testort 2", AddressId = 2 },
-                new AddressLocation { ZipCode = 123457, Location = "Testort 3", AddressId = 3 },
-                new AddressLocation { ZipCode = 123458, Location = "Testort 4", AddressId = 4 },
-                new AddressLocation { ZipCode = 123459, Location = "Testort 5", AddressId = 5 }
+                new AddressLocation { ZipCode = 12345, Location = "Testort 1" },
+                new AddressLocation { ZipCode = 123456, Location = "Testort 2" },
+                new AddressLocation { ZipCode = 123457, Location = "Testort 3" },
+                new AddressLocation { ZipCode = 123458, Location = "Testort 4" },
+                new AddressLocation { ZipCode = 123459, Location = "Testort 5" }
             );
 
 
@@ -147,11 +139,11 @@ namespace Projekt_Auftragsverwaltung
             );
 
             modelBuilder.Entity<Customer>().HasData(
-                 new Customer { CustomerId = 1, Name = "Test Kunde 1", PhoneNumber = "0123456789", EMail = "test1@test.com", Password = "pass1", AddressId = 1 },
-                 new Customer { CustomerId = 2, Name = "Test Kunde 2", PhoneNumber = "9876543210", EMail = "test2@test.com", Password = "pass2", AddressId = 2 },
-                 new Customer { CustomerId = 3, Name = "Test Kunde 3", PhoneNumber = "1234567890", EMail = "test3@test.com", Password = "pass3", AddressId = 3 },
-                 new Customer { CustomerId = 4, Name = "Test Kunde 4", PhoneNumber = "0987654321", EMail = "test4@test.com", Password = "pass4", AddressId = 4 },
-                 new Customer { CustomerId = 5, Name = "Test Kunde 5", PhoneNumber = "1023456789", EMail = "test5@test.com", Password = "pass5", AddressId = 5 }
+                 new Customer { CustomerId = 1, Name = "Test Kunde 1", PhoneNumber = "0123456789", EMail = "test1@test.com", Website = "Website1", Password = "pass1", AddressId = 1 },
+                 new Customer { CustomerId = 2, Name = "Test Kunde 2", PhoneNumber = "9876543210", EMail = "test2@test.com", Website = "Website2", Password = "pass2", AddressId = 2 },
+                 new Customer { CustomerId = 3, Name = "Test Kunde 3", PhoneNumber = "1234567890", EMail = "test3@test.com", Website = "Website3", Password = "pass3", AddressId = 3 },
+                 new Customer { CustomerId = 4, Name = "Test Kunde 4", PhoneNumber = "0987654321", EMail = "test4@test.com", Website = "Website4", Password = "pass4", AddressId = 4 },
+                 new Customer { CustomerId = 5, Name = "Test Kunde 5", PhoneNumber = "1023456789", EMail = "test5@test.com", Website = "Website5", Password = "pass5", AddressId = 5 }
              );
 
             modelBuilder.Entity<Order>().HasData(
