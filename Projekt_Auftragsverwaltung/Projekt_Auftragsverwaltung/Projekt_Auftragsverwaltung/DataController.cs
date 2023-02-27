@@ -441,7 +441,7 @@ namespace Projekt_Auftragsverwaltung
                     {
                         ZipCode = Convert.ToInt32(zipCode),
                         Location = location,
-                        AddressId = address.AddressId
+                        //AddressId = address.AddressId
                     };
                     dbContext.AddressLocations.Add(newAddressLocation);
                     dbContext.SaveChanges();

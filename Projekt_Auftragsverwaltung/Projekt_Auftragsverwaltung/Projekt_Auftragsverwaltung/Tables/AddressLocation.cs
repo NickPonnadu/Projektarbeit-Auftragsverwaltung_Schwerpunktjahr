@@ -10,12 +10,12 @@ namespace Projekt_Auftragsverwaltung.Tables
 {
     public class AddressLocation
     {
+
+        [Key]
         public int ZipCode { get; set; }
         public string Location { get; set; }
 
-
-        public int AddressId { get; set; }
-        public Address Address { get; set; }
+        public List<Address> Addresses { get; set; }
 
     }
 }
