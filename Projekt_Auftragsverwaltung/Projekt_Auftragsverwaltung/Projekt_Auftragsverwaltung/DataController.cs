@@ -47,6 +47,7 @@ namespace Projekt_Auftragsverwaltung
                                      Name = k.Name,
                                      Telefonnummer = k.PhoneNumber,
                                      EMail = k.EMail,
+                                     Webseite = k.Website,
                                      Passwort = k.Password,
                                      Strasse = a.Street != null ? a.Street : null,
                                      Hausnummer = a.HouseNumber != null ? a.HouseNumber : null,
@@ -58,7 +59,7 @@ namespace Projekt_Auftragsverwaltung
                     // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
                     foreach (var item in list)
                     {
-                        dataTable.Rows.Add(item.Kundennummer, item.Name, item.Telefonnummer, item.EMail,
+                        dataTable.Rows.Add(item.Kundennummer, item.Name, item.Telefonnummer, item.EMail, item.Webseite,
                             item.Passwort, item.Strasse, item.Hausnummer, item.PLZ, item.Ort);
                     }
                     // Verwende die DataTable als DataSource für das DataGridView
@@ -76,22 +77,23 @@ namespace Projekt_Auftragsverwaltung
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
                     var query = from k in dbContext.Customers
-                                 join a in dbContext.Addresses on k.AddressId equals a.AddressId into aGroup
-                                 from a in aGroup.DefaultIfEmpty()
-                                 join l in dbContext.AddressLocations on a.ZipCode equals l.ZipCode into lGroup
-                                 from l in lGroup.DefaultIfEmpty()
-                                 select new
-                                 {
-                                     Kundennummer = k.CustomerId,
-                                     Name = k.Name,
-                                     Telefonnummer = k.PhoneNumber,
-                                     EMail = k.EMail,
-                                     Passwort = k.Password,
-                                     Strasse = a.Street != null ? a.Street : null,
-                                     Hausnummer = a.HouseNumber != null ? a.HouseNumber : null,
-                                     PLZ = a.ZipCode != 0 ? a.ZipCode : 0,
-                                     Ort = l.Location != null ? l.Location : null,
-                                 };
+                                join a in dbContext.Addresses on k.AddressId equals a.AddressId into aGroup
+                                from a in aGroup.DefaultIfEmpty()
+                                join l in dbContext.AddressLocations on a.ZipCode equals l.ZipCode into lGroup
+                                from l in lGroup.DefaultIfEmpty()
+                                select new
+                                {
+                                    Kundennummer = k.CustomerId,
+                                    Name = k.Name,
+                                    Telefonnummer = k.PhoneNumber,
+                                    EMail = k.EMail,
+                                    Webseite = k.Website,
+                                    Passwort = k.Password,
+                                    Strasse = a.Street != null ? a.Street : null,
+                                    Hausnummer = a.HouseNumber != null ? a.HouseNumber : null,
+                                    PLZ = a.ZipCode != 0 ? a.ZipCode : 0,
+                                    Ort = l.Location != null ? l.Location : null,
+                                };
 
                     switch (columnName)
                     {
@@ -107,6 +109,9 @@ namespace Projekt_Auftragsverwaltung
                         case "Email":
                             query = query.Where(c => c.EMail.Contains(searchValue));
                             break;
+                        case "Website":
+                            query = query.Where(c => c.Webseite.Contains(searchValue));
+                            break;
                         case "Passwort":
                             query = query.Where(c => c.Passwort.Contains(searchValue));
                             break;
@@ -114,7 +119,7 @@ namespace Projekt_Auftragsverwaltung
                             query = query.Where(c => c.Strasse.Contains(searchValue));
                             break;
                         case "Hausnummer":
-                            query = query.Where(c => c.Hausnummer.ToString().Contains(searchValue));
+                            query = query.Where(c => c.Hausnummer.Contains(searchValue));
                             break;
                         case "PLZ":
                             query = query.Where(c => c.PLZ.ToString().Contains(searchValue));
@@ -127,14 +132,12 @@ namespace Projekt_Auftragsverwaltung
                             throw new ArgumentException("Invalid columnName: " + columnName);
                     }
 
-
                     var list = query.ToList();
                     var dataTable = CreateDataTableCustomer();
 
-                    // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
                     foreach (var item in list)
                     {
-                        dataTable.Rows.Add(item.Kundennummer, item.Name, item.Telefonnummer, item.EMail,
+                        dataTable.Rows.Add(item.Kundennummer, item.Name, item.Telefonnummer, item.EMail, item.Webseite,
                             item.Passwort, item.Strasse, item.Hausnummer, item.PLZ, item.Ort);
                     }
 
@@ -459,7 +462,6 @@ namespace Projekt_Auftragsverwaltung
             }
         }
 
-
         public DataTable ReturnArticleGroupsSearch(string searchValue)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -491,7 +493,7 @@ namespace Projekt_Auftragsverwaltung
             }
         }
 
-        public void CreateCustomer(string name, string phoneNumber, string eMail, string password, Address address)
+        public void CreateCustomer(string name, string phoneNumber, string eMail, string password, string website, Address address)
         {
             // Verbindung mit der Datenbank herstellen
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -504,6 +506,7 @@ namespace Projekt_Auftragsverwaltung
                     {
                         Name = name,
                         PhoneNumber = phoneNumber,
+                        Website = website,
                         EMail = eMail,
                         Password = password,
                         AddressId = address.AddressId
@@ -537,7 +540,6 @@ namespace Projekt_Auftragsverwaltung
         }
         public void CreateAddressLocation(string zipCode, string location)
         {
-            //Suchmethode mit filter einbauen. Falls resultat zurückkommt, return, sonst neuer erstellen.
             // Verbindung mit der Datenbank herstellen
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -545,18 +547,27 @@ namespace Projekt_Auftragsverwaltung
                 // SqlCommand-Objekt erstellen und mit Verbindung und SQL-Befehl initialisieren
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
+                    // Prüfen, ob Datensatz bereits vorhanden ist
+                    var existingRecord = dbContext.AddressLocations.FirstOrDefault(al => al.ZipCode == Convert.ToInt32(zipCode));
+
+                    if (existingRecord != null)
+                    {
+                        // Datensatz bereits vorhanden
+                        return;
+                    }
+
+                    // Datensatz neu erstellen
                     var newAddressLocation = new AddressLocation
                     {
                         ZipCode = Convert.ToInt32(zipCode),
-                        Location = location,
-                        
+                        Location = location
                     };
                     dbContext.AddressLocations.Add(newAddressLocation);
                     dbContext.SaveChanges();
-
                 }
             }
         }
+
         public void CreateOrder(DateTime date, int customerId)
         {
             // Verbindung mit der Datenbank herstellen
@@ -633,6 +644,7 @@ namespace Projekt_Auftragsverwaltung
             dataTable.Columns.Add("Name", typeof(string));
             dataTable.Columns.Add("Telefonnummer", typeof(string));
             dataTable.Columns.Add("EMail", typeof(string));
+            dataTable.Columns.Add("Webseite", typeof(string));
             dataTable.Columns.Add("Passwort", typeof(string));
             dataTable.Columns.Add("Strasse", typeof(string));
             dataTable.Columns.Add("Hausnummer", typeof(string));
@@ -736,6 +748,35 @@ namespace Projekt_Auftragsverwaltung
             }
         }
 
+        public void DeleteCustomer(int customerId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                // Kunden-Bestellungen prüfen
+                var hasOrders = db.Orders.Any(o => o.CustomerId == customerId);
+                if (hasOrders)
+                {
+                    MessageBox.Show("Kunde hat laufende Aufträge und kann deshalb nicht gelöscht werden!");
+                }
+                else
+                {
+                    var customer = db.Customers.FirstOrDefault(c => c.CustomerId == customerId);
+                    var address = db.Addresses.FirstOrDefault(a => a.AddressId == customer.AddressId);
+                    if (customer != null)
+                    {
+                        db.Customers.Remove(customer);
+                        db.SaveChanges();
+                    }
+                    if (address != null)
+                    {
+                        db.Addresses.Remove(address);
+                        db.SaveChanges();
+                    }
+                }
+              
+            }
+        }
+
         public void DeleteOrderPosition(int orderPositionId)
         {
             using (var db = new CompanyContext(ConnectionString))
@@ -750,10 +791,10 @@ namespace Projekt_Auftragsverwaltung
                     db.OrderPositions.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
                     db.SaveChanges(); // Änderungen speichern
                 }
-                
+
             }
         }
-          
+
         public void DeleteAddress(int addressId)
         {
             using (var db = new CompanyContext(ConnectionString))
@@ -768,7 +809,7 @@ namespace Projekt_Auftragsverwaltung
 
         }
 
-        public void EditArticleGroup(int articleGroupId, string articleGroupName="")
+        public void EditArticleGroup(int articleGroupId, string articleGroupName = "")
         {
             using (var db = new CompanyContext(ConnectionString))
             {
@@ -781,18 +822,17 @@ namespace Projekt_Auftragsverwaltung
                 }
             }
         }
-
-        public void EditArticle(int articleId, string articleName = "",decimal articlePrice=0,int articleGroupId=0)
+                public void EditArticle(int articleId, string articleName = "", decimal articlePrice = 0, int articleGroupId = 0)
         {
             using (var db = new CompanyContext(ConnectionString))
             {
                 var recordToEdit = db.Articles.FirstOrDefault(r => r.ArticleId == articleId);
                 if (recordToEdit != null)
                 {
-                    
-                    recordToEdit.ArticleName= articleName;
-                    recordToEdit.Price=articlePrice;
-                    recordToEdit.ArticleGroupId=articleGroupId;
+
+                    recordToEdit.ArticleName = articleName;
+                    recordToEdit.Price = articlePrice;
+                    recordToEdit.ArticleGroupId = articleGroupId;
                     db.Articles.Update(recordToEdit);
                     db.SaveChanges(); // Änderungen speichern
                 }
@@ -806,7 +846,7 @@ namespace Projekt_Auftragsverwaltung
                 var recordToReturn = db.ArticleGroups.FirstOrDefault(r => r.ArticleGroupId == articleGroupId);
                 if (recordToReturn != null)
                 {
-                  return recordToReturn;
+                    return recordToReturn;
                 }
                 else
                 {
@@ -830,6 +870,6 @@ namespace Projekt_Auftragsverwaltung
                 }
             }
         }
-       
+
     }
 }

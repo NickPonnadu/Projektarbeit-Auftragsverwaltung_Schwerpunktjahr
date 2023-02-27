@@ -136,7 +136,6 @@ namespace Projekt_Auftragsverwaltung
             CmbArticleSearchProperty.DataSource = new String[] { "ArtikelId", "Artikelname", "Preis", "Artikelgruppe" };
             CmbOrderSearchProperty.DataSource = new String[] { "Auftragsnummer", "Datum", "Name", };
 
-
         }
 
         public void UpdateListsEvent(object sender, EventArgs e)
@@ -289,6 +288,19 @@ namespace Projekt_Auftragsverwaltung
         {
             var dataFound = DataController.ReturnArticleGroupsSearch(TxtArticleGroupSearchName.Text);
             DGWArticleGroups.DataSource = dataFound;
+        }
+
+        private void CmdDeleteCustomer_Click(object sender, EventArgs e)
+        {
+            if (DGWCustomers.SelectedRows.Count > 0)
+            {
+                var rows = DGWCustomers.SelectedRows[0];
+                int customerId = Convert.ToInt32(rows.Cells[0].Value);
+                DataController.DeleteCustomer(customerId);
+                UpdateCustomers();
+            }
+            else
+            { MessageBox.Show("Bitte Kunde auswählen"); }
         }
     }
 }

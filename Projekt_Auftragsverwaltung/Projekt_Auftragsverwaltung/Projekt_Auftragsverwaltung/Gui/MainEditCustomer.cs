@@ -14,7 +14,7 @@ namespace Projekt_Auftragsverwaltung
         public MainEditCustomer(string connectionString)
         {
             InitializeComponent();
-            
+
             ConnectionString = connectionString;
             dataController = new DataController(ConnectionString);
         }
@@ -23,9 +23,9 @@ namespace Projekt_Auftragsverwaltung
         private void CmdEditCustomerSave_Click(object sender, EventArgs e)
         {
             dataController.ReturnCustomers();
-            var address = dataController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
             dataController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
-            dataController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text,address);
+            var address = dataController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
+            dataController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text, TxtCustomerWebsite.Text, address);
             CloseForm();
         }
 
@@ -33,6 +33,6 @@ namespace Projekt_Auftragsverwaltung
         {
             CloseForm();
         }
-              
+
     }
 }

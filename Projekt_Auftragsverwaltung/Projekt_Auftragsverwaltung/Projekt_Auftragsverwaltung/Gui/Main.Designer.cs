@@ -138,7 +138,7 @@
             this.Kunden.Controls.Add(this.LblKunden);
             this.Kunden.Location = new System.Drawing.Point(4, 29);
             this.Kunden.Name = "Kunden";
-            this.Kunden.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Kunden.Padding = new System.Windows.Forms.Padding(3);
             this.Kunden.Size = new System.Drawing.Size(1433, 760);
             this.Kunden.TabIndex = 4;
             this.Kunden.Text = "Kunden";
@@ -161,6 +161,7 @@
             this.CmdDeleteCustomer.TabIndex = 39;
             this.CmdDeleteCustomer.Text = "Löschen";
             this.CmdDeleteCustomer.UseVisualStyleBackColor = true;
+            this.CmdDeleteCustomer.Click += new System.EventHandler(this.CmdDeleteCustomer_Click);
             // 
             // TxtCustomerSearchProperty
             // 
@@ -192,7 +193,7 @@
             this.DGWCustomers.RowTemplate.Height = 29;
             this.DGWCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGWCustomers.ShowEditingIcon = false;
-            this.DGWCustomers.Size = new System.Drawing.Size(1200, 500);
+            this.DGWCustomers.Size = new System.Drawing.Size(1350, 500);
             this.DGWCustomers.TabIndex = 33;
             // 
             // CmdSearchResetCustomer
@@ -248,7 +249,7 @@
             this.Artikelgruppen.Controls.Add(this.LblArticleGroups);
             this.Artikelgruppen.Location = new System.Drawing.Point(4, 29);
             this.Artikelgruppen.Name = "Artikelgruppen";
-            this.Artikelgruppen.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Artikelgruppen.Padding = new System.Windows.Forms.Padding(3);
             this.Artikelgruppen.Size = new System.Drawing.Size(1433, 760);
             this.Artikelgruppen.TabIndex = 0;
             this.Artikelgruppen.Text = "Artikelgruppen";
@@ -358,7 +359,7 @@
             this.Artikel.Controls.Add(this.LblArticle);
             this.Artikel.Location = new System.Drawing.Point(4, 29);
             this.Artikel.Name = "Artikel";
-            this.Artikel.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Artikel.Padding = new System.Windows.Forms.Padding(3);
             this.Artikel.Size = new System.Drawing.Size(1433, 760);
             this.Artikel.TabIndex = 2;
             this.Artikel.Text = "Artikel";
@@ -476,7 +477,7 @@
             this.Aufträge.Controls.Add(this.label5);
             this.Aufträge.Location = new System.Drawing.Point(4, 29);
             this.Aufträge.Name = "Aufträge";
-            this.Aufträge.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Aufträge.Padding = new System.Windows.Forms.Padding(3);
             this.Aufträge.Size = new System.Drawing.Size(1433, 760);
             this.Aufträge.TabIndex = 1;
             this.Aufträge.Text = "Aufträge";
@@ -594,7 +595,7 @@
             this.Positionen.Controls.Add(this.label10);
             this.Positionen.Location = new System.Drawing.Point(4, 29);
             this.Positionen.Name = "Positionen";
-            this.Positionen.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Positionen.Padding = new System.Windows.Forms.Padding(3);
             this.Positionen.Size = new System.Drawing.Size(1433, 760);
             this.Positionen.TabIndex = 3;
             this.Positionen.Text = "Positionen";
@@ -702,7 +703,7 @@
             // 
             this.Jahresvergleich.Location = new System.Drawing.Point(4, 29);
             this.Jahresvergleich.Name = "Jahresvergleich";
-            this.Jahresvergleich.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Jahresvergleich.Padding = new System.Windows.Forms.Padding(3);
             this.Jahresvergleich.Size = new System.Drawing.Size(1433, 760);
             this.Jahresvergleich.TabIndex = 5;
             this.Jahresvergleich.Text = "Jahresvergleich";
@@ -712,7 +713,7 @@
             // 
             this.AbfrageRechnungen.Location = new System.Drawing.Point(4, 29);
             this.AbfrageRechnungen.Name = "AbfrageRechnungen";
-            this.AbfrageRechnungen.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.AbfrageRechnungen.Padding = new System.Windows.Forms.Padding(3);
             this.AbfrageRechnungen.Size = new System.Drawing.Size(1433, 760);
             this.AbfrageRechnungen.TabIndex = 6;
             this.AbfrageRechnungen.Text = "Abfrage Rechnungen";
