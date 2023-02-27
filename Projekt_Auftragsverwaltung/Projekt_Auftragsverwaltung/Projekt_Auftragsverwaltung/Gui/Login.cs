@@ -13,8 +13,8 @@ namespace Projekt_Auftragsverwaltung
         public Login()
         {
             InitializeComponent();
-            //this.Connection = false;
-            this.Connection = true;
+            
+            this.Connection = false;
         }
 
         private void CmdTestConnection_Click(object sender, EventArgs e)
@@ -24,13 +24,14 @@ namespace Projekt_Auftragsverwaltung
             {
                 //Gibt Wert and DataManager weiter welcher dann auf Context zugreift und DB erstellt.
                 string connectionString = DatabaseManager.BuildConnectionString(TxtDBServer.Text, TxtDBName.Text);
-                DatabaseManager.UseDbContext(connectionString);
-
+                Connection = DatabaseManager.UseDbContext(connectionString);
+                Connection= true;
                 if (this.Connection)
                 {
                     LblConnection.Text = "DB ist Verbunden";
                     CmdStartApplication.Enabled = true;
                     DBconnectionString = connectionString;
+                    LblConnection.ForeColor = Color.Green;
                 }
                 else
                 {

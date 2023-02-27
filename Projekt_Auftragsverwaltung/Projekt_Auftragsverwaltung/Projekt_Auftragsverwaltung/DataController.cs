@@ -1,6 +1,7 @@
 ﻿using Azure;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Projekt_Auftragsverwaltung;
 using Projekt_Auftragsverwaltung.Tables;
@@ -74,58 +75,58 @@ namespace Projekt_Auftragsverwaltung
                 connection.Open();
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
-                    var query = from customer in dbContext.Customers
-                                join address in dbContext.Addresses on customer.AddressId equals address.AddressId
-                                join location in dbContext.AddressLocations on address.ZipCode equals location.ZipCode
-                                select new
-                                {
-                                    CustomerId = customer.CustomerId,
-                                    Name = customer.Name,
-                                    PhoneNumber = customer.PhoneNumber,
-                                    EMail = customer.EMail,
-                                    Password = customer.Password,
-                                    Street = address.Street,
-                                    HouseNumber = address.HouseNumber,
-                                    ZipCode = address.ZipCode,
-                                    Location = location.Location
-                                };
+                    var query = from k in dbContext.Customers
+                                 join a in dbContext.Addresses on k.AddressId equals a.AddressId into aGroup
+                                 from a in aGroup.DefaultIfEmpty()
+                                 join l in dbContext.AddressLocations on a.ZipCode equals l.ZipCode into lGroup
+                                 from l in lGroup.DefaultIfEmpty()
+                                 select new
+                                 {
+                                     Kundennummer = k.CustomerId,
+                                     Name = k.Name,
+                                     Telefonnummer = k.PhoneNumber,
+                                     EMail = k.EMail,
+                                     Passwort = k.Password,
+                                     Strasse = a.Street != null ? a.Street : null,
+                                     Hausnummer = a.HouseNumber != null ? a.HouseNumber : null,
+                                     PLZ = a.ZipCode != 0 ? a.ZipCode : 0,
+                                     Ort = l.Location != null ? l.Location : null,
+                                 };
 
-                    if (columnName == "Kundennummer")
+                    switch (columnName)
                     {
-                        query = query.Where(c => c.CustomerId.ToString().Contains(searchValue));
+                        case "Kundennummer":
+                            query = query.Where(c => c.Kundennummer.ToString().Contains(searchValue));
+                            break;
+                        case "Name":
+                            query = query.Where(c => c.Name.Contains(searchValue));
+                            break;
+                        case "Telefonnummer":
+                            query = query.Where(c => c.Telefonnummer.Contains(searchValue));
+                            break;
+                        case "Email":
+                            query = query.Where(c => c.EMail.Contains(searchValue));
+                            break;
+                        case "Passwort":
+                            query = query.Where(c => c.Passwort.Contains(searchValue));
+                            break;
+                        case "Strasse":
+                            query = query.Where(c => c.Strasse.Contains(searchValue));
+                            break;
+                        case "Hausnummer":
+                            query = query.Where(c => c.Hausnummer.ToString().Contains(searchValue));
+                            break;
+                        case "PLZ":
+                            query = query.Where(c => c.PLZ.ToString().Contains(searchValue));
+                            break;
+                        case "Ort":
+                            query = query.Where(c => c.Ort.Contains(searchValue));
+                            break;
+                        default:
+                            // Handle the case where columnName is not recognized
+                            throw new ArgumentException("Invalid columnName: " + columnName);
                     }
-                    else if (columnName == "Name")
-                    {
-                        query = query.Where(c => c.Name.Contains(searchValue));
-                    }
-                    else if (columnName == "Telefonnummer")
-                    {
-                        query = query.Where(c => c.PhoneNumber.Contains(searchValue));
-                    }
-                    else if (columnName == "EMail")
-                    {
-                        query = query.Where(c => c.EMail.Contains(searchValue));
-                    }
-                    else if (columnName == "Passwort")
-                    {
-                        query = query.Where(c => c.Password.Contains(searchValue));
-                    }
-                    else if (columnName == "Strasse")
-                    {
-                        query = query.Where(c => c.Street.Contains(searchValue));
-                    }
-                    else if (columnName == "Hausnummer")
-                    {
-                        query = query.Where(c => c.HouseNumber.ToString().Contains(searchValue));
-                    }
-                    else if (columnName == "PLZ")
-                    {
-                        query = query.Where(c => c.ZipCode.ToString().Contains(searchValue));
-                    }
-                    else if (columnName == "Ort")
-                    {
-                        query = query.Where(c => c.Location.Contains(searchValue));
-                    }
+
 
                     var list = query.ToList();
                     var dataTable = CreateDataTableCustomer();
@@ -133,8 +134,8 @@ namespace Projekt_Auftragsverwaltung
                     // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
                     foreach (var item in list)
                     {
-                        dataTable.Rows.Add(item.CustomerId, item.Name, item.PhoneNumber, item.EMail,
-                            item.Password, item.Street, item.HouseNumber, item.ZipCode, item.Location);
+                        dataTable.Rows.Add(item.Kundennummer, item.Name, item.Telefonnummer, item.EMail,
+                            item.Passwort, item.Strasse, item.Hausnummer, item.PLZ, item.Ort);
                     }
 
                     // Verwende die DataTable als DataSource für das DataGridView
@@ -251,9 +252,6 @@ namespace Projekt_Auftragsverwaltung
             }
         }
 
-
-
-
         public DataTable ReturnOrdersSearch(string column, string value)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -346,7 +344,6 @@ namespace Projekt_Auftragsverwaltung
                 }
             }
         }
-
 
         public DataTable ReturnOrderPositionsSearch(string columnName, string searchValue)
         {
@@ -446,6 +443,8 @@ namespace Projekt_Auftragsverwaltung
                                             Name = a.Name
                                         };
 
+
+
                     var list = articleGroups.ToList();
                     var dataTable = CreateDataTableArticleGroups();
                     // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
@@ -458,7 +457,38 @@ namespace Projekt_Auftragsverwaltung
                     return dataTable;
                 }
             }
+        }
 
+
+        public DataTable ReturnArticleGroupsSearch(string searchValue)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                using (var dbContext = new CompanyContext(ConnectionString))
+                {
+                    var articleGroups = from a in dbContext.ArticleGroups
+                                        select new
+                                        {
+                                            ArtikelgruppeId = a.ArticleGroupId,
+                                            Name = a.Name
+                                        };
+
+
+                    articleGroups = articleGroups.Where(o => o.Name.Contains(searchValue));
+
+                    var list = articleGroups.ToList();
+                    var dataTable = CreateDataTableArticleGroups();
+                    // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
+                    foreach (var item in list)
+                    {
+                        dataTable.Rows.Add(item.ArtikelgruppeId, item.Name);
+                    }
+
+                    // Verwende die DataTable als DataSource für das DataGridView
+                    return dataTable;
+                }
+            }
         }
 
         public void CreateCustomer(string name, string phoneNumber, string eMail, string password, Address address)
@@ -568,9 +598,6 @@ namespace Projekt_Auftragsverwaltung
                 dbContext.SaveChanges();
             }
         }
-
-
-
         public void CreateArticleGroup(string name)
         {
             // Verbindung mit der Datenbank herstellen
@@ -727,8 +754,7 @@ namespace Projekt_Auftragsverwaltung
                 
             }
         }
-             
-
+          
         public void DeleteAddress(int addressId)
         {
             using (var db = new CompanyContext(ConnectionString))
@@ -743,6 +769,68 @@ namespace Projekt_Auftragsverwaltung
 
         }
 
+        public void EditArticleGroup(int articleGroupId, string articleGroupName="")
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToEdit = db.ArticleGroups.FirstOrDefault(r => r.ArticleGroupId == articleGroupId);
+                if (recordToEdit != null)
+                {
+                    recordToEdit.Name = articleGroupName;
+                    db.ArticleGroups.Update(recordToEdit);
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
 
+        public void EditArticle(int articleId, string articleName = "",decimal articlePrice=0,int articleGroupId=0)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToEdit = db.Articles.FirstOrDefault(r => r.ArticleId == articleId);
+                if (recordToEdit != null)
+                {
+                    
+                    recordToEdit.ArticleName= articleName;
+                    recordToEdit.Price=articlePrice;
+                    recordToEdit.ArticleGroupId=articleGroupId;
+                    db.Articles.Update(recordToEdit);
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
+
+        public ArticleGroup GetSingleArticleGroup(int articleGroupId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToReturn = db.ArticleGroups.FirstOrDefault(r => r.ArticleGroupId == articleGroupId);
+                if (recordToReturn != null)
+                {
+                  return recordToReturn;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public Article GetSingleArticle(int articleId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToReturn = db.Articles.FirstOrDefault(r => r.ArticleId == articleId);
+                if (recordToReturn != null)
+                {
+                    return recordToReturn;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+       
     }
 }

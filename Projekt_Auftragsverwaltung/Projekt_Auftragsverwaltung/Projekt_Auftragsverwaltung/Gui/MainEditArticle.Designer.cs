@@ -109,6 +109,11 @@
             // 
             this.NumArticlePrice.DecimalPlaces = 2;
             this.NumArticlePrice.Location = new System.Drawing.Point(234, 158);
+            this.NumArticlePrice.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.NumArticlePrice.Name = "NumArticlePrice";
             this.NumArticlePrice.Size = new System.Drawing.Size(125, 27);
             this.NumArticlePrice.TabIndex = 74;
@@ -119,12 +124,12 @@
             this.DGWChooseArticleGroup.AllowUserToDeleteRows = false;
             this.DGWChooseArticleGroup.BackgroundColor = System.Drawing.SystemColors.Control;
             this.DGWChooseArticleGroup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGWChooseArticleGroup.Location = new System.Drawing.Point(46, 312);
+            this.DGWChooseArticleGroup.Location = new System.Drawing.Point(46, 286);
             this.DGWChooseArticleGroup.Name = "DGWChooseArticleGroup";
             this.DGWChooseArticleGroup.RowHeadersWidth = 51;
             this.DGWChooseArticleGroup.RowTemplate.Height = 29;
             this.DGWChooseArticleGroup.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGWChooseArticleGroup.Size = new System.Drawing.Size(562, 545);
+            this.DGWChooseArticleGroup.Size = new System.Drawing.Size(562, 571);
             this.DGWChooseArticleGroup.TabIndex = 88;
             // 
             // MainEditArticle

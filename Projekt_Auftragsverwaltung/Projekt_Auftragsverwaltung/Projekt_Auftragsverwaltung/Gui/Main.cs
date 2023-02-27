@@ -1,5 +1,6 @@
 using Microsoft.Data.SqlClient;
 using Projekt_Auftragsverwaltung.Gui;
+using Projekt_Auftragsverwaltung.Tables;
 using System;
 using System.Data;
 using System.Reflection.Metadata;
@@ -75,11 +76,20 @@ namespace Projekt_Auftragsverwaltung
             this.EditGuiPosition.ShowDialog();
         }
 
-
         private void CmdEditArticleGroup_Click(Object sender, EventArgs e)
         {
-            this.EditGuiArticleGroup.ShowDialog();
-
+            if (DGWArticleGroups.SelectedRows.Count > 0)
+            {
+                var rows = DGWArticleGroups.SelectedRows[0];
+                int articleGroupId = Convert.ToInt32(rows.Cells[0].Value);
+                var articleGroup = DataController.GetSingleArticleGroup(articleGroupId);
+                this.EditGuiArticleGroup.Dispose();
+                this.EditGuiArticleGroup = new MainEditArticleGroup(ConnectionString, articleGroup);
+                EditGuiArticleGroup.VisibleChanged += UpdateListsEvent;
+                this.EditGuiArticleGroup.ShowDialog();
+                UpdateLists();
+            }
+         
         }
 
         private void CmdEditCustomer_Click(object sender, EventArgs e)
@@ -90,7 +100,19 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdEditArticle_Click(object sender, EventArgs e)
         {
-            this.EditGuiArticle.ShowDialog();
+           
+            if (DGWArticles.SelectedRows.Count > 0)
+            {
+                var rows = DGWArticles.SelectedRows[0];
+                int articleId = Convert.ToInt32(rows.Cells[0].Value);
+                var article = DataController.GetSingleArticle(articleId);
+                this.EditGuiArticle.Dispose();
+                this.EditGuiArticle = new MainEditArticle(ConnectionString, article);
+                EditGuiArticle.VisibleChanged += UpdateListsEvent;
+                this.EditGuiArticle.ShowDialog();
+                UpdateLists();
+            }
+
         }
         private void CmdEditPosition_Click(object sender, EventArgs e)
         {
@@ -261,6 +283,12 @@ namespace Projekt_Auftragsverwaltung
             }
             else
             { MessageBox.Show("Bitte Position auswählen"); }
+        }
+
+        private void CmdSearchArticleGroup_Click(object sender, EventArgs e)
+        {
+            var dataFound = DataController.ReturnArticleGroupsSearch(TxtArticleGroupSearchName.Text);
+            DGWArticleGroups.DataSource = dataFound;
         }
     }
 }
