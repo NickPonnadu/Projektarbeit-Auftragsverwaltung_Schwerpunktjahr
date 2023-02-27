@@ -1,4 +1,4 @@
-﻿
+﻿using Projekt_Auftragsverwaltung;
 using Microsoft.Data.SqlClient;
 using Projekt_Auftragsverwaltung.Gui;
 using Projekt_Auftragsverwaltung.Tables;
@@ -11,14 +11,39 @@ namespace Projekt_Auftragsverwaltung
     {
         DataController dataController;
         public string ConnectionString;
-
-        public MainEditArticle(string connectionString)
+        Article? Article { get; set; }
+        public bool EditMode;
+        public MainEditArticle(string connectionString,Article article=null)
         {
             InitializeComponent();
             ConnectionString = connectionString;
             dataController = new DataController(ConnectionString);
+            Article = article;
 
+            if (Article != null)
+            {
+                SetEditModeOn();
+            }
+            else SetEditModeOff();
         }
+
+        private void SetEditModeOn()
+        {
+            EditMode = true;
+            TxtArticleDescription.Text = Article.ArticleName;
+            NumArticlePrice.Value = Article.Price;
+            CmdCreateArticleSave.Text = "Änderungen speichern";
+        }
+
+        private void SetEditModeOff()
+        {
+            Article = null;
+            EditMode = false;
+            TxtArticleDescription.Text = "";
+            NumArticlePrice.Value = 0;
+            CmdCreateArticleSave.Text = "Artikel anlegen";
+        }
+
 
         private void CmdCreateArticleSave_Click(object sender, EventArgs e)
         {
@@ -27,13 +52,30 @@ namespace Projekt_Auftragsverwaltung
                 var rows = DGWChooseArticleGroup.SelectedRows[0];
                 int articleGroupId = Convert.ToInt32(rows.Cells[0].Value);
 
+                if (EditMode == false)
+                {
+                    dataController.CreateArticle(TxtArticleDescription.Text, NumArticlePrice.Value, articleGroupId);
+                    CloseForm();
+                }
+                if (EditMode == true && Article != null)
+                {
+                    dataController.EditArticle(Article.ArticleId, TxtArticleDescription.Text,NumArticlePrice.Value,articleGroupId);
+                    SetEditModeOff();
+                    CloseForm();
+                }
+                else if (EditMode == true && Article == null)
+                {
+                    MessageBox.Show("Falscher EditMode");
+                }
 
-                //dataController.CreateArticle(DtpOrderDate.Value, customerId);
-                CloseForm();
             }
             else
             { throw new Exception("Bitte Artikelgruppe auswählen"); }
             CloseForm();
+
+           
+
+
         }
 
 
@@ -50,5 +92,7 @@ namespace Projekt_Auftragsverwaltung
                 DGWChooseArticleGroup.DataSource = data;
             }
         }
+
+        
     }
 }

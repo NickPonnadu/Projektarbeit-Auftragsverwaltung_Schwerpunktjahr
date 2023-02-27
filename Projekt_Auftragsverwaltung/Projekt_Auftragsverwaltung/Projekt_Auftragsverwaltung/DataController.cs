@@ -1,6 +1,9 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Azure;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Projekt_Auftragsverwaltung;
 using Projekt_Auftragsverwaltung.Tables;
 using System;
 using System.Collections.Generic;
@@ -10,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -33,8 +37,10 @@ namespace Projekt_Auftragsverwaltung
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
                     var kunden = from k in dbContext.Customers
-                                 join a in dbContext.Addresses on k.AddressId equals a.AddressId
-                                 join l in dbContext.AddressLocations on a.ZipCode equals l.ZipCode
+                                 join a in dbContext.Addresses on k.AddressId equals a.AddressId into aGroup
+                                 from a in aGroup.DefaultIfEmpty()
+                                 join l in dbContext.AddressLocations on a.ZipCode equals l.ZipCode into lGroup
+                                 from l in lGroup.DefaultIfEmpty()
                                  select new
                                  {
                                      Kundennummer = k.CustomerId,
@@ -42,10 +48,10 @@ namespace Projekt_Auftragsverwaltung
                                      Telefonnummer = k.PhoneNumber,
                                      EMail = k.EMail,
                                      Passwort = k.Password,
-                                     Strasse = a.Street,
-                                     Hausnummer = a.HouseNumber,
-                                     PLZ = a.ZipCode,
-                                     Ort = l.Location
+                                     Strasse = a.Street != null ? a.Street : null,
+                                     Hausnummer = a.HouseNumber != null ? a.HouseNumber : null,
+                                     PLZ = a.ZipCode != 0 ? a.ZipCode : 0,
+                                     Ort = l.Location != null ? l.Location : null,
                                  };
                     var list = kunden.ToList();
                     var dataTable = CreateDataTableCustomer();
@@ -60,6 +66,7 @@ namespace Projekt_Auftragsverwaltung
                 }
             }
         }
+
         public DataTable ReturnCustomersSearch(string columnName, string searchValue)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -68,58 +75,58 @@ namespace Projekt_Auftragsverwaltung
                 connection.Open();
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
-                    var query = from customer in dbContext.Customers
-                                join address in dbContext.Addresses on customer.AddressId equals address.AddressId
-                                join location in dbContext.AddressLocations on address.ZipCode equals location.ZipCode
-                                select new
-                                {
-                                    CustomerId = customer.CustomerId,
-                                    Name = customer.Name,
-                                    PhoneNumber = customer.PhoneNumber,
-                                    EMail = customer.EMail,
-                                    Password = customer.Password,
-                                    Street = address.Street,
-                                    HouseNumber = address.HouseNumber,
-                                    ZipCode = address.ZipCode,
-                                    Location = location.Location
-                                };
+                    var query = from k in dbContext.Customers
+                                 join a in dbContext.Addresses on k.AddressId equals a.AddressId into aGroup
+                                 from a in aGroup.DefaultIfEmpty()
+                                 join l in dbContext.AddressLocations on a.ZipCode equals l.ZipCode into lGroup
+                                 from l in lGroup.DefaultIfEmpty()
+                                 select new
+                                 {
+                                     Kundennummer = k.CustomerId,
+                                     Name = k.Name,
+                                     Telefonnummer = k.PhoneNumber,
+                                     EMail = k.EMail,
+                                     Passwort = k.Password,
+                                     Strasse = a.Street != null ? a.Street : null,
+                                     Hausnummer = a.HouseNumber != null ? a.HouseNumber : null,
+                                     PLZ = a.ZipCode != 0 ? a.ZipCode : 0,
+                                     Ort = l.Location != null ? l.Location : null,
+                                 };
 
-                    if (columnName == "Kundennummer")
+                    switch (columnName)
                     {
-                        query = query.Where(c => c.CustomerId.ToString().Contains(searchValue));
+                        case "Kundennummer":
+                            query = query.Where(c => c.Kundennummer.ToString().Contains(searchValue));
+                            break;
+                        case "Name":
+                            query = query.Where(c => c.Name.Contains(searchValue));
+                            break;
+                        case "Telefonnummer":
+                            query = query.Where(c => c.Telefonnummer.Contains(searchValue));
+                            break;
+                        case "Email":
+                            query = query.Where(c => c.EMail.Contains(searchValue));
+                            break;
+                        case "Passwort":
+                            query = query.Where(c => c.Passwort.Contains(searchValue));
+                            break;
+                        case "Strasse":
+                            query = query.Where(c => c.Strasse.Contains(searchValue));
+                            break;
+                        case "Hausnummer":
+                            query = query.Where(c => c.Hausnummer.ToString().Contains(searchValue));
+                            break;
+                        case "PLZ":
+                            query = query.Where(c => c.PLZ.ToString().Contains(searchValue));
+                            break;
+                        case "Ort":
+                            query = query.Where(c => c.Ort.Contains(searchValue));
+                            break;
+                        default:
+                            // Handle the case where columnName is not recognized
+                            throw new ArgumentException("Invalid columnName: " + columnName);
                     }
-                    else if (columnName == "Name")
-                    {
-                        query = query.Where(c => c.Name.Contains(searchValue));
-                    }
-                    else if (columnName == "Telefonnummer")
-                    {
-                        query = query.Where(c => c.PhoneNumber.Contains(searchValue));
-                    }
-                    else if (columnName == "EMail")
-                    {
-                        query = query.Where(c => c.EMail.Contains(searchValue));
-                    }
-                    else if (columnName == "Passwort")
-                    {
-                        query = query.Where(c => c.Password.Contains(searchValue));
-                    }
-                    else if (columnName == "Strasse")
-                    {
-                        query = query.Where(c => c.Street.Contains(searchValue));
-                    }
-                    else if (columnName == "Hausnummer")
-                    {
-                        query = query.Where(c => c.HouseNumber.ToString().Contains(searchValue));
-                    }
-                    else if (columnName == "PLZ")
-                    {
-                        query = query.Where(c => c.ZipCode.ToString().Contains(searchValue));
-                    }
-                    else if (columnName == "Ort")
-                    {
-                        query = query.Where(c => c.Location.Contains(searchValue));
-                    }
+
 
                     var list = query.ToList();
                     var dataTable = CreateDataTableCustomer();
@@ -127,8 +134,8 @@ namespace Projekt_Auftragsverwaltung
                     // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
                     foreach (var item in list)
                     {
-                        dataTable.Rows.Add(item.CustomerId, item.Name, item.PhoneNumber, item.EMail,
-                            item.Password, item.Street, item.HouseNumber, item.ZipCode, item.Location);
+                        dataTable.Rows.Add(item.Kundennummer, item.Name, item.Telefonnummer, item.EMail,
+                            item.Passwort, item.Strasse, item.Hausnummer, item.PLZ, item.Ort);
                     }
 
                     // Verwende die DataTable als DataSource für das DataGridView
@@ -215,26 +222,36 @@ namespace Projekt_Auftragsverwaltung
                 connection.Open();
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
-                    var orders = from o in dbContext.Orders
-                                 join op in dbContext.OrderPositions on o.OrderId equals op.OrderId
-                                 join c in dbContext.Customers on o.CustomerId equals c.CustomerId
-                                 select new
-                                 {
-                                     Auftragsnummer = o.OrderId,
-                                     Datum = o.Date.ToString("dd.MM.yyyy"),
-                                     Name = c.Name,
-                                     Positionen = "XXX",
-                                 };
-                    var list = orders.ToList();
+
+                    var foundOrders = from o in dbContext.Orders
+                                      join c in dbContext.Customers on o.CustomerId equals c.CustomerId
+                                      join op in dbContext.OrderPositions on o.OrderId equals op.OrderId into opGroup
+                                      from op in opGroup.DefaultIfEmpty()
+                                      join ap in dbContext.ArticlePositions on op.OrderPositionId equals ap.OrderPositionId into apGroup
+                                      from ap in apGroup.DefaultIfEmpty()
+                                      join a in dbContext.Articles on ap.ArticleId equals a.ArticleId into aGroup
+                                      from a in aGroup.DefaultIfEmpty()
+                                      group new { o, op, a } by new { o.OrderId, o.Date, c.Name } into g
+                                      select new
+                                      {
+                                          Auftragsnummer = g.Key.OrderId,
+                                          Datum = g.Key.Date.ToString("dd.MM.yyyy") ?? "",
+                                          Name = g.Key.Name ?? "",
+                                          PositionsId = string.Join(",", g.Select(x => x.op.OrderPositionId != null ? x.op.OrderPositionId : 0).ToList()) ?? "",
+                                          Totalbetrag = g.Sum(x => (x.op != null ? x.op.amount : 0) * (x.a != null ? x.a.Price : 0))
+                                      };
+                    var list = foundOrders.ToList();
                     var dataTable = CreateDataTableOrders();
                     foreach (var order in list)
                     {
-                        dataTable.Rows.Add(order.Auftragsnummer, order.Datum, order.Name, order.Positionen);
+                        dataTable.Rows.Add(order.Auftragsnummer, order.Datum, order.Name, order.PositionsId, order.Totalbetrag);
                     }
+
                     return dataTable;
                 }
             }
         }
+
         public DataTable ReturnOrdersSearch(string column, string value)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -242,43 +259,51 @@ namespace Projekt_Auftragsverwaltung
                 connection.Open();
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
-                    var orders = from o in dbContext.Orders
-                                 join op in dbContext.OrderPositions on o.OrderId equals op.OrderId
-                                 join c in dbContext.Customers on o.CustomerId equals c.CustomerId
-                                 select new
-                                 {
-                                     Auftragsnummer = o.OrderId,
-                                     Datum = o.Date.ToString("dd.MM.yyyy"),
-                                     Name = c.Name,
-                                     Positionen = "XXX",
-                                 };
+
+
+                    var foundOrders = from o in dbContext.Orders
+                                      join c in dbContext.Customers on o.CustomerId equals c.CustomerId
+                                      join op in dbContext.OrderPositions on o.OrderId equals op.OrderId into opGroup
+                                      from op in opGroup.DefaultIfEmpty()
+                                      join ap in dbContext.ArticlePositions on op.OrderPositionId equals ap.OrderPositionId into apGroup
+                                      from ap in apGroup.DefaultIfEmpty()
+                                      join a in dbContext.Articles on ap.ArticleId equals a.ArticleId into aGroup
+                                      from a in aGroup.DefaultIfEmpty()
+                                      group new { o, op, a } by new { o.OrderId, o.Date, c.Name } into g
+                                      select new
+                                      {
+                                          Auftragsnummer = g.Key.OrderId,
+                                          Datum = g.Key.Date.ToString("dd.MM.yyyy") ?? "",
+                                          Name = g.Key.Name ?? "",
+                                          PositionsId = string.Join(",", g.Select(x => x.op.OrderPositionId != null ? x.op.OrderPositionId : 0).ToList()) ?? "",
+                                          Totalbetrag = g.Sum(x => (x.op != null ? x.op.amount : 0) * (x.a != null ? x.a.Price : 0))
+                                      };
 
                     switch (column)
                     {
                         case "Auftragsnummer":
-                            orders = orders.Where(o => o.Auftragsnummer == Convert.ToInt32(value));
+                            foundOrders = foundOrders.Where(o => o.Auftragsnummer == Convert.ToInt32(value));
                             break;
                         case "Datum":
-                            orders = orders.Where(o => o.Datum == value);
+                            foundOrders = foundOrders.Where(o => o.Datum == value);
                             break;
                         case "Name":
-                            orders = orders.Where(o => o.Name.Contains(value));
+                            foundOrders = foundOrders.Where(o => o.Name.Contains(value));
                             break;
-                        case "Positionen":
-                            orders = orders.Where(o => o.Positionen.Contains(value));
-                            break;
+
                     }
 
-                    var list = orders.ToList();
+                    var list = foundOrders.ToList();
                     var dataTable = CreateDataTableOrders();
                     foreach (var order in list)
                     {
-                        dataTable.Rows.Add(order.Auftragsnummer, order.Datum, order.Name, order.Positionen);
+                        dataTable.Rows.Add(order.Auftragsnummer, order.Datum, order.Name, order.PositionsId, order.Totalbetrag);
                     }
                     return dataTable;
                 }
             }
         }
+
         public DataTable ReturnOrderPositions()
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -287,67 +312,117 @@ namespace Projekt_Auftragsverwaltung
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
                     var orderPositions = from op in dbContext.OrderPositions
-                                         join o in dbContext.Orders on op.OrderId equals o.OrderId
+                                         join o in dbContext.Orders on op.OrderId equals o.OrderId into orders
+                                         from o in orders.DefaultIfEmpty()
+                                         join ap in dbContext.ArticlePositions on op.OrderPositionId equals ap.OrderPositionId into apGroup
+                                         from ap in apGroup.DefaultIfEmpty()
+                                         join a in dbContext.Articles on ap.ArticleId equals a.ArticleId into aGroup
+                                         from a in aGroup.DefaultIfEmpty()
+                                         join c in dbContext.Customers on o.CustomerId equals c.CustomerId
                                          select new
                                          {
-                                             Positionsnummer = op.OrderPositionId,
-                                             Kundennummer = o.CustomerId,
-                                             Betrag = op.amount,
-                                             Datum = o.Date.ToString("dd.MM.yyyy"),
-                                             Auftragsnummer = o.OrderId,
+                                             Positionsnummer = op.OrderPositionId == 0 ? 0 : op.OrderPositionId,
+                                             Auftragsnummer = o.OrderId == 0 ? 0 : op.OrderId,
+                                             Auftragsdatum = o.Date.ToString("dd.MM.yyyy") ?? "",
+                                             Kunde = c.Name ?? "",
+                                             Artikelbezeichnung = a.ArticleName ?? "",
+                                             Artikelanzahl = op.amount == 0 ? 0 : op.amount,
+                                             Artikelbetrag = a.Price == 0 ? 0 : a.Price,
+                                             Totalbetrag = (op.amount == 0 ? 0 : op.amount) * (a.Price == 0 ? 0 : a.Price),
+
                                          };
                     var list = orderPositions.ToList();
                     var dataTable = CreateDataTableOrderPositions();
                     foreach (var orderPosition in list)
                     {
-                        dataTable.Rows.Add(orderPosition.Positionsnummer, orderPosition.Kundennummer, orderPosition.Betrag, orderPosition.Datum, orderPosition.Auftragsnummer);
+                        dataTable.Rows.Add(orderPosition.Positionsnummer, orderPosition.Auftragsnummer, orderPosition.Auftragsdatum, orderPosition.Kunde, orderPosition.Artikelbezeichnung,
+                                           orderPosition.Artikelanzahl, orderPosition.Artikelbetrag.ToString("F2"),
+                                           orderPosition.Totalbetrag.ToString("F2"));
+
                     }
                     return dataTable;
                 }
             }
         }
-        public DataTable ReturnOrderPositionsSearch(string column, string filterValue)
+
+        public DataTable ReturnOrderPositionsSearch(string columnName, string searchValue)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
-                    var orderPositions = from op in dbContext.OrderPositions
-                                         join o in dbContext.Orders on op.OrderId equals o.OrderId
-                                         select new
-                                         {
-                                             Positionsnummer = op.OrderPositionId,
-                                             Kundennummer = o.CustomerId,
-                                             Betrag = op.amount,
-                                             Datum = o.Date.ToString("dd.MM.yyyy"),
-                                             Auftragsnummer = o.OrderId,
-                                         };
-                    switch (column.ToLower())
+                    var orderPositionsQuery = from op in dbContext.OrderPositions
+                                              join o in dbContext.Orders on op.OrderId equals o.OrderId
+                                              join ap in dbContext.ArticlePositions on op.OrderPositionId equals ap.OrderPositionId into apGroup
+                                              from ap in apGroup.DefaultIfEmpty()
+                                              join a in dbContext.Articles on ap.ArticleId equals a.ArticleId into aGroup
+                                              from a in aGroup.DefaultIfEmpty()
+                                              join c in dbContext.Customers on o.CustomerId equals c.CustomerId
+                                              select new
+                                              {
+                                                  Positionsnummer = op.OrderPositionId,
+                                                  Auftragsnummer = o.OrderId,
+                                                  Auftragsdatum = o.Date.ToString("dd.MM.yyyy"),
+                                                  Kunde = c.Name,
+                                                  Artikelbezeichnung = a != null ? a.ArticleName : "",
+                                                  Artikelanzahl = op.amount,
+                                                  Artikelbetrag = a.Price,
+                                                  Totalbetrag = (op.amount * a.Price),
+
+                                              };
+
+                    switch (columnName)
                     {
-                        case "positionsnummer":
-                            orderPositions = orderPositions.Where(op => op.Positionsnummer.ToString().Contains(filterValue));
+                        case "Positionsnummer":
+                            orderPositionsQuery = orderPositionsQuery.Where(op => op.Positionsnummer.ToString().Contains(searchValue));
                             break;
-                        case "kundennummer":
-                            orderPositions = orderPositions.Where(op => op.Kundennummer.ToString().Contains(filterValue));
+                        case "Auftragsnummer":
+                            orderPositionsQuery = orderPositionsQuery.Where(op => op.Auftragsnummer.ToString().Contains(searchValue));
                             break;
-                        case "betrag":
-                            orderPositions = orderPositions.Where(op => op.Betrag.ToString().Contains(filterValue));
+                        case "Auftragsdatum":
+                            DateTime dateValue;
+                            if (DateTime.TryParse(searchValue, out dateValue))
+                            {
+                                orderPositionsQuery = orderPositionsQuery.Where(op => op.Auftragsdatum.Equals(dateValue.ToString("dd.MM.yyyy")));
+                            }
                             break;
-                        case "datum":
-                            orderPositions = orderPositions.Where(op => op.Datum.Contains(filterValue));
+                        case "Kunde":
+                            orderPositionsQuery = orderPositionsQuery.Where(op => op.Kunde.Contains(searchValue));
                             break;
-                        case "auftragsnummer":
-                            orderPositions = orderPositions.Where(op => op.Auftragsnummer.ToString().Contains(filterValue));
+                        case "Artikelbezeichnung":
+                            orderPositionsQuery = orderPositionsQuery.Where(op => op.Artikelbezeichnung.Contains(searchValue));
                             break;
-                        default:
+                        case "Artikelanzahl":
+                            int intValue;
+                            if (int.TryParse(searchValue, out intValue))
+                            {
+                                orderPositionsQuery = orderPositionsQuery.Where(op => op.Artikelanzahl.Equals(intValue));
+                            }
+                            break;
+                        case "Artikelbetrag":
+                            double doubleValue;
+                            if (double.TryParse(searchValue, out doubleValue))
+                            {
+                                orderPositionsQuery = orderPositionsQuery.Where(op => op.Artikelbetrag.Equals(doubleValue));
+                            }
+                            break;
+                        case "Totalbetrag":
+                            if (double.TryParse(searchValue, out doubleValue))
+                            {
+                                orderPositionsQuery = orderPositionsQuery.Where(op => op.Totalbetrag.Equals(doubleValue));
+                            }
                             break;
                     }
-                    var list = orderPositions.ToList();
+
+                    var list = orderPositionsQuery.ToList();
                     var dataTable = CreateDataTableOrderPositions();
                     foreach (var orderPosition in list)
                     {
-                        dataTable.Rows.Add(orderPosition.Positionsnummer, orderPosition.Kundennummer, orderPosition.Betrag, orderPosition.Datum, orderPosition.Auftragsnummer);
+                        dataTable.Rows.Add(orderPosition.Positionsnummer, orderPosition.Auftragsnummer, orderPosition.Auftragsdatum, orderPosition.Kunde, orderPosition.Artikelbezeichnung,
+                                           orderPosition.Artikelanzahl, orderPosition.Artikelbetrag.ToString("F2"),
+                                           orderPosition.Totalbetrag.ToString("F2"));
+
                     }
                     return dataTable;
                 }
@@ -368,6 +443,8 @@ namespace Projekt_Auftragsverwaltung
                                             Name = a.Name
                                         };
 
+
+
                     var list = articleGroups.ToList();
                     var dataTable = CreateDataTableArticleGroups();
                     // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
@@ -380,7 +457,38 @@ namespace Projekt_Auftragsverwaltung
                     return dataTable;
                 }
             }
+        }
 
+
+        public DataTable ReturnArticleGroupsSearch(string searchValue)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                using (var dbContext = new CompanyContext(ConnectionString))
+                {
+                    var articleGroups = from a in dbContext.ArticleGroups
+                                        select new
+                                        {
+                                            ArtikelgruppeId = a.ArticleGroupId,
+                                            Name = a.Name
+                                        };
+
+
+                    articleGroups = articleGroups.Where(o => o.Name.Contains(searchValue));
+
+                    var list = articleGroups.ToList();
+                    var dataTable = CreateDataTableArticleGroups();
+                    // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
+                    foreach (var item in list)
+                    {
+                        dataTable.Rows.Add(item.ArtikelgruppeId, item.Name);
+                    }
+
+                    // Verwende die DataTable als DataSource für das DataGridView
+                    return dataTable;
+                }
+            }
         }
 
         public void CreateCustomer(string name, string phoneNumber, string eMail, string password, Address address)
@@ -441,7 +549,8 @@ namespace Projekt_Auftragsverwaltung
                     {
                         ZipCode = Convert.ToInt32(zipCode),
                         Location = location,
-                        //AddressId = address.AddressId
+                        AddressId = address.AddressId,
+                        //Address = address
                     };
                     dbContext.AddressLocations.Add(newAddressLocation);
                     dbContext.SaveChanges();
@@ -464,6 +573,31 @@ namespace Projekt_Auftragsverwaltung
             }
         }
 
+        public void CreateOrderPosition(int amount, int orderId, int articleId)
+        {
+            // Verbindung mit der Datenbank herstellen
+            using (var dbContext = new CompanyContext(ConnectionString))
+            {
+                var orderPosition = new OrderPosition
+                {
+                    amount = amount,
+                    OrderId = orderId
+                };
+
+
+                dbContext.OrderPositions.Add(orderPosition);
+                dbContext.SaveChanges();
+
+                var articlePosition = new ArticlePosition
+                {
+                    ArticleId = articleId,
+                    OrderPositionId = orderPosition.OrderPositionId
+                };
+
+                dbContext.ArticlePositions.Add(articlePosition);
+                dbContext.SaveChanges();
+            }
+        }
         public void CreateArticleGroup(string name)
         {
             // Verbindung mit der Datenbank herstellen
@@ -534,6 +668,7 @@ namespace Projekt_Auftragsverwaltung
             dataTable.Columns.Add("Datum", typeof(string));
             dataTable.Columns.Add("Name", typeof(string));
             dataTable.Columns.Add("Positionen", typeof(string));
+            dataTable.Columns.Add("Totalbetrag", typeof(decimal));
             return dataTable;
         }
 
@@ -541,13 +676,161 @@ namespace Projekt_Auftragsverwaltung
         {
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("Positionsnummer", typeof(int));
-            dataTable.Columns.Add("Kundennummer", typeof(int));
-            dataTable.Columns.Add("Betrag", typeof(decimal));
-            dataTable.Columns.Add("Datum", typeof(string));
             dataTable.Columns.Add("Auftragsnummer", typeof(int));
+            dataTable.Columns.Add("Autragsdatum", typeof(string));
+            dataTable.Columns.Add("Kunde", typeof(string));
+            dataTable.Columns.Add("Artikelbezeichnung", typeof(string));
+            dataTable.Columns.Add("Artikelanzahl", typeof(int));
+            dataTable.Columns.Add("Artikelbetrag", typeof(string));
+            dataTable.Columns.Add("Totalbetrag", typeof(string));
             return dataTable;
         }
 
+        public void DeleteArticle(int articleId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToDelete = db.Articles.FirstOrDefault(r => r.ArticleId == articleId);
+                if (recordToDelete != null)
+                {
+                    db.Articles.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
 
+        public void DeleteArticleGroup(int ArticleGroupId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToDelete = db.ArticleGroups.FirstOrDefault(r => r.ArticleGroupId == ArticleGroupId);
+                if (recordToDelete != null)
+                {
+                    db.ArticleGroups.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
+
+        public void DeleteOrder(int orderId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToDelete = db.Orders.FirstOrDefault(r => r.OrderId == orderId);
+                if (recordToDelete != null)
+                {
+                    var orderPositions = db.OrderPositions.Where(op => op.OrderId == orderId).ToList();
+                    if (orderPositions.Count == 0)
+                    {
+                        db.Orders.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
+                        db.SaveChanges(); // Änderungen speichern
+                    }
+                    else
+                    {
+                        MessageBox.Show("Der Auftrag enthält noch Positionen. Lösche zuerst die Positionen, bevor du den Auftrag löschst!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Kein Auftrag ausgewählt");
+                }
+            }
+        }
+
+        public void DeleteOrderPosition(int orderPositionId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+
+                var recordToDelete = db.OrderPositions.FirstOrDefault(r => r.OrderPositionId == orderPositionId);
+
+                int articlePositionId = recordToDelete.OrderPositionId;
+
+                if (recordToDelete != null)
+                {
+                    db.OrderPositions.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
+                    db.SaveChanges(); // Änderungen speichern
+                }
+                
+            }
+        }
+          
+        public void DeleteAddress(int addressId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToDelete = db.Addresses.FirstOrDefault(r => r.AddressId == addressId);
+                if (recordToDelete != null)
+                {
+                    db.Addresses.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+
+        }
+
+        public void EditArticleGroup(int articleGroupId, string articleGroupName="")
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToEdit = db.ArticleGroups.FirstOrDefault(r => r.ArticleGroupId == articleGroupId);
+                if (recordToEdit != null)
+                {
+                    recordToEdit.Name = articleGroupName;
+                    db.ArticleGroups.Update(recordToEdit);
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
+
+        public void EditArticle(int articleId, string articleName = "",decimal articlePrice=0,int articleGroupId=0)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToEdit = db.Articles.FirstOrDefault(r => r.ArticleId == articleId);
+                if (recordToEdit != null)
+                {
+                    
+                    recordToEdit.ArticleName= articleName;
+                    recordToEdit.Price=articlePrice;
+                    recordToEdit.ArticleGroupId=articleGroupId;
+                    db.Articles.Update(recordToEdit);
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
+
+        public ArticleGroup GetSingleArticleGroup(int articleGroupId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToReturn = db.ArticleGroups.FirstOrDefault(r => r.ArticleGroupId == articleGroupId);
+                if (recordToReturn != null)
+                {
+                  return recordToReturn;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public Article GetSingleArticle(int articleId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToReturn = db.Articles.FirstOrDefault(r => r.ArticleId == articleId);
+                if (recordToReturn != null)
+                {
+                    return recordToReturn;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+       
     }
 }

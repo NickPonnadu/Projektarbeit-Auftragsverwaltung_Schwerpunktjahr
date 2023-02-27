@@ -138,11 +138,12 @@
             this.Kunden.Controls.Add(this.LblKunden);
             this.Kunden.Location = new System.Drawing.Point(4, 29);
             this.Kunden.Name = "Kunden";
-            this.Kunden.Padding = new System.Windows.Forms.Padding(3);
+            this.Kunden.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Kunden.Size = new System.Drawing.Size(1433, 760);
             this.Kunden.TabIndex = 4;
             this.Kunden.Text = "Kunden";
             this.Kunden.UseVisualStyleBackColor = true;
+            this.Kunden.ContextMenuStripChanged += new System.EventHandler(this.UpdateListsEvent);
             // 
             // CmbCustomerSearchProperty
             // 
@@ -181,20 +182,24 @@
             // 
             this.DGWCustomers.AllowUserToAddRows = false;
             this.DGWCustomers.AllowUserToDeleteRows = false;
+            this.DGWCustomers.BackgroundColor = System.Drawing.SystemColors.Control;
             this.DGWCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGWCustomers.Location = new System.Drawing.Point(35, 149);
+            this.DGWCustomers.MultiSelect = false;
             this.DGWCustomers.Name = "DGWCustomers";
             this.DGWCustomers.ReadOnly = true;
             this.DGWCustomers.RowHeadersWidth = 51;
             this.DGWCustomers.RowTemplate.Height = 29;
+            this.DGWCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DGWCustomers.ShowEditingIcon = false;
             this.DGWCustomers.Size = new System.Drawing.Size(1200, 500);
             this.DGWCustomers.TabIndex = 33;
             // 
             // CmdSearchResetCustomer
             // 
-            this.CmdSearchResetCustomer.Location = new System.Drawing.Point(523, 6);
+            this.CmdSearchResetCustomer.Location = new System.Drawing.Point(523, 5);
             this.CmdSearchResetCustomer.Name = "CmdSearchResetCustomer";
-            this.CmdSearchResetCustomer.Size = new System.Drawing.Size(230, 58);
+            this.CmdSearchResetCustomer.Size = new System.Drawing.Size(230, 59);
             this.CmdSearchResetCustomer.TabIndex = 31;
             this.CmdSearchResetCustomer.Text = "Suche zurücksetzen / Datensätze aktualisieren";
             this.CmdSearchResetCustomer.UseVisualStyleBackColor = true;
@@ -243,7 +248,7 @@
             this.Artikelgruppen.Controls.Add(this.LblArticleGroups);
             this.Artikelgruppen.Location = new System.Drawing.Point(4, 29);
             this.Artikelgruppen.Name = "Artikelgruppen";
-            this.Artikelgruppen.Padding = new System.Windows.Forms.Padding(3);
+            this.Artikelgruppen.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Artikelgruppen.Size = new System.Drawing.Size(1433, 760);
             this.Artikelgruppen.TabIndex = 0;
             this.Artikelgruppen.Text = "Artikelgruppen";
@@ -258,12 +263,13 @@
             this.CmdDeleteArticleGroup.TabIndex = 45;
             this.CmdDeleteArticleGroup.Text = "Löschen";
             this.CmdDeleteArticleGroup.UseVisualStyleBackColor = true;
+            this.CmdDeleteArticleGroup.Click += new System.EventHandler(this.CmdDeleteArticleGroup_Click);
             // 
             // CmdSearchResetArticleGroup
             // 
-            this.CmdSearchResetArticleGroup.Location = new System.Drawing.Point(523, 6);
+            this.CmdSearchResetArticleGroup.Location = new System.Drawing.Point(523, 5);
             this.CmdSearchResetArticleGroup.Name = "CmdSearchResetArticleGroup";
-            this.CmdSearchResetArticleGroup.Size = new System.Drawing.Size(230, 58);
+            this.CmdSearchResetArticleGroup.Size = new System.Drawing.Size(230, 59);
             this.CmdSearchResetArticleGroup.TabIndex = 43;
             this.CmdSearchResetArticleGroup.Text = "Suche zurücksetzen / Datensätze aktualisieren";
             this.CmdSearchResetArticleGroup.UseVisualStyleBackColor = true;
@@ -277,6 +283,7 @@
             this.CmdSearchArticleGroup.TabIndex = 42;
             this.CmdSearchArticleGroup.Text = "Suchen";
             this.CmdSearchArticleGroup.UseVisualStyleBackColor = true;
+            this.CmdSearchArticleGroup.Click += new System.EventHandler(this.CmdSearchArticleGroup_Click);
             // 
             // CmdEditArticleGroup
             // 
@@ -300,11 +307,14 @@
             // 
             // DGWArticleGroups
             // 
+            this.DGWArticleGroups.AllowUserToAddRows = false;
+            this.DGWArticleGroups.AllowUserToDeleteRows = false;
             this.DGWArticleGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGWArticleGroups.Location = new System.Drawing.Point(35, 149);
             this.DGWArticleGroups.Name = "DGWArticleGroups";
             this.DGWArticleGroups.RowHeadersWidth = 51;
             this.DGWArticleGroups.RowTemplate.Height = 29;
+            this.DGWArticleGroups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGWArticleGroups.Size = new System.Drawing.Size(1200, 500);
             this.DGWArticleGroups.TabIndex = 6;
             // 
@@ -348,7 +358,7 @@
             this.Artikel.Controls.Add(this.LblArticle);
             this.Artikel.Location = new System.Drawing.Point(4, 29);
             this.Artikel.Name = "Artikel";
-            this.Artikel.Padding = new System.Windows.Forms.Padding(3);
+            this.Artikel.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Artikel.Size = new System.Drawing.Size(1433, 760);
             this.Artikel.TabIndex = 2;
             this.Artikel.Text = "Artikel";
@@ -366,11 +376,13 @@
             // 
             this.DGWArticles.AllowUserToAddRows = false;
             this.DGWArticles.AllowUserToDeleteRows = false;
+            this.DGWArticles.BackgroundColor = System.Drawing.SystemColors.Control;
             this.DGWArticles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGWArticles.Location = new System.Drawing.Point(35, 149);
             this.DGWArticles.Name = "DGWArticles";
             this.DGWArticles.RowHeadersWidth = 51;
             this.DGWArticles.RowTemplate.Height = 29;
+            this.DGWArticles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGWArticles.Size = new System.Drawing.Size(1200, 500);
             this.DGWArticles.TabIndex = 63;
             // 
@@ -389,10 +401,11 @@
             this.CmdDeleteArticle.TabIndex = 53;
             this.CmdDeleteArticle.Text = "Löschen";
             this.CmdDeleteArticle.UseVisualStyleBackColor = true;
+            this.CmdDeleteArticle.Click += new System.EventHandler(this.CmdDeleteArticle_Click);
             // 
             // CmdSearchResetArticle
             // 
-            this.CmdSearchResetArticle.Location = new System.Drawing.Point(524, 15);
+            this.CmdSearchResetArticle.Location = new System.Drawing.Point(523, 15);
             this.CmdSearchResetArticle.Name = "CmdSearchResetArticle";
             this.CmdSearchResetArticle.Size = new System.Drawing.Size(230, 49);
             this.CmdSearchResetArticle.TabIndex = 51;
@@ -463,7 +476,7 @@
             this.Aufträge.Controls.Add(this.label5);
             this.Aufträge.Location = new System.Drawing.Point(4, 29);
             this.Aufträge.Name = "Aufträge";
-            this.Aufträge.Padding = new System.Windows.Forms.Padding(3);
+            this.Aufträge.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Aufträge.Size = new System.Drawing.Size(1433, 760);
             this.Aufträge.TabIndex = 1;
             this.Aufträge.Text = "Aufträge";
@@ -481,11 +494,13 @@
             // 
             this.DGWOrders.AllowUserToAddRows = false;
             this.DGWOrders.AllowUserToDeleteRows = false;
+            this.DGWOrders.BackgroundColor = System.Drawing.SystemColors.Control;
             this.DGWOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGWOrders.Location = new System.Drawing.Point(35, 149);
             this.DGWOrders.Name = "DGWOrders";
             this.DGWOrders.RowHeadersWidth = 51;
             this.DGWOrders.RowTemplate.Height = 29;
+            this.DGWOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGWOrders.Size = new System.Drawing.Size(1200, 500);
             this.DGWOrders.TabIndex = 72;
             // 
@@ -504,12 +519,13 @@
             this.CmdDeleteOrder.TabIndex = 70;
             this.CmdDeleteOrder.Text = "Löschen";
             this.CmdDeleteOrder.UseVisualStyleBackColor = true;
+            this.CmdDeleteOrder.Click += new System.EventHandler(this.CmdDeleteOrder_Click);
             // 
             // CmdSearchResetOrder
             // 
-            this.CmdSearchResetOrder.Location = new System.Drawing.Point(523, 6);
+            this.CmdSearchResetOrder.Location = new System.Drawing.Point(523, 5);
             this.CmdSearchResetOrder.Name = "CmdSearchResetOrder";
-            this.CmdSearchResetOrder.Size = new System.Drawing.Size(230, 58);
+            this.CmdSearchResetOrder.Size = new System.Drawing.Size(230, 59);
             this.CmdSearchResetOrder.TabIndex = 68;
             this.CmdSearchResetOrder.Text = "Suche zurücksetzen / Datensätze aktualisieren";
             this.CmdSearchResetOrder.UseVisualStyleBackColor = true;
@@ -560,9 +576,9 @@
             this.label5.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label5.Location = new System.Drawing.Point(35, 29);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(111, 35);
+            this.label5.Size = new System.Drawing.Size(283, 35);
             this.label5.TabIndex = 3;
-            this.label5.Text = "Aufträge";
+            this.label5.Text = "Aufträge und Positionen";
             // 
             // Positionen
             // 
@@ -578,7 +594,7 @@
             this.Positionen.Controls.Add(this.label10);
             this.Positionen.Location = new System.Drawing.Point(4, 29);
             this.Positionen.Name = "Positionen";
-            this.Positionen.Padding = new System.Windows.Forms.Padding(3);
+            this.Positionen.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Positionen.Size = new System.Drawing.Size(1433, 760);
             this.Positionen.TabIndex = 3;
             this.Positionen.Text = "Positionen";
@@ -596,11 +612,13 @@
             // 
             this.DGWPositions.AllowUserToAddRows = false;
             this.DGWPositions.AllowUserToDeleteRows = false;
+            this.DGWPositions.BackgroundColor = System.Drawing.SystemColors.Control;
             this.DGWPositions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGWPositions.Location = new System.Drawing.Point(35, 149);
             this.DGWPositions.Name = "DGWPositions";
             this.DGWPositions.RowHeadersWidth = 51;
             this.DGWPositions.RowTemplate.Height = 29;
+            this.DGWPositions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGWPositions.Size = new System.Drawing.Size(1200, 500);
             this.DGWPositions.TabIndex = 81;
             // 
@@ -619,12 +637,13 @@
             this.CmdDeletePosition.TabIndex = 79;
             this.CmdDeletePosition.Text = "Löschen";
             this.CmdDeletePosition.UseVisualStyleBackColor = true;
+            this.CmdDeletePosition.Click += new System.EventHandler(this.CmdDeletePosition_Click);
             // 
             // CmdSearchResetPosition
             // 
-            this.CmdSearchResetPosition.Location = new System.Drawing.Point(523, 6);
+            this.CmdSearchResetPosition.Location = new System.Drawing.Point(523, 5);
             this.CmdSearchResetPosition.Name = "CmdSearchResetPosition";
-            this.CmdSearchResetPosition.Size = new System.Drawing.Size(230, 58);
+            this.CmdSearchResetPosition.Size = new System.Drawing.Size(230, 59);
             this.CmdSearchResetPosition.TabIndex = 77;
             this.CmdSearchResetPosition.Text = "Suche zurücksetzen / Datensätze aktualisieren";
             this.CmdSearchResetPosition.UseVisualStyleBackColor = true;
@@ -683,7 +702,7 @@
             // 
             this.Jahresvergleich.Location = new System.Drawing.Point(4, 29);
             this.Jahresvergleich.Name = "Jahresvergleich";
-            this.Jahresvergleich.Padding = new System.Windows.Forms.Padding(3);
+            this.Jahresvergleich.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Jahresvergleich.Size = new System.Drawing.Size(1433, 760);
             this.Jahresvergleich.TabIndex = 5;
             this.Jahresvergleich.Text = "Jahresvergleich";
@@ -693,7 +712,7 @@
             // 
             this.AbfrageRechnungen.Location = new System.Drawing.Point(4, 29);
             this.AbfrageRechnungen.Name = "AbfrageRechnungen";
-            this.AbfrageRechnungen.Padding = new System.Windows.Forms.Padding(3);
+            this.AbfrageRechnungen.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.AbfrageRechnungen.Size = new System.Drawing.Size(1433, 760);
             this.AbfrageRechnungen.TabIndex = 6;
             this.AbfrageRechnungen.Text = "Abfrage Rechnungen";
@@ -708,6 +727,7 @@
             this.Name = "Main";
             this.Text = "Auftragsverwaltung";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
+            this.ContextMenuStripChanged += new System.EventHandler(this.UpdateListsEvent);
             this.TabControl.ResumeLayout(false);
             this.Kunden.ResumeLayout(false);
             this.Kunden.PerformLayout();
