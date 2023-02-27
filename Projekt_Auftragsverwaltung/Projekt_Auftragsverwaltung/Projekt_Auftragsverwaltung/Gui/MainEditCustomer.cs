@@ -24,7 +24,7 @@ namespace Projekt_Auftragsverwaltung
         {
             dataController.ReturnCustomers();
             var address = dataController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
-            dataController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text,address);
+            dataController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
             dataController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text,address);
             CloseForm();
         }
