@@ -535,7 +535,7 @@ namespace Projekt_Auftragsverwaltung
                 }
             }
         }
-        public void CreateAddressLocation(string zipCode, string location, Address address)
+        public void CreateAddressLocation(string zipCode, string location)
         {
             //Suchmethode mit filter einbauen. Falls resultat zurückkommt, return, sonst neuer erstellen.
             // Verbindung mit der Datenbank herstellen
@@ -549,8 +549,7 @@ namespace Projekt_Auftragsverwaltung
                     {
                         ZipCode = Convert.ToInt32(zipCode),
                         Location = location,
-                        AddressId = address.AddressId,
-                        //Address = address
+                        
                     };
                     dbContext.AddressLocations.Add(newAddressLocation);
                     dbContext.SaveChanges();
