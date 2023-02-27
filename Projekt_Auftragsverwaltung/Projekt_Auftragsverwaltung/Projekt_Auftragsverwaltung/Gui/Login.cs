@@ -24,7 +24,7 @@ namespace Projekt_Auftragsverwaltung
             {
                 //Gibt Wert and DataManager weiter welcher dann auf Context zugreift und DB erstellt.
                 string connectionString = DatabaseManager.BuildConnectionString(TxtDBServer.Text, TxtDBName.Text);
-                //Connection = DatabaseManager.UseDbContext(connectionString);
+               DatabaseManager.UseDbContext(connectionString);
                 Connection= true;
                 if (this.Connection)
                 {
