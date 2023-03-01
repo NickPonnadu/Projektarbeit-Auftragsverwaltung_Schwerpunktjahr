@@ -537,71 +537,14 @@ namespace Projekt_Auftragsverwaltung
             return dataTable;
         }
 
-        // ChatGPT 1.
-        public DataTable AnnualComparison()
+        public DataTable WindowFunctionTest()
         {
             using (var context = new CompanyContext(ConnectionString))
             {
-                var startDate = DateTime.Now.Date.AddYears(-2);
-                var endDate = DateTime.Now.Date;
-                var query = from order in context.Orders
-                            where order.Date >= startDate && order.Date < endDate
-                            group order by new
-                            {
-                                Quarter = DbFunctions.DiffQuarter(startDate, order.Date) + 1
-                            } into g
-                            orderby g.Key.Quarter
-                            select new
-                            {
-                                Quarter = g.Key.Quarter,
-                                NumOrders = g.Count(),
-                                AvgArticlesPerOrder = g.Average(o => context.OrderItems.Count(i => i.OrderId == o.OrderId)),
-                                RevenuePerCustomer = g.Sum(o => o.TotalRevenue) / g.Select(o => o.CustomerId).Distinct().Count(),
-                                TotalRevenue = g.Sum(o => o.TotalRevenue),
-                                TotalArticles = g.Sum(o => context.OrderItems.Where(i => i.OrderId == o.OrderId).Sum(i => i.Quantity))
-                            };
-
-                foreach (var result in query)
-                {
-                    Console.WriteLine($"Quarter: {result.Quarter}, Num Orders: {result.NumOrders}, Total Articles: {result.TotalArticles}, Avg Articles Per Order: {result.AvgArticlesPerOrder}, Total Revenue: {result.TotalRevenue}, Revenue Per Customer: {result.RevenuePerCustomer}");
-                }
+                var windowFuncTest = "select * from Article"; 
             }
+            return null;
         }
-
-
-        public DataTable MolLuegeTwo()
-        {
-            using (var context = new CompanyContext(ConnectionString))
-            {
-                var results = from order in context.Orders
-                              join orderPosition in context.OrderPositions on order.OrderId equals orderPosition.OrderId
-                              where order.Date >= DateTime.Now.AddYears(-3)
-                              group orderPosition by new
-                              {
-                                  Year = order.Date.Year,
-                                  Quarter = (order.Date.Month - 1) / 3 + 1
-                              } into quarterlyData
-                              select new
-                              {
-                                  Year = quarterlyData.Key.Year,
-                                  Quarter = quarterlyData.Key.Quarter,
-                                  NumOrders = quarterlyData.Select(op => op.order_id).Distinct().Count(),
-                                  NumItems = quarterlyData.Sum(op => op.quantity),
-                                  TotalRevenue = quarterlyData.Sum(op => op.quantity * op.price),
-                                  AvgItemsPerOrder = quarterlyData.Average(op => (double)op.quantity)
-                                                    over(partition by quarterlyData.Select(op => op.order_id).Distinct().Count());
-
-                // Konvertieren Sie die Ergebnisse in eine Liste, damit sie in der DataGridView angezeigt werden können
-                var resultList = results.ToList();
-
-                // Legen Sie die DataSource-Eigenschaft der DataGridView auf die Ergebnisliste fest
-                DATAGRIDNAME.DataSource = resultList;
-            }
-        }
-
 
     }
-
-
-}
 }

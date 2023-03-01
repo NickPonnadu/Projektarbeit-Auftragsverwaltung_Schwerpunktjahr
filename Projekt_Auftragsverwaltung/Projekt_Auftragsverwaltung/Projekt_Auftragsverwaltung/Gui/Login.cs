@@ -19,12 +19,19 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdTestConnection_Click(object sender, EventArgs e)
         {
-            // Prüft Textfelder auf Wert, nur Inhalt
             if (!string.IsNullOrEmpty(TxtDBServer.Text) && !string.IsNullOrEmpty(TxtDBName.Text))
-            {
-                //Gibt Wert and DataManager weiter welcher dann auf Context zugreift und DB erstellt.
+            {               
                 string connectionString = DatabaseManager.BuildConnectionString(TxtDBServer.Text, TxtDBName.Text);
-                DatabaseManager.UseDbContext(connectionString);
+                LblConnection.Text = "testet Verbindung..";
+                if (DatabaseManager.TestConnection(connectionString))
+                {
+                    DatabaseManager.UseDbContext(connectionString);
+                }
+                else
+                {
+                    this.Connection = false;
+                }
+
 
                 if (this.Connection)
                 {
@@ -60,7 +67,5 @@ namespace Projekt_Auftragsverwaltung
         {
             Application.Exit();
         }
-
-
     }
 }

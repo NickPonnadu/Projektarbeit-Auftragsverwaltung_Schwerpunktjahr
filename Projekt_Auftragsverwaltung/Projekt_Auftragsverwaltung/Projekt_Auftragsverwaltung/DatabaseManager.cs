@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
 
 namespace Projekt_Auftragsverwaltung
@@ -10,6 +11,20 @@ namespace Projekt_Auftragsverwaltung
             return $"Server={serverName}; Database={databaseName}; Trusted_Connection=True; Encrypt=false";
         }
 
+        public static bool TestConnection(string connectionString)
+        {
+            var testContext = new SqlConnection(connectionString);
+            try
+            {
+                testContext.Open();
+                return true;
+            }
+            catch(Exception) 
+            {
+                return false; 
+            }
+            
+        }
         public static void UseDbContext(string connectionString)
         {
             using (var context = new CompanyContext(connectionString))
