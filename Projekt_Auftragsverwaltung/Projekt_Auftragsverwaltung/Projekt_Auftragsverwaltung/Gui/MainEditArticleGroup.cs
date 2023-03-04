@@ -66,6 +66,7 @@ namespace Projekt_Auftragsverwaltung
         {
 
             CloseForm();
+            SetEditModeOff();
         }
 
     }

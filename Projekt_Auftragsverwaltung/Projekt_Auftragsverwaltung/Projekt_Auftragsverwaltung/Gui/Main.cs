@@ -94,8 +94,18 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdEditCustomer_Click(object sender, EventArgs e)
         {
-            this.EditGuiCustomer.ShowDialog();
-
+            if (DGWCustomers.SelectedRows.Count > 0)
+            {
+                var rows = DGWCustomers.SelectedRows[0];
+                int customerId = Convert.ToInt32(rows.Cells[0].Value);
+                var customer = DataController.GetSingleCustomer(customerId);
+                this.EditGuiCustomer.Dispose();
+                this.EditGuiCustomer = new MainEditCustomer(ConnectionString, customer);
+                EditGuiCustomer.VisibleChanged += UpdateListsEvent;
+                this.EditGuiCustomer.ShowDialog();
+                UpdateLists();
+            }
+            
         }
 
         private void CmdEditArticle_Click(object sender, EventArgs e)

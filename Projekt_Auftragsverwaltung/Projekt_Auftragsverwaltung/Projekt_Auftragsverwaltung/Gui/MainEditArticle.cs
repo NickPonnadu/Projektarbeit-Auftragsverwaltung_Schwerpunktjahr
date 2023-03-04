@@ -73,15 +73,13 @@ namespace Projekt_Auftragsverwaltung
             { throw new Exception("Bitte Artikelgruppe auswählen"); }
             CloseForm();
 
-           
-
-
         }
 
 
         private void CmdCreateArticleancel_Click(object sender, EventArgs e)
         {
             CloseForm();
+            SetEditModeOff();
         }
 
         private void UpdateArticleGroupList(object sender, EventArgs e)

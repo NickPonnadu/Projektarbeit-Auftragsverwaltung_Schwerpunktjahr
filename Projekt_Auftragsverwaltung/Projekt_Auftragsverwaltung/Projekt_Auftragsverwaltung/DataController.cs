@@ -773,7 +773,7 @@ namespace Projekt_Auftragsverwaltung
                         db.SaveChanges();
                     }
                 }
-              
+
             }
         }
 
@@ -822,7 +822,7 @@ namespace Projekt_Auftragsverwaltung
                 }
             }
         }
-                public void EditArticle(int articleId, string articleName = "", decimal articlePrice = 0, int articleGroupId = 0)
+        public void EditArticle(int articleId, string articleName = "", decimal articlePrice = 0, int articleGroupId = 0)
         {
             using (var db = new CompanyContext(ConnectionString))
             {
@@ -838,6 +838,58 @@ namespace Projekt_Auftragsverwaltung
                 }
             }
         }
+
+        public void EditCustomer(int customerId, string name = "", string phoneNumber = "", string eMail = "", string website = "", string Password = "")
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToEdit = db.Customers.FirstOrDefault(r => r.CustomerId == customerId);
+                if (recordToEdit != null)
+                {
+
+                    recordToEdit.Name = name;
+                    recordToEdit.PhoneNumber = phoneNumber;
+                    recordToEdit.EMail = eMail;
+                    recordToEdit.Website = website;
+                    recordToEdit.Password = Password;
+                    db.Customers.Update(recordToEdit);
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
+
+        public void EditAddress(int addressId, string street = "", string houseNumber = "", int postCode = 0000)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToEdit = db.Addresses.FirstOrDefault(r => r.AddressId == addressId);
+                if (recordToEdit != null)
+                {
+
+                    recordToEdit.Street = street;
+                    recordToEdit.HouseNumber = houseNumber; 
+                    recordToEdit.ZipCode = postCode == 0000 ? 0000 : postCode;
+                    db.Addresses.Update(recordToEdit);
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
+        public void EditAddressLocation(int zipCode, string location = "")
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToEdit = db.AddressLocations.FirstOrDefault(r => r.ZipCode == zipCode);
+                if (recordToEdit != null)
+                {
+
+                    recordToEdit.Location = location;
+                    db.AddressLocations.Update(recordToEdit);
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
+
+
 
         public ArticleGroup GetSingleArticleGroup(int articleGroupId)
         {
@@ -870,6 +922,107 @@ namespace Projekt_Auftragsverwaltung
                 }
             }
         }
+
+        public Customer GetSingleCustomer(int customerId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToReturn = db.Customers.FirstOrDefault(r => r.CustomerId == customerId);
+                if (recordToReturn != null)
+                {
+                    return recordToReturn;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+
+        public Address GetSingleAddress(int adressId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToReturn = db.Addresses.FirstOrDefault(r => r.AddressId == adressId);
+                if (recordToReturn != null)
+                {
+                    return recordToReturn;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public AddressLocation GetSingleAddressLocation(int zipcode)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToReturn = db.AddressLocations.FirstOrDefault(r => r.ZipCode == zipcode);
+                if (recordToReturn != null)
+                {
+                    return recordToReturn;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public Order GetSingleOrder(int orderId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToReturn = db.Orders.FirstOrDefault(r => r.OrderId == orderId);
+                if (recordToReturn != null)
+                {
+                    return recordToReturn;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public OrderPosition GetSingleOrderPosition(int orderPositionId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToReturn = db.OrderPositions.FirstOrDefault(r => r.OrderPositionId == orderPositionId);
+                if (recordToReturn != null)
+                {
+                    return recordToReturn;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public ArticlePosition GetSingleArticlePosition(int articlePositionId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToReturn = db.ArticlePositions.FirstOrDefault(r => r.ArticlePositionId == articlePositionId);
+                if (recordToReturn != null)
+                {
+                    return recordToReturn;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+
+
+
 
     }
 }
