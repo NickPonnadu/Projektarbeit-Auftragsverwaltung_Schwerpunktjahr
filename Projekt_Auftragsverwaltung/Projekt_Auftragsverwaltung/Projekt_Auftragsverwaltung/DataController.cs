@@ -854,6 +854,37 @@ namespace Projekt_Auftragsverwaltung
             }
         }
 
+
+        public void EditOrderPosition(int orderPositionId, int amount, int orderId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToEdit = db.OrderPositions.FirstOrDefault(r => r.OrderPositionId == orderPositionId);
+                if (recordToEdit != null)
+                {
+                    recordToEdit.amount = amount;
+                    recordToEdit.OrderId = orderId;
+                    db.OrderPositions.Update(recordToEdit);
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
+
+        public void EditArticlePosition(int orderPositionId, int articleId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToEdit = db.ArticlePositions.FirstOrDefault(r => r.OrderPositionId == orderPositionId);
+                if (recordToEdit != null)
+                {
+                    recordToEdit.OrderPositionId = orderPositionId;
+                    recordToEdit.ArticleId = articleId;
+                    db.ArticlePositions.Update(recordToEdit);
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
+
         public void EditCustomer(int customerId, string name = "", string phoneNumber = "", string eMail = "", string website = "", string Password = "")
         {
             using (var db = new CompanyContext(ConnectionString))
@@ -1018,11 +1049,11 @@ namespace Projekt_Auftragsverwaltung
             }
         }
 
-        public ArticlePosition GetSingleArticlePosition(int articlePositionId)
+        public ArticlePosition GetSingleArticlePosition(int orderPositionId, int articleId)
         {
             using (var db = new CompanyContext(ConnectionString))
             {
-                var recordToReturn = db.ArticlePositions.FirstOrDefault(r => r.ArticlePositionId == articlePositionId);
+                var recordToReturn = db.ArticlePositions.FirstOrDefault(r => r.OrderPositionId == orderPositionId && r.ArticleId == articleId);
                 if (recordToReturn != null)
                 {
                     return recordToReturn;
@@ -1033,6 +1064,7 @@ namespace Projekt_Auftragsverwaltung
                 }
             }
         }
+
 
 
 

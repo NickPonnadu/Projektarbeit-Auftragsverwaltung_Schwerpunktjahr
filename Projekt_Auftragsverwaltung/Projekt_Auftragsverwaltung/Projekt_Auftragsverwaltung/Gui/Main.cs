@@ -29,16 +29,13 @@ namespace Projekt_Auftragsverwaltung
             this.EditGuiArticle = new MainEditArticle(ConnectionString);
             this.EditGuiPosition = new MainEditPosition(ConnectionString);
             this.EditGuiOrder = new MainEditOrder(ConnectionString);
-
-            DataController = new DataController(ConnectionString);
+                        DataController = new DataController(ConnectionString);
             EditGuiArticleGroup.VisibleChanged += UpdateListsEvent;
             EditGuiCustomer.VisibleChanged += UpdateListsEvent;
             EditGuiOrder.VisibleChanged += UpdateListsEvent;
             EditGuiArticle.VisibleChanged += UpdateListsEvent;
             EditGuiPosition.VisibleChanged += UpdateListsEvent;
-
-
-            UpdateLists();
+                        UpdateLists();
             SetDataBindings();
         }
 
@@ -115,7 +112,17 @@ namespace Projekt_Auftragsverwaltung
         }
         private void CmdEditPosition_Click(object sender, EventArgs e)
         {
-            this.EditGuiPosition.ShowDialog();
+            if (DGWPositions.SelectedRows.Count > 0)
+            {
+                var rows = DGWPositions.SelectedRows[0];
+                int orderPositionId = Convert.ToInt32(rows.Cells[0].Value);
+                var orderPosition = DataController.GetSingleOrderPosition(orderPositionId);
+                this.EditGuiPosition.Dispose();
+                this.EditGuiPosition = new MainEditPosition(ConnectionString, orderPosition);
+                EditGuiPosition.VisibleChanged += UpdateListsEvent;
+                this.EditGuiPosition.ShowDialog();
+                UpdateLists();
+            }
         }
 
         private void CmdEditOrder_Click(object sender, EventArgs e)
