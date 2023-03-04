@@ -41,7 +41,7 @@ namespace Projekt_Auftragsverwaltung
             OrderPosition = null;
             EditMode = false;
             NumOrderPositionQuantity.Value = 0;
-            CmdCreatePositionCancel.Text = "Position anlegen";
+            CmdCreatePositionSave.Text = "Position anlegen";
         }
 
 

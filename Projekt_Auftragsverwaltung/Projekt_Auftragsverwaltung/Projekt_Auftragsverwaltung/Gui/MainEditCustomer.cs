@@ -75,7 +75,7 @@ namespace Projekt_Auftragsverwaltung
             if (EditMode == true && Customer != null)
             {
                 dataController.EditCustomer(Customer.CustomerId, TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerWebsite.Text, TxtCustomerPassword.Text);
-                dataController.EditAddress(Customer.AddressId, TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, Convert.ToInt32(TxtCustomerPostcode.Text));
+                
                 var addressLocation = dataController.GetSingleAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text));
                 if (addressLocation != null)
                 {
@@ -85,7 +85,8 @@ namespace Projekt_Auftragsverwaltung
                 {
                     dataController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
                 }
-                
+                dataController.EditAddress(Customer.AddressId, TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, Convert.ToInt32(TxtCustomerPostcode.Text));
+
                 SetEditModeOff();
                 CloseForm();
             }

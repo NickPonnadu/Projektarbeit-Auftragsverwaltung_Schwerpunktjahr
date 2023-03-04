@@ -86,8 +86,7 @@ namespace Projekt_Auftragsverwaltung
                     MessageBox.Show("Falscher EditMode");
                 }
             }
-            else
-            { throw new Exception("Bitte Kunde auswählen"); }
+            
             SetEditModeOff();
             CloseForm();
 

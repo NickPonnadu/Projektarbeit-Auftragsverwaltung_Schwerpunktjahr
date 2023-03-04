@@ -154,14 +154,16 @@ namespace Projekt_Auftragsverwaltung
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
                     var articles = from a in dbContext.Articles
-                                   join ag in dbContext.ArticleGroups on a.ArticleGroupId equals ag.ArticleGroupId
+                                   join ag in dbContext.ArticleGroups on a.ArticleGroupId equals ag.ArticleGroupId into agGroup
+                                   from ag in agGroup.DefaultIfEmpty()
                                    select new
                                    {
                                        ArtikelId = a.ArticleId,
                                        Artikelname = a.ArticleName,
                                        Preis = a.Price,
-                                       Artikelgruppe = ag.Name,
+                                       Artikelgruppe = ag != null ? ag.Name : "keine Artikelgruppe",
                                    };
+
                     var list = articles.ToList();
                     var dataTable = CreateDataTableArticles();
                     // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
@@ -247,7 +249,8 @@ namespace Projekt_Auftragsverwaltung
                     var dataTable = CreateDataTableOrders();
                     foreach (var order in list)
                     {
-                        dataTable.Rows.Add(order.Auftragsnummer, order.Datum, order.Name, order.PositionsId, order.Totalbetrag);
+                        dataTable.Rows.Add(order.Auftragsnummer, order.Datum, order.Name, order.PositionsId, order.Totalbetrag.ToString("0.00"));
+
                     }
 
                     return dataTable;
@@ -262,6 +265,24 @@ namespace Projekt_Auftragsverwaltung
                 connection.Open();
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
+
+                    DateTime dateTime;
+
+                    if (column == "Datum")
+                    {
+
+                        try
+                        {
+                            dateTime = DateTime.ParseExact(value, "dd.MM.yyyy", null);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Ungültiges Datumsformat");
+                            return null;
+                        }
+                    }
+
+
 
 
                     var foundOrders = from o in dbContext.Orders
@@ -288,19 +309,20 @@ namespace Projekt_Auftragsverwaltung
                             foundOrders = foundOrders.Where(o => o.Auftragsnummer == Convert.ToInt32(value));
                             break;
                         case "Datum":
-                            foundOrders = foundOrders.Where(o => o.Datum == value);
+                            foundOrders = foundOrders.Where(o => o.Datum.Equals(DateTime.ParseExact(value, "dd.MM.yyyy", null)));
                             break;
                         case "Name":
                             foundOrders = foundOrders.Where(o => o.Name.Contains(value));
                             break;
-
                     }
+
 
                     var list = foundOrders.ToList();
                     var dataTable = CreateDataTableOrders();
                     foreach (var order in list)
                     {
-                        dataTable.Rows.Add(order.Auftragsnummer, order.Datum, order.Name, order.PositionsId, order.Totalbetrag);
+                        dataTable.Rows.Add(order.Auftragsnummer, order.Datum, order.Name, order.PositionsId, order.Totalbetrag.ToString("0.00"));
+
                     }
                     return dataTable;
                 }
@@ -324,16 +346,16 @@ namespace Projekt_Auftragsverwaltung
                                          join c in dbContext.Customers on o.CustomerId equals c.CustomerId
                                          select new
                                          {
-                                             Positionsnummer = op.OrderPositionId == 0 ? 0 : op.OrderPositionId,
-                                             Auftragsnummer = o.OrderId == 0 ? 0 : op.OrderId,
-                                             Auftragsdatum = o.Date.ToString("dd.MM.yyyy") ?? "",
-                                             Kunde = c.Name ?? "",
-                                             Artikelbezeichnung = a.ArticleName ?? "",
-                                             Artikelanzahl = op.amount == 0 ? 0 : op.amount,
-                                             Artikelbetrag = a.Price == 0 ? 0 : a.Price,
-                                             Totalbetrag = (op.amount == 0 ? 0 : op.amount) * (a.Price == 0 ? 0 : a.Price),
-
+                                             Positionsnummer = op.OrderPositionId == null ? 0 : op.OrderPositionId,
+                                             Auftragsnummer = o.OrderId == null ? 0 : o.OrderId,
+                                             Auftragsdatum = o.Date == null ? "" : o.Date.ToString("dd.MM.yyyy"),
+                                             Kunde = c.Name == null ? "" : c.Name,
+                                             Artikelbezeichnung = a.ArticleName == null ? "" : a.ArticleName,
+                                             Artikelanzahl = op.amount == null ? 0 : op.amount,
+                                             Artikelbetrag = a.Price == null ? 0 : a.Price,
+                                             Totalbetrag = (op.amount == null ? 0 : op.amount) * (a.Price == null ? 0 : a.Price)
                                          };
+
                     var list = orderPositions.ToList();
                     var dataTable = CreateDataTableOrderPositions();
                     foreach (var orderPosition in list)
@@ -356,24 +378,24 @@ namespace Projekt_Auftragsverwaltung
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
                     var orderPositionsQuery = from op in dbContext.OrderPositions
-                                              join o in dbContext.Orders on op.OrderId equals o.OrderId
-                                              join ap in dbContext.ArticlePositions on op.OrderPositionId equals ap.OrderPositionId into apGroup
-                                              from ap in apGroup.DefaultIfEmpty()
-                                              join a in dbContext.Articles on ap.ArticleId equals a.ArticleId into aGroup
-                                              from a in aGroup.DefaultIfEmpty()
-                                              join c in dbContext.Customers on o.CustomerId equals c.CustomerId
-                                              select new
-                                              {
-                                                  Positionsnummer = op.OrderPositionId,
-                                                  Auftragsnummer = o.OrderId,
-                                                  Auftragsdatum = o.Date.ToString("dd.MM.yyyy"),
-                                                  Kunde = c.Name,
-                                                  Artikelbezeichnung = a != null ? a.ArticleName : "",
-                                                  Artikelanzahl = op.amount,
-                                                  Artikelbetrag = a.Price,
-                                                  Totalbetrag = (op.amount * a.Price),
-
-                                              };
+                                         join o in dbContext.Orders on op.OrderId equals o.OrderId into orders
+                                         from o in orders.DefaultIfEmpty()
+                                         join ap in dbContext.ArticlePositions on op.OrderPositionId equals ap.OrderPositionId into apGroup
+                                         from ap in apGroup.DefaultIfEmpty()
+                                         join a in dbContext.Articles on ap.ArticleId equals a.ArticleId into aGroup
+                                         from a in aGroup.DefaultIfEmpty()
+                                         join c in dbContext.Customers on o.CustomerId equals c.CustomerId
+                                         select new
+                                         {
+                                             Positionsnummer = op.OrderPositionId == null ? 0 : op.OrderPositionId,
+                                             Auftragsnummer = o.OrderId == null ? 0 : o.OrderId,
+                                             Auftragsdatum = o.Date == null ? "" : o.Date.ToString("dd.MM.yyyy"),
+                                             Kunde = c.Name == null ? "" : c.Name,
+                                             Artikelbezeichnung = a.ArticleName == null ? "" : a.ArticleName,
+                                             Artikelanzahl = op.amount == null ? 0 : op.amount,
+                                             Artikelbetrag = a.Price == null ? 0 : a.Price,
+                                             Totalbetrag = (op.amount == null ? 0 : op.amount) * (a.Price == null ? 0 : a.Price)
+                                         };
 
                     switch (columnName)
                     {
@@ -717,11 +739,21 @@ namespace Projekt_Auftragsverwaltung
                 var recordToDelete = db.ArticleGroups.FirstOrDefault(r => r.ArticleGroupId == ArticleGroupId);
                 if (recordToDelete != null)
                 {
-                    db.ArticleGroups.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
-                    db.SaveChanges(); // Änderungen speichern
+                    var hasArticleGroups = db.Articles.Any(o => o.ArticleGroupId == ArticleGroupId);
+
+                    if (hasArticleGroups)
+                    {
+                        MessageBox.Show("Artikelgruppe ist mit Artikeln verknüpft!");
+                    }
+                    else
+                    {
+                        db.ArticleGroups.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
+                        db.SaveChanges(); // Änderungen speichern
+                    }
                 }
             }
         }
+
 
         public void DeleteOrder(int orderId)
         {

@@ -258,6 +258,7 @@ namespace Projekt_Auftragsverwaltung
             }
             else
             { MessageBox.Show("Bitte Artikelgruppe auswählen"); }
+            UpdateLists();
         }
 
         private void CmdDeleteArticle_Click(object sender, EventArgs e)
