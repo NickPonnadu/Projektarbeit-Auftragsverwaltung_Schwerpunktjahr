@@ -12,6 +12,11 @@ namespace Projekt_Auftragsverwaltung.Tables
         public int ArticleGroupId { get; set; }
         public string Name { get; set; }
 
+        public int? ParentGroupId { get; set; }
+        public ArticleGroup ParentGroup { get; set; }
+
+        public List<ArticleGroup> ChildGroups { get; set; }
         public List<Article> Articles { get; set; }
     }
+
 }

@@ -3,7 +3,7 @@ using Projekt_Auftragsverwaltung.Gui;
 using System;
 using System.Data;
 using System.Reflection.Metadata;
-using TreeView = Projekt_Auftragsverwaltung.Gui.TreeView;
+using TreeViewClass = Projekt_Auftragsverwaltung.Gui.TreeViewClass;
 
 namespace Projekt_Auftragsverwaltung
 
@@ -16,7 +16,7 @@ namespace Projekt_Auftragsverwaltung
         private Form EditGuiArticle;
         private Form EditGuiOrder;
         private Form EditGuiPosition;
-
+        private Form TreeViewClass;
         public string ConnectionString;
         private DataController DataController;
 
@@ -29,7 +29,7 @@ namespace Projekt_Auftragsverwaltung
             this.EditGuiArticle = new MainEditArticle(ConnectionString);
             this.EditGuiPosition = new MainEditPosition(ConnectionString);
             this.EditGuiOrder = new MainEditOrder(ConnectionString);
-            
+            this.TreeViewClass = new TreeViewClass(ConnectionString);
             DataController = new DataController(ConnectionString);
             UpdateLists();
             SetDataBindings();
@@ -200,9 +200,7 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdTreeView_Click(object sender, EventArgs e)
         {
-            TreeView treeView = new TreeView();
-            treeView.Show();
-
+            this.TreeViewClass.ShowDialog();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Projekt_Auftragsverwaltung.Gui
 {
-    partial class TreeView
+    partial class TreeViewClass
     {
         /// <summary>
         /// Required designer variable.
@@ -29,20 +29,32 @@
         private void InitializeComponent()
         {
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.CmdTreeViewShow = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // treeView1
             // 
             this.treeView1.Location = new System.Drawing.Point(77, 50);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(864, 456);
+            this.treeView1.Size = new System.Drawing.Size(670, 456);
             this.treeView1.TabIndex = 0;
+            // 
+            // CmdTreeViewShow
+            // 
+            this.CmdTreeViewShow.Location = new System.Drawing.Point(784, 50);
+            this.CmdTreeViewShow.Name = "CmdTreeViewShow";
+            this.CmdTreeViewShow.Size = new System.Drawing.Size(157, 56);
+            this.CmdTreeViewShow.TabIndex = 1;
+            this.CmdTreeViewShow.Text = "TreeViewZeigen";
+            this.CmdTreeViewShow.UseVisualStyleBackColor = true;
+            this.CmdTreeViewShow.Click += new System.EventHandler(this.CmdTreeViewShow_Click);
             // 
             // TreeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1029, 583);
+            this.Controls.Add(this.CmdTreeViewShow);
             this.Controls.Add(this.treeView1);
             this.Name = "TreeView";
             this.Text = "TreeView";
@@ -53,5 +65,6 @@
         #endregion
 
         private System.Windows.Forms.TreeView treeView1;
+        private Button CmdTreeViewShow;
     }
 }

@@ -30,6 +30,35 @@ namespace Projekt_Auftragsverwaltung
             // optionsBuilder.UseSqlServer("Server=DESKTOP-G8PTADT\MSSQLSERVERZBWGA; Database=myDataBase; Trusted_Connection=True;Encrypt=false;");
         }
 
+        public IQueryable<ArticleGroup> GetArticleGroupHierarchy()
+        {
+            var query = from ag in ArticleGroups
+                        where ag.ParentGroupId == null
+                        select new ArticleGroup
+                        {
+                            ArticleGroupId = ag.ArticleGroupId,
+                            Name = ag.Name,
+                            ParentGroupId = ag.ParentGroupId,
+                            Articles = ag.Articles,
+                            ChildGroups = ag.ChildGroups
+                        };
+
+            var recursiveQuery = from ag in ArticleGroups
+                                 join c in GetArticleGroupHierarchy() on ag.ParentGroupId equals c.ArticleGroupId
+                                 select new ArticleGroup
+                                 {
+                                     ArticleGroupId = ag.ArticleGroupId,
+                                     Name = ag.Name,
+                                     ParentGroupId = ag.ParentGroupId,
+                                     Articles = ag.Articles,
+                                     ParentGroup = c,
+                                     ChildGroups = ag.ChildGroups
+                                 };
+
+            return query.Concat(recursiveQuery);
+        }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Address>()
@@ -161,6 +190,7 @@ namespace Projekt_Auftragsverwaltung
                 new OrderPosition { OrderPositionId = 4, amount = 8, OrderId = 4 },
                 new OrderPosition { OrderPositionId = 5, amount = 15, OrderId = 5 }
                 );
+
         }
     }
 }
