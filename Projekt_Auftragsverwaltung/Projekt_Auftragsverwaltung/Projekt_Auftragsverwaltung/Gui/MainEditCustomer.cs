@@ -97,6 +97,7 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdEditCustomerCancel_Click(object sender, EventArgs e)
         {
+            SetEditModeOff();
             CloseForm();
         }
 

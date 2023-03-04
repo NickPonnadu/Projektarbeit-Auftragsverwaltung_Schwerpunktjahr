@@ -839,6 +839,21 @@ namespace Projekt_Auftragsverwaltung
             }
         }
 
+        public void EditOrder(int orderId, DateTime date, int customerId)
+        {
+            using (var db = new CompanyContext(ConnectionString))
+            {
+                var recordToEdit = db.Orders.FirstOrDefault(r => r.OrderId == orderId);
+                if (recordToEdit != null)
+                {
+                    recordToEdit.Date = date;
+                    recordToEdit.CustomerId = customerId;
+                    db.Orders.Update(recordToEdit);
+                    db.SaveChanges(); // Änderungen speichern
+                }
+            }
+        }
+
         public void EditCustomer(int customerId, string name = "", string phoneNumber = "", string eMail = "", string website = "", string Password = "")
         {
             using (var db = new CompanyContext(ConnectionString))
@@ -867,7 +882,7 @@ namespace Projekt_Auftragsverwaltung
                 {
 
                     recordToEdit.Street = street;
-                    recordToEdit.HouseNumber = houseNumber; 
+                    recordToEdit.HouseNumber = houseNumber;
                     recordToEdit.ZipCode = postCode == 0000 ? 0000 : postCode;
                     db.Addresses.Update(recordToEdit);
                     db.SaveChanges(); // Änderungen speichern
@@ -938,7 +953,6 @@ namespace Projekt_Auftragsverwaltung
                 }
             }
         }
-
 
         public Address GetSingleAddress(int adressId)
         {
