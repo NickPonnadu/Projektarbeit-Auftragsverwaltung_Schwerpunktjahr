@@ -27,57 +27,55 @@ namespace Projekt_Auftragsverwaltung.Gui
 
         private void CmdTreeViewShow_Click(object sender, EventArgs e)
         {
-            // Clear existing nodes
-            treeView.Nodes.Clear();
-
-            using (var connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                // Open the connection
                 connection.Open();
 
-                // Create a command for the recursive CTE
-                var command = new SqlCommand(@"
-                    
-                        WITH CTE_ArticleGroups (ArticleGroupId, Name, ParentId, Level)
-                        AS (
-                            SELECT ArticleGroupId, Name, ParentId, 0 AS Level
-                            FROM dbo.ArticleGroups
-                            WHERE ParentId IS NULL
-                            UNION ALL
-                            SELECT ag.ArticleGroupId, ag.Name, ag.ParentId, ag.Level + 1
-                            FROM dbo.ArticleGroups AS ag
-                            INNER JOIN CTE_ArticleGroups AS p
-                                ON ag.ParentId = p.ArticleGroupId
-                        )
-                        SELECT ArticleGroupId, Name, ParentId, Level
-                        FROM CTE_ArticleGroups
-                        ORDER BY ArticleGroupId;
+                string query = "WITH CTE_ArticleGroups (ArticleGroupId, Name, ParentId, Level) AS " +
+                               "(SELECT ArticleGroupId, Name, ParentId, 0 AS Level FROM dbo.ArticleGroups " +
+                               "WHERE ParentId IS NULL " +
+                               "UNION ALL " +
+                               "SELECT ag.ArticleGroupId, ag.Name, ag.ParentId, ag.Level + 1 " +
+                               "FROM dbo.ArticleGroups AS ag " +
+                               "INNER JOIN CTE_ArticleGroups AS p " +
+                               "ON ag.ParentId = p.ArticleGroupId) " +
+                               "SELECT ArticleGroupId, Name, ParentId, Level " +
+                               "FROM CTE_ArticleGroups " +
+                               "ORDER BY ArticleGroupId;";
+                // command Objekt erzeugen
+                SqlCommand command = new SqlCommand(query, connection);
 
-                ", connection);
+                // dataAdapter Objekt erzeugen
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
 
-                // Execute the command and get the results
-                var adapter = new SqlDataAdapter(command);
-                var dataTable = new DataTable();
-                adapter.Fill(dataTable);
+                // Datentabelle für Ergebnisse
+                DataTable table = new DataTable();
 
-                // Group the results by parent node
-                var nodeGroups = dataTable.AsEnumerable().GroupBy(row => row.Field<int?>("ParentId"));
+                // Füllt die Datentabelle mit den Ergebnissen der Abfrage
+                adapter.Fill(table);
 
-                // Add root nodes to the treeview
-                foreach (var rootNode in nodeGroups.FirstOrDefault(g => !g.Key.HasValue))
-                {
-                    var treeNode = new TreeNode(rootNode.Field<string>("Name"), GetChildNodes(rootNode, nodeGroups).ToArray());
-                    treeView.Nodes.Add(treeNode);
-                }
+                // Bindet die Daten an die TreeView
+                treeView.Nodes.Clear();
+                AddNode(null, table);
             }
         }
-        private IEnumerable<TreeNode> GetChildNodes(DataRow parentRow, IEnumerable<IGrouping<int?, DataRow>> nodeGroups)
+        private void AddNode(TreeNode parentNode, DataTable table)
         {
-            // Recursively get child nodes for the given parent node
-            foreach (var childNode in nodeGroups.FirstOrDefault(g => g.Key == parentRow.Field<int?>("ArticleGroupId")))
+            string filter = "ParentId" + (parentNode == null ? " IS NULL" : " = " + parentNode.Tag);
+            DataRow[] rows = table.Select(filter);
+            foreach (DataRow row in rows)
             {
-                var treeNode = new TreeNode(childNode.Field<string>("Name"), GetChildNodes(childNode, nodeGroups).ToArray());
-                yield return treeNode;
+                TreeNode node = new TreeNode(row["Name"].ToString());
+                node.Tag = row["ArticleGroupId"].ToString();
+                if (parentNode == null)
+                {
+                    treeView.Nodes.Add(node);
+                }
+                else
+                {
+                    parentNode.Nodes.Add(node);
+                }
+                AddNode(node, table);
             }
         }
     }
