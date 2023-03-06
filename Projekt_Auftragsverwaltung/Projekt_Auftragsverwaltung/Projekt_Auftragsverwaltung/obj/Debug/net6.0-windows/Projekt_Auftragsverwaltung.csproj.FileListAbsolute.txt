@@ -319,3 +319,5 @@ C:\Users\marco\OneDrive\Dokumente\Desktop\ProjektDatenbank - Kopie\Projekt_Auftr
 C:\Users\marco\OneDrive\Dokumente\Desktop\ProjektDatenbank - Kopie\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\obj\Debug\net6.0-windows\ref\Projekt_Auftragsverwaltung.dll
 C:\Users\marco\OneDrive\Dokumente\Desktop\ProjektDatenbank - Kopie\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\bin\Debug\net6.0-windows\Microsoft.Extensions.PlatformAbstractions.dll
 C:\Users\marco\OneDrive\Dokumente\Desktop\ProjektDatenbank - Kopie\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\bin\Debug\net6.0-windows\Nancy.dll
+C:\Users\marco\OneDrive\Dokumente\Desktop\ProjektDatenbank\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\bin\Debug\net6.0-windows\Microsoft.Extensions.PlatformAbstractions.dll
+C:\Users\marco\OneDrive\Dokumente\Desktop\ProjektDatenbank\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\Projekt_Auftragsverwaltung\bin\Debug\net6.0-windows\Nancy.dll

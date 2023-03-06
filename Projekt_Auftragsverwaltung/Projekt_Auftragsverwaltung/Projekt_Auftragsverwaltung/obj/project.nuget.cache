@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uJ8areKiWM24BOecx+R5dd8GjfBpqgiOlHGLsJUWjImEkceCrqR9rD7ZvxQpY0IzjM0+X+M5wm7JdHXQ/W6WjQ==",
+  "dgSpecHash": "+9jOLz/u16ZRJ2/qMoFdyz8glH0CmCEpYn/N+hawkZdoB/Mc3LVyIoS/vpU4S0IPkYBgA6ld3jmQozeITeqVYA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\ProjektDatenbank - Kopie\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
+  "projectFilePath": "C:\\Users\\marco\\OneDrive\\Dokumente\\Desktop\\ProjektDatenbank\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\marco\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\marco\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

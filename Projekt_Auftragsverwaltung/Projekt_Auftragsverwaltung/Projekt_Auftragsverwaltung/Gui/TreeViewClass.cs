@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Projekt_Auftragsverwaltung.Tables;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Projekt_Auftragsverwaltung.Gui
@@ -40,8 +42,27 @@ namespace Projekt_Auftragsverwaltung.Gui
                                "INNER JOIN CTE_ArticleGroups AS p " +
                                "ON ag.ParentId = p.ArticleGroupId) " +
                                "SELECT ArticleGroupId, Name, ParentId, Level " +
-                               "FROM CTE_ArticleGroups " +
+                                "FROM CTE_ArticleGroups " +
                                "ORDER BY ArticleGroupId;";
+
+
+                               //"WITH CTE_ArticleGroups (ArticleGroupId, Name, ParentId, Level) AS " +
+                               //"(SELECT ArticleGroupId, Name, ParentId, 0 AS Level FROM dbo.ArticleGroups " +
+                               //"WHERE ParentId IS NULL " +
+                               //"UNION ALL " +
+                               //"SELECT ag.ArticleGroupId, ag.Name, ag.ParentId, ag.Level + 1 " +
+                               //"FROM dbo.ArticleGroups AS ag " +
+                               //"INNER JOIN CTE_ArticleGroups AS p " +
+                               //"ON ag.ParentId = p.ArticleGroupId) " +
+                               //"SELECT ag1.Name AS ParentName, ag2.Name AS ChildName, a.ArticleName " +
+                               //"FROM dbo.Articles AS a " +
+                               //"INNER JOIN dbo.ArticleGroups AS ag1 " +
+                               //"ON a.ArticleGroupId = ag1.ArticleGroupId " +
+                               //"INNER JOIN dbo.ArticleGroups AS ag2 " +
+                               //"ON ag1.ArticleGroupId = ag2.ParentId " +
+                               //"ORDER BY ag1.Name, ag2.Name, a.ArticleName;";
+
+
                 // command Objekt erzeugen
                 SqlCommand command = new SqlCommand(query, connection);
 
@@ -78,5 +99,35 @@ namespace Projekt_Auftragsverwaltung.Gui
                 AddNode(node, table);
             }
         }
+
+        //private void AddNode(TreeNode parentNode, DataTable table)
+        //{
+        //    string parentFilter = "ParentName" + (parentNode == null ? " IS NULL" : " = '" + parentNode.Text + "'");
+        //    DataRow[] parentRows = table.Select(parentFilter);
+        //    foreach (DataRow parentRow in parentRows)
+        //    {
+        //        TreeNode parentNode1 = new TreeNode(parentRow["ParentName"].ToString());
+        //        if (parentNode == null)
+        //        {
+        //            treeView.Nodes.Add(parentNode1);
+        //        }
+        //        else
+        //        {
+        //            parentNode.Nodes.Add(parentNode1);
+        //        }
+        //        string childFilter = "ParentName = '" + parentRow["ParentName"] + "'";
+        //        DataRow[] childRows = table.Select(childFilter);
+        //        foreach (DataRow childRow in childRows)
+        //        {
+        //            TreeNode childNode = new TreeNode(childRow["ChildName"].ToString());
+        //            parentNode1.Nodes.Add(childNode);
+        //            if (!childRow.IsNull("ArticleName"))
+        //            {
+        //                TreeNode articleNode = new TreeNode(childRow["ArticleName"].ToString());
+        //                childNode.Nodes.Add(articleNode);
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
