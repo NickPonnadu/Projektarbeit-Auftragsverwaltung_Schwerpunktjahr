@@ -46,21 +46,19 @@ namespace Projekt_Auftragsverwaltung.Gui
                                "ORDER BY ArticleGroupId;";
 
 
-                               //"WITH CTE_ArticleGroups (ArticleGroupId, Name, ParentId, Level) AS " +
-                               //"(SELECT ArticleGroupId, Name, ParentId, 0 AS Level FROM dbo.ArticleGroups " +
-                               //"WHERE ParentId IS NULL " +
-                               //"UNION ALL " +
-                               //"SELECT ag.ArticleGroupId, ag.Name, ag.ParentId, ag.Level + 1 " +
-                               //"FROM dbo.ArticleGroups AS ag " +
-                               //"INNER JOIN CTE_ArticleGroups AS p " +
-                               //"ON ag.ParentId = p.ArticleGroupId) " +
-                               //"SELECT ag1.Name AS ParentName, ag2.Name AS ChildName, a.ArticleName " +
-                               //"FROM dbo.Articles AS a " +
-                               //"INNER JOIN dbo.ArticleGroups AS ag1 " +
-                               //"ON a.ArticleGroupId = ag1.ArticleGroupId " +
-                               //"INNER JOIN dbo.ArticleGroups AS ag2 " +
-                               //"ON ag1.ArticleGroupId = ag2.ParentId " +
-                               //"ORDER BY ag1.Name, ag2.Name, a.ArticleName;";
+                                //"WITH CTE_ArticleGroups (ArticleGroupId, Name, ParentId, Level) AS " +
+                                //"(SELECT ArticleGroupId, Name, ParentId, 0 AS Level FROM dbo.ArticleGroups " +
+                                //"WHERE ParentId IS NULL " +
+                                //"UNION ALL " +
+                                //"SELECT ag.ArticleGroupId, ag.Name, ag.ParentId, ag.Level + 1 " +
+                                //"FROM dbo.ArticleGroups AS ag " +
+                                //"INNER JOIN CTE_ArticleGroups AS p " +
+                                //"ON ag.ParentId = p.ArticleGroupId) " +
+                                //"SELECT ag.Name, a.ArticleName " +
+                                //"FROM dbo.Articles AS a " +
+                                //"INNER JOIN dbo.ArticleGroups AS ag " +
+                                //"ON a.ArticleGroupId = ag.ArticleGroupId " +
+                                //"ORDER BY ag.Name, a.ArticleName;";
 
 
                 // command Objekt erzeugen
@@ -100,13 +98,15 @@ namespace Projekt_Auftragsverwaltung.Gui
             }
         }
 
+
+
         //private void AddNode(TreeNode parentNode, DataTable table)
         //{
-        //    string parentFilter = "ParentName" + (parentNode == null ? " IS NULL" : " = '" + parentNode.Text + "'");
+        //    string parentFilter = "Name" + (parentNode == null ? " IS NULL" : " = '" + parentNode.Text + "'");
         //    DataRow[] parentRows = table.Select(parentFilter);
         //    foreach (DataRow parentRow in parentRows)
         //    {
-        //        TreeNode parentNode1 = new TreeNode(parentRow["ParentName"].ToString());
+        //        TreeNode parentNode1 = new TreeNode(parentRow["Name"].ToString());
         //        if (parentNode == null)
         //        {
         //            treeView.Nodes.Add(parentNode1);
@@ -115,15 +115,17 @@ namespace Projekt_Auftragsverwaltung.Gui
         //        {
         //            parentNode.Nodes.Add(parentNode1);
         //        }
-        //        string childFilter = "ParentName = '" + parentRow["ParentName"] + "'";
+        //        string childFilter = "Name = '" + parentRow["Name"] + "'";
         //        DataRow[] childRows = table.Select(childFilter);
         //        foreach (DataRow childRow in childRows)
         //        {
-        //            TreeNode childNode = new TreeNode(childRow["ChildName"].ToString());
+        //            TreeNode childNode = new TreeNode(childRow["ArticleName"].ToString());
         //            parentNode1.Nodes.Add(childNode);
-        //            if (!childRow.IsNull("ArticleName"))
+        //            string articleFilter = "Name = '" + childRow["ArticleName"] + "'";
+        //            DataRow[] articleRows = table.Select(articleFilter);
+        //            foreach (DataRow articleRow in articleRows)
         //            {
-        //                TreeNode articleNode = new TreeNode(childRow["ArticleName"].ToString());
+        //                TreeNode articleNode = new TreeNode(articleRow["ArticleName"].ToString());
         //                childNode.Nodes.Add(articleNode);
         //            }
         //        }
