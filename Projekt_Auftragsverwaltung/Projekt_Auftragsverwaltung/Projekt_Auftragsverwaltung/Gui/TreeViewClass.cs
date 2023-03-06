@@ -37,31 +37,22 @@ namespace Projekt_Auftragsverwaltung.Gui
 
                 // Create a command for the recursive CTE
                 var command = new SqlCommand(@"
-                    WITH RecursiveTree AS (
-                        -- Anchor query: get root nodes (ArticleGroups without parents)
-                        SELECT ArticleGroupId, Name, NULL AS ParentId
-                        FROM ArticleGroup
-                        WHERE ParentId IS NULL
+                    
+                        WITH CTE_ArticleGroups (ArticleGroupId, Name, ParentId, Level)
+                        AS (
+                            SELECT ArticleGroupId, Name, ParentId, 0 AS Level
+                            FROM dbo.ArticleGroups
+                            WHERE ParentId IS NULL
+                            UNION ALL
+                            SELECT ag.ArticleGroupId, ag.Name, ag.ParentId, ag.Level + 1
+                            FROM dbo.ArticleGroups AS ag
+                            INNER JOIN CTE_ArticleGroups AS p
+                                ON ag.ParentId = p.ArticleGroupId
+                        )
+                        SELECT ArticleGroupId, Name, ParentId, Level
+                        FROM CTE_ArticleGroups
+                        ORDER BY ArticleGroupId;
 
-                        UNION ALL
-
-                        -- Recursive query: get child nodes (Articles and ArticleGroups)
-                        SELECT 
-                            CASE 
-                                WHEN ag.ParentId IS NULL THEN a.ArticleId
-                                ELSE ag.ArticleGroupId
-                            END AS ArticleGroupId,
-                            CASE 
-                                WHEN ag.ParentId IS NULL THEN a.ArticleName
-                                ELSE ag.Name
-                            END AS Name,
-                            ag.ParentId
-                        FROM RecursiveTree rt
-                        JOIN ArticleGroup ag ON rt.ArticleGroupId = ag.ParentId
-                        JOIN Article a ON ag.ArticleGroupId = a.ArticleGroupId
-                    )
-                    SELECT ArticleGroupId, Name, ParentId
-                    FROM RecursiveTree
                 ", connection);
 
                 // Execute the command and get the results
