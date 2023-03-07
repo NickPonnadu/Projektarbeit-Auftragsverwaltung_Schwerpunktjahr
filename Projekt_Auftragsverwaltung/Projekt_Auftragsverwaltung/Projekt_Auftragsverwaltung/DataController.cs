@@ -219,7 +219,7 @@ namespace Projekt_Auftragsverwaltung
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                connection.Open();
+                connectionTEST.Open();
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
 
