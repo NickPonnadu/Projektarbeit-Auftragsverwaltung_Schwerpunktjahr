@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.VisualBasic;
 using Projekt_Auftragsverwaltung;
 using Projekt_Auftragsverwaltung.Tables;
 using System;
@@ -265,26 +266,7 @@ namespace Projekt_Auftragsverwaltung
                 connection.Open();
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
-
-                    DateTime dateTime;
-
-                    if (column == "Datum")
-                    {
-
-                        try
-                        {
-                            dateTime = DateTime.ParseExact(value, "dd.MM.yyyy", null);
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Ungültiges Datumsformat");
-                            return null;
-                        }
-                    }
-
-
-
-
+                                       
                     var foundOrders = from o in dbContext.Orders
                                       join c in dbContext.Customers on o.CustomerId equals c.CustomerId
                                       join op in dbContext.OrderPositions on o.OrderId equals op.OrderId into opGroup
@@ -294,6 +276,7 @@ namespace Projekt_Auftragsverwaltung
                                       join a in dbContext.Articles on ap.ArticleId equals a.ArticleId into aGroup
                                       from a in aGroup.DefaultIfEmpty()
                                       group new { o, op, a } by new { o.OrderId, o.Date, c.Name } into g
+
                                       select new
                                       {
                                           Auftragsnummer = g.Key.OrderId,
@@ -308,9 +291,17 @@ namespace Projekt_Auftragsverwaltung
                         case "Auftragsnummer":
                             foundOrders = foundOrders.Where(o => o.Auftragsnummer == Convert.ToInt32(value));
                             break;
+                      
+
                         case "Datum":
-                            foundOrders = foundOrders.Where(o => o.Datum.Equals(DateTime.ParseExact(value, "dd.MM.yyyy", null)));
+                            DateTime dateValue;
+                            if (DateTime.TryParse(value, out dateValue))
+                            {
+                                foundOrders = foundOrders.Where(op => op.Datum.Equals(dateValue.ToString("dd.MM.yyyy")));
+                            }
                             break;
+
+
                         case "Name":
                             foundOrders = foundOrders.Where(o => o.Name.Contains(value));
                             break;
@@ -378,24 +369,24 @@ namespace Projekt_Auftragsverwaltung
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
                     var orderPositionsQuery = from op in dbContext.OrderPositions
-                                         join o in dbContext.Orders on op.OrderId equals o.OrderId into orders
-                                         from o in orders.DefaultIfEmpty()
-                                         join ap in dbContext.ArticlePositions on op.OrderPositionId equals ap.OrderPositionId into apGroup
-                                         from ap in apGroup.DefaultIfEmpty()
-                                         join a in dbContext.Articles on ap.ArticleId equals a.ArticleId into aGroup
-                                         from a in aGroup.DefaultIfEmpty()
-                                         join c in dbContext.Customers on o.CustomerId equals c.CustomerId
-                                         select new
-                                         {
-                                             Positionsnummer = op.OrderPositionId == null ? 0 : op.OrderPositionId,
-                                             Auftragsnummer = o.OrderId == null ? 0 : o.OrderId,
-                                             Auftragsdatum = o.Date == null ? "" : o.Date.ToString("dd.MM.yyyy"),
-                                             Kunde = c.Name == null ? "" : c.Name,
-                                             Artikelbezeichnung = a.ArticleName == null ? "" : a.ArticleName,
-                                             Artikelanzahl = op.amount == null ? 0 : op.amount,
-                                             Artikelbetrag = a.Price == null ? 0 : a.Price,
-                                             Totalbetrag = (op.amount == null ? 0 : op.amount) * (a.Price == null ? 0 : a.Price)
-                                         };
+                                              join o in dbContext.Orders on op.OrderId equals o.OrderId into orders
+                                              from o in orders.DefaultIfEmpty()
+                                              join ap in dbContext.ArticlePositions on op.OrderPositionId equals ap.OrderPositionId into apGroup
+                                              from ap in apGroup.DefaultIfEmpty()
+                                              join a in dbContext.Articles on ap.ArticleId equals a.ArticleId into aGroup
+                                              from a in aGroup.DefaultIfEmpty()
+                                              join c in dbContext.Customers on o.CustomerId equals c.CustomerId
+                                              select new
+                                              {
+                                                  Positionsnummer = op.OrderPositionId == null ? 0 : op.OrderPositionId,
+                                                  Auftragsnummer = o.OrderId == null ? 0 : o.OrderId,
+                                                  Auftragsdatum = o.Date == null ? "" : o.Date.ToString("dd.MM.yyyy"),
+                                                  Kunde = c.Name == null ? "" : c.Name,
+                                                  Artikelbezeichnung = a.ArticleName == null ? "" : a.ArticleName,
+                                                  Artikelanzahl = op.amount == null ? 0 : op.amount,
+                                                  Artikelbetrag = a.Price == null ? 0 : a.Price,
+                                                  Totalbetrag = (op.amount == null ? 0 : op.amount) * (a.Price == null ? 0 : a.Price)
+                                              };
 
                     switch (columnName)
                     {
