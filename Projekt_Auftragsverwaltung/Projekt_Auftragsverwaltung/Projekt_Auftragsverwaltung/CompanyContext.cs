@@ -28,7 +28,7 @@ namespace Projekt_Auftragsverwaltung
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_ConnectionString);
-            // optionsBuilder.UseSqlServer("Server=DESKTOP-G8PTADT\MSSQLSERVERZBWGA; Database=myDataBase; Trusted_Connection=True;Encrypt=false;");
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

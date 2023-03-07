@@ -13,7 +13,7 @@ namespace Projekt_Auftragsverwaltung
         public Login()
         {
             InitializeComponent();
-            
+
             this.Connection = false;
         }
 
@@ -24,11 +24,15 @@ namespace Projekt_Auftragsverwaltung
             {
                 //Gibt Wert and DataManager weiter welcher dann auf Context zugreift und DB erstellt.
                 string connectionString = DatabaseManager.BuildConnectionString(TxtDBServer.Text, TxtDBName.Text);
-                DatabaseManager.UseDbContext(connectionString);
-                Connection= true;
+
+
+                bool existingDB = DatabaseManager.CheckExistingDB(connectionString);
+
+                Connection = DatabaseManager.UseDbContext(connectionString);
+
                 if (this.Connection)
                 {
-                    LblConnection.Text = "DB ist Verbunden";
+                    LblConnection.Text = existingDB ? "DB ist Verbunden" : "Da keine DB gefunden wurde, wurde eine neue DB mit Testdaten erstellt";
                     CmdStartApplication.Enabled = true;
                     DBconnectionString = connectionString;
                     LblConnection.ForeColor = Color.Green;
@@ -52,7 +56,7 @@ namespace Projekt_Auftragsverwaltung
             {
                 this.Hide();
                 this.MainGui = new Main(DBconnectionString);
-                
+
                 this.MainGui.Show();
             }
         }
