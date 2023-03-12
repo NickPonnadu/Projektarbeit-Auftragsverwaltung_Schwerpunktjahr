@@ -10,10 +10,10 @@ namespace Projekt_Auftragsverwaltung
 
     {
         DataController dataController;
-        
+
         Article? Article { get; set; }
         public bool EditMode;
-        public MainEditArticle(string connectionString,Article article=null)
+        public MainEditArticle(string connectionString, Article article = null)
         {
             InitializeComponent();
             ConnectionString = connectionString;
@@ -59,7 +59,7 @@ namespace Projekt_Auftragsverwaltung
                 }
                 if (EditMode == true && Article != null)
                 {
-                    dataController.EditArticle(Article.ArticleId, TxtArticleDescription.Text,NumArticlePrice.Value,articleGroupId);
+                    dataController.EditArticle(Article.ArticleId, TxtArticleDescription.Text, NumArticlePrice.Value, articleGroupId);
                     SetEditModeOff();
                     CloseForm();
                 }
@@ -72,7 +72,6 @@ namespace Projekt_Auftragsverwaltung
             else
             { throw new Exception("Bitte Artikelgruppe auswählen"); }
             CloseForm();
-
         }
 
 
@@ -91,6 +90,6 @@ namespace Projekt_Auftragsverwaltung
             }
         }
 
-        
+
     }
 }

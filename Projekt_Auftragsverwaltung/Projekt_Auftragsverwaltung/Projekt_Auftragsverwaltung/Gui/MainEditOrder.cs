@@ -37,16 +37,15 @@ namespace Projekt_Auftragsverwaltung
 
             EditMode = true;
             DtpOrderDate.Value = Order.Date;
-            
+
             CmdCreateOrderSave.Text = "Änderungen speichern";
         }
 
-       
         private void SetEditModeOff()
         {
             EditMode = false;
             DtpOrderDate.Value = DateTime.Today;
-            
+
             CmdCreateOrderSave.Text = "Auftrag anlegen";
         }
 
@@ -83,7 +82,7 @@ namespace Projekt_Auftragsverwaltung
                     MessageBox.Show("Falscher EditMode");
                 }
             }
-            
+
             SetEditModeOff();
             CloseForm();
 
@@ -95,7 +94,7 @@ namespace Projekt_Auftragsverwaltung
             CloseForm();
         }
 
-        private void UpdateCustomerList(object sender = null, EventArgs e=null)
+        private void UpdateCustomerList(object sender = null, EventArgs e = null)
         {
             if (dataController != null)
             {

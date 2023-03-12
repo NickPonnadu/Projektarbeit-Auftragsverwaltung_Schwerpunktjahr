@@ -41,6 +41,7 @@
             this.CmdEditCustomer = new System.Windows.Forms.Button();
             this.CmdCreateCustomer = new System.Windows.Forms.Button();
             this.Artikelgruppen = new System.Windows.Forms.TabPage();
+            this.CmdTreeView = new System.Windows.Forms.Button();
             this.CmdDeleteArticleGroup = new System.Windows.Forms.Button();
             this.CmdSearchResetArticleGroup = new System.Windows.Forms.Button();
             this.CmdSearchArticleGroup = new System.Windows.Forms.Button();
@@ -86,8 +87,6 @@
             this.Jahresvergleich = new System.Windows.Forms.TabPage();
             this.LblStatistics = new System.Windows.Forms.Label();
             this.DGWStatistic = new System.Windows.Forms.DataGridView();
-            this.AbfrageRechnungen = new System.Windows.Forms.TabPage();
-            this.CmdTreeView = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.Kunden.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGWCustomers)).BeginInit();
@@ -121,7 +120,6 @@
             this.TabControl.Controls.Add(this.Aufträge);
             this.TabControl.Controls.Add(this.Positionen);
             this.TabControl.Controls.Add(this.Jahresvergleich);
-            this.TabControl.Controls.Add(this.AbfrageRechnungen);
             this.TabControl.Location = new System.Drawing.Point(10, 9);
             this.TabControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TabControl.Name = "TabControl";
@@ -265,15 +263,25 @@
             this.Artikelgruppen.Controls.Add(this.TxtArticleGroupSearchName);
             this.Artikelgruppen.Controls.Add(this.LblArticleGroupSearch);
             this.Artikelgruppen.Controls.Add(this.LblArticleGroups);
-            this.Artikelgruppen.Location = new System.Drawing.Point(4, 34);
-            this.Artikelgruppen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Artikelgruppen.Location = new System.Drawing.Point(4, 24);
+            this.Artikelgruppen.Margin = new System.Windows.Forms.Padding(4);
             this.Artikelgruppen.Name = "Artikelgruppen";
-            this.Artikelgruppen.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Artikelgruppen.Size = new System.Drawing.Size(1793, 953);
+            this.Artikelgruppen.Padding = new System.Windows.Forms.Padding(4);
+            this.Artikelgruppen.Size = new System.Drawing.Size(1253, 567);
             this.Artikelgruppen.TabIndex = 0;
             this.Artikelgruppen.Text = "Artikelgruppen";
             this.Artikelgruppen.UseVisualStyleBackColor = true;
             this.Artikelgruppen.ContextMenuStripChanged += new System.EventHandler(this.UpdateListsEvent);
+            // 
+            // CmdTreeView
+            // 
+            this.CmdTreeView.Location = new System.Drawing.Point(1115, 112);
+            this.CmdTreeView.Name = "CmdTreeView";
+            this.CmdTreeView.Size = new System.Drawing.Size(97, 52);
+            this.CmdTreeView.TabIndex = 46;
+            this.CmdTreeView.Text = "Tree-View anzeigen";
+            this.CmdTreeView.UseVisualStyleBackColor = true;
+            this.CmdTreeView.Click += new System.EventHandler(this.CmdTreeView_Click);
             // 
             // CmdDeleteArticleGroup
             // 
@@ -798,27 +806,6 @@
             this.DGWStatistic.Size = new System.Drawing.Size(441, 452);
             this.DGWStatistic.TabIndex = 0;
             // 
-            // AbfrageRechnungen
-            // 
-            this.AbfrageRechnungen.Location = new System.Drawing.Point(4, 24);
-            this.AbfrageRechnungen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.AbfrageRechnungen.Name = "AbfrageRechnungen";
-            this.AbfrageRechnungen.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.AbfrageRechnungen.Size = new System.Drawing.Size(1253, 567);
-            this.AbfrageRechnungen.TabIndex = 6;
-            this.AbfrageRechnungen.Text = "Abfrage Rechnungen";
-            this.AbfrageRechnungen.UseVisualStyleBackColor = true;
-            // 
-            // CmdTreeView
-            // 
-            this.CmdTreeView.Location = new System.Drawing.Point(1000, 8);
-            this.CmdTreeView.Name = "CmdTreeView";
-            this.CmdTreeView.Size = new System.Drawing.Size(139, 69);
-            this.CmdTreeView.TabIndex = 46;
-            this.CmdTreeView.Text = "Artikelgruppen TreeView";
-            this.CmdTreeView.UseVisualStyleBackColor = true;
-            this.CmdTreeView.Click += new System.EventHandler(this.CmdTreeView_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -907,12 +894,12 @@
         private Label label11;
         private Label label10;
         private TabPage Jahresvergleich;
-        private TabPage AbfrageRechnungen;
         private ComboBox CmbCustomerSearchProperty;
         private ComboBox CmbArticleSearchProperty;
         private ComboBox CmbOrderSearchProperty;
         private ComboBox CmdPositionSearchProperty;
         private Label LblStatistics;
         private DataGridView DGWStatistic;
+        private Button CmdTreeView;
     }
 }

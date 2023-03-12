@@ -29,35 +29,26 @@
         private void InitializeComponent()
         {
             this.treeView = new System.Windows.Forms.TreeView();
-            this.CmdTreeViewShow = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // treeView
             // 
-            this.treeView.Location = new System.Drawing.Point(77, 50);
+            this.treeView.Location = new System.Drawing.Point(54, 30);
+            this.treeView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(670, 456);
+            this.treeView.Size = new System.Drawing.Size(470, 275);
             this.treeView.TabIndex = 0;
-            // 
-            // CmdTreeViewShow
-            // 
-            this.CmdTreeViewShow.Location = new System.Drawing.Point(784, 50);
-            this.CmdTreeViewShow.Name = "CmdTreeViewShow";
-            this.CmdTreeViewShow.Size = new System.Drawing.Size(157, 56);
-            this.CmdTreeViewShow.TabIndex = 1;
-            this.CmdTreeViewShow.Text = "TreeViewZeigen";
-            this.CmdTreeViewShow.UseVisualStyleBackColor = true;
-            this.CmdTreeViewShow.Click += new System.EventHandler(this.CmdTreeViewShow_Click);
             // 
             // TreeViewClass
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1029, 583);
-            this.Controls.Add(this.CmdTreeViewShow);
+            this.ClientSize = new System.Drawing.Size(608, 350);
             this.Controls.Add(this.treeView);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "TreeViewClass";
             this.Text = "TreeView";
+            this.VisibleChanged += new System.EventHandler(this.CmdTreeViewShow_Click);
             this.ResumeLayout(false);
 
         }
@@ -65,6 +56,5 @@
         #endregion
 
         private System.Windows.Forms.TreeView treeView;
-        private Button CmdTreeViewShow;
     }
 }

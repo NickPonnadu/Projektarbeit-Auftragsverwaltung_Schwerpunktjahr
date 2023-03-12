@@ -1,6 +1,4 @@
-﻿using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-
-namespace Projekt_Auftragsverwaltung
+﻿namespace Projekt_Auftragsverwaltung
 {
     public partial class Login : Form
     {
@@ -17,24 +15,16 @@ namespace Projekt_Auftragsverwaltung
             this.Connection = false;
         }
 
-        public static string server;
-        public static string name;
-
         private void CmdTestConnection_Click(object sender, EventArgs e)
         {
-            server = TxtDBServer.Text;
-            name = TxtDBName.Text;
-            // Prüft Textfelder auf Wert, nur Inhalt
+
             if (!string.IsNullOrEmpty(TxtDBServer.Text) && !string.IsNullOrEmpty(TxtDBName.Text))
             {
-                //Gibt Wert and DataManager weiter welcher dann auf Context zugreift und DB erstellt.
+                // Gibt Wert and DataManager weiter welcher dann auf Context zugreift und DB erstellt.
                 string connectionString = DatabaseManager.BuildConnectionString(TxtDBServer.Text, TxtDBName.Text);
-
-
+                // Überprüft, ob DB bereits vorhanden. Wird für Anzeige später verwendet
                 bool existingDB = DatabaseManager.CheckExistingDB(connectionString);
-
                 Connection = DatabaseManager.UseDbContext(connectionString);
-
                 if (this.Connection)
                 {
                     LblConnection.Text = existingDB ? "DB ist Verbunden" : "Da keine DB gefunden wurde, wurde eine neue DB mit Testdaten erstellt";
@@ -65,12 +55,6 @@ namespace Projekt_Auftragsverwaltung
                 this.MainGui.Show();
             }
         }
-
-        private void Login_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
-
 
     }
 }

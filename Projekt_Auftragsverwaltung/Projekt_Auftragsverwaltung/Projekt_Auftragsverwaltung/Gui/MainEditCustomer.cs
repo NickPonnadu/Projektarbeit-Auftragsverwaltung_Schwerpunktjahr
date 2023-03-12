@@ -10,7 +10,6 @@ namespace Projekt_Auftragsverwaltung
 
     {
         DataController dataController;
-        
         Customer? Customer { get; set; }
         public bool EditMode;
 
@@ -74,7 +73,7 @@ namespace Projekt_Auftragsverwaltung
             if (EditMode == true && Customer != null)
             {
                 dataController.EditCustomer(Customer.CustomerId, TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerWebsite.Text, TxtCustomerPassword.Text);
-                
+
                 var addressLocation = dataController.GetSingleAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text));
                 if (addressLocation != null)
                 {

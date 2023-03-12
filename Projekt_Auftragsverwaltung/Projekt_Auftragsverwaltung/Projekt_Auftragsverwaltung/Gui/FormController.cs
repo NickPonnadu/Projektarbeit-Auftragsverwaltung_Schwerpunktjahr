@@ -1,12 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using Projekt_Auftragsverwaltung.Tables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Projekt_Auftragsverwaltung.Gui
+﻿namespace Projekt_Auftragsverwaltung.Gui
 {
     public class FormController : Form
     {
@@ -32,9 +24,6 @@ namespace Projekt_Auftragsverwaltung.Gui
         private void InitializeComponent()
         {
             SuspendLayout();
-            // 
-            // FormController
-            // 
             ClientSize = new Size(278, 244);
             Name = "FormController";
             ResumeLayout(false);

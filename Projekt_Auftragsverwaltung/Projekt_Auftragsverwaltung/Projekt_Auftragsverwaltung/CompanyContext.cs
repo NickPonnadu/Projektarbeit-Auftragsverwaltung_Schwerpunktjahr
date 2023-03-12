@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Identity.Client;
 using Projekt_Auftragsverwaltung.Tables;
-using System.Configuration;
 
 namespace Projekt_Auftragsverwaltung
 {
@@ -17,7 +14,6 @@ namespace Projekt_Auftragsverwaltung
         public DbSet<ArticleGroup> ArticleGroups { get; set; }
         public DbSet<ArticlePosition> ArticlePositions { get; set; }
 
-
         public string _ConnectionString;
 
         public CompanyContext(string connectionString)
@@ -28,7 +24,7 @@ namespace Projekt_Auftragsverwaltung
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_ConnectionString);
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,32 +32,31 @@ namespace Projekt_Auftragsverwaltung
             modelBuilder.Entity<Address>()
                 .HasKey(b => b.AddressId);
 
-            // Configure primary key
+
+            modelBuilder.Entity<AddressLocation>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
             modelBuilder.Entity<AddressLocation>().HasKey(b => b.ZipCode);
 
             modelBuilder.Entity<AddressLocation>()
                .Property(b => b.ZipCode)
                .ValueGeneratedNever();
-
+            modelBuilder.Entity<Article>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
             modelBuilder.Entity<Article>()
                 .HasKey(b => b.ArticleId);
-
+            modelBuilder.Entity<ArticleGroup>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
             modelBuilder.Entity<ArticleGroup>()
                 .HasKey(b => b.ArticleGroupId);
-
+            modelBuilder.Entity<ArticlePosition>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
             modelBuilder.Entity<ArticlePosition>()
                 .HasKey(b => b.ArticlePositionId);
-
+            modelBuilder.Entity<Customer>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
             modelBuilder.Entity<Customer>()
                 .HasKey(b => b.CustomerId);
-
+            modelBuilder.Entity<Order>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
             modelBuilder.Entity<Order>()
                .HasKey(b => b.OrderId);
-
+            modelBuilder.Entity<OrderPosition>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
             modelBuilder.Entity<OrderPosition>()
                .HasKey(b => b.OrderPositionId);
-
-
 
 
 
@@ -100,7 +95,7 @@ namespace Projekt_Auftragsverwaltung
                .HasForeignKey(ap => ap.ArticleId);
 
 
-
+            // Testdaten
             modelBuilder.Entity<AddressLocation>().HasData(
                new AddressLocation { ZipCode = 9000, Location = "St. Gallen" },
                new AddressLocation { ZipCode = 9426, Location = "Lutzenberg" },
@@ -118,7 +113,7 @@ namespace Projekt_Auftragsverwaltung
                 new Address { AddressId = 5, Street = "Bahnhofsstrasse", HouseNumber = "12", ZipCode = 8000 }
             );
 
-           
+
 
 
             modelBuilder.Entity<Article>().HasData(

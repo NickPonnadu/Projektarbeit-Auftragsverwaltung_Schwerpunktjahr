@@ -1,26 +1,6 @@
-﻿using Azure;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.VisualBasic;
-using Projekt_Auftragsverwaltung;
+﻿using Microsoft.Data.SqlClient;
 using Projekt_Auftragsverwaltung.Tables;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
-using System.IO;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using static System.ComponentModel.Design.ObjectSelectorEditor;
-using static System.Net.WebRequestMethods;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Projekt_Auftragsverwaltung
 {
@@ -57,13 +37,11 @@ namespace Projekt_Auftragsverwaltung
                              };
                 var list = kunden.ToList();
                 var dataTable = CreateDataTableCustomer();
-                // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
                 foreach (var item in list)
                 {
                     dataTable.Rows.Add(item.Kundennummer, item.Name, item.Telefonnummer, item.EMail, item.Webseite,
                         item.Passwort, item.Strasse, item.Hausnummer, item.PLZ, item.Ort);
                 }
-                // Verwende die DataTable als DataSource für das DataGridView
                 return dataTable;
             }
         }
@@ -163,15 +141,12 @@ namespace Projekt_Auftragsverwaltung
                                        Preis = a.Price,
                                        Artikelgruppe = ag != null ? ag.Name : "keine Artikelgruppe",
                                    };
-
                     var list = articles.ToList();
                     var dataTable = CreateDataTableArticles();
-                    // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
                     foreach (var item in list)
                     {
                         dataTable.Rows.Add(item.ArtikelId, item.Artikelname, item.Preis, item.Artikelgruppe);
                     }
-                    // Verwende die DataTable als DataSource für das DataGridView
                     return dataTable;
                 }
             }
@@ -210,13 +185,11 @@ namespace Projekt_Auftragsverwaltung
 
                 var list = articles.ToList();
                 var dataTable = CreateDataTableArticles();
-                // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
                 foreach (var item in list)
                 {
                     dataTable.Rows.Add(item.ArtikelId, item.Artikelname, item.Preis, item.Artikelgruppe);
                 }
 
-                // Verwende die DataTable als DataSource für das DataGridView
                 return dataTable;
             }
         }
@@ -252,7 +225,6 @@ namespace Projekt_Auftragsverwaltung
                         dataTable.Rows.Add(order.Auftragsnummer, order.Datum, order.Name, order.PositionsId, order.Totalbetrag.ToString("0.00"));
 
                     }
-
                     return dataTable;
                 }
             }
@@ -294,11 +266,9 @@ namespace Projekt_Auftragsverwaltung
                         case "Name":
                             foundOrders = foundOrders.Where(o => o.Name.Contains(value));
                             break;
-                    }
-                    ;
+                    };
 
                     var list = foundOrders.ToList();
-
                     var dataTable = CreateDataTableOrders();
                     foreach (var order in list)
                     {
@@ -386,7 +356,7 @@ namespace Projekt_Auftragsverwaltung
                         case "Auftragsnummer":
                             orderPositionsQuery = orderPositionsQuery.Where(op => op.Auftragsnummer.ToString().Contains(searchValue));
                             break;
-                      
+
                         case "Kunde":
                             orderPositionsQuery = orderPositionsQuery.Where(op => op.Kunde.Contains(searchValue));
                             break;
@@ -415,7 +385,7 @@ namespace Projekt_Auftragsverwaltung
                             }
                             break;
                     }
-                    
+
 
                     var list = orderPositionsQuery.ToList();
 
@@ -429,7 +399,6 @@ namespace Projekt_Auftragsverwaltung
                     }
                     return dataTable;
 
-                    return null;
                 }
             }
         }
@@ -448,17 +417,13 @@ namespace Projekt_Auftragsverwaltung
                                             Name = a.Name
                                         };
 
-
-
                     var list = articleGroups.ToList();
                     var dataTable = CreateDataTableArticleGroups();
-                    // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
                     foreach (var item in list)
                     {
                         dataTable.Rows.Add(item.ArtikelgruppeId, item.Name);
                     }
 
-                    // Verwende die DataTable als DataSource für das DataGridView
                     return dataTable;
                 }
             }
@@ -478,18 +443,15 @@ namespace Projekt_Auftragsverwaltung
                                             a.Name
                                         };
 
-
                     articleGroups = articleGroups.Where(o => o.Name.Contains(searchValue));
 
                     var list = articleGroups.ToList();
                     var dataTable = CreateDataTableArticleGroups();
-                    // Füge jede Zeile aus der Ergebnisliste zur DataTable hinzu
                     foreach (var item in list)
                     {
                         dataTable.Rows.Add(item.ArtikelgruppeId, item.Name);
                     }
 
-                    // Verwende die DataTable als DataSource für das DataGridView
                     return dataTable;
                 }
             }
@@ -542,23 +504,18 @@ namespace Projekt_Auftragsverwaltung
         }
         public void CreateAddressLocation(string zipCode, string location)
         {
-            // Verbindung mit der Datenbank herstellen
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                // SqlCommand-Objekt erstellen und mit Verbindung und SQL-Befehl initialisieren
                 using (var dbContext = new CompanyContext(ConnectionString))
                 {
-                    // Prüfen, ob Datensatz bereits vorhanden ist
                     var existingRecord = dbContext.AddressLocations.FirstOrDefault(al => al.ZipCode == Convert.ToInt32(zipCode));
 
                     if (existingRecord != null)
                     {
-                        // Datensatz bereits vorhanden
                         return;
                     }
 
-                    // Datensatz neu erstellen
                     var newAddressLocation = new AddressLocation
                     {
                         ZipCode = Convert.ToInt32(zipCode),
@@ -572,7 +529,7 @@ namespace Projekt_Auftragsverwaltung
 
         public void CreateOrder(DateTime date, int customerId)
         {
-            // Verbindung mit der Datenbank herstellen
+
             using var dbContext = new CompanyContext(ConnectionString);
             var order = new Order
             {
@@ -585,7 +542,6 @@ namespace Projekt_Auftragsverwaltung
 
         public void CreateOrderPosition(int amount, int orderId, int articleId)
         {
-            // Verbindung mit der Datenbank herstellen
             using (var dbContext = new CompanyContext(ConnectionString))
             {
                 var orderPosition = new OrderPosition
@@ -610,7 +566,6 @@ namespace Projekt_Auftragsverwaltung
         }
         public void CreateArticleGroup(string name)
         {
-            // Verbindung mit der Datenbank herstellen
             using (var dbContext = new CompanyContext(ConnectionString))
             {
                 var articleGroup = new ArticleGroup { Name = name };
@@ -620,7 +575,6 @@ namespace Projekt_Auftragsverwaltung
         }
         public void CreateArticle(string name, decimal price, int articleGroupId)
         {
-            // Verbindung mit der Datenbank herstellen
             using (var dbContext = new CompanyContext(ConnectionString))
             {
                 var article = new Article
@@ -637,9 +591,7 @@ namespace Projekt_Auftragsverwaltung
         }
         public static DataTable CreateDataTableCustomer()
         {
-            // Erstelle eine neue DataTable
             DataTable dataTable = new DataTable();
-            // Erstelle Spalten in der DataTable
             dataTable.Columns.Add("Kundennummer", typeof(int));
             dataTable.Columns.Add("Name", typeof(string));
             dataTable.Columns.Add("Telefonnummer", typeof(string));
@@ -654,9 +606,7 @@ namespace Projekt_Auftragsverwaltung
         }
         public static DataTable CreateDataTableArticles()
         {
-            // Erstelle eine neue DataTable
             DataTable dataTable = new DataTable();
-            // Erstelle Spalten in der DataTable
             dataTable.Columns.Add("ArtikelId", typeof(int));
             dataTable.Columns.Add("Artikelname", typeof(string));
             dataTable.Columns.Add("Preis", typeof(decimal));
@@ -665,9 +615,7 @@ namespace Projekt_Auftragsverwaltung
         }
         public static DataTable CreateDataTableArticleGroups()
         {
-            // Erstelle eine neue DataTable
             DataTable dataTable = new DataTable();
-            // Erstelle Spalten in der DataTable
             dataTable.Columns.Add("ArtikelgruppeId", typeof(int));
             dataTable.Columns.Add("Name", typeof(string));
             return dataTable;
@@ -699,11 +647,8 @@ namespace Projekt_Auftragsverwaltung
 
         public static DataTable CreateDataTableStatistics()
         {
-            // Erstelle eine neue DataTable
             DataTable dataTable = new DataTable();
-            // Erstelle Spalten in der DataTable
             dataTable.Columns.Add("Kategorie", typeof(int));
-            
             dataTable.Columns.Add("Q1", typeof(decimal));
             dataTable.Columns.Add("Q2", typeof(decimal));
             dataTable.Columns.Add("Q3", typeof(decimal));
@@ -720,8 +665,18 @@ namespace Projekt_Auftragsverwaltung
                 var recordToDelete = db.Articles.FirstOrDefault(r => r.ArticleId == articleId);
                 if (recordToDelete != null)
                 {
-                    db.Articles.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
-                    db.SaveChanges(); // Änderungen speichern
+                    var articlePositions = db.ArticlePositions.Where(ap => ap.ArticleId == articleId).ToList();
+                    if (articlePositions.Any())
+                    {
+                        MessageBox.Show("Artikel ist mit Positionen verknüpft!");
+                    }
+                    else
+                    {
+
+                        db.Articles.Remove(recordToDelete);
+                        db.SaveChanges();
+
+                    }
                 }
             }
         }
@@ -741,8 +696,8 @@ namespace Projekt_Auftragsverwaltung
                     }
                     else
                     {
-                        db.ArticleGroups.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
-                        db.SaveChanges(); // Änderungen speichern
+                        db.ArticleGroups.Remove(recordToDelete);
+                        db.SaveChanges();
                     }
                 }
             }
@@ -759,8 +714,8 @@ namespace Projekt_Auftragsverwaltung
                     var orderPositions = db.OrderPositions.Where(op => op.OrderId == orderId).ToList();
                     if (orderPositions.Count == 0)
                     {
-                        db.Orders.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
-                        db.SaveChanges(); // Änderungen speichern
+                        db.Orders.Remove(recordToDelete);
+                        db.SaveChanges();
                     }
                     else
                     {
@@ -778,7 +733,7 @@ namespace Projekt_Auftragsverwaltung
         {
             using (var db = new CompanyContext(ConnectionString))
             {
-                // Kunden-Bestellungen prüfen
+
                 var hasOrders = db.Orders.Any(o => o.CustomerId == customerId);
                 if (hasOrders)
                 {
@@ -844,7 +799,7 @@ namespace Projekt_Auftragsverwaltung
                 {
                     recordToEdit.Name = articleGroupName;
                     db.ArticleGroups.Update(recordToEdit);
-                    db.SaveChanges(); // Änderungen speichern
+                    db.SaveChanges();
                 }
             }
         }
@@ -860,7 +815,7 @@ namespace Projekt_Auftragsverwaltung
                     recordToEdit.Price = articlePrice;
                     recordToEdit.ArticleGroupId = articleGroupId;
                     db.Articles.Update(recordToEdit);
-                    db.SaveChanges(); // Änderungen speichern
+                    db.SaveChanges();
                 }
             }
         }
@@ -875,7 +830,7 @@ namespace Projekt_Auftragsverwaltung
                     recordToEdit.Date = date;
                     recordToEdit.CustomerId = customerId;
                     db.Orders.Update(recordToEdit);
-                    db.SaveChanges(); // Änderungen speichern
+                    db.SaveChanges();
                 }
             }
         }
@@ -891,7 +846,7 @@ namespace Projekt_Auftragsverwaltung
                     recordToEdit.amount = amount;
                     recordToEdit.OrderId = orderId;
                     db.OrderPositions.Update(recordToEdit);
-                    db.SaveChanges(); // Änderungen speichern
+                    db.SaveChanges();
                 }
             }
         }
@@ -906,7 +861,7 @@ namespace Projekt_Auftragsverwaltung
                     recordToEdit.OrderPositionId = orderPositionId;
                     recordToEdit.ArticleId = articleId;
                     db.ArticlePositions.Update(recordToEdit);
-                    db.SaveChanges(); // Änderungen speichern
+                    db.SaveChanges();
                 }
             }
         }
@@ -925,7 +880,7 @@ namespace Projekt_Auftragsverwaltung
                     recordToEdit.Website = website;
                     recordToEdit.Password = Password;
                     db.Customers.Update(recordToEdit);
-                    db.SaveChanges(); // Änderungen speichern
+                    db.SaveChanges();
                 }
             }
         }
@@ -942,7 +897,7 @@ namespace Projekt_Auftragsverwaltung
                     recordToEdit.HouseNumber = houseNumber;
                     recordToEdit.ZipCode = postCode == 0000 ? 0000 : postCode;
                     db.Addresses.Update(recordToEdit);
-                    db.SaveChanges(); // Änderungen speichern
+                    db.SaveChanges();
                 }
             }
         }
@@ -956,7 +911,7 @@ namespace Projekt_Auftragsverwaltung
 
                     recordToEdit.Location = location;
                     db.AddressLocations.Update(recordToEdit);
-                    db.SaveChanges(); // Änderungen speichern
+                    db.SaveChanges();
                 }
             }
         }
@@ -1102,21 +1057,43 @@ namespace Projekt_Auftragsverwaltung
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-
-
-                    //DataTable data = CreateDataTableStatistics();
                     DataTable data = new();
                     using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                     {
                         adapter.Fill(data);
                     }
-
                     return data;
                 }
 
             }
-
-
         }
+
+        public DataTable GetDataTableTreeView()
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                string query = "WITH CTE_ArticleGroups (ArticleGroupId, Name, ParentId, Level) AS " +
+                               "(SELECT ArticleGroupId, Name, ParentId, 0 AS Level FROM dbo.ArticleGroups " +
+                               "WHERE ParentId IS NULL " +
+                               "UNION ALL " +
+                               "SELECT ag.ArticleGroupId, ag.Name, ag.ParentId, ag.Level + 1 " +
+                               "FROM dbo.ArticleGroups AS ag " +
+                               "INNER JOIN CTE_ArticleGroups AS p " +
+                               "ON ag.ParentId = p.ArticleGroupId) " +
+                               "SELECT ArticleGroupId, Name, ParentId, Level " +
+                                "FROM CTE_ArticleGroups " +
+                               "ORDER BY ArticleGroupId;";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                return table;
+            }
+        }
+
     }
+
 }

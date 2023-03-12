@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Runtime.CompilerServices;
-
-namespace Projekt_Auftragsverwaltung
+﻿namespace Projekt_Auftragsverwaltung
 {
 
     public class DatabaseManager
@@ -29,11 +26,8 @@ namespace Projekt_Auftragsverwaltung
 
         public static bool CheckExistingDB(string connectionString)
         {
-
             using var context = new CompanyContext(connectionString);
             return context.Database.CanConnect();
-          
         }
-
     }
 }

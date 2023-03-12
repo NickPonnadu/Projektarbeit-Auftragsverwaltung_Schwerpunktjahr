@@ -54,9 +54,7 @@ namespace Projekt_Auftragsverwaltung
                     var rowsOrders = DGWChooseOrder.SelectedRows[0];
                     var rowsArticles = DGWChooseArticles.SelectedRows[0];
                     int orderId = Convert.ToInt32(rowsOrders.Cells[0].Value);
-
                     int articleId = Convert.ToInt32(rowsArticles.Cells[0].Value);
-
                     dataController.CreateOrderPosition(Convert.ToInt32(NumOrderPositionQuantity.Value), orderId, articleId);
                     SetEditModeOff();
                     CloseForm();
@@ -74,8 +72,6 @@ namespace Projekt_Auftragsverwaltung
                 int articleId = Convert.ToInt32(rowsArticles.Cells[0].Value);
                 dataController.EditOrderPosition(OrderPosition.OrderPositionId, Convert.ToInt16(NumOrderPositionQuantity.Value), orderId);
                 dataController.EditArticlePosition(OrderPosition.OrderPositionId, articleId);
-                // Schauen, ob es klappt so oder ob man auch articlePosition öndern muss
-
                 SetEditModeOff();
                 CloseForm();
             }
@@ -85,8 +81,6 @@ namespace Projekt_Auftragsverwaltung
             }
 
         }
-
-
 
         private void CmdCreatePositionCancel_Click(object sender, EventArgs e)
         {
@@ -116,6 +110,5 @@ namespace Projekt_Auftragsverwaltung
                 DGWChooseArticles.DataSource = data;
             }
         }
-
     }
 }

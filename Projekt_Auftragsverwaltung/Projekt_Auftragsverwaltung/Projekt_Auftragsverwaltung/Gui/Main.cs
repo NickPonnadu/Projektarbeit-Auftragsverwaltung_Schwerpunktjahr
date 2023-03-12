@@ -1,9 +1,4 @@
-using Microsoft.Data.SqlClient;
 using Projekt_Auftragsverwaltung.Gui;
-using Projekt_Auftragsverwaltung.Tables;
-using System;
-using System.Data;
-using System.Reflection.Metadata;
 using TreeViewClass = Projekt_Auftragsverwaltung.Gui.TreeViewClass;
 
 namespace Projekt_Auftragsverwaltung
@@ -12,12 +7,12 @@ namespace Projekt_Auftragsverwaltung
 
     public partial class Main : FormController
     {
-        private Form EditGuiArticleGroup;
-        private Form EditGuiCustomer;
-        private Form EditGuiArticle;
-        private Form EditGuiOrder;
-        private Form EditGuiPosition;
-        private Form TreeViewClass;
+        public Form EditGuiArticleGroup;
+        public Form EditGuiCustomer;
+        public Form EditGuiArticle;
+        public Form EditGuiOrder;
+        public Form EditGuiPosition;
+        public Form TreeViewClass;
         public string ConnectionString;
         private DataController DataController;
 
@@ -40,7 +35,6 @@ namespace Projekt_Auftragsverwaltung
             UpdateLists();
             SetDataBindings();
         }
-
 
         private void CmdCreateArticleGroup_Click(Object sender, EventArgs e)
         {
@@ -143,10 +137,6 @@ namespace Projekt_Auftragsverwaltung
 
         }
 
-        private void Main_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
 
         public void SetDataBindings()
         {
@@ -154,7 +144,6 @@ namespace Projekt_Auftragsverwaltung
             CmdPositionSearchProperty.DataSource = new String[] { "Positionsnummer", "Auftragsnummer", "Kunde", "Artikelbezeichnung", "Artikelanzahl", "Artikelbetrag", "Totalbetrag" };
             CmbArticleSearchProperty.DataSource = new String[] { "ArtikelId", "Artikelname", "Preis", "Artikelgruppe" };
             CmbOrderSearchProperty.DataSource = new String[] { "Auftragsnummer", "Name", };
-            
         }
 
         public void UpdateListsEvent(object sender, EventArgs e)
@@ -327,12 +316,19 @@ namespace Projekt_Auftragsverwaltung
         {
             DGWStatistic.DataSource = DataController.ReturnStatistic();
         }
-            UpdateArticleGroups();
-        }
+
 
         private void CmdTreeView_Click(object sender, EventArgs e)
         {
-            this.TreeViewClass.ShowDialog();
+            TreeViewClass.ShowDialog();
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
+
 }
+
+
