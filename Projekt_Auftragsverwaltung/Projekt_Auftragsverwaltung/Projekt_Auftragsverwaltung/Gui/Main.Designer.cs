@@ -87,6 +87,7 @@
             this.LblStatistics = new System.Windows.Forms.Label();
             this.DGWStatistic = new System.Windows.Forms.DataGridView();
             this.AbfrageRechnungen = new System.Windows.Forms.TabPage();
+            this.CmdTreeView = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.Kunden.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGWCustomers)).BeginInit();
@@ -254,6 +255,7 @@
             // 
             // Artikelgruppen
             // 
+            this.Artikelgruppen.Controls.Add(this.CmdTreeView);
             this.Artikelgruppen.Controls.Add(this.CmdDeleteArticleGroup);
             this.Artikelgruppen.Controls.Add(this.CmdSearchResetArticleGroup);
             this.Artikelgruppen.Controls.Add(this.CmdSearchArticleGroup);
@@ -263,11 +265,11 @@
             this.Artikelgruppen.Controls.Add(this.TxtArticleGroupSearchName);
             this.Artikelgruppen.Controls.Add(this.LblArticleGroupSearch);
             this.Artikelgruppen.Controls.Add(this.LblArticleGroups);
-            this.Artikelgruppen.Location = new System.Drawing.Point(4, 24);
-            this.Artikelgruppen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Artikelgruppen.Location = new System.Drawing.Point(4, 34);
+            this.Artikelgruppen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Artikelgruppen.Name = "Artikelgruppen";
-            this.Artikelgruppen.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Artikelgruppen.Size = new System.Drawing.Size(1253, 567);
+            this.Artikelgruppen.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Artikelgruppen.Size = new System.Drawing.Size(1793, 953);
             this.Artikelgruppen.TabIndex = 0;
             this.Artikelgruppen.Text = "Artikelgruppen";
             this.Artikelgruppen.UseVisualStyleBackColor = true;
@@ -806,6 +808,16 @@
             this.AbfrageRechnungen.TabIndex = 6;
             this.AbfrageRechnungen.Text = "Abfrage Rechnungen";
             this.AbfrageRechnungen.UseVisualStyleBackColor = true;
+            // 
+            // CmdTreeView
+            // 
+            this.CmdTreeView.Location = new System.Drawing.Point(1000, 8);
+            this.CmdTreeView.Name = "CmdTreeView";
+            this.CmdTreeView.Size = new System.Drawing.Size(139, 69);
+            this.CmdTreeView.TabIndex = 46;
+            this.CmdTreeView.Text = "Artikelgruppen TreeView";
+            this.CmdTreeView.UseVisualStyleBackColor = true;
+            this.CmdTreeView.Click += new System.EventHandler(this.CmdTreeView_Click);
             // 
             // Main
             // 

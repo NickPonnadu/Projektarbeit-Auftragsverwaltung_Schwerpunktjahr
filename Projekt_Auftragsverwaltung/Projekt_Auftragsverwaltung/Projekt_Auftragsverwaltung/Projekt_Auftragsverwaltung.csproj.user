@@ -25,5 +25,8 @@
     <Compile Update="Gui\MainEditPosition.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Gui\TreeViewClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

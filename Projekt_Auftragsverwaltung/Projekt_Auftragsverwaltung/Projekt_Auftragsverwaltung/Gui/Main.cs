@@ -4,6 +4,7 @@ using Projekt_Auftragsverwaltung.Tables;
 using System;
 using System.Data;
 using System.Reflection.Metadata;
+using TreeViewClass = Projekt_Auftragsverwaltung.Gui.TreeViewClass;
 
 namespace Projekt_Auftragsverwaltung
 
@@ -11,14 +12,14 @@ namespace Projekt_Auftragsverwaltung
 
     public partial class Main : FormController
     {
-        public Form EditGuiArticleGroup;
-        public Form EditGuiCustomer;
-        public Form EditGuiArticle;
-        public Form EditGuiOrder;
-        public Form EditGuiPosition;
-
-
-        public DataController DataController;
+        private Form EditGuiArticleGroup;
+        private Form EditGuiCustomer;
+        private Form EditGuiArticle;
+        private Form EditGuiOrder;
+        private Form EditGuiPosition;
+        private Form TreeViewClass;
+        public string ConnectionString;
+        private DataController DataController;
 
         public Main(string connectionString)
         {
@@ -29,6 +30,7 @@ namespace Projekt_Auftragsverwaltung
             this.EditGuiArticle = new MainEditArticle(ConnectionString);
             this.EditGuiPosition = new MainEditPosition(ConnectionString);
             this.EditGuiOrder = new MainEditOrder(ConnectionString);
+            this.TreeViewClass = new TreeViewClass(ConnectionString);
             DataController = new DataController(ConnectionString);
             EditGuiArticleGroup.VisibleChanged += UpdateListsEvent;
             EditGuiCustomer.VisibleChanged += UpdateListsEvent;
@@ -324,6 +326,13 @@ namespace Projekt_Auftragsverwaltung
         private void Select_Statistics(object sender, TabControlCancelEventArgs e)
         {
             DGWStatistic.DataSource = DataController.ReturnStatistic();
+        }
+            UpdateArticleGroups();
+        }
+
+        private void CmdTreeView_Click(object sender, EventArgs e)
+        {
+            this.TreeViewClass.ShowDialog();
         }
     }
 }
