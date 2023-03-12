@@ -10,7 +10,6 @@ namespace Projekt_Auftragsverwaltung
 
     {
         DataController dataController;
-        public string ConnectionString;
         OrderPosition? OrderPosition { get; set; }
         public bool EditMode;
         public MainEditPosition(string connectionString, OrderPosition orderPosition = null)

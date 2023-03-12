@@ -14,18 +14,15 @@ namespace Projekt_Auftragsverwaltung
 
         public static bool UseDbContext(string connectionString)
         {
-            using (var context = new CompanyContext(connectionString))
+            using var context = new CompanyContext(connectionString);
+            try
             {
-                try
-                {
-                    context.Database.EnsureCreated();
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
-
+                context.Database.EnsureCreated();
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
@@ -33,15 +30,9 @@ namespace Projekt_Auftragsverwaltung
         public static bool CheckExistingDB(string connectionString)
         {
 
-            using (var context = new CompanyContext(connectionString))
-            {
-                if (context.Database.CanConnect())
-                {
-                    return true;
-                }
-                else
-                    return false;
-            }
+            using var context = new CompanyContext(connectionString);
+            return context.Database.CanConnect();
+          
         }
 
     }

@@ -84,6 +84,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.Jahresvergleich = new System.Windows.Forms.TabPage();
+            this.LblStatistics = new System.Windows.Forms.Label();
+            this.DGWStatistic = new System.Windows.Forms.DataGridView();
             this.AbfrageRechnungen = new System.Windows.Forms.TabPage();
             this.TabControl.SuspendLayout();
             this.Kunden.SuspendLayout();
@@ -96,6 +98,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGWOrders)).BeginInit();
             this.Positionen.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGWPositions)).BeginInit();
+            this.Jahresvergleich.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGWStatistic)).BeginInit();
             this.SuspendLayout();
             // 
             // LblKunden
@@ -123,6 +127,7 @@
             this.TabControl.SelectedIndex = 0;
             this.TabControl.Size = new System.Drawing.Size(1261, 595);
             this.TabControl.TabIndex = 24;
+            this.TabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.Select_Statistics);
             // 
             // Kunden
             // 
@@ -327,10 +332,12 @@
             // 
             this.DGWArticleGroups.AllowUserToAddRows = false;
             this.DGWArticleGroups.AllowUserToDeleteRows = false;
+            this.DGWArticleGroups.BackgroundColor = System.Drawing.SystemColors.Control;
             this.DGWArticleGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGWArticleGroups.Location = new System.Drawing.Point(31, 112);
             this.DGWArticleGroups.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DGWArticleGroups.Name = "DGWArticleGroups";
+            this.DGWArticleGroups.ReadOnly = true;
             this.DGWArticleGroups.RowHeadersWidth = 51;
             this.DGWArticleGroups.RowTemplate.Height = 29;
             this.DGWArticleGroups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -404,6 +411,7 @@
             this.DGWArticles.Location = new System.Drawing.Point(31, 112);
             this.DGWArticles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DGWArticles.Name = "DGWArticles";
+            this.DGWArticles.ReadOnly = true;
             this.DGWArticles.RowHeadersWidth = 51;
             this.DGWArticles.RowTemplate.Height = 29;
             this.DGWArticles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -532,6 +540,7 @@
             this.DGWOrders.Location = new System.Drawing.Point(31, 112);
             this.DGWOrders.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DGWOrders.Name = "DGWOrders";
+            this.DGWOrders.ReadOnly = true;
             this.DGWOrders.RowHeadersWidth = 51;
             this.DGWOrders.RowTemplate.Height = 29;
             this.DGWOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -660,6 +669,7 @@
             this.DGWPositions.Location = new System.Drawing.Point(31, 112);
             this.DGWPositions.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DGWPositions.Name = "DGWPositions";
+            this.DGWPositions.ReadOnly = true;
             this.DGWPositions.RowHeadersWidth = 51;
             this.DGWPositions.RowTemplate.Height = 29;
             this.DGWPositions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -750,6 +760,8 @@
             // 
             // Jahresvergleich
             // 
+            this.Jahresvergleich.Controls.Add(this.LblStatistics);
+            this.Jahresvergleich.Controls.Add(this.DGWStatistic);
             this.Jahresvergleich.Location = new System.Drawing.Point(4, 24);
             this.Jahresvergleich.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Jahresvergleich.Name = "Jahresvergleich";
@@ -758,6 +770,31 @@
             this.Jahresvergleich.TabIndex = 5;
             this.Jahresvergleich.Text = "Jahresvergleich";
             this.Jahresvergleich.UseVisualStyleBackColor = true;
+            // 
+            // LblStatistics
+            // 
+            this.LblStatistics.AutoSize = true;
+            this.LblStatistics.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblStatistics.Location = new System.Drawing.Point(34, 28);
+            this.LblStatistics.Name = "LblStatistics";
+            this.LblStatistics.Size = new System.Drawing.Size(255, 30);
+            this.LblStatistics.TabIndex = 1;
+            this.LblStatistics.Text = "Jahresvergleich - Statistik";
+            // 
+            // DGWStatistic
+            // 
+            this.DGWStatistic.AllowUserToAddRows = false;
+            this.DGWStatistic.AllowUserToDeleteRows = false;
+            this.DGWStatistic.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DGWStatistic.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DGWStatistic.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.DGWStatistic.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGWStatistic.Location = new System.Drawing.Point(34, 92);
+            this.DGWStatistic.Name = "DGWStatistic";
+            this.DGWStatistic.ReadOnly = true;
+            this.DGWStatistic.RowTemplate.Height = 25;
+            this.DGWStatistic.Size = new System.Drawing.Size(441, 452);
+            this.DGWStatistic.TabIndex = 0;
             // 
             // AbfrageRechnungen
             // 
@@ -797,6 +834,9 @@
             this.Positionen.ResumeLayout(false);
             this.Positionen.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGWPositions)).EndInit();
+            this.Jahresvergleich.ResumeLayout(false);
+            this.Jahresvergleich.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGWStatistic)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -860,5 +900,7 @@
         private ComboBox CmbArticleSearchProperty;
         private ComboBox CmbOrderSearchProperty;
         private ComboBox CmdPositionSearchProperty;
+        private Label LblStatistics;
+        private DataGridView DGWStatistic;
     }
 }

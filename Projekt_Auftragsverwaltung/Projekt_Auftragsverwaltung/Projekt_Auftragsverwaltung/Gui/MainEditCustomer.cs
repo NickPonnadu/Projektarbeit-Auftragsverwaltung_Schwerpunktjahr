@@ -10,8 +10,7 @@ namespace Projekt_Auftragsverwaltung
 
     {
         DataController dataController;
-        public string ConnectionString;
-
+        
         Customer? Customer { get; set; }
         public bool EditMode;
 

@@ -105,6 +105,7 @@
             this.DGWChooseCustomer.Location = new System.Drawing.Point(49, 232);
             this.DGWChooseCustomer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DGWChooseCustomer.Name = "DGWChooseCustomer";
+            this.DGWChooseCustomer.ReadOnly = true;
             this.DGWChooseCustomer.RowHeadersWidth = 51;
             this.DGWChooseCustomer.RowTemplate.Height = 29;
             this.DGWChooseCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;

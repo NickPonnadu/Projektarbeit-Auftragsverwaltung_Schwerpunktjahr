@@ -17,7 +17,7 @@ namespace Projekt_Auftragsverwaltung
         public Form EditGuiOrder;
         public Form EditGuiPosition;
 
-        public string ConnectionString;
+
         public DataController DataController;
 
         public Main(string connectionString)
@@ -29,13 +29,13 @@ namespace Projekt_Auftragsverwaltung
             this.EditGuiArticle = new MainEditArticle(ConnectionString);
             this.EditGuiPosition = new MainEditPosition(ConnectionString);
             this.EditGuiOrder = new MainEditOrder(ConnectionString);
-                        DataController = new DataController(ConnectionString);
+            DataController = new DataController(ConnectionString);
             EditGuiArticleGroup.VisibleChanged += UpdateListsEvent;
             EditGuiCustomer.VisibleChanged += UpdateListsEvent;
             EditGuiOrder.VisibleChanged += UpdateListsEvent;
             EditGuiArticle.VisibleChanged += UpdateListsEvent;
             EditGuiPosition.VisibleChanged += UpdateListsEvent;
-                        UpdateLists();
+            UpdateLists();
             SetDataBindings();
         }
 
@@ -138,7 +138,7 @@ namespace Projekt_Auftragsverwaltung
                 this.EditGuiOrder.ShowDialog();
                 UpdateLists();
             }
-            
+
         }
 
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
@@ -149,9 +149,10 @@ namespace Projekt_Auftragsverwaltung
         public void SetDataBindings()
         {
             CmbCustomerSearchProperty.DataSource = new String[] { "Kundennummer", "Name", "Telefonnummer", "Email", "Website", "Strasse", "Hausnummer", "PLZ", "Ort" };
-            CmdPositionSearchProperty.DataSource = new String[] { "Positionsnummer", "Auftragsnummer", "Auftragsdatum", "Kunde", "Artikelbezeichnung", "Artikelanzahl", "Artikelbetrag", "Totalbetrag" };
+            CmdPositionSearchProperty.DataSource = new String[] { "Positionsnummer", "Auftragsnummer", "Kunde", "Artikelbezeichnung", "Artikelanzahl", "Artikelbetrag", "Totalbetrag" };
             CmbArticleSearchProperty.DataSource = new String[] { "ArtikelId", "Artikelname", "Preis", "Artikelgruppe" };
-            CmbOrderSearchProperty.DataSource = new String[] { "Auftragsnummer", "Datum", "Name", };
+            CmbOrderSearchProperty.DataSource = new String[] { "Auftragsnummer", "Name", };
+            
         }
 
         public void UpdateListsEvent(object sender, EventArgs e)
@@ -317,6 +318,12 @@ namespace Projekt_Auftragsverwaltung
             }
             else
             { MessageBox.Show("Bitte Kunde auswählen"); }
+        }
+
+
+        private void Select_Statistics(object sender, TabControlCancelEventArgs e)
+        {
+            DGWStatistic.DataSource = DataController.ReturnStatistic();
         }
     }
 }

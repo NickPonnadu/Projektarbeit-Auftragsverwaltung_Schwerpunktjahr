@@ -10,7 +10,7 @@ namespace Projekt_Auftragsverwaltung
 
     {
         DataController dataController;
-        public string ConnectionString;
+        
         Article? Article { get; set; }
         public bool EditMode;
         public MainEditArticle(string connectionString,Article article=null)

@@ -13,9 +13,6 @@ namespace Projekt_Auftragsverwaltung
 
     {
         DataController dataController;
-        public string ConnectionString;
-
-
         Order? Order { get; set; }
 
         public bool EditMode;

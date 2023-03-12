@@ -92,6 +92,7 @@
             this.DGWChooseOrder.Location = new System.Drawing.Point(54, 199);
             this.DGWChooseOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DGWChooseOrder.Name = "DGWChooseOrder";
+            this.DGWChooseOrder.ReadOnly = true;
             this.DGWChooseOrder.RowHeadersWidth = 51;
             this.DGWChooseOrder.RowTemplate.Height = 29;
             this.DGWChooseOrder.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -123,6 +124,7 @@
             this.DGWChooseArticles.Location = new System.Drawing.Point(660, 199);
             this.DGWChooseArticles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DGWChooseArticles.Name = "DGWChooseArticles";
+            this.DGWChooseArticles.ReadOnly = true;
             this.DGWChooseArticles.RowHeadersWidth = 51;
             this.DGWChooseArticles.RowTemplate.Height = 29;
             this.DGWChooseArticles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
