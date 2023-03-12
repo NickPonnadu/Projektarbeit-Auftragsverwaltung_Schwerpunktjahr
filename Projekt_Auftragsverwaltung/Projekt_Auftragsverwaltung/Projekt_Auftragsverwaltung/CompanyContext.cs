@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Identity.Client;
 using Projekt_Auftragsverwaltung.Tables;
 using System.Configuration;
@@ -27,7 +28,7 @@ namespace Projekt_Auftragsverwaltung
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_ConnectionString);
-            // optionsBuilder.UseSqlServer("Server=DESKTOP-G8PTADT\MSSQLSERVERZBWGA; Database=myDataBase; Trusted_Connection=True;Encrypt=false;");
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,8 +36,12 @@ namespace Projekt_Auftragsverwaltung
             modelBuilder.Entity<Address>()
                 .HasKey(b => b.AddressId);
 
+            // Configure primary key
+            modelBuilder.Entity<AddressLocation>().HasKey(b => b.ZipCode);
+
             modelBuilder.Entity<AddressLocation>()
-                .HasKey(b => b.ZipCode);
+               .Property(b => b.ZipCode)
+               .ValueGeneratedNever();
 
             modelBuilder.Entity<Article>()
                 .HasKey(b => b.ArticleId);
@@ -96,38 +101,38 @@ namespace Projekt_Auftragsverwaltung
 
 
 
-
+            modelBuilder.Entity<AddressLocation>().HasData(
+               new AddressLocation { ZipCode = 9000, Location = "St. Gallen" },
+               new AddressLocation { ZipCode = 9426, Location = "Lutzenberg" },
+               new AddressLocation { ZipCode = 9424, Location = "Rheineck" },
+               new AddressLocation { ZipCode = 9001, Location = "St. Gallen" },
+               new AddressLocation { ZipCode = 8000, Location = "Zürich" }
+           );
 
 
             modelBuilder.Entity<Address>().HasData(
-                new Address { AddressId = 1, Street = "Teststraße 1", HouseNumber = "1", ZipCode = 12345 },
-                new Address { AddressId = 2, Street = "Teststraße 2", HouseNumber = "2", ZipCode = 12345 },
-                new Address { AddressId = 3, Street = "Teststraße 3", HouseNumber = "3", ZipCode = 12345 },
-                new Address { AddressId = 4, Street = "Teststraße 4", HouseNumber = "4", ZipCode = 12345 },
-                new Address { AddressId = 5, Street = "Teststraße 5", HouseNumber = "5", ZipCode = 12345 }
+                new Address { AddressId = 1, Street = "Oberer Graben", HouseNumber = "42", ZipCode = 9000 },
+                new Address { AddressId = 2, Street = "Vorderbrenden", HouseNumber = "6", ZipCode = 9426 },
+                new Address { AddressId = 3, Street = "Teufener Strasse", HouseNumber = "36", ZipCode = 9001 },
+                new Address { AddressId = 4, Street = "Seeblickstrasse", HouseNumber = "4", ZipCode = 9424 },
+                new Address { AddressId = 5, Street = "Bahnhofsstrasse", HouseNumber = "12", ZipCode = 8000 }
             );
 
-            modelBuilder.Entity<AddressLocation>().HasData(
-                new AddressLocation { ZipCode = 12345, Location = "Testort 1" },
-                new AddressLocation { ZipCode = 123456, Location = "Testort 2" },
-                new AddressLocation { ZipCode = 123457, Location = "Testort 3" },
-                new AddressLocation { ZipCode = 123458, Location = "Testort 4" },
-                new AddressLocation { ZipCode = 123459, Location = "Testort 5" }
-            );
+           
 
 
             modelBuilder.Entity<Article>().HasData(
-                new Article { ArticleId = 1, ArticleName = "Artikel 1", Price = 10.0M, ArticleGroupId = 1 },
-                new Article { ArticleId = 2, ArticleName = "Artikel 2", Price = 20.0M, ArticleGroupId = 1 },
-                new Article { ArticleId = 3, ArticleName = "Artikel 3", Price = 30.0M, ArticleGroupId = 2 },
-                new Article { ArticleId = 4, ArticleName = "Artikel 4", Price = 40.0M, ArticleGroupId = 2 },
-                new Article { ArticleId = 5, ArticleName = "Artikel 5", Price = 50.0M, ArticleGroupId = 3 }
+                new Article { ArticleId = 1, ArticleName = "Handschuhe", Price = 10.0M, ArticleGroupId = 1 },
+                new Article { ArticleId = 2, ArticleName = "Schwamm", Price = 20.0M, ArticleGroupId = 2 },
+                new Article { ArticleId = 3, ArticleName = "Besen", Price = 30.0M, ArticleGroupId = 2 },
+                new Article { ArticleId = 4, ArticleName = "Hüpfburg", Price = 40.0M, ArticleGroupId = 3 },
+                new Article { ArticleId = 5, ArticleName = "Kettensäge", Price = 50.0M, ArticleGroupId = 1 }
             );
 
             modelBuilder.Entity<ArticleGroup>().HasData(
-                new ArticleGroup { ArticleGroupId = 1, Name = "Gruppe 1" },
-                new ArticleGroup { ArticleGroupId = 2, Name = "Gruppe 2" },
-                new ArticleGroup { ArticleGroupId = 3, Name = "Gruppe 3" }
+                new ArticleGroup { ArticleGroupId = 1, Name = "Werkzeuge" },
+                new ArticleGroup { ArticleGroupId = 2, Name = "Hygiene" },
+                new ArticleGroup { ArticleGroupId = 3, Name = "Kinder" }
             );
 
             modelBuilder.Entity<ArticlePosition>().HasData(
@@ -139,11 +144,11 @@ namespace Projekt_Auftragsverwaltung
             );
 
             modelBuilder.Entity<Customer>().HasData(
-                 new Customer { CustomerId = 1, Name = "Test Kunde 1", PhoneNumber = "0123456789", EMail = "test1@test.com", Website = "Website1", Password = "pass1", AddressId = 1 },
-                 new Customer { CustomerId = 2, Name = "Test Kunde 2", PhoneNumber = "9876543210", EMail = "test2@test.com", Website = "Website2", Password = "pass2", AddressId = 2 },
-                 new Customer { CustomerId = 3, Name = "Test Kunde 3", PhoneNumber = "1234567890", EMail = "test3@test.com", Website = "Website3", Password = "pass3", AddressId = 3 },
-                 new Customer { CustomerId = 4, Name = "Test Kunde 4", PhoneNumber = "0987654321", EMail = "test4@test.com", Website = "Website4", Password = "pass4", AddressId = 4 },
-                 new Customer { CustomerId = 5, Name = "Test Kunde 5", PhoneNumber = "1023456789", EMail = "test5@test.com", Website = "Website5", Password = "pass5", AddressId = 5 }
+                 new Customer { CustomerId = 1, Name = "Marco Mayer", PhoneNumber = "0123456789", EMail = "marco-mayer@gmx.com", Website = "servicesolution.com", Password = "pass1", AddressId = 1 },
+                 new Customer { CustomerId = 2, Name = "Peter Steiner", PhoneNumber = "9876543210", EMail = "ps@gmail.com", Website = "funreisen.ch", Password = "pass2", AddressId = 2 },
+                 new Customer { CustomerId = 3, Name = "Julia Heeb", PhoneNumber = "1234567890", EMail = "jh@gmx.com", Website = "geschenkideen.ch", Password = "pass3", AddressId = 3 },
+                 new Customer { CustomerId = 4, Name = "Larissa Hugentobler", PhoneNumber = "0987654321", EMail = "lärihugi@hotmail.com", Website = "gmx.ch", Password = "pass4", AddressId = 4 },
+                 new Customer { CustomerId = 5, Name = "Pascal Meier", PhoneNumber = "1023456789", EMail = "PCMeier@sunrise.com", Website = "meierbau.ch", Password = "pass5", AddressId = 5 }
              );
 
             modelBuilder.Entity<Order>().HasData(

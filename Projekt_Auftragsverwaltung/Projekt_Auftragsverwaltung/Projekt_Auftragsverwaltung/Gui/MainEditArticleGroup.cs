@@ -12,7 +12,7 @@ namespace Projekt_Auftragsverwaltung
 
         public bool EditMode;
         DataController dataController;
-        public string ConnectionString;
+        
         public MainEditArticleGroup(string connectionString, ArticleGroup articleGroup = null)
         {
             InitializeComponent();
@@ -66,6 +66,7 @@ namespace Projekt_Auftragsverwaltung
         {
 
             CloseForm();
+            SetEditModeOff();
         }
 
     }

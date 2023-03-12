@@ -17,7 +17,7 @@ namespace Projekt_Auftragsverwaltung
         public Form EditGuiOrder;
         public Form EditGuiPosition;
 
-        public string ConnectionString;
+
         public DataController DataController;
 
         public Main(string connectionString)
@@ -29,15 +29,12 @@ namespace Projekt_Auftragsverwaltung
             this.EditGuiArticle = new MainEditArticle(ConnectionString);
             this.EditGuiPosition = new MainEditPosition(ConnectionString);
             this.EditGuiOrder = new MainEditOrder(ConnectionString);
-
             DataController = new DataController(ConnectionString);
             EditGuiArticleGroup.VisibleChanged += UpdateListsEvent;
             EditGuiCustomer.VisibleChanged += UpdateListsEvent;
             EditGuiOrder.VisibleChanged += UpdateListsEvent;
             EditGuiArticle.VisibleChanged += UpdateListsEvent;
             EditGuiPosition.VisibleChanged += UpdateListsEvent;
-
-
             UpdateLists();
             SetDataBindings();
         }
@@ -45,34 +42,27 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdCreateArticleGroup_Click(Object sender, EventArgs e)
         {
-            
             this.EditGuiArticleGroup.ShowDialog();
         }
 
         private void CmdCreateCustomer_Click(object sender, EventArgs e)
         {
-            
             this.EditGuiCustomer.Location = new Point(15, 15);
             this.EditGuiCustomer.ShowDialog();
         }
 
         private void CmdCreateArticle_Click(object sender, EventArgs e)
         {
-            
             this.EditGuiArticle.ShowDialog();
-
         }
 
         private void CmdCreateOrder_Click(object sender, EventArgs e)
         {
-            
             this.EditGuiOrder.ShowDialog();
         }
 
         private void CmdCreatePosition_Click(object sender, EventArgs e)
         {
-            
-            
             this.EditGuiPosition.ShowDialog();
         }
 
@@ -89,18 +79,25 @@ namespace Projekt_Auftragsverwaltung
                 this.EditGuiArticleGroup.ShowDialog();
                 UpdateLists();
             }
-         
         }
 
         private void CmdEditCustomer_Click(object sender, EventArgs e)
         {
-            this.EditGuiCustomer.ShowDialog();
-
+            if (DGWCustomers.SelectedRows.Count > 0)
+            {
+                var rows = DGWCustomers.SelectedRows[0];
+                int customerId = Convert.ToInt32(rows.Cells[0].Value);
+                var customer = DataController.GetSingleCustomer(customerId);
+                this.EditGuiCustomer.Dispose();
+                this.EditGuiCustomer = new MainEditCustomer(ConnectionString, customer);
+                EditGuiCustomer.VisibleChanged += UpdateListsEvent;
+                this.EditGuiCustomer.ShowDialog();
+                UpdateLists();
+            }
         }
 
         private void CmdEditArticle_Click(object sender, EventArgs e)
         {
-           
             if (DGWArticles.SelectedRows.Count > 0)
             {
                 var rows = DGWArticles.SelectedRows[0];
@@ -112,16 +109,36 @@ namespace Projekt_Auftragsverwaltung
                 this.EditGuiArticle.ShowDialog();
                 UpdateLists();
             }
-
         }
         private void CmdEditPosition_Click(object sender, EventArgs e)
         {
-            this.EditGuiPosition.ShowDialog();
+            if (DGWPositions.SelectedRows.Count > 0)
+            {
+                var rows = DGWPositions.SelectedRows[0];
+                int orderPositionId = Convert.ToInt32(rows.Cells[0].Value);
+                var orderPosition = DataController.GetSingleOrderPosition(orderPositionId);
+                this.EditGuiPosition.Dispose();
+                this.EditGuiPosition = new MainEditPosition(ConnectionString, orderPosition);
+                EditGuiPosition.VisibleChanged += UpdateListsEvent;
+                this.EditGuiPosition.ShowDialog();
+                UpdateLists();
+            }
         }
 
         private void CmdEditOrder_Click(object sender, EventArgs e)
         {
-            this.EditGuiOrder.ShowDialog();
+            if (DGWOrders.SelectedRows.Count > 0)
+            {
+                var rows = DGWOrders.SelectedRows[0];
+                int orderId = Convert.ToInt32(rows.Cells[0].Value);
+                var order = DataController.GetSingleOrder(orderId);
+                this.EditGuiOrder.Dispose();
+                this.EditGuiOrder = new MainEditOrder(ConnectionString, order);
+                EditGuiOrder.VisibleChanged += UpdateListsEvent;
+                this.EditGuiOrder.ShowDialog();
+                UpdateLists();
+            }
+
         }
 
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
@@ -132,11 +149,10 @@ namespace Projekt_Auftragsverwaltung
         public void SetDataBindings()
         {
             CmbCustomerSearchProperty.DataSource = new String[] { "Kundennummer", "Name", "Telefonnummer", "Email", "Website", "Strasse", "Hausnummer", "PLZ", "Ort" };
-            CmdPositionSearchProperty.DataSource = new String[] { "Positionsnummer", "Auftragsnummer", "Auftragsdatum", "Kunde", "Artikelbezeichnung","Artikelanzahl", "Artikelbetrag", "Totalbetrag" };
+            CmdPositionSearchProperty.DataSource = new String[] { "Positionsnummer", "Auftragsnummer", "Kunde", "Artikelbezeichnung", "Artikelanzahl", "Artikelbetrag", "Totalbetrag" };
             CmbArticleSearchProperty.DataSource = new String[] { "ArtikelId", "Artikelname", "Preis", "Artikelgruppe" };
-            CmbOrderSearchProperty.DataSource = new String[] { "Auftragsnummer", "Datum", "Name", };
-
-
+            CmbOrderSearchProperty.DataSource = new String[] { "Auftragsnummer", "Name", };
+            
         }
 
         public void UpdateListsEvent(object sender, EventArgs e)
@@ -154,7 +170,6 @@ namespace Projekt_Auftragsverwaltung
             UpdateOrders();
             UpdateOrderPositions();
             UpdateArticleGroups();
-
         }
         private void UpdateCustomers()
         {
@@ -244,6 +259,7 @@ namespace Projekt_Auftragsverwaltung
             }
             else
             { MessageBox.Show("Bitte Artikelgruppe auswählen"); }
+            UpdateLists();
         }
 
         private void CmdDeleteArticle_Click(object sender, EventArgs e)
@@ -289,6 +305,25 @@ namespace Projekt_Auftragsverwaltung
         {
             var dataFound = DataController.ReturnArticleGroupsSearch(TxtArticleGroupSearchName.Text);
             DGWArticleGroups.DataSource = dataFound;
+        }
+
+        private void CmdDeleteCustomer_Click(object sender, EventArgs e)
+        {
+            if (DGWCustomers.SelectedRows.Count > 0)
+            {
+                var rows = DGWCustomers.SelectedRows[0];
+                int customerId = Convert.ToInt32(rows.Cells[0].Value);
+                DataController.DeleteCustomer(customerId);
+                UpdateCustomers();
+            }
+            else
+            { MessageBox.Show("Bitte Kunde auswählen"); }
+        }
+
+
+        private void Select_Statistics(object sender, TabControlCancelEventArgs e)
+        {
+            DGWStatistic.DataSource = DataController.ReturnStatistic();
         }
     }
 }

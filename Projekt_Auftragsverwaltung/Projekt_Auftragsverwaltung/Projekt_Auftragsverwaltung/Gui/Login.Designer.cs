@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.LblAuftragsverwaltung = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,6 +37,7 @@
             this.CmdTestConnection = new System.Windows.Forms.Button();
             this.LblConnection = new System.Windows.Forms.Label();
             this.CmdStartApplication = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LblAuftragsverwaltung
@@ -116,11 +118,23 @@
             this.CmdStartApplication.UseVisualStyleBackColor = true;
             this.CmdStartApplication.Click += new System.EventHandler(this.CmdStartApplication_Click);
             // 
+            // label3
+            // 
+            this.label3.AllowDrop = true;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(481, 33);
+            this.label3.MaximumSize = new System.Drawing.Size(200, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(194, 165);
+            this.label3.TabIndex = 8;
+            this.label3.Text = resources.GetString("label3.Text");
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 338);
+            this.ClientSize = new System.Drawing.Size(773, 338);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.CmdStartApplication);
             this.Controls.Add(this.LblConnection);
             this.Controls.Add(this.CmdTestConnection);
@@ -147,5 +161,6 @@
         private Button CmdTestConnection;
         private Label LblConnection;
         private Button CmdStartApplication;
+        private Label label3;
     }
 }

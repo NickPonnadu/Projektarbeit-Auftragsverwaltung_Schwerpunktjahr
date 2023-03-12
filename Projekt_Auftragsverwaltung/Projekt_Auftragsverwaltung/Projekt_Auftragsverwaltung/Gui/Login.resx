@@ -57,4 +57,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Das Programm kann nur gestartet werden, wenn eine Verbindung mit einer Datenbank besteht. 
+
+Falls eine existierende Datenbank verwendet werden will, kann diese eingetragen werden. 
+
+Falls keine Datenbank gefunden wird, wird eine neue mit Testdaten angelegt.</value>
+  </data>
 </root>
