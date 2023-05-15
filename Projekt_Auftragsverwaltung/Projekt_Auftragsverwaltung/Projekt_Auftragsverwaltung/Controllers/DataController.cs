@@ -2,7 +2,7 @@
 using Projekt_Auftragsverwaltung.Tables;
 using System.Data;
 
-namespace Projekt_Auftragsverwaltung
+namespace Projekt_Auftragsverwaltung.Controllers
 {
     public class DataController
     {
@@ -25,9 +25,9 @@ namespace Projekt_Auftragsverwaltung
                              select new
                              {
                                  Kundennummer = k.CustomerId,
-                                 Name = k.Name,
+                                 k.Name,
                                  Telefonnummer = k.PhoneNumber,
-                                 EMail = k.EMail,
+                                 k.EMail,
                                  Webseite = k.Website,
                                  Passwort = k.Password,
                                  Strasse = a.Street != null ? a.Street : null,
@@ -62,9 +62,9 @@ namespace Projekt_Auftragsverwaltung
                                 select new
                                 {
                                     Kundennummer = k.CustomerId,
-                                    Name = k.Name,
+                                    k.Name,
                                     Telefonnummer = k.PhoneNumber,
-                                    EMail = k.EMail,
+                                    k.EMail,
                                     Webseite = k.Website,
                                     Passwort = k.Password,
                                     Strasse = a.Street != null ? a.Street : null,
@@ -414,7 +414,7 @@ namespace Projekt_Auftragsverwaltung
                                         select new
                                         {
                                             ArtikelgruppeId = a.ArticleGroupId,
-                                            Name = a.Name
+                                            a.Name
                                         };
 
                     var list = articleGroups.ToList();
