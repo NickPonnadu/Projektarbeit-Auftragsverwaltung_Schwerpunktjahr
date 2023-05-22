@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projekt_Auftragsverwaltung.Controllers
 {
-    internal class AddressLocationController
+    public class AddressLocationController
     {
     }
 }

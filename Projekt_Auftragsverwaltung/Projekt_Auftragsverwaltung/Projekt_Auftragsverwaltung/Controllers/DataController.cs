@@ -481,27 +481,7 @@ namespace Projekt_Auftragsverwaltung.Controllers
                 }
             }
         }
-        public Address CreateAddress(string street, string houseNumber, string zipCode)
-        {
-            // Verbindung mit der Datenbank herstellen
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                // SqlCommand-Objekt erstellen und mit Verbindung und SQL-Befehl initialisieren
-                using (var dbContext = new CompanyContext(ConnectionString))
-                {
-                    var newAddress = new Address
-                    {
-                        Street = street,
-                        HouseNumber = houseNumber,
-                        ZipCode = Convert.ToInt32(zipCode)
-                    };
-                    dbContext.Addresses.Add(newAddress);
-                    dbContext.SaveChanges();
-                    return newAddress;
-                }
-            }
-        }
+       
         public void CreateAddressLocation(string zipCode, string location)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -776,19 +756,7 @@ namespace Projekt_Auftragsverwaltung.Controllers
             }
         }
 
-        public void DeleteAddress(int addressId)
-        {
-            using (var db = new CompanyContext(ConnectionString))
-            {
-                var recordToDelete = db.Addresses.FirstOrDefault(r => r.AddressId == addressId);
-                if (recordToDelete != null)
-                {
-                    db.Addresses.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
-                    db.SaveChanges(); // Änderungen speichern
-                }
-            }
-
-        }
+        
 
         public void EditArticleGroup(int articleGroupId, string articleGroupName = "")
         {
@@ -885,22 +853,7 @@ namespace Projekt_Auftragsverwaltung.Controllers
             }
         }
 
-        public void EditAddress(int addressId, string street = "", string houseNumber = "", int postCode = 0000)
-        {
-            using (var db = new CompanyContext(ConnectionString))
-            {
-                var recordToEdit = db.Addresses.FirstOrDefault(r => r.AddressId == addressId);
-                if (recordToEdit != null)
-                {
-
-                    recordToEdit.Street = street;
-                    recordToEdit.HouseNumber = houseNumber;
-                    recordToEdit.ZipCode = postCode == 0000 ? 0000 : postCode;
-                    db.Addresses.Update(recordToEdit);
-                    db.SaveChanges();
-                }
-            }
-        }
+       
         public void EditAddressLocation(int zipCode, string location = "")
         {
             using (var db = new CompanyContext(ConnectionString))
@@ -966,21 +919,7 @@ namespace Projekt_Auftragsverwaltung.Controllers
             }
         }
 
-        public Address GetSingleAddress(int adressId)
-        {
-            using (var db = new CompanyContext(ConnectionString))
-            {
-                var recordToReturn = db.Addresses.FirstOrDefault(r => r.AddressId == adressId);
-                if (recordToReturn != null)
-                {
-                    return recordToReturn;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
+        
 
         public AddressLocation GetSingleAddressLocation(int zipcode)
         {

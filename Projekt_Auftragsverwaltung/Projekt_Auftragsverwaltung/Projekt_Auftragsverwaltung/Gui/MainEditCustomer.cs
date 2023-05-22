@@ -10,16 +10,17 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditCustomer : FormController
 
     {
-        DataController dataController;
+        AddressController _addressDataController { get; }
+        AddressLocationController _addressLocationController { get; }
+        CustomerController _customerController { get; }
         Customer? Customer { get; set; }
+
         public bool EditMode;
 
-        public MainEditCustomer(string connectionString, Customer customer = null)
+        public MainEditCustomer(Customer customer = null, AddressController? addressDataController, AddressLocationController? addressLocationController = null, CustomerController? customerController = null)
         {
             InitializeComponent();
 
-            ConnectionString = connectionString;
-            dataController = new DataController(ConnectionString);
             Customer = customer;
 
             if (Customer != null)
@@ -27,11 +28,14 @@ namespace Projekt_Auftragsverwaltung
                 SetEditModeOn();
             }
             else SetEditModeOff();
+            _addressDataController = addressDataController;
+            _addressLocationController = addressLocationController;
+            _customerController = customerController;
         }
 
         private void SetEditModeOn()
         {
-            var address = dataController.GetSingleAddress(Customer.AddressId);
+            var address = _addressDataController.GetSingleEntity(Customer.AddressId);
             var addressLocation = dataController.GetSingleAddressLocation(address.ZipCode);
             EditMode = true;
             TxtCustomerName.Text = Customer.Name;

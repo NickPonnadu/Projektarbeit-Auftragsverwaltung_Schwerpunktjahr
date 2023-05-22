@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 
 namespace Projekt_Auftragsverwaltung.Controllers
 {
-    public interface IDataController
+    public interface IDataControllerMainEntity
     {
-        public DataTable ReturnData();
-        public DataTable ReturnDataSearch();
 
-        public void CreateEntity();
+        public void DeleteEntity(int entityPK);
+
+        public object GetSingleEntity(int entityPK);
+
+        public DataTable ReturnData();
+
+        public DataTable ReturnDataSearched();
 
         public DataTable CreateDataTable();
     }
