@@ -9,6 +9,7 @@ namespace Projekt_Auftragsverwaltung.Controllers
 {
     public interface IDataController
     {
+       
         public DataTable ReturnData();
         public DataTable ReturnDataSearch();
 

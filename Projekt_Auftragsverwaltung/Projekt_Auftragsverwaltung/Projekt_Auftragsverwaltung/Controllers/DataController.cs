@@ -481,27 +481,7 @@ namespace Projekt_Auftragsverwaltung.Controllers
                 }
             }
         }
-        public Address CreateAddress(string street, string houseNumber, string zipCode)
-        {
-            // Verbindung mit der Datenbank herstellen
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                // SqlCommand-Objekt erstellen und mit Verbindung und SQL-Befehl initialisieren
-                using (var dbContext = new CompanyContext(ConnectionString))
-                {
-                    var newAddress = new Address
-                    {
-                        Street = street,
-                        HouseNumber = houseNumber,
-                        ZipCode = Convert.ToInt32(zipCode)
-                    };
-                    dbContext.Addresses.Add(newAddress);
-                    dbContext.SaveChanges();
-                    return newAddress;
-                }
-            }
-        }
+       
         public void CreateAddressLocation(string zipCode, string location)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
