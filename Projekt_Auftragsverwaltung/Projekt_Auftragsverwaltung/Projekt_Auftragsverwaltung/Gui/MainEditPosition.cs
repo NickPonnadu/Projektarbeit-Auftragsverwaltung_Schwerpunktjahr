@@ -10,7 +10,7 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditPosition : FormController
 
     {
-        DataController dataController;
+        StatisticController dataController;
         OrderPosition? OrderPosition { get; set; }
         public bool EditMode;
         public MainEditPosition(string connectionString, OrderPosition orderPosition = null)

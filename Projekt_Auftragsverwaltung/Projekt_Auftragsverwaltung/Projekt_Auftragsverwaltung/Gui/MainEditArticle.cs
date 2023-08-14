@@ -9,15 +9,20 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditArticle : FormController
 
     {
-        DataController dataController;
+        private readonly ArticleController _articleController;
+        private readonly ArticleGroupController _articleGroupController;
+        private readonly string _connectionString;
 
-        Article? Article { get; set; }
+        private Article? Article { get; set; }
+
         public bool EditMode;
-        public MainEditArticle(string connectionString, Article article = null)
+        public MainEditArticle(string connectionString,ArticleGroupController articleGroupController,ArticleController articleController, Article article = null)
         {
             InitializeComponent();
-            ConnectionString = connectionString;
-            dataController = new DataController(ConnectionString);
+            _connectionString = connectionString;
+            _articleController = articleController;
+            _articleGroupController = articleGroupController;
+
             Article = article;
 
             if (Article != null)
@@ -25,6 +30,7 @@ namespace Projekt_Auftragsverwaltung
                 SetEditModeOn();
             }
             else SetEditModeOff();
+            
         }
 
         private void SetEditModeOn()
@@ -54,12 +60,12 @@ namespace Projekt_Auftragsverwaltung
 
                 if (EditMode == false)
                 {
-                    dataController.CreateArticle(TxtArticleDescription.Text, NumArticlePrice.Value, articleGroupId);
+                    _articleController.CreateArticle(TxtArticleDescription.Text, NumArticlePrice.Value, articleGroupId);
                     CloseForm();
                 }
                 if (EditMode == true && Article != null)
                 {
-                    dataController.EditArticle(Article.ArticleId, TxtArticleDescription.Text, NumArticlePrice.Value, articleGroupId);
+                    _articleController.EditArticle(Article.ArticleId, TxtArticleDescription.Text, NumArticlePrice.Value, articleGroupId);
                     SetEditModeOff();
                     CloseForm();
                 }
@@ -83,9 +89,9 @@ namespace Projekt_Auftragsverwaltung
 
         private void UpdateArticleGroupList(object sender, EventArgs e)
         {
-            if (dataController != null)
+            if (_articleGroupController != null)
             {
-                var data = dataController.ReturnArticleGroups();
+                var data = _articleGroupController.ReturnArticleGroups();
                 DGWChooseArticleGroup.DataSource = data;
             }
         }

@@ -15,7 +15,7 @@ namespace Projekt_Auftragsverwaltung
         public Form EditGuiPosition;
         public Form TreeViewClass;
         public string ConnectionString;
-        private DataController DataController;
+        private StatisticController DataController;
 
         public Main(string connectionString)
         {
@@ -27,7 +27,7 @@ namespace Projekt_Auftragsverwaltung
             this.EditGuiPosition = new MainEditPosition(ConnectionString);
             this.EditGuiOrder = new MainEditOrder(ConnectionString);
             this.TreeViewClass = new TreeViewClass(ConnectionString);
-            DataController = new DataController(ConnectionString);
+            DataController = new StatisticController(ConnectionString);
             EditGuiArticleGroup.VisibleChanged += UpdateListsEvent;
             EditGuiCustomer.VisibleChanged += UpdateListsEvent;
             EditGuiOrder.VisibleChanged += UpdateListsEvent;

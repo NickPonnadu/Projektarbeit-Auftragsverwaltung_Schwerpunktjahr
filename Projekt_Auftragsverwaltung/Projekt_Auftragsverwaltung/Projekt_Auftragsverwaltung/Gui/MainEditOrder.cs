@@ -13,7 +13,7 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditOrder : FormController
 
     {
-        DataController dataController;
+        StatisticController dataController;
         Order? Order { get; set; }
 
         public bool EditMode;

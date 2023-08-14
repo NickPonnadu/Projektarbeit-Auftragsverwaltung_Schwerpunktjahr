@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Projekt_Auftragsverwaltung.Interfaces;
 using Projekt_Auftragsverwaltung.Tables;
 using System;
 using System.Collections.Generic;
@@ -8,16 +9,17 @@ using System.Threading.Tasks;
 
 namespace Projekt_Auftragsverwaltung.Controllers
 {
-    public class AddressController : IDataControllerAddressEntities
+    public class AddressController : IAddressController
 
     {
-        private string _connectionString { get; }
+        private readonly string _connectionString;
 
         public AddressController(string connectionString)
         {
             _connectionString = connectionString;
         }
-        public Address CreateEntity(string street, string houseNumber, string zipCode)
+
+        public Address Create(string street, string houseNumber, string zipCode)
         {
             // Verbindung mit der Datenbank herstellen
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -38,11 +40,9 @@ namespace Projekt_Auftragsverwaltung.Controllers
                 }
             }
 
-
-
-
+            
         }
-        public void DeleteEntity(int addressId)
+        public void Delete(int addressId)
         {
             using (var db = new CompanyContext(_connectionString))
             {
@@ -55,7 +55,7 @@ namespace Projekt_Auftragsverwaltung.Controllers
             }
 
         }
-        public void EditAddress(int addressId, string street = "", string houseNumber = "", int postCode = 0000)
+        public void Edit(int addressId, string street = "", string houseNumber = "", int postCode = 0000)
         {
             using (var db = new CompanyContext(_connectionString))
             {
@@ -75,16 +75,9 @@ namespace Projekt_Auftragsverwaltung.Controllers
         public object GetSingleEntity(int adressId)
         {
             using (var db = new CompanyContext(_connectionString))
-            {   
+            {
                 var recordToReturn = db.Addresses.FirstOrDefault(r => r.AddressId == adressId);
-                if (recordToReturn != null)
-                {
-                    return recordToReturn;
-                }
-                else
-                {
-                    return null;
-                }
+                return recordToReturn;
             }
         }
 

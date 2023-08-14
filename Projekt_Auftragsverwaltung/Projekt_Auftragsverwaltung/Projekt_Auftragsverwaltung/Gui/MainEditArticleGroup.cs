@@ -12,7 +12,7 @@ namespace Projekt_Auftragsverwaltung
         ArticleGroup? ArticleGroup { get; set; }
 
         public bool EditMode;
-        DataController dataController;
+        StatisticController dataController;
         
         public MainEditArticleGroup(string connectionString, ArticleGroup articleGroup = null)
         {

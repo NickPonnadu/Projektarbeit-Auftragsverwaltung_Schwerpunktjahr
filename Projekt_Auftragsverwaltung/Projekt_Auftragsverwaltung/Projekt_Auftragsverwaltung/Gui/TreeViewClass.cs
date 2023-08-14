@@ -19,13 +19,13 @@ namespace Projekt_Auftragsverwaltung.Gui
     public partial class TreeViewClass : Form
     {
         public string connectionString;
-        public DataController dataController;
+        public StatisticController dataController;
 
         public TreeViewClass(string connectionstring1)
         {
             InitializeComponent();
             connectionString = connectionstring1;
-            dataController = new DataController(connectionString);
+            dataController = new StatisticController(connectionString);
         }
 
         private void CmdTreeViewShow_Click(object sender, EventArgs e)
