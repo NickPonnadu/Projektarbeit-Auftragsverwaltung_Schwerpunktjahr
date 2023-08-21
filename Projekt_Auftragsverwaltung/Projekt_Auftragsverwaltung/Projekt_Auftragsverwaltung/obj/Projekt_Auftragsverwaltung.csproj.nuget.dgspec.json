@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Repos\\Projektarbeit-Auftragsverwaltung_Schwerpunktjahr\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj": {}
   },
   "projects": {
@@ -12,12 +13,29 @@
         "projectPath": "C:\\Repos\\Projektarbeit-Auftragsverwaltung_Schwerpunktjahr\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
         "packagesPath": "C:\\Users\\nick9\\.nuget\\packages\\",
         "outputPath": "C:\\Repos\\Projektarbeit-Auftragsverwaltung_Schwerpunktjahr\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\obj\\",
+=======
+    "C:\\Users\\gabor\\Desktop\\Projekt_4_Semester\\Projektarbeit-Auftragsverwaltung_Schwerpunktjahr\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\gabor\\Desktop\\Projekt_4_Semester\\Projektarbeit-Auftragsverwaltung_Schwerpunktjahr\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\gabor\\Desktop\\Projekt_4_Semester\\Projektarbeit-Auftragsverwaltung_Schwerpunktjahr\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
+        "projectName": "Projekt_Auftragsverwaltung",
+        "projectPath": "C:\\Users\\gabor\\Desktop\\Projekt_4_Semester\\Projektarbeit-Auftragsverwaltung_Schwerpunktjahr\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung.csproj",
+        "packagesPath": "C:\\Users\\gabor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gabor\\Desktop\\Projekt_4_Semester\\Projektarbeit-Auftragsverwaltung_Schwerpunktjahr\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\Projekt_Auftragsverwaltung\\obj\\",
+>>>>>>> 181659ce5592e660795f0b1b30d1ca0e13a52582
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\nick9\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "C:\\Users\\gabor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 181659ce5592e660795f0b1b30d1ca0e13a52582
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -86,7 +104,11 @@
               "privateAssets": "none"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+>>>>>>> 181659ce5592e660795f0b1b30d1ca0e13a52582
         }
       }
     }
