@@ -1,4 +1,6 @@
-﻿namespace Projekt_Auftragsverwaltung
+﻿using Projekt_Auftragsverwaltung.Controllers;
+
+namespace Projekt_Auftragsverwaltung
 {
     public partial class Login : Form
     {
@@ -6,13 +8,22 @@
 
         private Form MainGui;
 
-        public string DBconnectionString;
+        public string DbConnectionString;
+
+        private AddressController AddressController;
+        private AddressLocationController AddressLocationController;
+        private ArticleController ArticleController;
+        private ArticleGroupController ArticleGroupController;
+        private ArticlePositionController ArticlePositionController;
+        private CustomerController CustomerController;
+        private OrderController OrderController;
+        private OrderPositionController OrderPositionController;
+        private StatisticController StatisticController;
 
         public Login()
         {
             InitializeComponent();
-
-            this.Connection = false;
+            Connection = false;
         }
 
         private void CmdTestConnection_Click(object sender, EventArgs e)
@@ -25,18 +36,20 @@
                 // Überprüft, ob DB bereits vorhanden. Wird für Anzeige später verwendet
                 bool existingDB = DatabaseManager.CheckExistingDB(connectionString);
                 Connection = DatabaseManager.UseDbContext(connectionString);
-                if (this.Connection)
+                if (Connection)
                 {
+
                     LblConnection.Text = existingDB ? "DB ist Verbunden" : "Da keine DB gefunden wurde, wurde eine neue DB mit Testdaten erstellt";
                     CmdStartApplication.Enabled = true;
-                    DBconnectionString = connectionString;
+                    DbConnectionString = connectionString;
                     LblConnection.ForeColor = Color.Green;
+                    InitializeControllers();
                 }
                 else
                 {
                     LblConnection.ForeColor = Color.Red;
                     LblConnection.Text = "Keine Verbindung mit der Datenbank";
-                    this.Connection = false;
+                    Connection = false;
                 }
             }
             else
@@ -45,14 +58,28 @@
             }
         }
 
+        private void InitializeControllers()
+        {
+            ArticleController = new ArticleController(DbConnectionString);
+            AddressController = new AddressController(DbConnectionString);
+            AddressLocationController = new AddressLocationController(DbConnectionString);
+            ArticleGroupController = new ArticleGroupController(DbConnectionString);
+            ArticlePositionController = new ArticlePositionController(DbConnectionString);
+            CustomerController = new CustomerController(DbConnectionString);
+            OrderController = new OrderController(DbConnectionString);
+            OrderPositionController = new OrderPositionController(DbConnectionString);
+            StatisticController = new StatisticController(DbConnectionString);
+
+        }
+
         private void CmdStartApplication_Click(object sender, EventArgs e)
         {
-            if (this.Connection)
+            if (Connection)
             {
-                this.Hide();
-                this.MainGui = new Main(DBconnectionString);
+                Hide();
+                MainGui = new Main(ArticleController, ArticleGroupController, ArticlePositionController, CustomerController, OrderController, OrderPositionController, StatisticController, AddressLocationController, AddressController);
 
-                this.MainGui.Show();
+                MainGui.Show();
             }
         }
 

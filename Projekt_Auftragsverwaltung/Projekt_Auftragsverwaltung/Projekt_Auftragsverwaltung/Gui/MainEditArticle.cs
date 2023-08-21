@@ -11,15 +11,14 @@ namespace Projekt_Auftragsverwaltung
     {
         private readonly ArticleController _articleController;
         private readonly ArticleGroupController _articleGroupController;
-        private readonly string _connectionString;
-
+        
         private Article? Article { get; set; }
 
         public bool EditMode;
-        public MainEditArticle(string connectionString,ArticleGroupController articleGroupController,ArticleController articleController, Article article = null)
+        public MainEditArticle(ArticleGroupController articleGroupController,ArticleController articleController, Article article = null)
         {
             InitializeComponent();
-            _connectionString = connectionString;
+            
             _articleController = articleController;
             _articleGroupController = articleGroupController;
 

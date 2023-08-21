@@ -6,40 +6,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projekt_Auftragsverwaltung.Controllers
+namespace Projekt_Auftragsverwaltung.Controllers;
+
+public class ArticlePositionController : IArticlePositionController
 {
-    public class ArticlePositionController : IArticlePositionController
+    private readonly string _connectionString;
+
+    public ArticlePositionController(string connectionString)
     {
-        private readonly string _connectionString;
+        _connectionString = connectionString;
+    }
 
-        public ArticlePositionController(string connectionString)
+
+    public void EditArticlePosition(int orderPositionId, int articleId)
+    {
+        using (var db = new CompanyContext(_connectionString))
         {
-            _connectionString = connectionString;
-        }
-
-
-        public void EditArticlePosition(int orderPositionId, int articleId)
-        {
-            using (var db = new CompanyContext(_connectionString))
+            var recordToEdit = db.ArticlePositions.FirstOrDefault(r => r.OrderPositionId == orderPositionId);
+            if (recordToEdit != null)
             {
-                var recordToEdit = db.ArticlePositions.FirstOrDefault(r => r.OrderPositionId == orderPositionId);
-                if (recordToEdit != null)
-                {
-                    recordToEdit.OrderPositionId = orderPositionId;
-                    recordToEdit.ArticleId = articleId;
-                    db.ArticlePositions.Update(recordToEdit);
-                    db.SaveChanges();
-                }
+                recordToEdit.OrderPositionId = orderPositionId;
+                recordToEdit.ArticleId = articleId;
+                db.ArticlePositions.Update(recordToEdit);
+                db.SaveChanges();
             }
         }
+    }
 
-        public ArticlePosition GetSingleArticlePosition(int orderPositionId, int articleId)
+    public ArticlePosition GetSingleArticlePosition(int orderPositionId, int articleId)
+    {
+        using (var db = new CompanyContext(_connectionString))
         {
-            using (var db = new CompanyContext(_connectionString))
-            {
-                var recordToReturn = db.ArticlePositions.FirstOrDefault(r => r.OrderPositionId == orderPositionId && r.ArticleId == articleId);
-                return recordToReturn;
-            }
+            var recordToReturn =
+                db.ArticlePositions.FirstOrDefault(
+                    r => r.OrderPositionId == orderPositionId && r.ArticleId == articleId);
+            return recordToReturn;
         }
     }
 }

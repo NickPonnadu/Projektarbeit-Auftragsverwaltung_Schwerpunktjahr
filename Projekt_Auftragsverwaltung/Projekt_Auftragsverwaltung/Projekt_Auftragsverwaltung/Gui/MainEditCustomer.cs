@@ -10,14 +10,14 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditCustomer : FormController
 
     {
-        AddressController _addressDataController { get; }
+        AddressController _addressController { get; }
         AddressLocationController _addressLocationController { get; }
         CustomerController _customerController { get; }
         Customer? Customer { get; set; }
 
         public bool EditMode;
 
-        public MainEditCustomer(Customer customer = null, AddressController? addressDataController, AddressLocationController? addressLocationController = null, CustomerController? customerController = null)
+        public MainEditCustomer(AddressController addressController, AddressLocationController addressLocationController, CustomerController customerController, Customer? customer = null )
         {
             InitializeComponent();
 
@@ -28,15 +28,15 @@ namespace Projekt_Auftragsverwaltung
                 SetEditModeOn();
             }
             else SetEditModeOff();
-            _addressDataController = addressDataController;
+            _addressController = addressController;
             _addressLocationController = addressLocationController;
             _customerController = customerController;
         }
 
         private void SetEditModeOn()
         {
-            var address = _addressDataController.GetSingleEntity(Customer.AddressId);
-            var addressLocation = dataController.GetSingleAddressLocation(address.ZipCode);
+            var address = (Address)_addressController.GetSingleAddress(Customer.AddressId);
+            var addressLocation = _addressLocationController.GetSingleAddressLocation(address.ZipCode);
             EditMode = true;
             TxtCustomerName.Text = Customer.Name;
             TxtCustomerPhoneNumber.Text = Customer.PhoneNumber;
@@ -69,26 +69,26 @@ namespace Projekt_Auftragsverwaltung
         {
             if (EditMode == false)
             {
-                dataController.ReturnCustomers();
-                dataController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
-                var address = dataController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
-                dataController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text, TxtCustomerWebsite.Text, address);
+                _customerController.ReturnCustomers();
+                _addressLocationController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
+                var address = _addressController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
+                _customerController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text, TxtCustomerWebsite.Text, address);
                 CloseForm();
             }
             if (EditMode == true && Customer != null)
             {
-                dataController.EditCustomer(Customer.CustomerId, TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerWebsite.Text, TxtCustomerPassword.Text);
+                _customerController.EditCustomer(Customer.CustomerId, TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerWebsite.Text, TxtCustomerPassword.Text);
 
-                var addressLocation = dataController.GetSingleAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text));
+                var addressLocation = _addressLocationController.GetSingleAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text));
                 if (addressLocation != null)
                 {
-                    dataController.EditAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text), TxtCustomerLocation.Text);
+                    _addressLocationController.EditAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text), TxtCustomerLocation.Text);
                 }
                 else
                 {
-                    dataController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
+                    _addressLocationController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
                 }
-                dataController.EditAddress(Customer.AddressId, TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, Convert.ToInt32(TxtCustomerPostcode.Text));
+                _addressController.EditAddress(Customer.AddressId, TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, Convert.ToInt32(TxtCustomerPostcode.Text));
 
                 SetEditModeOff();
                 CloseForm();

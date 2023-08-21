@@ -9,16 +9,16 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditArticleGroup : FormController
 
     {
+        private readonly ArticleGroupController _articleGroupController;
         ArticleGroup? ArticleGroup { get; set; }
 
         public bool EditMode;
-        StatisticController dataController;
-        
-        public MainEditArticleGroup(string connectionString, ArticleGroup articleGroup = null)
+      
+        public MainEditArticleGroup(ArticleGroupController articleGroupController, ArticleGroup articleGroup = null)
         {
             InitializeComponent();
-            ConnectionString = connectionString;
-            dataController = new DataController(ConnectionString);
+
+            _articleGroupController = articleGroupController;
             ArticleGroup = articleGroup;
 
             if (ArticleGroup != null)
@@ -47,12 +47,12 @@ namespace Projekt_Auftragsverwaltung
         {
             if (EditMode == false)
             {
-                dataController.CreateArticleGroup(TxtArticleGroupEditArticleGroup.Text);
+                _articleGroupController.CreateArticleGroup(TxtArticleGroupEditArticleGroup.Text);
                 CloseForm();
             }
             if (EditMode == true && ArticleGroup != null && TxtArticleGroupEditArticleGroup.Text.Length > 0)
             {
-                dataController.EditArticleGroup(ArticleGroup.ArticleGroupId, TxtArticleGroupEditArticleGroup.Text);
+                _articleGroupController.EditArticleGroup(ArticleGroup.ArticleGroupId, TxtArticleGroupEditArticleGroup.Text);
                 SetEditModeOff();
                 CloseForm();
             }

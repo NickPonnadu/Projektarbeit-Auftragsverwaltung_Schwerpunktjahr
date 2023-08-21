@@ -9,10 +9,10 @@ namespace Projekt_Auftragsverwaltung.Interfaces
 {
     public interface IAddressController
     {
-        Address Create(string street, string houseNumber, string zipCode);
-        void Delete(int addressId);
-        void Edit(int addressId, string street = "", string houseNumber = "", int postCode = 0000);
-        object GetSingleEntity(int addressId);
+        Address CreateAddress(string street, string houseNumber, string zipCode);
+        void DeleteAddress(int addressId);
+        void EditAddress(int addressId, string street = "", string houseNumber = "", int postCode = 0000);
+        object GetSingleAddress(int addressId);
     }
 
 }

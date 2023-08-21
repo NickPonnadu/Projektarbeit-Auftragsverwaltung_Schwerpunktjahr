@@ -7,80 +7,75 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projekt_Auftragsverwaltung.Controllers
+namespace Projekt_Auftragsverwaltung.Controllers;
+
+public class AddressController : IAddressController
+
 {
-    public class AddressController : IAddressController
+    private readonly string _connectionString;
 
+    public AddressController(string connectionString)
     {
-        private readonly string _connectionString;
+        _connectionString = connectionString;
+    }
 
-        public AddressController(string connectionString)
+    public Address CreateAddress(string street, string houseNumber, string zipCode)
+    {
+        // Verbindung mit der Datenbank herstellen
+        using (var connection = new SqlConnection(_connectionString))
         {
-            _connectionString = connectionString;
-        }
-
-        public Address Create(string street, string houseNumber, string zipCode)
-        {
-            // Verbindung mit der Datenbank herstellen
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            connection.Open();
+            // SqlCommand-Objekt erstellen und mit Verbindung und SQL-Befehl initialisieren
+            using (var dbContext = new CompanyContext(_connectionString))
             {
-                connection.Open();
-                // SqlCommand-Objekt erstellen und mit Verbindung und SQL-Befehl initialisieren
-                using (var dbContext = new CompanyContext(_connectionString))
+                var newAddress = new Address
                 {
-                    var newAddress = new Address
-                    {
-                        Street = street,
-                        HouseNumber = houseNumber,
-                        ZipCode = Convert.ToInt32(zipCode)
-                    };
-                    dbContext.Addresses.Add(newAddress);
-                    dbContext.SaveChanges();
-                    return newAddress;
-                }
+                    Street = street,
+                    HouseNumber = houseNumber,
+                    ZipCode = Convert.ToInt32(zipCode)
+                };
+                dbContext.Addresses.Add(newAddress);
+                dbContext.SaveChanges();
+                return newAddress;
             }
-
-            
         }
-        public void Delete(int addressId)
+    }
+
+    public void DeleteAddress(int addressId)
+    {
+        using (var db = new CompanyContext(_connectionString))
         {
-            using (var db = new CompanyContext(_connectionString))
+            var recordToDelete = db.Addresses.FirstOrDefault(r => r.AddressId == addressId);
+            if (recordToDelete != null)
             {
-                var recordToDelete = db.Addresses.FirstOrDefault(r => r.AddressId == addressId);
-                if (recordToDelete != null)
-                {
-                    db.Addresses.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
-                    db.SaveChanges(); // Änderungen speichern
-                }
+                db.Addresses.Remove(recordToDelete); // Den Datensatz aus der Datenbank entfernen
+                db.SaveChanges(); // Änderungen speichern
             }
-
         }
-        public void Edit(int addressId, string street = "", string houseNumber = "", int postCode = 0000)
+    }
+
+    public void EditAddress(int addressId, string street = "", string houseNumber = "", int postCode = 0000)
+    {
+        using (var db = new CompanyContext(_connectionString))
         {
-            using (var db = new CompanyContext(_connectionString))
+            var recordToEdit = db.Addresses.FirstOrDefault(r => r.AddressId == addressId);
+            if (recordToEdit != null)
             {
-                var recordToEdit = db.Addresses.FirstOrDefault(r => r.AddressId == addressId);
-                if (recordToEdit != null)
-                {
-
-                    recordToEdit.Street = street;
-                    recordToEdit.HouseNumber = houseNumber;
-                    recordToEdit.ZipCode = postCode == 0000 ? 0000 : postCode;
-                    db.Addresses.Update(recordToEdit);
-                    db.SaveChanges();
-                }
+                recordToEdit.Street = street;
+                recordToEdit.HouseNumber = houseNumber;
+                recordToEdit.ZipCode = postCode == 0000 ? 0000 : postCode;
+                db.Addresses.Update(recordToEdit);
+                db.SaveChanges();
             }
         }
+    }
 
-        public object GetSingleEntity(int adressId)
+    public object GetSingleAddress(int adressId)
+    {
+        using (var db = new CompanyContext(_connectionString))
         {
-            using (var db = new CompanyContext(_connectionString))
-            {
-                var recordToReturn = db.Addresses.FirstOrDefault(r => r.AddressId == adressId);
-                return recordToReturn;
-            }
+            var recordToReturn = db.Addresses.FirstOrDefault(r => r.AddressId == adressId);
+            return recordToReturn;
         }
-
-
     }
 }

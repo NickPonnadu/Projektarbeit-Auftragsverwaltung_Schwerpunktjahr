@@ -18,19 +18,17 @@ namespace Projekt_Auftragsverwaltung.Gui
 {
     public partial class TreeViewClass : Form
     {
-        public string connectionString;
-        public StatisticController dataController;
+        private readonly StatisticController _statisticController;
 
-        public TreeViewClass(string connectionstring1)
+        public TreeViewClass(StatisticController statisticController)
         {
+            _statisticController = statisticController;
             InitializeComponent();
-            connectionString = connectionstring1;
-            dataController = new StatisticController(connectionString);
         }
 
         private void CmdTreeViewShow_Click(object sender, EventArgs e)
         {
-            var table = dataController.GetDataTableTreeView();
+            var table = _statisticController.GetDataTableTreeView();
             treeView.Nodes.Clear();
             AddNode(null, table);
         }

@@ -13,16 +13,19 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditOrder : FormController
 
     {
-        StatisticController dataController;
+        private readonly CustomerController _customerController;
+        private readonly OrderController _orderController;
+        
+
         Order? Order { get; set; }
 
         public bool EditMode;
 
-        public MainEditOrder(string connectionString, Order order = null)
+        public MainEditOrder(CustomerController customerController, OrderController orderController, Order order = null)
         {
             InitializeComponent();
-            ConnectionString = connectionString;
-            dataController = new DataController(ConnectionString);
+            _customerController = customerController;
+            _orderController = orderController;
             Order = order;
             UpdateCustomerList();
             if (Order != null)
@@ -60,7 +63,7 @@ namespace Projekt_Auftragsverwaltung
                     int customerId = Convert.ToInt32(rows.Cells[0].Value);
 
 
-                    dataController.CreateOrder(DtpOrderDate.Value, customerId);
+                    _orderController.CreateOrder(DtpOrderDate.Value, customerId);
                     CloseForm();
                 }
                 else
@@ -74,7 +77,7 @@ namespace Projekt_Auftragsverwaltung
                     int customerId = Convert.ToInt32(rows.Cells[0].Value);
 
 
-                    dataController.EditOrder(Order.OrderId, DtpOrderDate.Value, customerId);
+                    _orderController.EditOrder(Order.OrderId, DtpOrderDate.Value, customerId);
                     SetEditModeOff();
                     CloseForm();
                 }
@@ -97,9 +100,9 @@ namespace Projekt_Auftragsverwaltung
 
         private void UpdateCustomerList(object sender = null, EventArgs e = null)
         {
-            if (dataController != null)
+            if (_orderController != null)
             {
-                var data = dataController.ReturnCustomers();
+                var data = _customerController.ReturnCustomers();
                 DGWChooseCustomer.DataSource = data;
             }
         }

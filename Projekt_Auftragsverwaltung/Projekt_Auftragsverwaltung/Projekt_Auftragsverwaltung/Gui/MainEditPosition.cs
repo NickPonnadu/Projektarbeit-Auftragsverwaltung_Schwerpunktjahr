@@ -10,15 +10,20 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditPosition : FormController
 
     {
-        StatisticController dataController;
+        private readonly OrderPositionController _orderPositionController;
+        private readonly OrderController _orderController;
+        private readonly ArticlePositionController _articlePositionController;
+        private readonly ArticleController _articleController;
         OrderPosition? OrderPosition { get; set; }
         public bool EditMode;
-        public MainEditPosition(string connectionString, OrderPosition orderPosition = null)
+        public MainEditPosition(OrderPositionController orderPositionController, ArticlePositionController articlePositionController, OrderController orderController, ArticleController articleController, OrderPosition? orderPosition = null)
         {
             InitializeComponent();
-            ConnectionString = connectionString;
-            dataController = new DataController(ConnectionString);
 
+            _orderPositionController = orderPositionController;
+            _articlePositionController = articlePositionController;
+            _orderController = orderController;
+            _articleController = articleController;
             OrderPosition = orderPosition;
 
             if (OrderPosition != null)
@@ -56,7 +61,7 @@ namespace Projekt_Auftragsverwaltung
                     var rowsArticles = DGWChooseArticles.SelectedRows[0];
                     int orderId = Convert.ToInt32(rowsOrders.Cells[0].Value);
                     int articleId = Convert.ToInt32(rowsArticles.Cells[0].Value);
-                    dataController.CreateOrderPosition(Convert.ToInt32(NumOrderPositionQuantity.Value), orderId, articleId);
+                    _orderPositionController.CreateOrderPosition(Convert.ToInt32(NumOrderPositionQuantity.Value), orderId, articleId);
                     SetEditModeOff();
                     CloseForm();
                 }
@@ -71,8 +76,8 @@ namespace Projekt_Auftragsverwaltung
                 var rowsArticles = DGWChooseArticles.SelectedRows[0];
                 int orderId = Convert.ToInt32(rowsOrders.Cells[0].Value);
                 int articleId = Convert.ToInt32(rowsArticles.Cells[0].Value);
-                dataController.EditOrderPosition(OrderPosition.OrderPositionId, Convert.ToInt16(NumOrderPositionQuantity.Value), orderId);
-                dataController.EditArticlePosition(OrderPosition.OrderPositionId, articleId);
+                _orderPositionController.EditOrderPosition(OrderPosition.OrderPositionId, Convert.ToInt16(NumOrderPositionQuantity.Value), orderId);
+                _articlePositionController.EditArticlePosition(OrderPosition.OrderPositionId, articleId);
                 SetEditModeOff();
                 CloseForm();
             }
@@ -96,18 +101,18 @@ namespace Projekt_Auftragsverwaltung
         }
         private void UpdateOrderList()
         {
-            if (dataController != null)
+            if (_orderController != null)
             {
-                var data = dataController.ReturnOrders();
+                var data = _orderController.ReturnOrders();
                 DGWChooseOrder.DataSource = data;
             }
         }
 
         private void UpdateArticleList()
         {
-            if (dataController != null)
+            if (_articleController != null)
             {
-                var data = dataController.ReturnArticles();
+                var data = _articleController.ReturnArticles();
                 DGWChooseArticles.DataSource = data;
             }
         }
