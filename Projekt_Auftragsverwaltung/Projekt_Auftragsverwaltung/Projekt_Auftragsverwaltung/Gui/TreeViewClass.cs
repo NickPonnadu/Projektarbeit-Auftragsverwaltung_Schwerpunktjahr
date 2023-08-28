@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using Projekt_Auftragsverwaltung.Interfaces;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -18,9 +19,9 @@ namespace Projekt_Auftragsverwaltung.Gui
 {
     public partial class TreeViewClass : Form
     {
-        private readonly StatisticController _statisticController;
+        private readonly IStatisticController _statisticController;
 
-        public TreeViewClass(StatisticController statisticController)
+        public TreeViewClass(IStatisticController statisticController)
         {
             _statisticController = statisticController;
             InitializeComponent();

@@ -2,6 +2,7 @@
 
 using Projekt_Auftragsverwaltung.Controllers;
 using Projekt_Auftragsverwaltung.Gui;
+using Projekt_Auftragsverwaltung.Interfaces;
 using Projekt_Auftragsverwaltung.Tables;
 
 namespace Projekt_Auftragsverwaltung
@@ -10,14 +11,14 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditCustomer : FormController
 
     {
-        AddressController _addressController { get; }
-        AddressLocationController _addressLocationController { get; }
-        CustomerController _customerController { get; }
+        IAddressController _addressController { get; }
+        IAddressLocationController _addressLocationController { get; }
+        ICustomerController _customerController { get; }
         Customer? Customer { get; set; }
 
         public bool EditMode;
 
-        public MainEditCustomer(AddressController addressController, AddressLocationController addressLocationController, CustomerController customerController, Customer? customer = null )
+        public MainEditCustomer(IAddressController addressController, IAddressLocationController addressLocationController, ICustomerController customerController, Customer? customer = null )
         {
             InitializeComponent();
 

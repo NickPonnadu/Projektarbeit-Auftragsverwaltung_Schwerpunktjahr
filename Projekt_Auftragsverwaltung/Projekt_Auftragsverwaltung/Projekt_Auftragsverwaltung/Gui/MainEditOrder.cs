@@ -6,6 +6,7 @@ using System.Data;
 using System.Reflection.Metadata;
 using Projekt_Auftragsverwaltung.Tables;
 using Projekt_Auftragsverwaltung.Controllers;
+using Projekt_Auftragsverwaltung.Interfaces;
 
 namespace Projekt_Auftragsverwaltung
 {
@@ -13,15 +14,15 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditOrder : FormController
 
     {
-        private readonly CustomerController _customerController;
-        private readonly OrderController _orderController;
+        private readonly ICustomerController _customerController;
+        private readonly IOrderController _orderController;
         
 
         Order? Order { get; set; }
 
         public bool EditMode;
 
-        public MainEditOrder(CustomerController customerController, OrderController orderController, Order order = null)
+        public MainEditOrder(ICustomerController customerController, IOrderController orderController, Order order = null)
         {
             InitializeComponent();
             _customerController = customerController;

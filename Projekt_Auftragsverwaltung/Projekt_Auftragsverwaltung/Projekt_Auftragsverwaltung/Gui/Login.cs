@@ -1,4 +1,5 @@
 ﻿using Projekt_Auftragsverwaltung.Controllers;
+using Projekt_Auftragsverwaltung.Interfaces;
 
 namespace Projekt_Auftragsverwaltung
 {
@@ -10,15 +11,15 @@ namespace Projekt_Auftragsverwaltung
 
         public string DbConnectionString;
 
-        private AddressController AddressController;
-        private AddressLocationController AddressLocationController;
-        private ArticleController ArticleController;
-        private ArticleGroupController ArticleGroupController;
-        private ArticlePositionController ArticlePositionController;
-        private CustomerController CustomerController;
-        private OrderController OrderController;
-        private OrderPositionController OrderPositionController;
-        private StatisticController StatisticController;
+        private IAddressController AddressController;
+        private IAddressLocationController AddressLocationController;
+        private IArticleController ArticleController;
+        private IArticleGroupController ArticleGroupController;
+        private IArticlePositionController ArticlePositionController;
+        private ICustomerController CustomerController;
+        private IOrderController OrderController;
+        private IOrderPositionController OrderPositionController;
+        private IStatisticController StatisticController;
 
         public Login()
         {

@@ -2,6 +2,7 @@
 using Projekt_Auftragsverwaltung.Gui;
 using Projekt_Auftragsverwaltung.Tables;
 using System.ComponentModel.DataAnnotations;
+using Projekt_Auftragsverwaltung.Interfaces;
 
 namespace Projekt_Auftragsverwaltung
 {
@@ -9,12 +10,12 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditArticleGroup : FormController
 
     {
-        private readonly ArticleGroupController _articleGroupController;
+        private readonly IArticleGroupController _articleGroupController;
         ArticleGroup? ArticleGroup { get; set; }
 
         public bool EditMode;
       
-        public MainEditArticleGroup(ArticleGroupController articleGroupController, ArticleGroup articleGroup = null)
+        public MainEditArticleGroup(IArticleGroupController articleGroupController, ArticleGroup articleGroup = null)
         {
             InitializeComponent();
 

@@ -1,19 +1,20 @@
 using Projekt_Auftragsverwaltung.Controllers;
 using Projekt_Auftragsverwaltung.Gui;
+using Projekt_Auftragsverwaltung.Interfaces;
 
 namespace Projekt_Auftragsverwaltung;
 
 public partial class Main : FormController
 {
-    private readonly AddressController _addressController;
-    private readonly AddressLocationController _addressLocationController;
-    private readonly ArticleController _articleController;
-    private readonly ArticleGroupController _articleGroupController;
-    private readonly ArticlePositionController _articlePositionController;
-    private readonly CustomerController _customerController;
-    private readonly OrderController _orderController;
-    private readonly OrderPositionController _orderPositionController;
-    private readonly StatisticController _statisticController;
+    private readonly IAddressController _addressController;
+    private readonly IAddressLocationController _addressLocationController;
+    private readonly IArticleController _articleController;
+    private readonly IArticleGroupController _articleGroupController;
+    private readonly IArticlePositionController _articlePositionController;
+    private readonly ICustomerController _customerController;
+    private readonly IOrderController _orderController;
+    private readonly IOrderPositionController _orderPositionController;
+    private readonly IStatisticController _statisticController;
     public Form EditGuiArticle;
     public Form EditGuiArticleGroup;
     public Form EditGuiCustomer;
@@ -21,11 +22,11 @@ public partial class Main : FormController
     public Form EditGuiPosition;
     public Form TreeViewClass;
 
-    public Main(ArticleController articleController, ArticleGroupController articleGroupController,
-        ArticlePositionController articlePositionController, CustomerController customerController,
-        OrderController orderController, OrderPositionController orderPositionController,
-        StatisticController statisticController, AddressLocationController addressLocationController,
-        AddressController addressController)
+    public Main(IArticleController articleController, IArticleGroupController articleGroupController,
+        IArticlePositionController articlePositionController, ICustomerController customerController,
+        IOrderController orderController, IOrderPositionController orderPositionController,
+        IStatisticController statisticController, IAddressLocationController addressLocationController,
+        IAddressController addressController)
     {
         _articleController = articleController;
         _articleGroupController = articleGroupController;
