@@ -70,10 +70,11 @@ public class AddressController : IAddressController
         }
     }
 
-    public object GetSingleAddress(int adressId)
+    public Address GetSingleAddress(int adressId)
     {
         using (var db = new CompanyContext(_connectionString))
         {
+            
             var recordToReturn = db.Addresses.FirstOrDefault(r => r.AddressId == adressId);
             return recordToReturn;
         }

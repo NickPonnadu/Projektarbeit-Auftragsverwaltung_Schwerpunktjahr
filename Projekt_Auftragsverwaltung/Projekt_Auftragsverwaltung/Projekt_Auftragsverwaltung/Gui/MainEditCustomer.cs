@@ -1,6 +1,4 @@
-﻿
-
-using Projekt_Auftragsverwaltung.Controllers;
+﻿using Projekt_Auftragsverwaltung.Controllers;
 using Projekt_Auftragsverwaltung.Gui;
 using Projekt_Auftragsverwaltung.Tables;
 
@@ -8,16 +6,15 @@ namespace Projekt_Auftragsverwaltung
 {
 
     public partial class MainEditCustomer : FormController
-
     {
-        AddressController _addressController { get; }
-        AddressLocationController _addressLocationController { get; }
-        CustomerController _customerController { get; }
+        AddressController AddressController { get; }
+        AddressLocationController AddressLocationController { get; }
+        CustomerController CustomerController { get; }
         Customer? Customer { get; set; }
 
         public bool EditMode;
 
-        public MainEditCustomer(AddressController addressController, AddressLocationController addressLocationController, CustomerController customerController, Customer? customer = null )
+        public MainEditCustomer(AddressController addressController, AddressLocationController addressLocationController, CustomerController customerController, Customer? customer = null)
         {
             InitializeComponent();
 
@@ -28,28 +25,29 @@ namespace Projekt_Auftragsverwaltung
                 SetEditModeOn();
             }
             else SetEditModeOff();
-            _addressController = addressController;
-            _addressLocationController = addressLocationController;
-            _customerController = customerController;
+            AddressController = addressController;
+            AddressLocationController = addressLocationController;
+            CustomerController = customerController;
+
         }
 
         private void SetEditModeOn()
         {
-            var address = (Address)_addressController.GetSingleAddress(Customer.AddressId);
-            var addressLocation = _addressLocationController.GetSingleAddressLocation(address.ZipCode);
+            var address = AddressController.GetSingleAddress(Customer.AddressId);
+            var addressLocation = AddressLocationController.GetSingleAddressLocation(address.ZipCode);
             EditMode = true;
+            TxtCustomerMail.Text = Customer.EMail;
+            TxtCustomerPassword.Text = Customer.Password;
+            TxtCustomerWebsite.Text = Customer.Website;
             TxtCustomerName.Text = Customer.Name;
             TxtCustomerPhoneNumber.Text = Customer.PhoneNumber;
-            TxtCustomerMail.Text = Customer.EMail;
-            TxtCustomerWebsite.Text = Customer.Website;
-            TxtCustomerPassword.Text = Customer.Password;
             TxtCustomerStreet.Text = address.Street;
             TxtCustomerHouseNumber.Text = address.HouseNumber;
             TxtCustomerPostcode.Text = Convert.ToString(addressLocation.ZipCode);
             TxtCustomerLocation.Text = addressLocation.Location;
             CmdEditCustomerSave.Text = "Änderungen speichern";
         }
-
+        
         private void SetEditModeOff()
         {
             Customer = null;
@@ -69,26 +67,26 @@ namespace Projekt_Auftragsverwaltung
         {
             if (EditMode == false)
             {
-                _customerController.ReturnCustomers();
-                _addressLocationController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
-                var address = _addressController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
-                _customerController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text, TxtCustomerWebsite.Text, address);
+                CustomerController.ReturnCustomers();
+                AddressLocationController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
+                var address = AddressController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
+                CustomerController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text, TxtCustomerWebsite.Text, address);
                 CloseForm();
             }
             if (EditMode == true && Customer != null)
             {
-                _customerController.EditCustomer(Customer.CustomerId, TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerWebsite.Text, TxtCustomerPassword.Text);
+                CustomerController.EditCustomer(Customer.CustomerId, TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerWebsite.Text, TxtCustomerPassword.Text);
 
-                var addressLocation = _addressLocationController.GetSingleAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text));
+                var addressLocation = AddressLocationController.GetSingleAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text));
                 if (addressLocation != null)
                 {
-                    _addressLocationController.EditAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text), TxtCustomerLocation.Text);
+                    AddressLocationController.EditAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text), TxtCustomerLocation.Text);
                 }
                 else
                 {
-                    _addressLocationController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
+                    AddressLocationController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
                 }
-                _addressController.EditAddress(Customer.AddressId, TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, Convert.ToInt32(TxtCustomerPostcode.Text));
+                AddressController.EditAddress(Customer.AddressId, TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, Convert.ToInt32(TxtCustomerPostcode.Text));
 
                 SetEditModeOff();
                 CloseForm();
@@ -104,6 +102,5 @@ namespace Projekt_Auftragsverwaltung
             SetEditModeOff();
             CloseForm();
         }
-
     }
 }

@@ -1,12 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Projekt_Auftragsverwaltung.Interfaces;
 using Projekt_Auftragsverwaltung.Tables;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Projekt_Auftragsverwaltung.Controllers;
 
@@ -17,6 +12,7 @@ public class CustomerController : ICustomerController
     public CustomerController(string connectionString)
     {
         _connectionString = connectionString;
+        _validationService = RegexValidationService.GetInstance();
     }
 
     public DataTable ReturnCustomers()
@@ -132,6 +128,10 @@ public class CustomerController : ICustomerController
     public void CreateCustomer(string name, string phoneNumber, string eMail, string password, string website,
         Address address)
     {
+        if (!_validationService.ValidateWebsite(website)) { return; }
+
+        if (_validationService.ValidateEmail(eMail)) { return; }
+
         // Verbindung mit der Datenbank herstellen
         using (var connection = new SqlConnection(_connectionString))
         {
@@ -141,6 +141,7 @@ public class CustomerController : ICustomerController
             {
                 var newCustomer = new Customer
                 {
+                    
                     Name = name,
                     PhoneNumber = phoneNumber,
                     Website = website,
@@ -206,11 +207,22 @@ public class CustomerController : ICustomerController
             var recordToEdit = db.Customers.FirstOrDefault(r => r.CustomerId == customerId);
             if (recordToEdit != null)
             {
+                if (_validationService.ValidateEmail(eMail))
+                {
+                    recordToEdit.EMail = eMail;
+                }
+
+                if (_validationService.ValidatePassword(Password))
+                {
+                recordToEdit.Password = Password;
+                }
+
+                if (_validationService.ValidateWebsite(website))
+                {
+                    recordToEdit.Website = website;
+                }
                 recordToEdit.Name = name;
                 recordToEdit.PhoneNumber = phoneNumber;
-                recordToEdit.EMail = eMail;
-                recordToEdit.Website = website;
-                recordToEdit.Password = Password;
                 db.Customers.Update(recordToEdit);
                 db.SaveChanges();
             }
@@ -225,4 +237,7 @@ public class CustomerController : ICustomerController
             return recordToReturn;
         }
     }
+
+    private readonly RegexValidationService _validationService;
+
 }
