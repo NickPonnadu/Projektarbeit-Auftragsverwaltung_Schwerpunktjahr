@@ -5,7 +5,6 @@ namespace Projekt_Auftragsverwaltung
     public class RegexValidationService
     {
         private static RegexValidationService instance;
-
         private RegexValidationService() { }
 
         public static RegexValidationService GetInstance()
@@ -47,10 +46,9 @@ namespace Projekt_Auftragsverwaltung
             return true;
         }
 
-        private readonly string _websitePattern = @"^(http|https)://([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,6})([/\w.-]*)*/?$";
+        private readonly string _websitePattern = @"^(https?://)?(www\.)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$";
         private readonly string _passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$";
         private readonly string _customerIdPattern = @"^CU\d{5}$";
         private readonly string _emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-
     }
 }

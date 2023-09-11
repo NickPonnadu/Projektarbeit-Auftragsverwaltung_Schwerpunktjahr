@@ -17,6 +17,7 @@ namespace Projekt_Auftragsverwaltung
         public MainEditCustomer(AddressController addressController, AddressLocationController addressLocationController, CustomerController customerController, Customer? customer = null)
         {
             InitializeComponent();
+            _validationService = RegexValidationService.GetInstance();
 
             Customer = customer;
 
@@ -66,19 +67,30 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdEditCustomerSave_Click(object sender, EventArgs e)
         {
-            if (EditMode == false)
+            if (!EditMode)
             {
                 CustomerController.ReturnCustomers();
                 AddressLocationController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
                 var address = AddressController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
-                CustomerController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text, TxtCustomerWebsite.Text, address);
-                CloseForm();
+
+                if(_validationService.ValidateEmail(TxtCustomerMail.Text) && 
+                    _validationService.ValidateWebsite(TxtCustomerWebsite.Text) &&
+                    _validationService.ValidatePassword(TxtCustomerPassword.Text))
+                {
+                    CustomerController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text, TxtCustomerWebsite.Text, address);
+
+                    CloseForm();
+                }
             }
-            if (EditMode == true && Customer != null)
+            if (EditMode == true && Customer != null &&
+                _validationService.ValidateEmail(TxtCustomerMail.Text) &&
+                _validationService.ValidateWebsite(TxtCustomerWebsite.Text) &&
+                _validationService.ValidatePassword(TxtCustomerPassword.Text))
             {
                 CustomerController.EditCustomer(Customer.CustomerId, TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerWebsite.Text, TxtCustomerPassword.Text);
 
                 var addressLocation = AddressLocationController.GetSingleAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text));
+
                 if (addressLocation != null)
                 {
                     AddressLocationController.EditAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text), TxtCustomerLocation.Text);
@@ -90,6 +102,7 @@ namespace Projekt_Auftragsverwaltung
                 AddressController.EditAddress(Customer.AddressId, TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, Convert.ToInt32(TxtCustomerPostcode.Text));
 
                 SetEditModeOff();
+                
                 CloseForm();
             }
             else if (EditMode == true && Customer == null)
@@ -103,5 +116,7 @@ namespace Projekt_Auftragsverwaltung
             SetEditModeOff();
             CloseForm();
         }
+
+        private readonly RegexValidationService _validationService;
     }
 }
