@@ -20,14 +20,15 @@ namespace Projekt_Auftragsverwaltung
 
             Customer = customer;
 
+            AddressController = addressController;
+            AddressLocationController = addressLocationController;
+            CustomerController = customerController;
+
             if (Customer != null)
             {
                 SetEditModeOn();
             }
             else SetEditModeOff();
-            AddressController = addressController;
-            AddressLocationController = addressLocationController;
-            CustomerController = customerController;
 
         }
 
