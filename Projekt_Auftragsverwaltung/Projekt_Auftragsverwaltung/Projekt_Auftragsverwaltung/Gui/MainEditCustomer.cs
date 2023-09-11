@@ -24,19 +24,22 @@ namespace Projekt_Auftragsverwaltung
 
             Customer = customer;
 
+            _addressController = addressController;
+            _addressLocationController = addressLocationController;
+            _customerController = customerController;
+
             if (Customer != null)
             {
                 SetEditModeOn();
             }
             else SetEditModeOff();
-            _addressController = addressController;
-            _addressLocationController = addressLocationController;
-            _customerController = customerController;
+            
         }
 
         private void SetEditModeOn()
         {
-            var address = (Address)_addressController.GetSingleAddress(Customer.AddressId);
+            var addressId = Customer.AddressId;
+            var address = _addressController.GetSingleAddress(addressId);
             var addressLocation = _addressLocationController.GetSingleAddressLocation(address.ZipCode);
             EditMode = true;
             TxtCustomerName.Text = Customer.Name;
