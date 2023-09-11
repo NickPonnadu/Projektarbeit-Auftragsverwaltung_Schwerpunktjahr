@@ -1,11 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Projekt_Auftragsverwaltung.Interfaces;
 using Projekt_Auftragsverwaltung.Tables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Projekt_Auftragsverwaltung.Controllers;
 
@@ -70,11 +65,11 @@ public class AddressController : IAddressController
         }
     }
 
-    public object GetSingleAddress(int adressId)
+    public Address GetSingleAddress(int addressId)
     {
         using (var db = new CompanyContext(_connectionString))
         {
-            var recordToReturn = db.Addresses.FirstOrDefault(r => r.AddressId == adressId);
+            var recordToReturn = db.Addresses.FirstOrDefault(r => r.AddressId == addressId);
             return recordToReturn;
         }
     }
