@@ -9,9 +9,7 @@ public class Customer
     public string Website { get; set; }
     public string Password { get; set; }
 
-
     public List<Order> Orders { get; set; }
-
 
     public int AddressId { get; set; }
     public Address Address { get; set; }

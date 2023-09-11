@@ -14,16 +14,16 @@ namespace Projekt_Auftragsverwaltung
         public DbSet<ArticleGroup> ArticleGroups { get; set; }
         public DbSet<ArticlePosition> ArticlePositions { get; set; }
 
-        public string _ConnectionString;
+        public string _connectionString;
 
         public CompanyContext(string connectionString)
         {
-            _ConnectionString = connectionString;
+            _connectionString = connectionString;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_ConnectionString);
+            optionsBuilder.UseSqlServer(_connectionString);
 
         }
 
@@ -32,32 +32,42 @@ namespace Projekt_Auftragsverwaltung
             modelBuilder.Entity<Address>()
                 .HasKey(b => b.AddressId);
 
-
             modelBuilder.Entity<AddressLocation>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
+
             modelBuilder.Entity<AddressLocation>().HasKey(b => b.ZipCode);
 
             modelBuilder.Entity<AddressLocation>()
                .Property(b => b.ZipCode)
                .ValueGeneratedNever();
+
             modelBuilder.Entity<Article>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
+
             modelBuilder.Entity<Article>()
                 .HasKey(b => b.ArticleId);
             modelBuilder.Entity<ArticleGroup>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
+
             modelBuilder.Entity<ArticleGroup>()
                 .HasKey(b => b.ArticleGroupId);
+
             modelBuilder.Entity<ArticlePosition>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
+
             modelBuilder.Entity<ArticlePosition>()
                 .HasKey(b => b.ArticlePositionId);
+
             modelBuilder.Entity<Customer>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
+
             modelBuilder.Entity<Customer>()
                 .HasKey(b => b.CustomerId);
+
             modelBuilder.Entity<Order>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
+
             modelBuilder.Entity<Order>()
                .HasKey(b => b.OrderId);
+
             modelBuilder.Entity<OrderPosition>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
+
             modelBuilder.Entity<OrderPosition>()
                .HasKey(b => b.OrderPositionId);
-
 
 
             modelBuilder.Entity<Address>()

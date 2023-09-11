@@ -4,16 +4,16 @@ namespace Projekt_Auftragsverwaltung
 {
     public class RegexValidationService
     {
-        private static RegexValidationService instance;
+        private static RegexValidationService? _instance;
         private RegexValidationService() { }
 
         public static RegexValidationService GetInstance()
         {
-            if(instance == null)
+            if(_instance == null)
             {
-                instance = new RegexValidationService();
+                _instance = new RegexValidationService();
             }
-            return instance;
+            return _instance;
         }
 
         public bool ValidateCustomerNumber(string input)

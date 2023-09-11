@@ -73,19 +73,14 @@ namespace Projekt_Auftragsverwaltung
                 AddressLocationController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
                 var address = AddressController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
 
-                if(_validationService.ValidateEmail(TxtCustomerMail.Text) && 
-                    _validationService.ValidateWebsite(TxtCustomerWebsite.Text) &&
-                    _validationService.ValidatePassword(TxtCustomerPassword.Text))
+                if(InputIsValid())
                 {
                     CustomerController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text, TxtCustomerWebsite.Text, address);
 
                     CloseForm();
                 }
             }
-            if (EditMode == true && Customer != null &&
-                _validationService.ValidateEmail(TxtCustomerMail.Text) &&
-                _validationService.ValidateWebsite(TxtCustomerWebsite.Text) &&
-                _validationService.ValidatePassword(TxtCustomerPassword.Text))
+            if (EditMode == true && Customer != null && InputIsValid())
             {
                 CustomerController.EditCustomer(Customer.CustomerId, TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerWebsite.Text, TxtCustomerPassword.Text);
 
@@ -110,7 +105,12 @@ namespace Projekt_Auftragsverwaltung
                 MessageBox.Show("Falscher EditMode");
             }
         }
-
+        public bool InputIsValid()
+        {
+            return _validationService.ValidateEmail(TxtCustomerMail.Text) &&
+                _validationService.ValidateWebsite(TxtCustomerWebsite.Text) &&
+                _validationService.ValidatePassword(TxtCustomerPassword.Text);
+        }
         private void CmdEditCustomerCancel_Click(object sender, EventArgs e)
         {
             SetEditModeOff();
