@@ -1,12 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Projekt_Auftragsverwaltung.Entites;
 using Projekt_Auftragsverwaltung.Interfaces;
 using Projekt_Auftragsverwaltung.Tables;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 
