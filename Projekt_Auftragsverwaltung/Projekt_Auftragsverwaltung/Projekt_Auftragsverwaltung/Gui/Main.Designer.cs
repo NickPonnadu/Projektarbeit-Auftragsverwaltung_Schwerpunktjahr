@@ -28,816 +28,863 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LblKunden = new System.Windows.Forms.Label();
-            this.TabControl = new System.Windows.Forms.TabControl();
-            this.Kunden = new System.Windows.Forms.TabPage();
-            this.CmbCustomerSearchProperty = new System.Windows.Forms.ComboBox();
-            this.CmdDeleteCustomer = new System.Windows.Forms.Button();
-            this.TxtCustomerSearchProperty = new System.Windows.Forms.TextBox();
-            this.LblCustomerSearchField = new System.Windows.Forms.Label();
-            this.DGWCustomers = new System.Windows.Forms.DataGridView();
-            this.CmdSearchResetCustomer = new System.Windows.Forms.Button();
-            this.CmdCustomerSearch = new System.Windows.Forms.Button();
-            this.CmdEditCustomer = new System.Windows.Forms.Button();
-            this.CmdCreateCustomer = new System.Windows.Forms.Button();
-            this.Artikelgruppen = new System.Windows.Forms.TabPage();
-            this.CmdTreeView = new System.Windows.Forms.Button();
-            this.CmdDeleteArticleGroup = new System.Windows.Forms.Button();
-            this.CmdSearchResetArticleGroup = new System.Windows.Forms.Button();
-            this.CmdSearchArticleGroup = new System.Windows.Forms.Button();
-            this.CmdEditArticleGroup = new System.Windows.Forms.Button();
-            this.CmdCreateArticleGroup = new System.Windows.Forms.Button();
-            this.DGWArticleGroups = new System.Windows.Forms.DataGridView();
-            this.TxtArticleGroupSearchName = new System.Windows.Forms.TextBox();
-            this.LblArticleGroupSearch = new System.Windows.Forms.Label();
-            this.LblArticleGroups = new System.Windows.Forms.Label();
-            this.Artikel = new System.Windows.Forms.TabPage();
-            this.CmbArticleSearchProperty = new System.Windows.Forms.ComboBox();
-            this.DGWArticles = new System.Windows.Forms.DataGridView();
-            this.TxtSearchArticleProperty = new System.Windows.Forms.TextBox();
-            this.CmdDeleteArticle = new System.Windows.Forms.Button();
-            this.CmdSearchResetArticle = new System.Windows.Forms.Button();
-            this.CmdSearchArticle = new System.Windows.Forms.Button();
-            this.CmdEditArticle = new System.Windows.Forms.Button();
-            this.CmdCreateArticle = new System.Windows.Forms.Button();
-            this.LblSearchName = new System.Windows.Forms.Label();
-            this.LblArticle = new System.Windows.Forms.Label();
-            this.Aufträge = new System.Windows.Forms.TabPage();
-            this.CmbOrderSearchProperty = new System.Windows.Forms.ComboBox();
-            this.DGWOrders = new System.Windows.Forms.DataGridView();
-            this.TxtSearchOrderProperty = new System.Windows.Forms.TextBox();
-            this.CmdDeleteOrder = new System.Windows.Forms.Button();
-            this.CmdSearchResetOrder = new System.Windows.Forms.Button();
-            this.CmdSearchOrder = new System.Windows.Forms.Button();
-            this.CmdEditOrder = new System.Windows.Forms.Button();
-            this.CmdCreateOrder = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.Positionen = new System.Windows.Forms.TabPage();
-            this.CmdPositionSearchProperty = new System.Windows.Forms.ComboBox();
-            this.DGWPositions = new System.Windows.Forms.DataGridView();
-            this.TxtSearchPositionProperty = new System.Windows.Forms.TextBox();
-            this.CmdDeletePosition = new System.Windows.Forms.Button();
-            this.CmdSearchResetPosition = new System.Windows.Forms.Button();
-            this.CmdSearchPosition = new System.Windows.Forms.Button();
-            this.CmdEditPosition = new System.Windows.Forms.Button();
-            this.CmdCreatePosition = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.Jahresvergleich = new System.Windows.Forms.TabPage();
-            this.LblStatistics = new System.Windows.Forms.Label();
-            this.DGWStatistic = new System.Windows.Forms.DataGridView();
-            this.TabControl.SuspendLayout();
-            this.Kunden.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGWCustomers)).BeginInit();
-            this.Artikelgruppen.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGWArticleGroups)).BeginInit();
-            this.Artikel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGWArticles)).BeginInit();
-            this.Aufträge.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGWOrders)).BeginInit();
-            this.Positionen.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGWPositions)).BeginInit();
-            this.Jahresvergleich.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGWStatistic)).BeginInit();
-            this.SuspendLayout();
+            LblKunden = new Label();
+            TabControl = new TabControl();
+            Kunden = new TabPage();
+            CmdImportXML = new Button();
+            CmdImport = new Button();
+            CmdExportXml = new Button();
+            CmdExportJson = new Button();
+            CmbCustomerSearchProperty = new ComboBox();
+            CmdDeleteCustomer = new Button();
+            TxtCustomerSearchProperty = new TextBox();
+            LblCustomerSearchField = new Label();
+            DGWCustomers = new DataGridView();
+            CmdSearchResetCustomer = new Button();
+            CmdCustomerSearch = new Button();
+            CmdEditCustomer = new Button();
+            CmdCreateCustomer = new Button();
+            Artikelgruppen = new TabPage();
+            CmdTreeView = new Button();
+            CmdDeleteArticleGroup = new Button();
+            CmdSearchResetArticleGroup = new Button();
+            CmdSearchArticleGroup = new Button();
+            CmdEditArticleGroup = new Button();
+            CmdCreateArticleGroup = new Button();
+            DGWArticleGroups = new DataGridView();
+            TxtArticleGroupSearchName = new TextBox();
+            LblArticleGroupSearch = new Label();
+            LblArticleGroups = new Label();
+            Artikel = new TabPage();
+            CmbArticleSearchProperty = new ComboBox();
+            DGWArticles = new DataGridView();
+            TxtSearchArticleProperty = new TextBox();
+            CmdDeleteArticle = new Button();
+            CmdSearchResetArticle = new Button();
+            CmdSearchArticle = new Button();
+            CmdEditArticle = new Button();
+            CmdCreateArticle = new Button();
+            LblSearchName = new Label();
+            LblArticle = new Label();
+            Aufträge = new TabPage();
+            CmbOrderSearchProperty = new ComboBox();
+            DGWOrders = new DataGridView();
+            TxtSearchOrderProperty = new TextBox();
+            CmdDeleteOrder = new Button();
+            CmdSearchResetOrder = new Button();
+            CmdSearchOrder = new Button();
+            CmdEditOrder = new Button();
+            CmdCreateOrder = new Button();
+            label6 = new Label();
+            label5 = new Label();
+            Positionen = new TabPage();
+            CmdPositionSearchProperty = new ComboBox();
+            DGWPositions = new DataGridView();
+            TxtSearchPositionProperty = new TextBox();
+            CmdDeletePosition = new Button();
+            CmdSearchResetPosition = new Button();
+            CmdSearchPosition = new Button();
+            CmdEditPosition = new Button();
+            CmdCreatePosition = new Button();
+            label11 = new Label();
+            label10 = new Label();
+            Jahresvergleich = new TabPage();
+            LblStatistics = new Label();
+            DGWStatistic = new DataGridView();
+            TabControl.SuspendLayout();
+            Kunden.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DGWCustomers).BeginInit();
+            Artikelgruppen.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DGWArticleGroups).BeginInit();
+            Artikel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DGWArticles).BeginInit();
+            Aufträge.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DGWOrders).BeginInit();
+            Positionen.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DGWPositions).BeginInit();
+            Jahresvergleich.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DGWStatistic).BeginInit();
+            SuspendLayout();
             // 
             // LblKunden
             // 
-            this.LblKunden.AutoSize = true;
-            this.LblKunden.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblKunden.Location = new System.Drawing.Point(31, 22);
-            this.LblKunden.Name = "LblKunden";
-            this.LblKunden.Size = new System.Drawing.Size(79, 28);
-            this.LblKunden.TabIndex = 0;
-            this.LblKunden.Text = "Kunden";
+            LblKunden.AutoSize = true;
+            LblKunden.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            LblKunden.Location = new Point(31, 22);
+            LblKunden.Name = "LblKunden";
+            LblKunden.Size = new Size(79, 28);
+            LblKunden.TabIndex = 0;
+            LblKunden.Text = "Kunden";
             // 
             // TabControl
             // 
-            this.TabControl.Controls.Add(this.Kunden);
-            this.TabControl.Controls.Add(this.Artikelgruppen);
-            this.TabControl.Controls.Add(this.Artikel);
-            this.TabControl.Controls.Add(this.Aufträge);
-            this.TabControl.Controls.Add(this.Positionen);
-            this.TabControl.Controls.Add(this.Jahresvergleich);
-            this.TabControl.Location = new System.Drawing.Point(10, 9);
-            this.TabControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.TabControl.Name = "TabControl";
-            this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(1261, 595);
-            this.TabControl.TabIndex = 24;
-            this.TabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.Select_Statistics);
+            TabControl.Controls.Add(Kunden);
+            TabControl.Controls.Add(Artikelgruppen);
+            TabControl.Controls.Add(Artikel);
+            TabControl.Controls.Add(Aufträge);
+            TabControl.Controls.Add(Positionen);
+            TabControl.Controls.Add(Jahresvergleich);
+            TabControl.Location = new Point(10, 9);
+            TabControl.Margin = new Padding(3, 2, 3, 2);
+            TabControl.Name = "TabControl";
+            TabControl.SelectedIndex = 0;
+            TabControl.Size = new Size(1261, 595);
+            TabControl.TabIndex = 24;
+            TabControl.Selecting += Select_Statistics;
             // 
             // Kunden
             // 
-            this.Kunden.AccessibleName = "";
-            this.Kunden.Controls.Add(this.CmbCustomerSearchProperty);
-            this.Kunden.Controls.Add(this.CmdDeleteCustomer);
-            this.Kunden.Controls.Add(this.TxtCustomerSearchProperty);
-            this.Kunden.Controls.Add(this.LblCustomerSearchField);
-            this.Kunden.Controls.Add(this.DGWCustomers);
-            this.Kunden.Controls.Add(this.CmdSearchResetCustomer);
-            this.Kunden.Controls.Add(this.CmdCustomerSearch);
-            this.Kunden.Controls.Add(this.CmdEditCustomer);
-            this.Kunden.Controls.Add(this.CmdCreateCustomer);
-            this.Kunden.Controls.Add(this.LblKunden);
-            this.Kunden.Location = new System.Drawing.Point(4, 24);
-            this.Kunden.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Kunden.Name = "Kunden";
-            this.Kunden.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Kunden.Size = new System.Drawing.Size(1253, 567);
-            this.Kunden.TabIndex = 4;
-            this.Kunden.Text = "Kunden";
-            this.Kunden.UseVisualStyleBackColor = true;
-            this.Kunden.ContextMenuStripChanged += new System.EventHandler(this.UpdateListsEvent);
+            Kunden.AccessibleName = "";
+            Kunden.Controls.Add(CmdImportXML);
+            Kunden.Controls.Add(CmdImport);
+            Kunden.Controls.Add(CmdExportXml);
+            Kunden.Controls.Add(CmdExportJson);
+            Kunden.Controls.Add(CmbCustomerSearchProperty);
+            Kunden.Controls.Add(CmdDeleteCustomer);
+            Kunden.Controls.Add(TxtCustomerSearchProperty);
+            Kunden.Controls.Add(LblCustomerSearchField);
+            Kunden.Controls.Add(DGWCustomers);
+            Kunden.Controls.Add(CmdSearchResetCustomer);
+            Kunden.Controls.Add(CmdCustomerSearch);
+            Kunden.Controls.Add(CmdEditCustomer);
+            Kunden.Controls.Add(CmdCreateCustomer);
+            Kunden.Controls.Add(LblKunden);
+            Kunden.Location = new Point(4, 24);
+            Kunden.Margin = new Padding(3, 2, 3, 2);
+            Kunden.Name = "Kunden";
+            Kunden.Padding = new Padding(3, 2, 3, 2);
+            Kunden.Size = new Size(1253, 567);
+            Kunden.TabIndex = 4;
+            Kunden.Text = "Kunden";
+            Kunden.UseVisualStyleBackColor = true;
+            Kunden.ContextMenuStripChanged += UpdateListsEvent;
+            // 
+            // CmdImportXML
+            // 
+            CmdImportXML.Location = new Point(1044, 19);
+            CmdImportXML.Name = "CmdImportXML";
+            CmdImportXML.Size = new Size(114, 23);
+            CmdImportXML.TabIndex = 46;
+            CmdImportXML.Text = "ImportXml";
+            CmdImportXML.UseVisualStyleBackColor = true;
+            CmdImportXML.Click += CmdImportXML_Click;
+            // 
+            // CmdImport
+            // 
+            CmdImport.Location = new Point(932, 19);
+            CmdImport.Name = "CmdImport";
+            CmdImport.Size = new Size(106, 23);
+            CmdImport.TabIndex = 45;
+            CmdImport.Text = "Import JSON";
+            CmdImport.UseVisualStyleBackColor = true;
+            CmdImport.Click += CmdImportJson_Click;
+            // 
+            // CmdExportXml
+            // 
+            CmdExportXml.Location = new Point(838, 20);
+            CmdExportXml.Name = "CmdExportXml";
+            CmdExportXml.Size = new Size(75, 23);
+            CmdExportXml.TabIndex = 44;
+            CmdExportXml.Text = "Xml";
+            CmdExportXml.UseVisualStyleBackColor = true;
+            CmdExportXml.Click += CmdExportXml_Click;
+            // 
+            // CmdExportJson
+            // 
+            CmdExportJson.Location = new Point(700, 19);
+            CmdExportJson.Name = "CmdExportJson";
+            CmdExportJson.Size = new Size(75, 23);
+            CmdExportJson.TabIndex = 41;
+            CmdExportJson.Text = "Json";
+            CmdExportJson.UseVisualStyleBackColor = true;
+            CmdExportJson.Click += CmdExportJson_Click;
             // 
             // CmbCustomerSearchProperty
             // 
-            this.CmbCustomerSearchProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbCustomerSearchProperty.FormattingEnabled = true;
-            this.CmbCustomerSearchProperty.Location = new System.Drawing.Point(172, 62);
-            this.CmbCustomerSearchProperty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmbCustomerSearchProperty.Name = "CmbCustomerSearchProperty";
-            this.CmbCustomerSearchProperty.Size = new System.Drawing.Size(124, 23);
-            this.CmbCustomerSearchProperty.TabIndex = 40;
+            CmbCustomerSearchProperty.DropDownStyle = ComboBoxStyle.DropDownList;
+            CmbCustomerSearchProperty.FormattingEnabled = true;
+            CmbCustomerSearchProperty.Location = new Point(172, 62);
+            CmbCustomerSearchProperty.Margin = new Padding(3, 2, 3, 2);
+            CmbCustomerSearchProperty.Name = "CmbCustomerSearchProperty";
+            CmbCustomerSearchProperty.Size = new Size(124, 23);
+            CmbCustomerSearchProperty.TabIndex = 40;
             // 
             // CmdDeleteCustomer
             // 
-            this.CmdDeleteCustomer.Location = new System.Drawing.Point(984, 50);
-            this.CmdDeleteCustomer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdDeleteCustomer.Name = "CmdDeleteCustomer";
-            this.CmdDeleteCustomer.Size = new System.Drawing.Size(97, 33);
-            this.CmdDeleteCustomer.TabIndex = 39;
-            this.CmdDeleteCustomer.Text = "Löschen";
-            this.CmdDeleteCustomer.UseVisualStyleBackColor = true;
-            this.CmdDeleteCustomer.Click += new System.EventHandler(this.CmdDeleteCustomer_Click);
+            CmdDeleteCustomer.Location = new Point(984, 50);
+            CmdDeleteCustomer.Margin = new Padding(3, 2, 3, 2);
+            CmdDeleteCustomer.Name = "CmdDeleteCustomer";
+            CmdDeleteCustomer.Size = new Size(97, 33);
+            CmdDeleteCustomer.TabIndex = 39;
+            CmdDeleteCustomer.Text = "Löschen";
+            CmdDeleteCustomer.UseVisualStyleBackColor = true;
+            CmdDeleteCustomer.Click += CmdDeleteCustomer_Click;
             // 
             // TxtCustomerSearchProperty
             // 
-            this.TxtCustomerSearchProperty.Location = new System.Drawing.Point(336, 62);
-            this.TxtCustomerSearchProperty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.TxtCustomerSearchProperty.Name = "TxtCustomerSearchProperty";
-            this.TxtCustomerSearchProperty.Size = new System.Drawing.Size(324, 23);
-            this.TxtCustomerSearchProperty.TabIndex = 37;
+            TxtCustomerSearchProperty.Location = new Point(336, 62);
+            TxtCustomerSearchProperty.Margin = new Padding(3, 2, 3, 2);
+            TxtCustomerSearchProperty.Name = "TxtCustomerSearchProperty";
+            TxtCustomerSearchProperty.Size = new Size(324, 23);
+            TxtCustomerSearchProperty.TabIndex = 37;
             // 
             // LblCustomerSearchField
             // 
-            this.LblCustomerSearchField.AutoSize = true;
-            this.LblCustomerSearchField.Location = new System.Drawing.Point(31, 64);
-            this.LblCustomerSearchField.Name = "LblCustomerSearchField";
-            this.LblCustomerSearchField.Size = new System.Drawing.Size(112, 15);
-            this.LblCustomerSearchField.TabIndex = 36;
-            this.LblCustomerSearchField.Text = "Suche nach Attribut";
+            LblCustomerSearchField.AutoSize = true;
+            LblCustomerSearchField.Location = new Point(31, 64);
+            LblCustomerSearchField.Name = "LblCustomerSearchField";
+            LblCustomerSearchField.Size = new Size(112, 15);
+            LblCustomerSearchField.TabIndex = 36;
+            LblCustomerSearchField.Text = "Suche nach Attribut";
             // 
             // DGWCustomers
             // 
-            this.DGWCustomers.AllowUserToAddRows = false;
-            this.DGWCustomers.AllowUserToDeleteRows = false;
-            this.DGWCustomers.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.DGWCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGWCustomers.Location = new System.Drawing.Point(31, 112);
-            this.DGWCustomers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DGWCustomers.MultiSelect = false;
-            this.DGWCustomers.Name = "DGWCustomers";
-            this.DGWCustomers.ReadOnly = true;
-            this.DGWCustomers.RowHeadersWidth = 51;
-            this.DGWCustomers.RowTemplate.Height = 29;
-            this.DGWCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGWCustomers.ShowEditingIcon = false;
-            this.DGWCustomers.Size = new System.Drawing.Size(1181, 375);
-            this.DGWCustomers.TabIndex = 33;
+            DGWCustomers.AllowUserToAddRows = false;
+            DGWCustomers.AllowUserToDeleteRows = false;
+            DGWCustomers.BackgroundColor = SystemColors.Control;
+            DGWCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DGWCustomers.Location = new Point(31, 112);
+            DGWCustomers.Margin = new Padding(3, 2, 3, 2);
+            DGWCustomers.MultiSelect = false;
+            DGWCustomers.Name = "DGWCustomers";
+            DGWCustomers.ReadOnly = true;
+            DGWCustomers.RowHeadersWidth = 51;
+            DGWCustomers.RowTemplate.Height = 29;
+            DGWCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGWCustomers.ShowEditingIcon = false;
+            DGWCustomers.Size = new Size(1181, 375);
+            DGWCustomers.TabIndex = 33;
             // 
             // CmdSearchResetCustomer
             // 
-            this.CmdSearchResetCustomer.Location = new System.Drawing.Point(458, 4);
-            this.CmdSearchResetCustomer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdSearchResetCustomer.Name = "CmdSearchResetCustomer";
-            this.CmdSearchResetCustomer.Size = new System.Drawing.Size(201, 44);
-            this.CmdSearchResetCustomer.TabIndex = 31;
-            this.CmdSearchResetCustomer.Text = "Suche zurücksetzen / Datensätze aktualisieren";
-            this.CmdSearchResetCustomer.UseVisualStyleBackColor = true;
-            this.CmdSearchResetCustomer.Click += new System.EventHandler(this.CmdSearchResetCustomer_Click);
+            CmdSearchResetCustomer.Location = new Point(458, 4);
+            CmdSearchResetCustomer.Margin = new Padding(3, 2, 3, 2);
+            CmdSearchResetCustomer.Name = "CmdSearchResetCustomer";
+            CmdSearchResetCustomer.Size = new Size(201, 44);
+            CmdSearchResetCustomer.TabIndex = 31;
+            CmdSearchResetCustomer.Text = "Suche zurücksetzen / Datensätze aktualisieren";
+            CmdSearchResetCustomer.UseVisualStyleBackColor = true;
+            CmdSearchResetCustomer.Click += CmdSearchResetCustomer_Click;
             // 
             // CmdCustomerSearch
             // 
-            this.CmdCustomerSearch.Location = new System.Drawing.Point(336, 22);
-            this.CmdCustomerSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdCustomerSearch.Name = "CmdCustomerSearch";
-            this.CmdCustomerSearch.Size = new System.Drawing.Size(88, 26);
-            this.CmdCustomerSearch.TabIndex = 30;
-            this.CmdCustomerSearch.Text = "Suchen";
-            this.CmdCustomerSearch.UseVisualStyleBackColor = true;
-            this.CmdCustomerSearch.Click += new System.EventHandler(this.CmdCustomerSearch_Click);
+            CmdCustomerSearch.Location = new Point(336, 22);
+            CmdCustomerSearch.Margin = new Padding(3, 2, 3, 2);
+            CmdCustomerSearch.Name = "CmdCustomerSearch";
+            CmdCustomerSearch.Size = new Size(88, 26);
+            CmdCustomerSearch.TabIndex = 30;
+            CmdCustomerSearch.Text = "Suchen";
+            CmdCustomerSearch.UseVisualStyleBackColor = true;
+            CmdCustomerSearch.Click += CmdCustomerSearch_Click;
             // 
             // CmdEditCustomer
             // 
-            this.CmdEditCustomer.Location = new System.Drawing.Point(845, 50);
-            this.CmdEditCustomer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdEditCustomer.Name = "CmdEditCustomer";
-            this.CmdEditCustomer.Size = new System.Drawing.Size(97, 33);
-            this.CmdEditCustomer.TabIndex = 29;
-            this.CmdEditCustomer.Text = "Bearbeiten";
-            this.CmdEditCustomer.UseVisualStyleBackColor = true;
-            this.CmdEditCustomer.Click += new System.EventHandler(this.CmdEditCustomer_Click);
+            CmdEditCustomer.Location = new Point(845, 50);
+            CmdEditCustomer.Margin = new Padding(3, 2, 3, 2);
+            CmdEditCustomer.Name = "CmdEditCustomer";
+            CmdEditCustomer.Size = new Size(97, 33);
+            CmdEditCustomer.TabIndex = 29;
+            CmdEditCustomer.Text = "Bearbeiten";
+            CmdEditCustomer.UseVisualStyleBackColor = true;
+            CmdEditCustomer.Click += CmdEditCustomer_Click;
             // 
             // CmdCreateCustomer
             // 
-            this.CmdCreateCustomer.Location = new System.Drawing.Point(700, 50);
-            this.CmdCreateCustomer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdCreateCustomer.Name = "CmdCreateCustomer";
-            this.CmdCreateCustomer.Size = new System.Drawing.Size(97, 32);
-            this.CmdCreateCustomer.TabIndex = 28;
-            this.CmdCreateCustomer.Text = "Erstellen";
-            this.CmdCreateCustomer.UseVisualStyleBackColor = true;
-            this.CmdCreateCustomer.Click += new System.EventHandler(this.CmdCreateCustomer_Click);
+            CmdCreateCustomer.Location = new Point(700, 50);
+            CmdCreateCustomer.Margin = new Padding(3, 2, 3, 2);
+            CmdCreateCustomer.Name = "CmdCreateCustomer";
+            CmdCreateCustomer.Size = new Size(97, 32);
+            CmdCreateCustomer.TabIndex = 28;
+            CmdCreateCustomer.Text = "Erstellen";
+            CmdCreateCustomer.UseVisualStyleBackColor = true;
+            CmdCreateCustomer.Click += CmdCreateCustomer_Click;
             // 
             // Artikelgruppen
             // 
-            this.Artikelgruppen.Controls.Add(this.CmdTreeView);
-            this.Artikelgruppen.Controls.Add(this.CmdDeleteArticleGroup);
-            this.Artikelgruppen.Controls.Add(this.CmdSearchResetArticleGroup);
-            this.Artikelgruppen.Controls.Add(this.CmdSearchArticleGroup);
-            this.Artikelgruppen.Controls.Add(this.CmdEditArticleGroup);
-            this.Artikelgruppen.Controls.Add(this.CmdCreateArticleGroup);
-            this.Artikelgruppen.Controls.Add(this.DGWArticleGroups);
-            this.Artikelgruppen.Controls.Add(this.TxtArticleGroupSearchName);
-            this.Artikelgruppen.Controls.Add(this.LblArticleGroupSearch);
-            this.Artikelgruppen.Controls.Add(this.LblArticleGroups);
-            this.Artikelgruppen.Location = new System.Drawing.Point(4, 24);
-            this.Artikelgruppen.Margin = new System.Windows.Forms.Padding(4);
-            this.Artikelgruppen.Name = "Artikelgruppen";
-            this.Artikelgruppen.Padding = new System.Windows.Forms.Padding(4);
-            this.Artikelgruppen.Size = new System.Drawing.Size(1253, 567);
-            this.Artikelgruppen.TabIndex = 0;
-            this.Artikelgruppen.Text = "Artikelgruppen";
-            this.Artikelgruppen.UseVisualStyleBackColor = true;
-            this.Artikelgruppen.ContextMenuStripChanged += new System.EventHandler(this.UpdateListsEvent);
+            Artikelgruppen.Controls.Add(CmdTreeView);
+            Artikelgruppen.Controls.Add(CmdDeleteArticleGroup);
+            Artikelgruppen.Controls.Add(CmdSearchResetArticleGroup);
+            Artikelgruppen.Controls.Add(CmdSearchArticleGroup);
+            Artikelgruppen.Controls.Add(CmdEditArticleGroup);
+            Artikelgruppen.Controls.Add(CmdCreateArticleGroup);
+            Artikelgruppen.Controls.Add(DGWArticleGroups);
+            Artikelgruppen.Controls.Add(TxtArticleGroupSearchName);
+            Artikelgruppen.Controls.Add(LblArticleGroupSearch);
+            Artikelgruppen.Controls.Add(LblArticleGroups);
+            Artikelgruppen.Location = new Point(4, 24);
+            Artikelgruppen.Margin = new Padding(4);
+            Artikelgruppen.Name = "Artikelgruppen";
+            Artikelgruppen.Padding = new Padding(4);
+            Artikelgruppen.Size = new Size(1253, 567);
+            Artikelgruppen.TabIndex = 0;
+            Artikelgruppen.Text = "Artikelgruppen";
+            Artikelgruppen.UseVisualStyleBackColor = true;
+            Artikelgruppen.ContextMenuStripChanged += UpdateListsEvent;
             // 
             // CmdTreeView
             // 
-            this.CmdTreeView.Location = new System.Drawing.Point(1115, 112);
-            this.CmdTreeView.Name = "CmdTreeView";
-            this.CmdTreeView.Size = new System.Drawing.Size(97, 52);
-            this.CmdTreeView.TabIndex = 46;
-            this.CmdTreeView.Text = "Tree-View anzeigen";
-            this.CmdTreeView.UseVisualStyleBackColor = true;
-            this.CmdTreeView.Click += new System.EventHandler(this.CmdTreeView_Click);
+            CmdTreeView.Location = new Point(1115, 112);
+            CmdTreeView.Name = "CmdTreeView";
+            CmdTreeView.Size = new Size(97, 52);
+            CmdTreeView.TabIndex = 46;
+            CmdTreeView.Text = "Tree-View anzeigen";
+            CmdTreeView.UseVisualStyleBackColor = true;
+            CmdTreeView.Click += CmdTreeView_Click;
             // 
             // CmdDeleteArticleGroup
             // 
-            this.CmdDeleteArticleGroup.Location = new System.Drawing.Point(984, 50);
-            this.CmdDeleteArticleGroup.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdDeleteArticleGroup.Name = "CmdDeleteArticleGroup";
-            this.CmdDeleteArticleGroup.Size = new System.Drawing.Size(97, 33);
-            this.CmdDeleteArticleGroup.TabIndex = 45;
-            this.CmdDeleteArticleGroup.Text = "Löschen";
-            this.CmdDeleteArticleGroup.UseVisualStyleBackColor = true;
-            this.CmdDeleteArticleGroup.Click += new System.EventHandler(this.CmdDeleteArticleGroup_Click);
+            CmdDeleteArticleGroup.Location = new Point(984, 50);
+            CmdDeleteArticleGroup.Margin = new Padding(3, 2, 3, 2);
+            CmdDeleteArticleGroup.Name = "CmdDeleteArticleGroup";
+            CmdDeleteArticleGroup.Size = new Size(97, 33);
+            CmdDeleteArticleGroup.TabIndex = 45;
+            CmdDeleteArticleGroup.Text = "Löschen";
+            CmdDeleteArticleGroup.UseVisualStyleBackColor = true;
+            CmdDeleteArticleGroup.Click += CmdDeleteArticleGroup_Click;
             // 
             // CmdSearchResetArticleGroup
             // 
-            this.CmdSearchResetArticleGroup.Location = new System.Drawing.Point(458, 4);
-            this.CmdSearchResetArticleGroup.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdSearchResetArticleGroup.Name = "CmdSearchResetArticleGroup";
-            this.CmdSearchResetArticleGroup.Size = new System.Drawing.Size(201, 44);
-            this.CmdSearchResetArticleGroup.TabIndex = 43;
-            this.CmdSearchResetArticleGroup.Text = "Suche zurücksetzen / Datensätze aktualisieren";
-            this.CmdSearchResetArticleGroup.UseVisualStyleBackColor = true;
-            this.CmdSearchResetArticleGroup.Click += new System.EventHandler(this.CmdSearchResetArticleGroup_Click);
+            CmdSearchResetArticleGroup.Location = new Point(458, 4);
+            CmdSearchResetArticleGroup.Margin = new Padding(3, 2, 3, 2);
+            CmdSearchResetArticleGroup.Name = "CmdSearchResetArticleGroup";
+            CmdSearchResetArticleGroup.Size = new Size(201, 44);
+            CmdSearchResetArticleGroup.TabIndex = 43;
+            CmdSearchResetArticleGroup.Text = "Suche zurücksetzen / Datensätze aktualisieren";
+            CmdSearchResetArticleGroup.UseVisualStyleBackColor = true;
+            CmdSearchResetArticleGroup.Click += CmdSearchResetArticleGroup_Click;
             // 
             // CmdSearchArticleGroup
             // 
-            this.CmdSearchArticleGroup.Location = new System.Drawing.Point(336, 22);
-            this.CmdSearchArticleGroup.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdSearchArticleGroup.Name = "CmdSearchArticleGroup";
-            this.CmdSearchArticleGroup.Size = new System.Drawing.Size(88, 26);
-            this.CmdSearchArticleGroup.TabIndex = 42;
-            this.CmdSearchArticleGroup.Text = "Suchen";
-            this.CmdSearchArticleGroup.UseVisualStyleBackColor = true;
-            this.CmdSearchArticleGroup.Click += new System.EventHandler(this.CmdSearchArticleGroup_Click);
+            CmdSearchArticleGroup.Location = new Point(336, 22);
+            CmdSearchArticleGroup.Margin = new Padding(3, 2, 3, 2);
+            CmdSearchArticleGroup.Name = "CmdSearchArticleGroup";
+            CmdSearchArticleGroup.Size = new Size(88, 26);
+            CmdSearchArticleGroup.TabIndex = 42;
+            CmdSearchArticleGroup.Text = "Suchen";
+            CmdSearchArticleGroup.UseVisualStyleBackColor = true;
+            CmdSearchArticleGroup.Click += CmdSearchArticleGroup_Click;
             // 
             // CmdEditArticleGroup
             // 
-            this.CmdEditArticleGroup.Location = new System.Drawing.Point(845, 50);
-            this.CmdEditArticleGroup.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdEditArticleGroup.Name = "CmdEditArticleGroup";
-            this.CmdEditArticleGroup.Size = new System.Drawing.Size(97, 33);
-            this.CmdEditArticleGroup.TabIndex = 41;
-            this.CmdEditArticleGroup.Text = "Bearbeiten";
-            this.CmdEditArticleGroup.UseVisualStyleBackColor = true;
-            this.CmdEditArticleGroup.Click += new System.EventHandler(this.CmdEditArticleGroup_Click);
+            CmdEditArticleGroup.Location = new Point(845, 50);
+            CmdEditArticleGroup.Margin = new Padding(3, 2, 3, 2);
+            CmdEditArticleGroup.Name = "CmdEditArticleGroup";
+            CmdEditArticleGroup.Size = new Size(97, 33);
+            CmdEditArticleGroup.TabIndex = 41;
+            CmdEditArticleGroup.Text = "Bearbeiten";
+            CmdEditArticleGroup.UseVisualStyleBackColor = true;
+            CmdEditArticleGroup.Click += CmdEditArticleGroup_Click;
             // 
             // CmdCreateArticleGroup
             // 
-            this.CmdCreateArticleGroup.Location = new System.Drawing.Point(700, 50);
-            this.CmdCreateArticleGroup.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdCreateArticleGroup.Name = "CmdCreateArticleGroup";
-            this.CmdCreateArticleGroup.Size = new System.Drawing.Size(97, 32);
-            this.CmdCreateArticleGroup.TabIndex = 40;
-            this.CmdCreateArticleGroup.Text = "Erstellen";
-            this.CmdCreateArticleGroup.UseVisualStyleBackColor = true;
-            this.CmdCreateArticleGroup.Click += new System.EventHandler(this.CmdCreateArticleGroup_Click);
+            CmdCreateArticleGroup.Location = new Point(700, 50);
+            CmdCreateArticleGroup.Margin = new Padding(3, 2, 3, 2);
+            CmdCreateArticleGroup.Name = "CmdCreateArticleGroup";
+            CmdCreateArticleGroup.Size = new Size(97, 32);
+            CmdCreateArticleGroup.TabIndex = 40;
+            CmdCreateArticleGroup.Text = "Erstellen";
+            CmdCreateArticleGroup.UseVisualStyleBackColor = true;
+            CmdCreateArticleGroup.Click += CmdCreateArticleGroup_Click;
             // 
             // DGWArticleGroups
             // 
-            this.DGWArticleGroups.AllowUserToAddRows = false;
-            this.DGWArticleGroups.AllowUserToDeleteRows = false;
-            this.DGWArticleGroups.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.DGWArticleGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGWArticleGroups.Location = new System.Drawing.Point(31, 112);
-            this.DGWArticleGroups.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DGWArticleGroups.Name = "DGWArticleGroups";
-            this.DGWArticleGroups.ReadOnly = true;
-            this.DGWArticleGroups.RowHeadersWidth = 51;
-            this.DGWArticleGroups.RowTemplate.Height = 29;
-            this.DGWArticleGroups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGWArticleGroups.Size = new System.Drawing.Size(1050, 375);
-            this.DGWArticleGroups.TabIndex = 6;
+            DGWArticleGroups.AllowUserToAddRows = false;
+            DGWArticleGroups.AllowUserToDeleteRows = false;
+            DGWArticleGroups.BackgroundColor = SystemColors.Control;
+            DGWArticleGroups.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DGWArticleGroups.Location = new Point(31, 112);
+            DGWArticleGroups.Margin = new Padding(3, 2, 3, 2);
+            DGWArticleGroups.Name = "DGWArticleGroups";
+            DGWArticleGroups.ReadOnly = true;
+            DGWArticleGroups.RowHeadersWidth = 51;
+            DGWArticleGroups.RowTemplate.Height = 29;
+            DGWArticleGroups.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGWArticleGroups.Size = new Size(1050, 375);
+            DGWArticleGroups.TabIndex = 6;
             // 
             // TxtArticleGroupSearchName
             // 
-            this.TxtArticleGroupSearchName.Location = new System.Drawing.Point(336, 62);
-            this.TxtArticleGroupSearchName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.TxtArticleGroupSearchName.Name = "TxtArticleGroupSearchName";
-            this.TxtArticleGroupSearchName.Size = new System.Drawing.Size(324, 23);
-            this.TxtArticleGroupSearchName.TabIndex = 5;
+            TxtArticleGroupSearchName.Location = new Point(336, 62);
+            TxtArticleGroupSearchName.Margin = new Padding(3, 2, 3, 2);
+            TxtArticleGroupSearchName.Name = "TxtArticleGroupSearchName";
+            TxtArticleGroupSearchName.Size = new Size(324, 23);
+            TxtArticleGroupSearchName.TabIndex = 5;
             // 
             // LblArticleGroupSearch
             // 
-            this.LblArticleGroupSearch.AutoSize = true;
-            this.LblArticleGroupSearch.Location = new System.Drawing.Point(31, 64);
-            this.LblArticleGroupSearch.Name = "LblArticleGroupSearch";
-            this.LblArticleGroupSearch.Size = new System.Drawing.Size(187, 15);
-            this.LblArticleGroupSearch.TabIndex = 4;
-            this.LblArticleGroupSearch.Text = "Suche nach Artikelgruppennamen";
+            LblArticleGroupSearch.AutoSize = true;
+            LblArticleGroupSearch.Location = new Point(31, 64);
+            LblArticleGroupSearch.Name = "LblArticleGroupSearch";
+            LblArticleGroupSearch.Size = new Size(187, 15);
+            LblArticleGroupSearch.TabIndex = 4;
+            LblArticleGroupSearch.Text = "Suche nach Artikelgruppennamen";
             // 
             // LblArticleGroups
             // 
-            this.LblArticleGroups.AutoSize = true;
-            this.LblArticleGroups.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblArticleGroups.Location = new System.Drawing.Point(31, 22);
-            this.LblArticleGroups.Name = "LblArticleGroups";
-            this.LblArticleGroups.Size = new System.Drawing.Size(144, 28);
-            this.LblArticleGroups.TabIndex = 1;
-            this.LblArticleGroups.Text = "Artikelgruppen";
+            LblArticleGroups.AutoSize = true;
+            LblArticleGroups.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            LblArticleGroups.Location = new Point(31, 22);
+            LblArticleGroups.Name = "LblArticleGroups";
+            LblArticleGroups.Size = new Size(144, 28);
+            LblArticleGroups.TabIndex = 1;
+            LblArticleGroups.Text = "Artikelgruppen";
             // 
             // Artikel
             // 
-            this.Artikel.Controls.Add(this.CmbArticleSearchProperty);
-            this.Artikel.Controls.Add(this.DGWArticles);
-            this.Artikel.Controls.Add(this.TxtSearchArticleProperty);
-            this.Artikel.Controls.Add(this.CmdDeleteArticle);
-            this.Artikel.Controls.Add(this.CmdSearchResetArticle);
-            this.Artikel.Controls.Add(this.CmdSearchArticle);
-            this.Artikel.Controls.Add(this.CmdEditArticle);
-            this.Artikel.Controls.Add(this.CmdCreateArticle);
-            this.Artikel.Controls.Add(this.LblSearchName);
-            this.Artikel.Controls.Add(this.LblArticle);
-            this.Artikel.Location = new System.Drawing.Point(4, 24);
-            this.Artikel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Artikel.Name = "Artikel";
-            this.Artikel.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Artikel.Size = new System.Drawing.Size(1253, 567);
-            this.Artikel.TabIndex = 2;
-            this.Artikel.Text = "Artikel";
-            this.Artikel.UseVisualStyleBackColor = true;
+            Artikel.Controls.Add(CmbArticleSearchProperty);
+            Artikel.Controls.Add(DGWArticles);
+            Artikel.Controls.Add(TxtSearchArticleProperty);
+            Artikel.Controls.Add(CmdDeleteArticle);
+            Artikel.Controls.Add(CmdSearchResetArticle);
+            Artikel.Controls.Add(CmdSearchArticle);
+            Artikel.Controls.Add(CmdEditArticle);
+            Artikel.Controls.Add(CmdCreateArticle);
+            Artikel.Controls.Add(LblSearchName);
+            Artikel.Controls.Add(LblArticle);
+            Artikel.Location = new Point(4, 24);
+            Artikel.Margin = new Padding(3, 2, 3, 2);
+            Artikel.Name = "Artikel";
+            Artikel.Padding = new Padding(3, 2, 3, 2);
+            Artikel.Size = new Size(1253, 567);
+            Artikel.TabIndex = 2;
+            Artikel.Text = "Artikel";
+            Artikel.UseVisualStyleBackColor = true;
             // 
             // CmbArticleSearchProperty
             // 
-            this.CmbArticleSearchProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbArticleSearchProperty.FormattingEnabled = true;
-            this.CmbArticleSearchProperty.Location = new System.Drawing.Point(175, 62);
-            this.CmbArticleSearchProperty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmbArticleSearchProperty.Name = "CmbArticleSearchProperty";
-            this.CmbArticleSearchProperty.Size = new System.Drawing.Size(124, 23);
-            this.CmbArticleSearchProperty.TabIndex = 64;
+            CmbArticleSearchProperty.DropDownStyle = ComboBoxStyle.DropDownList;
+            CmbArticleSearchProperty.FormattingEnabled = true;
+            CmbArticleSearchProperty.Location = new Point(175, 62);
+            CmbArticleSearchProperty.Margin = new Padding(3, 2, 3, 2);
+            CmbArticleSearchProperty.Name = "CmbArticleSearchProperty";
+            CmbArticleSearchProperty.Size = new Size(124, 23);
+            CmbArticleSearchProperty.TabIndex = 64;
             // 
             // DGWArticles
             // 
-            this.DGWArticles.AllowUserToAddRows = false;
-            this.DGWArticles.AllowUserToDeleteRows = false;
-            this.DGWArticles.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.DGWArticles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGWArticles.Location = new System.Drawing.Point(31, 112);
-            this.DGWArticles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DGWArticles.Name = "DGWArticles";
-            this.DGWArticles.ReadOnly = true;
-            this.DGWArticles.RowHeadersWidth = 51;
-            this.DGWArticles.RowTemplate.Height = 29;
-            this.DGWArticles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGWArticles.Size = new System.Drawing.Size(1050, 375);
-            this.DGWArticles.TabIndex = 63;
+            DGWArticles.AllowUserToAddRows = false;
+            DGWArticles.AllowUserToDeleteRows = false;
+            DGWArticles.BackgroundColor = SystemColors.Control;
+            DGWArticles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DGWArticles.Location = new Point(31, 112);
+            DGWArticles.Margin = new Padding(3, 2, 3, 2);
+            DGWArticles.Name = "DGWArticles";
+            DGWArticles.ReadOnly = true;
+            DGWArticles.RowHeadersWidth = 51;
+            DGWArticles.RowTemplate.Height = 29;
+            DGWArticles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGWArticles.Size = new Size(1050, 375);
+            DGWArticles.TabIndex = 63;
             // 
             // TxtSearchArticleProperty
             // 
-            this.TxtSearchArticleProperty.Location = new System.Drawing.Point(336, 62);
-            this.TxtSearchArticleProperty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.TxtSearchArticleProperty.Name = "TxtSearchArticleProperty";
-            this.TxtSearchArticleProperty.Size = new System.Drawing.Size(324, 23);
-            this.TxtSearchArticleProperty.TabIndex = 62;
+            TxtSearchArticleProperty.Location = new Point(336, 62);
+            TxtSearchArticleProperty.Margin = new Padding(3, 2, 3, 2);
+            TxtSearchArticleProperty.Name = "TxtSearchArticleProperty";
+            TxtSearchArticleProperty.Size = new Size(324, 23);
+            TxtSearchArticleProperty.TabIndex = 62;
             // 
             // CmdDeleteArticle
             // 
-            this.CmdDeleteArticle.Location = new System.Drawing.Point(984, 50);
-            this.CmdDeleteArticle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdDeleteArticle.Name = "CmdDeleteArticle";
-            this.CmdDeleteArticle.Size = new System.Drawing.Size(97, 33);
-            this.CmdDeleteArticle.TabIndex = 53;
-            this.CmdDeleteArticle.Text = "Löschen";
-            this.CmdDeleteArticle.UseVisualStyleBackColor = true;
-            this.CmdDeleteArticle.Click += new System.EventHandler(this.CmdDeleteArticle_Click);
+            CmdDeleteArticle.Location = new Point(984, 50);
+            CmdDeleteArticle.Margin = new Padding(3, 2, 3, 2);
+            CmdDeleteArticle.Name = "CmdDeleteArticle";
+            CmdDeleteArticle.Size = new Size(97, 33);
+            CmdDeleteArticle.TabIndex = 53;
+            CmdDeleteArticle.Text = "Löschen";
+            CmdDeleteArticle.UseVisualStyleBackColor = true;
+            CmdDeleteArticle.Click += CmdDeleteArticle_Click;
             // 
             // CmdSearchResetArticle
             // 
-            this.CmdSearchResetArticle.Location = new System.Drawing.Point(458, 11);
-            this.CmdSearchResetArticle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdSearchResetArticle.Name = "CmdSearchResetArticle";
-            this.CmdSearchResetArticle.Size = new System.Drawing.Size(201, 37);
-            this.CmdSearchResetArticle.TabIndex = 51;
-            this.CmdSearchResetArticle.Text = "Suche zurücksetzen / Datensätze aktualisieren";
-            this.CmdSearchResetArticle.UseVisualStyleBackColor = true;
-            this.CmdSearchResetArticle.Click += new System.EventHandler(this.CmdSearchResetArticle_Click);
+            CmdSearchResetArticle.Location = new Point(458, 11);
+            CmdSearchResetArticle.Margin = new Padding(3, 2, 3, 2);
+            CmdSearchResetArticle.Name = "CmdSearchResetArticle";
+            CmdSearchResetArticle.Size = new Size(201, 37);
+            CmdSearchResetArticle.TabIndex = 51;
+            CmdSearchResetArticle.Text = "Suche zurücksetzen / Datensätze aktualisieren";
+            CmdSearchResetArticle.UseVisualStyleBackColor = true;
+            CmdSearchResetArticle.Click += CmdSearchResetArticle_Click;
             // 
             // CmdSearchArticle
             // 
-            this.CmdSearchArticle.Location = new System.Drawing.Point(336, 22);
-            this.CmdSearchArticle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdSearchArticle.Name = "CmdSearchArticle";
-            this.CmdSearchArticle.Size = new System.Drawing.Size(88, 26);
-            this.CmdSearchArticle.TabIndex = 50;
-            this.CmdSearchArticle.Text = "Suchen";
-            this.CmdSearchArticle.UseVisualStyleBackColor = true;
-            this.CmdSearchArticle.Click += new System.EventHandler(this.CmdSearchArticle_Click);
+            CmdSearchArticle.Location = new Point(336, 22);
+            CmdSearchArticle.Margin = new Padding(3, 2, 3, 2);
+            CmdSearchArticle.Name = "CmdSearchArticle";
+            CmdSearchArticle.Size = new Size(88, 26);
+            CmdSearchArticle.TabIndex = 50;
+            CmdSearchArticle.Text = "Suchen";
+            CmdSearchArticle.UseVisualStyleBackColor = true;
+            CmdSearchArticle.Click += CmdSearchArticle_Click;
             // 
             // CmdEditArticle
             // 
-            this.CmdEditArticle.Location = new System.Drawing.Point(845, 50);
-            this.CmdEditArticle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdEditArticle.Name = "CmdEditArticle";
-            this.CmdEditArticle.Size = new System.Drawing.Size(97, 33);
-            this.CmdEditArticle.TabIndex = 49;
-            this.CmdEditArticle.Text = "Bearbeiten";
-            this.CmdEditArticle.UseVisualStyleBackColor = true;
-            this.CmdEditArticle.Click += new System.EventHandler(this.CmdEditArticle_Click);
+            CmdEditArticle.Location = new Point(845, 50);
+            CmdEditArticle.Margin = new Padding(3, 2, 3, 2);
+            CmdEditArticle.Name = "CmdEditArticle";
+            CmdEditArticle.Size = new Size(97, 33);
+            CmdEditArticle.TabIndex = 49;
+            CmdEditArticle.Text = "Bearbeiten";
+            CmdEditArticle.UseVisualStyleBackColor = true;
+            CmdEditArticle.Click += CmdEditArticle_Click;
             // 
             // CmdCreateArticle
             // 
-            this.CmdCreateArticle.Location = new System.Drawing.Point(700, 50);
-            this.CmdCreateArticle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdCreateArticle.Name = "CmdCreateArticle";
-            this.CmdCreateArticle.Size = new System.Drawing.Size(97, 32);
-            this.CmdCreateArticle.TabIndex = 48;
-            this.CmdCreateArticle.Text = "Erstellen";
-            this.CmdCreateArticle.UseVisualStyleBackColor = true;
-            this.CmdCreateArticle.Click += new System.EventHandler(this.CmdCreateArticle_Click);
+            CmdCreateArticle.Location = new Point(700, 50);
+            CmdCreateArticle.Margin = new Padding(3, 2, 3, 2);
+            CmdCreateArticle.Name = "CmdCreateArticle";
+            CmdCreateArticle.Size = new Size(97, 32);
+            CmdCreateArticle.TabIndex = 48;
+            CmdCreateArticle.Text = "Erstellen";
+            CmdCreateArticle.UseVisualStyleBackColor = true;
+            CmdCreateArticle.Click += CmdCreateArticle_Click;
             // 
             // LblSearchName
             // 
-            this.LblSearchName.AutoSize = true;
-            this.LblSearchName.Location = new System.Drawing.Point(31, 64);
-            this.LblSearchName.Name = "LblSearchName";
-            this.LblSearchName.Size = new System.Drawing.Size(112, 15);
-            this.LblSearchName.TabIndex = 46;
-            this.LblSearchName.Text = "Suche nach Attribut";
+            LblSearchName.AutoSize = true;
+            LblSearchName.Location = new Point(31, 64);
+            LblSearchName.Name = "LblSearchName";
+            LblSearchName.Size = new Size(112, 15);
+            LblSearchName.TabIndex = 46;
+            LblSearchName.Text = "Suche nach Attribut";
             // 
             // LblArticle
             // 
-            this.LblArticle.AutoSize = true;
-            this.LblArticle.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblArticle.Location = new System.Drawing.Point(31, 22);
-            this.LblArticle.Name = "LblArticle";
-            this.LblArticle.Size = new System.Drawing.Size(69, 28);
-            this.LblArticle.TabIndex = 2;
-            this.LblArticle.Text = "Artikel";
+            LblArticle.AutoSize = true;
+            LblArticle.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            LblArticle.Location = new Point(31, 22);
+            LblArticle.Name = "LblArticle";
+            LblArticle.Size = new Size(69, 28);
+            LblArticle.TabIndex = 2;
+            LblArticle.Text = "Artikel";
             // 
             // Aufträge
             // 
-            this.Aufträge.Controls.Add(this.CmbOrderSearchProperty);
-            this.Aufträge.Controls.Add(this.DGWOrders);
-            this.Aufträge.Controls.Add(this.TxtSearchOrderProperty);
-            this.Aufträge.Controls.Add(this.CmdDeleteOrder);
-            this.Aufträge.Controls.Add(this.CmdSearchResetOrder);
-            this.Aufträge.Controls.Add(this.CmdSearchOrder);
-            this.Aufträge.Controls.Add(this.CmdEditOrder);
-            this.Aufträge.Controls.Add(this.CmdCreateOrder);
-            this.Aufträge.Controls.Add(this.label6);
-            this.Aufträge.Controls.Add(this.label5);
-            this.Aufträge.Location = new System.Drawing.Point(4, 24);
-            this.Aufträge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Aufträge.Name = "Aufträge";
-            this.Aufträge.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Aufträge.Size = new System.Drawing.Size(1253, 567);
-            this.Aufträge.TabIndex = 1;
-            this.Aufträge.Text = "Aufträge";
-            this.Aufträge.UseVisualStyleBackColor = true;
+            Aufträge.Controls.Add(CmbOrderSearchProperty);
+            Aufträge.Controls.Add(DGWOrders);
+            Aufträge.Controls.Add(TxtSearchOrderProperty);
+            Aufträge.Controls.Add(CmdDeleteOrder);
+            Aufträge.Controls.Add(CmdSearchResetOrder);
+            Aufträge.Controls.Add(CmdSearchOrder);
+            Aufträge.Controls.Add(CmdEditOrder);
+            Aufträge.Controls.Add(CmdCreateOrder);
+            Aufträge.Controls.Add(label6);
+            Aufträge.Controls.Add(label5);
+            Aufträge.Location = new Point(4, 24);
+            Aufträge.Margin = new Padding(3, 2, 3, 2);
+            Aufträge.Name = "Aufträge";
+            Aufträge.Padding = new Padding(3, 2, 3, 2);
+            Aufträge.Size = new Size(1253, 567);
+            Aufträge.TabIndex = 1;
+            Aufträge.Text = "Aufträge";
+            Aufträge.UseVisualStyleBackColor = true;
             // 
             // CmbOrderSearchProperty
             // 
-            this.CmbOrderSearchProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbOrderSearchProperty.FormattingEnabled = true;
-            this.CmbOrderSearchProperty.Location = new System.Drawing.Point(175, 62);
-            this.CmbOrderSearchProperty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmbOrderSearchProperty.Name = "CmbOrderSearchProperty";
-            this.CmbOrderSearchProperty.Size = new System.Drawing.Size(124, 23);
-            this.CmbOrderSearchProperty.TabIndex = 73;
+            CmbOrderSearchProperty.DropDownStyle = ComboBoxStyle.DropDownList;
+            CmbOrderSearchProperty.FormattingEnabled = true;
+            CmbOrderSearchProperty.Location = new Point(175, 62);
+            CmbOrderSearchProperty.Margin = new Padding(3, 2, 3, 2);
+            CmbOrderSearchProperty.Name = "CmbOrderSearchProperty";
+            CmbOrderSearchProperty.Size = new Size(124, 23);
+            CmbOrderSearchProperty.TabIndex = 73;
             // 
             // DGWOrders
             // 
-            this.DGWOrders.AllowUserToAddRows = false;
-            this.DGWOrders.AllowUserToDeleteRows = false;
-            this.DGWOrders.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.DGWOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGWOrders.Location = new System.Drawing.Point(31, 112);
-            this.DGWOrders.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DGWOrders.Name = "DGWOrders";
-            this.DGWOrders.ReadOnly = true;
-            this.DGWOrders.RowHeadersWidth = 51;
-            this.DGWOrders.RowTemplate.Height = 29;
-            this.DGWOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGWOrders.Size = new System.Drawing.Size(1050, 375);
-            this.DGWOrders.TabIndex = 72;
+            DGWOrders.AllowUserToAddRows = false;
+            DGWOrders.AllowUserToDeleteRows = false;
+            DGWOrders.BackgroundColor = SystemColors.Control;
+            DGWOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DGWOrders.Location = new Point(31, 112);
+            DGWOrders.Margin = new Padding(3, 2, 3, 2);
+            DGWOrders.Name = "DGWOrders";
+            DGWOrders.ReadOnly = true;
+            DGWOrders.RowHeadersWidth = 51;
+            DGWOrders.RowTemplate.Height = 29;
+            DGWOrders.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGWOrders.Size = new Size(1050, 375);
+            DGWOrders.TabIndex = 72;
             // 
             // TxtSearchOrderProperty
             // 
-            this.TxtSearchOrderProperty.Location = new System.Drawing.Point(336, 62);
-            this.TxtSearchOrderProperty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.TxtSearchOrderProperty.Name = "TxtSearchOrderProperty";
-            this.TxtSearchOrderProperty.Size = new System.Drawing.Size(324, 23);
-            this.TxtSearchOrderProperty.TabIndex = 71;
+            TxtSearchOrderProperty.Location = new Point(336, 62);
+            TxtSearchOrderProperty.Margin = new Padding(3, 2, 3, 2);
+            TxtSearchOrderProperty.Name = "TxtSearchOrderProperty";
+            TxtSearchOrderProperty.Size = new Size(324, 23);
+            TxtSearchOrderProperty.TabIndex = 71;
             // 
             // CmdDeleteOrder
             // 
-            this.CmdDeleteOrder.Location = new System.Drawing.Point(984, 50);
-            this.CmdDeleteOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdDeleteOrder.Name = "CmdDeleteOrder";
-            this.CmdDeleteOrder.Size = new System.Drawing.Size(97, 33);
-            this.CmdDeleteOrder.TabIndex = 70;
-            this.CmdDeleteOrder.Text = "Löschen";
-            this.CmdDeleteOrder.UseVisualStyleBackColor = true;
-            this.CmdDeleteOrder.Click += new System.EventHandler(this.CmdDeleteOrder_Click);
+            CmdDeleteOrder.Location = new Point(984, 50);
+            CmdDeleteOrder.Margin = new Padding(3, 2, 3, 2);
+            CmdDeleteOrder.Name = "CmdDeleteOrder";
+            CmdDeleteOrder.Size = new Size(97, 33);
+            CmdDeleteOrder.TabIndex = 70;
+            CmdDeleteOrder.Text = "Löschen";
+            CmdDeleteOrder.UseVisualStyleBackColor = true;
+            CmdDeleteOrder.Click += CmdDeleteOrder_Click;
             // 
             // CmdSearchResetOrder
             // 
-            this.CmdSearchResetOrder.Location = new System.Drawing.Point(458, 4);
-            this.CmdSearchResetOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdSearchResetOrder.Name = "CmdSearchResetOrder";
-            this.CmdSearchResetOrder.Size = new System.Drawing.Size(201, 44);
-            this.CmdSearchResetOrder.TabIndex = 68;
-            this.CmdSearchResetOrder.Text = "Suche zurücksetzen / Datensätze aktualisieren";
-            this.CmdSearchResetOrder.UseVisualStyleBackColor = true;
-            this.CmdSearchResetOrder.Click += new System.EventHandler(this.CmdSearchResetOrder_Click);
+            CmdSearchResetOrder.Location = new Point(458, 4);
+            CmdSearchResetOrder.Margin = new Padding(3, 2, 3, 2);
+            CmdSearchResetOrder.Name = "CmdSearchResetOrder";
+            CmdSearchResetOrder.Size = new Size(201, 44);
+            CmdSearchResetOrder.TabIndex = 68;
+            CmdSearchResetOrder.Text = "Suche zurücksetzen / Datensätze aktualisieren";
+            CmdSearchResetOrder.UseVisualStyleBackColor = true;
+            CmdSearchResetOrder.Click += CmdSearchResetOrder_Click;
             // 
             // CmdSearchOrder
             // 
-            this.CmdSearchOrder.Location = new System.Drawing.Point(336, 22);
-            this.CmdSearchOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdSearchOrder.Name = "CmdSearchOrder";
-            this.CmdSearchOrder.Size = new System.Drawing.Size(88, 26);
-            this.CmdSearchOrder.TabIndex = 67;
-            this.CmdSearchOrder.Text = "Suchen";
-            this.CmdSearchOrder.UseVisualStyleBackColor = true;
-            this.CmdSearchOrder.Click += new System.EventHandler(this.CmdSearchOrder_Click);
+            CmdSearchOrder.Location = new Point(336, 22);
+            CmdSearchOrder.Margin = new Padding(3, 2, 3, 2);
+            CmdSearchOrder.Name = "CmdSearchOrder";
+            CmdSearchOrder.Size = new Size(88, 26);
+            CmdSearchOrder.TabIndex = 67;
+            CmdSearchOrder.Text = "Suchen";
+            CmdSearchOrder.UseVisualStyleBackColor = true;
+            CmdSearchOrder.Click += CmdSearchOrder_Click;
             // 
             // CmdEditOrder
             // 
-            this.CmdEditOrder.Location = new System.Drawing.Point(845, 50);
-            this.CmdEditOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdEditOrder.Name = "CmdEditOrder";
-            this.CmdEditOrder.Size = new System.Drawing.Size(97, 33);
-            this.CmdEditOrder.TabIndex = 66;
-            this.CmdEditOrder.Text = "Bearbeiten";
-            this.CmdEditOrder.UseVisualStyleBackColor = true;
-            this.CmdEditOrder.Click += new System.EventHandler(this.CmdEditOrder_Click);
+            CmdEditOrder.Location = new Point(845, 50);
+            CmdEditOrder.Margin = new Padding(3, 2, 3, 2);
+            CmdEditOrder.Name = "CmdEditOrder";
+            CmdEditOrder.Size = new Size(97, 33);
+            CmdEditOrder.TabIndex = 66;
+            CmdEditOrder.Text = "Bearbeiten";
+            CmdEditOrder.UseVisualStyleBackColor = true;
+            CmdEditOrder.Click += CmdEditOrder_Click;
             // 
             // CmdCreateOrder
             // 
-            this.CmdCreateOrder.Location = new System.Drawing.Point(700, 50);
-            this.CmdCreateOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdCreateOrder.Name = "CmdCreateOrder";
-            this.CmdCreateOrder.Size = new System.Drawing.Size(97, 32);
-            this.CmdCreateOrder.TabIndex = 65;
-            this.CmdCreateOrder.Text = "Erstellen";
-            this.CmdCreateOrder.UseVisualStyleBackColor = true;
-            this.CmdCreateOrder.Click += new System.EventHandler(this.CmdCreateOrder_Click);
+            CmdCreateOrder.Location = new Point(700, 50);
+            CmdCreateOrder.Margin = new Padding(3, 2, 3, 2);
+            CmdCreateOrder.Name = "CmdCreateOrder";
+            CmdCreateOrder.Size = new Size(97, 32);
+            CmdCreateOrder.TabIndex = 65;
+            CmdCreateOrder.Text = "Erstellen";
+            CmdCreateOrder.UseVisualStyleBackColor = true;
+            CmdCreateOrder.Click += CmdCreateOrder_Click;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(31, 64);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(112, 15);
-            this.label6.TabIndex = 63;
-            this.label6.Text = "Suche nach Attribut";
+            label6.AutoSize = true;
+            label6.Location = new Point(31, 64);
+            label6.Name = "label6";
+            label6.Size = new Size(112, 15);
+            label6.TabIndex = 63;
+            label6.Text = "Suche nach Attribut";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(31, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(223, 28);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Aufträge und Positionen";
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(31, 22);
+            label5.Name = "label5";
+            label5.Size = new Size(223, 28);
+            label5.TabIndex = 3;
+            label5.Text = "Aufträge und Positionen";
             // 
             // Positionen
             // 
-            this.Positionen.Controls.Add(this.CmdPositionSearchProperty);
-            this.Positionen.Controls.Add(this.DGWPositions);
-            this.Positionen.Controls.Add(this.TxtSearchPositionProperty);
-            this.Positionen.Controls.Add(this.CmdDeletePosition);
-            this.Positionen.Controls.Add(this.CmdSearchResetPosition);
-            this.Positionen.Controls.Add(this.CmdSearchPosition);
-            this.Positionen.Controls.Add(this.CmdEditPosition);
-            this.Positionen.Controls.Add(this.CmdCreatePosition);
-            this.Positionen.Controls.Add(this.label11);
-            this.Positionen.Controls.Add(this.label10);
-            this.Positionen.Location = new System.Drawing.Point(4, 24);
-            this.Positionen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Positionen.Name = "Positionen";
-            this.Positionen.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Positionen.Size = new System.Drawing.Size(1253, 567);
-            this.Positionen.TabIndex = 3;
-            this.Positionen.Text = "Positionen";
-            this.Positionen.UseVisualStyleBackColor = true;
+            Positionen.Controls.Add(CmdPositionSearchProperty);
+            Positionen.Controls.Add(DGWPositions);
+            Positionen.Controls.Add(TxtSearchPositionProperty);
+            Positionen.Controls.Add(CmdDeletePosition);
+            Positionen.Controls.Add(CmdSearchResetPosition);
+            Positionen.Controls.Add(CmdSearchPosition);
+            Positionen.Controls.Add(CmdEditPosition);
+            Positionen.Controls.Add(CmdCreatePosition);
+            Positionen.Controls.Add(label11);
+            Positionen.Controls.Add(label10);
+            Positionen.Location = new Point(4, 24);
+            Positionen.Margin = new Padding(3, 2, 3, 2);
+            Positionen.Name = "Positionen";
+            Positionen.Padding = new Padding(3, 2, 3, 2);
+            Positionen.Size = new Size(1253, 567);
+            Positionen.TabIndex = 3;
+            Positionen.Text = "Positionen";
+            Positionen.UseVisualStyleBackColor = true;
             // 
             // CmdPositionSearchProperty
             // 
-            this.CmdPositionSearchProperty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmdPositionSearchProperty.FormattingEnabled = true;
-            this.CmdPositionSearchProperty.Location = new System.Drawing.Point(175, 62);
-            this.CmdPositionSearchProperty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdPositionSearchProperty.Name = "CmdPositionSearchProperty";
-            this.CmdPositionSearchProperty.Size = new System.Drawing.Size(124, 23);
-            this.CmdPositionSearchProperty.TabIndex = 82;
+            CmdPositionSearchProperty.DropDownStyle = ComboBoxStyle.DropDownList;
+            CmdPositionSearchProperty.FormattingEnabled = true;
+            CmdPositionSearchProperty.Location = new Point(175, 62);
+            CmdPositionSearchProperty.Margin = new Padding(3, 2, 3, 2);
+            CmdPositionSearchProperty.Name = "CmdPositionSearchProperty";
+            CmdPositionSearchProperty.Size = new Size(124, 23);
+            CmdPositionSearchProperty.TabIndex = 82;
             // 
             // DGWPositions
             // 
-            this.DGWPositions.AllowUserToAddRows = false;
-            this.DGWPositions.AllowUserToDeleteRows = false;
-            this.DGWPositions.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.DGWPositions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGWPositions.Location = new System.Drawing.Point(31, 112);
-            this.DGWPositions.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DGWPositions.Name = "DGWPositions";
-            this.DGWPositions.ReadOnly = true;
-            this.DGWPositions.RowHeadersWidth = 51;
-            this.DGWPositions.RowTemplate.Height = 29;
-            this.DGWPositions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGWPositions.Size = new System.Drawing.Size(1050, 375);
-            this.DGWPositions.TabIndex = 81;
+            DGWPositions.AllowUserToAddRows = false;
+            DGWPositions.AllowUserToDeleteRows = false;
+            DGWPositions.BackgroundColor = SystemColors.Control;
+            DGWPositions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DGWPositions.Location = new Point(31, 112);
+            DGWPositions.Margin = new Padding(3, 2, 3, 2);
+            DGWPositions.Name = "DGWPositions";
+            DGWPositions.ReadOnly = true;
+            DGWPositions.RowHeadersWidth = 51;
+            DGWPositions.RowTemplate.Height = 29;
+            DGWPositions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGWPositions.Size = new Size(1050, 375);
+            DGWPositions.TabIndex = 81;
             // 
             // TxtSearchPositionProperty
             // 
-            this.TxtSearchPositionProperty.Location = new System.Drawing.Point(336, 62);
-            this.TxtSearchPositionProperty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.TxtSearchPositionProperty.Name = "TxtSearchPositionProperty";
-            this.TxtSearchPositionProperty.Size = new System.Drawing.Size(324, 23);
-            this.TxtSearchPositionProperty.TabIndex = 80;
+            TxtSearchPositionProperty.Location = new Point(336, 62);
+            TxtSearchPositionProperty.Margin = new Padding(3, 2, 3, 2);
+            TxtSearchPositionProperty.Name = "TxtSearchPositionProperty";
+            TxtSearchPositionProperty.Size = new Size(324, 23);
+            TxtSearchPositionProperty.TabIndex = 80;
             // 
             // CmdDeletePosition
             // 
-            this.CmdDeletePosition.Location = new System.Drawing.Point(984, 50);
-            this.CmdDeletePosition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdDeletePosition.Name = "CmdDeletePosition";
-            this.CmdDeletePosition.Size = new System.Drawing.Size(97, 33);
-            this.CmdDeletePosition.TabIndex = 79;
-            this.CmdDeletePosition.Text = "Löschen";
-            this.CmdDeletePosition.UseVisualStyleBackColor = true;
-            this.CmdDeletePosition.Click += new System.EventHandler(this.CmdDeletePosition_Click);
+            CmdDeletePosition.Location = new Point(984, 50);
+            CmdDeletePosition.Margin = new Padding(3, 2, 3, 2);
+            CmdDeletePosition.Name = "CmdDeletePosition";
+            CmdDeletePosition.Size = new Size(97, 33);
+            CmdDeletePosition.TabIndex = 79;
+            CmdDeletePosition.Text = "Löschen";
+            CmdDeletePosition.UseVisualStyleBackColor = true;
+            CmdDeletePosition.Click += CmdDeletePosition_Click;
             // 
             // CmdSearchResetPosition
             // 
-            this.CmdSearchResetPosition.Location = new System.Drawing.Point(458, 4);
-            this.CmdSearchResetPosition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdSearchResetPosition.Name = "CmdSearchResetPosition";
-            this.CmdSearchResetPosition.Size = new System.Drawing.Size(201, 44);
-            this.CmdSearchResetPosition.TabIndex = 77;
-            this.CmdSearchResetPosition.Text = "Suche zurücksetzen / Datensätze aktualisieren";
-            this.CmdSearchResetPosition.UseVisualStyleBackColor = true;
-            this.CmdSearchResetPosition.Click += new System.EventHandler(this.CmdSearchResetPosition_Click);
+            CmdSearchResetPosition.Location = new Point(458, 4);
+            CmdSearchResetPosition.Margin = new Padding(3, 2, 3, 2);
+            CmdSearchResetPosition.Name = "CmdSearchResetPosition";
+            CmdSearchResetPosition.Size = new Size(201, 44);
+            CmdSearchResetPosition.TabIndex = 77;
+            CmdSearchResetPosition.Text = "Suche zurücksetzen / Datensätze aktualisieren";
+            CmdSearchResetPosition.UseVisualStyleBackColor = true;
+            CmdSearchResetPosition.Click += CmdSearchResetPosition_Click;
             // 
             // CmdSearchPosition
             // 
-            this.CmdSearchPosition.Location = new System.Drawing.Point(336, 22);
-            this.CmdSearchPosition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdSearchPosition.Name = "CmdSearchPosition";
-            this.CmdSearchPosition.Size = new System.Drawing.Size(88, 26);
-            this.CmdSearchPosition.TabIndex = 76;
-            this.CmdSearchPosition.Text = "Suchen";
-            this.CmdSearchPosition.UseVisualStyleBackColor = true;
-            this.CmdSearchPosition.Click += new System.EventHandler(this.CmdSearchPosition_Click);
+            CmdSearchPosition.Location = new Point(336, 22);
+            CmdSearchPosition.Margin = new Padding(3, 2, 3, 2);
+            CmdSearchPosition.Name = "CmdSearchPosition";
+            CmdSearchPosition.Size = new Size(88, 26);
+            CmdSearchPosition.TabIndex = 76;
+            CmdSearchPosition.Text = "Suchen";
+            CmdSearchPosition.UseVisualStyleBackColor = true;
+            CmdSearchPosition.Click += CmdSearchPosition_Click;
             // 
             // CmdEditPosition
             // 
-            this.CmdEditPosition.Location = new System.Drawing.Point(845, 50);
-            this.CmdEditPosition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdEditPosition.Name = "CmdEditPosition";
-            this.CmdEditPosition.Size = new System.Drawing.Size(97, 33);
-            this.CmdEditPosition.TabIndex = 75;
-            this.CmdEditPosition.Text = "Bearbeiten";
-            this.CmdEditPosition.UseVisualStyleBackColor = true;
-            this.CmdEditPosition.Click += new System.EventHandler(this.CmdEditPosition_Click);
+            CmdEditPosition.Location = new Point(845, 50);
+            CmdEditPosition.Margin = new Padding(3, 2, 3, 2);
+            CmdEditPosition.Name = "CmdEditPosition";
+            CmdEditPosition.Size = new Size(97, 33);
+            CmdEditPosition.TabIndex = 75;
+            CmdEditPosition.Text = "Bearbeiten";
+            CmdEditPosition.UseVisualStyleBackColor = true;
+            CmdEditPosition.Click += CmdEditPosition_Click;
             // 
             // CmdCreatePosition
             // 
-            this.CmdCreatePosition.Location = new System.Drawing.Point(700, 50);
-            this.CmdCreatePosition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.CmdCreatePosition.Name = "CmdCreatePosition";
-            this.CmdCreatePosition.Size = new System.Drawing.Size(97, 32);
-            this.CmdCreatePosition.TabIndex = 74;
-            this.CmdCreatePosition.Text = "Erstellen";
-            this.CmdCreatePosition.UseVisualStyleBackColor = true;
-            this.CmdCreatePosition.Click += new System.EventHandler(this.CmdCreatePosition_Click);
+            CmdCreatePosition.Location = new Point(700, 50);
+            CmdCreatePosition.Margin = new Padding(3, 2, 3, 2);
+            CmdCreatePosition.Name = "CmdCreatePosition";
+            CmdCreatePosition.Size = new Size(97, 32);
+            CmdCreatePosition.TabIndex = 74;
+            CmdCreatePosition.Text = "Erstellen";
+            CmdCreatePosition.UseVisualStyleBackColor = true;
+            CmdCreatePosition.Click += CmdCreatePosition_Click;
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(31, 64);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(112, 15);
-            this.label11.TabIndex = 72;
-            this.label11.Text = "Suche nach Attribut";
+            label11.AutoSize = true;
+            label11.Location = new Point(31, 64);
+            label11.Name = "label11";
+            label11.Size = new Size(112, 15);
+            label11.TabIndex = 72;
+            label11.Text = "Suche nach Attribut";
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(31, 22);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(103, 28);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Positionen";
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.Location = new Point(31, 22);
+            label10.Name = "label10";
+            label10.Size = new Size(103, 28);
+            label10.TabIndex = 4;
+            label10.Text = "Positionen";
             // 
             // Jahresvergleich
             // 
-            this.Jahresvergleich.Controls.Add(this.LblStatistics);
-            this.Jahresvergleich.Controls.Add(this.DGWStatistic);
-            this.Jahresvergleich.Location = new System.Drawing.Point(4, 24);
-            this.Jahresvergleich.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Jahresvergleich.Name = "Jahresvergleich";
-            this.Jahresvergleich.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Jahresvergleich.Size = new System.Drawing.Size(1253, 567);
-            this.Jahresvergleich.TabIndex = 5;
-            this.Jahresvergleich.Text = "Jahresvergleich";
-            this.Jahresvergleich.UseVisualStyleBackColor = true;
+            Jahresvergleich.Controls.Add(LblStatistics);
+            Jahresvergleich.Controls.Add(DGWStatistic);
+            Jahresvergleich.Location = new Point(4, 24);
+            Jahresvergleich.Margin = new Padding(3, 2, 3, 2);
+            Jahresvergleich.Name = "Jahresvergleich";
+            Jahresvergleich.Padding = new Padding(3, 2, 3, 2);
+            Jahresvergleich.Size = new Size(1253, 567);
+            Jahresvergleich.TabIndex = 5;
+            Jahresvergleich.Text = "Jahresvergleich";
+            Jahresvergleich.UseVisualStyleBackColor = true;
             // 
             // LblStatistics
             // 
-            this.LblStatistics.AutoSize = true;
-            this.LblStatistics.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblStatistics.Location = new System.Drawing.Point(34, 28);
-            this.LblStatistics.Name = "LblStatistics";
-            this.LblStatistics.Size = new System.Drawing.Size(255, 30);
-            this.LblStatistics.TabIndex = 1;
-            this.LblStatistics.Text = "Jahresvergleich - Statistik";
+            LblStatistics.AutoSize = true;
+            LblStatistics.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            LblStatistics.Location = new Point(34, 28);
+            LblStatistics.Name = "LblStatistics";
+            LblStatistics.Size = new Size(255, 30);
+            LblStatistics.TabIndex = 1;
+            LblStatistics.Text = "Jahresvergleich - Statistik";
             // 
             // DGWStatistic
             // 
-            this.DGWStatistic.AllowUserToAddRows = false;
-            this.DGWStatistic.AllowUserToDeleteRows = false;
-            this.DGWStatistic.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.DGWStatistic.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.DGWStatistic.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.DGWStatistic.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGWStatistic.Location = new System.Drawing.Point(34, 92);
-            this.DGWStatistic.Name = "DGWStatistic";
-            this.DGWStatistic.ReadOnly = true;
-            this.DGWStatistic.RowTemplate.Height = 25;
-            this.DGWStatistic.Size = new System.Drawing.Size(441, 452);
-            this.DGWStatistic.TabIndex = 0;
+            DGWStatistic.AllowUserToAddRows = false;
+            DGWStatistic.AllowUserToDeleteRows = false;
+            DGWStatistic.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DGWStatistic.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            DGWStatistic.BackgroundColor = SystemColors.Control;
+            DGWStatistic.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DGWStatistic.Location = new Point(34, 92);
+            DGWStatistic.Name = "DGWStatistic";
+            DGWStatistic.ReadOnly = true;
+            DGWStatistic.RowTemplate.Height = 25;
+            DGWStatistic.Size = new Size(441, 452);
+            DGWStatistic.TabIndex = 0;
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1319, 604);
-            this.Controls.Add(this.TabControl);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "Main";
-            this.Text = "Auftragsverwaltung";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
-            this.ContextMenuStripChanged += new System.EventHandler(this.UpdateListsEvent);
-            this.TabControl.ResumeLayout(false);
-            this.Kunden.ResumeLayout(false);
-            this.Kunden.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGWCustomers)).EndInit();
-            this.Artikelgruppen.ResumeLayout(false);
-            this.Artikelgruppen.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGWArticleGroups)).EndInit();
-            this.Artikel.ResumeLayout(false);
-            this.Artikel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGWArticles)).EndInit();
-            this.Aufträge.ResumeLayout(false);
-            this.Aufträge.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGWOrders)).EndInit();
-            this.Positionen.ResumeLayout(false);
-            this.Positionen.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGWPositions)).EndInit();
-            this.Jahresvergleich.ResumeLayout(false);
-            this.Jahresvergleich.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGWStatistic)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1319, 604);
+            Controls.Add(TabControl);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "Main";
+            Text = "Auftragsverwaltung";
+            FormClosed += Main_FormClosed;
+            ContextMenuStripChanged += UpdateListsEvent;
+            TabControl.ResumeLayout(false);
+            Kunden.ResumeLayout(false);
+            Kunden.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)DGWCustomers).EndInit();
+            Artikelgruppen.ResumeLayout(false);
+            Artikelgruppen.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)DGWArticleGroups).EndInit();
+            Artikel.ResumeLayout(false);
+            Artikel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)DGWArticles).EndInit();
+            Aufträge.ResumeLayout(false);
+            Aufträge.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)DGWOrders).EndInit();
+            Positionen.ResumeLayout(false);
+            Positionen.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)DGWPositions).EndInit();
+            Jahresvergleich.ResumeLayout(false);
+            Jahresvergleich.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)DGWStatistic).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -901,5 +948,9 @@
         private Label LblStatistics;
         private DataGridView DGWStatistic;
         private Button CmdTreeView;
+        private Button CmdExportXml;
+        private Button CmdExportJson;
+        private Button CmdImport;
+        private Button CmdImportXML;
     }
 }

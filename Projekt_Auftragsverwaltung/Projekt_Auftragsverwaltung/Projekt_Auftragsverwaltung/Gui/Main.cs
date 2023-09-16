@@ -1,6 +1,8 @@
+using Microsoft.Identity.Client;
 using Projekt_Auftragsverwaltung.Controllers;
 using Projekt_Auftragsverwaltung.Gui;
 using Projekt_Auftragsverwaltung.Interfaces;
+using Projekt_Auftragsverwaltung.Tables;
 
 namespace Projekt_Auftragsverwaltung;
 
@@ -15,6 +17,11 @@ public partial class Main : FormController
     private readonly IOrderController _orderController;
     private readonly IOrderPositionController _orderPositionController;
     private readonly IStatisticController _statisticController;
+    private readonly IXmlController _xmlController;
+    private readonly IJsonController _jsonController;
+    private readonly IImportJsonController _importJsonController;
+    private readonly IImportXmlController _importXmlController;
+    private readonly IUpdateController _updateController;
     public Form EditGuiArticle;
     public Form EditGuiArticleGroup;
     public Form EditGuiCustomer;
@@ -26,7 +33,7 @@ public partial class Main : FormController
         IArticlePositionController articlePositionController, ICustomerController customerController,
         IOrderController orderController, IOrderPositionController orderPositionController,
         IStatisticController statisticController, IAddressLocationController addressLocationController,
-        IAddressController addressController)
+        IAddressController addressController, IJsonController jsonController, IXmlController xmlController, IImportJsonController importJsonController, IImportXmlController importXmlController, IUpdateController updateController)
     {
         _articleController = articleController;
         _articleGroupController = articleGroupController;
@@ -37,6 +44,11 @@ public partial class Main : FormController
         _statisticController = statisticController;
         _addressLocationController = addressLocationController;
         _addressController = addressController;
+        _jsonController = jsonController;
+        _xmlController = xmlController;
+        _importJsonController = importJsonController;
+        _importXmlController = importXmlController;
+        _updateController = updateController;
         InitializeComponent();
 
         EditGuiArticleGroup = new MainEditArticleGroup(_articleGroupController);
@@ -54,6 +66,7 @@ public partial class Main : FormController
         EditGuiPosition.VisibleChanged += UpdateListsEvent;
         UpdateLists();
         SetDataBindings();
+        _updateController = updateController;
     }
 
     private void CmdCreateArticleGroup_Click(object sender, EventArgs e)
@@ -373,4 +386,34 @@ public partial class Main : FormController
     {
         Application.Exit();
     }
+
+    private void CmdExportJson_Click(object sender, EventArgs e)
+    {
+        _jsonController.ExportCustomersToJson();
+    }
+
+    private void CmdExportXml_Click(object sender, EventArgs e)
+    {
+        _xmlController.ExportCustomerToXml();
+    }
+
+    private void CmdImportJson_Click(object sender, EventArgs e)
+    {
+        _importJsonController.ImportCustomersFromJson();
+        RefreshDataGridView();
+    }
+
+    private void CmdImportXML_Click(object sender, EventArgs e)
+    {
+        _importXmlController.ImportCustomerFromXml();
+        RefreshDataGridView();
+    }
+
+    private void RefreshDataGridView()
+    {
+        DGWCustomers.DataSource = null; // Löscht die aktuelle Datenquelle
+        DGWCustomers.DataSource = _updateController.GetCustomers(); // Setzt die neue Datenquelle
+        DGWCustomers.Refresh(); // Aktualisiert das DataGridView
+    }
+
 }

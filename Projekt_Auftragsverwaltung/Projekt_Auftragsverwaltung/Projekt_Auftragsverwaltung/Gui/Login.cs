@@ -20,6 +20,11 @@ namespace Projekt_Auftragsverwaltung
         private IOrderController OrderController;
         private IOrderPositionController OrderPositionController;
         private IStatisticController StatisticController;
+        private IJsonController JsonController;
+        private IXmlController XmlController;
+        private IImportJsonController ImportJsonController;
+        private IImportXmlController ImportXmlController;
+        private IUpdateController UpdateController;
 
         public Login()
         {
@@ -70,6 +75,11 @@ namespace Projekt_Auftragsverwaltung
             OrderController = new OrderController(DbConnectionString);
             OrderPositionController = new OrderPositionController(DbConnectionString);
             StatisticController = new StatisticController(DbConnectionString);
+            JsonController = new JsonController(DbConnectionString);
+            XmlController = new XmlController(DbConnectionString);
+            ImportJsonController = new ImportJsonController(DbConnectionString);
+            ImportXmlController = new ImportXmlController(DbConnectionString);
+            UpdateController = new UpdateController(DbConnectionString);
 
         }
 
@@ -78,7 +88,7 @@ namespace Projekt_Auftragsverwaltung
             if (Connection)
             {
                 Hide();
-                MainGui = new Main(ArticleController, ArticleGroupController, ArticlePositionController, CustomerController, OrderController, OrderPositionController, StatisticController, AddressLocationController, AddressController);
+                MainGui = new Main(ArticleController, ArticleGroupController, ArticlePositionController, CustomerController, OrderController, OrderPositionController, StatisticController, AddressLocationController, AddressController, JsonController, XmlController, ImportJsonController, ImportXmlController, UpdateController);
 
                 MainGui.Show();
             }
