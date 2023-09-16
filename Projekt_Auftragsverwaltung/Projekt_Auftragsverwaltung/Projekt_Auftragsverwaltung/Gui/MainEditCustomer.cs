@@ -49,7 +49,7 @@ namespace Projekt_Auftragsverwaltung
             TxtCustomerLocation.Text = addressLocation.Location;
             CmdEditCustomerSave.Text = "Änderungen speichern";
         }
-        
+
         private void SetEditModeOff()
         {
             Customer = null;
@@ -73,16 +73,16 @@ namespace Projekt_Auftragsverwaltung
                 AddressLocationController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
                 var address = AddressController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
 
-                if(InputIsValid())
+                if (InputIsValid())
                 {
-                    CustomerController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text, TxtCustomerWebsite.Text, address);
+                    CustomerController.CreateCustomer(TxtCustomerNr.Text, TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text, TxtCustomerWebsite.Text, address);
 
                     CloseForm();
                 }
             }
             if (EditMode == true && Customer != null && InputIsValid())
             {
-                CustomerController.EditCustomer(Customer.CustomerId, TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerWebsite.Text, TxtCustomerPassword.Text);
+                CustomerController.EditCustomer(Customer.CustomerNr, Customer.CustomerId, TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerWebsite.Text, TxtCustomerPassword.Text);
 
                 var addressLocation = AddressLocationController.GetSingleAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text));
 
@@ -97,7 +97,7 @@ namespace Projekt_Auftragsverwaltung
                 AddressController.EditAddress(Customer.AddressId, TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, Convert.ToInt32(TxtCustomerPostcode.Text));
 
                 SetEditModeOff();
-                
+
                 CloseForm();
             }
             else if (EditMode == true && Customer == null)
@@ -107,7 +107,8 @@ namespace Projekt_Auftragsverwaltung
         }
         public bool InputIsValid()
         {
-            return _validationService.ValidateEmail(TxtCustomerMail.Text) &&
+            return _validationService.ValidateCustomerNumber(TxtCustomerNr.Text) &&
+                _validationService.ValidateEmail(TxtCustomerMail.Text) &&
                 _validationService.ValidateWebsite(TxtCustomerWebsite.Text) &&
                 _validationService.ValidatePassword(TxtCustomerPassword.Text);
         }

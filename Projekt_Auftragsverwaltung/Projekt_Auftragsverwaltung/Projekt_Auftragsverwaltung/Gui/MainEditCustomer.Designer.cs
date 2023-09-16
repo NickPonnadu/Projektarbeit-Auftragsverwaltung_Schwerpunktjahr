@@ -49,6 +49,8 @@
             LblTxtCustomerStreet = new Label();
             LblTxtCustomerHouseNumber = new Label();
             TxtCustomerHouseNumber = new TextBox();
+            TxtCustomerNr = new TextBox();
+            LblCustomerNr = new Label();
             SuspendLayout();
             // 
             // TxtCustomerPassword
@@ -236,11 +238,32 @@
             TxtCustomerHouseNumber.Size = new Size(167, 23);
             TxtCustomerHouseNumber.TabIndex = 42;
             // 
+            // TxtCustomerNr
+            // 
+            TxtCustomerNr.AccessibleDescription = "";
+            TxtCustomerNr.Location = new Point(184, 68);
+            TxtCustomerNr.Margin = new Padding(3, 2, 3, 2);
+            TxtCustomerNr.Name = "TxtCustomerNr";
+            TxtCustomerNr.PlaceholderText = "CUXXXXX";
+            TxtCustomerNr.Size = new Size(168, 23);
+            TxtCustomerNr.TabIndex = 39;
+            // 
+            // LblCustomerNr
+            // 
+            LblCustomerNr.AutoSize = true;
+            LblCustomerNr.Location = new Point(55, 71);
+            LblCustomerNr.Name = "LblCustomerNr";
+            LblCustomerNr.Size = new Size(94, 15);
+            LblCustomerNr.TabIndex = 75;
+            LblCustomerNr.Text = "Kundennummer";
+            // 
             // MainEditCustomer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1061, 481);
+            Controls.Add(LblCustomerNr);
+            Controls.Add(TxtCustomerNr);
             Controls.Add(TxtCustomerHouseNumber);
             Controls.Add(LblTxtCustomerHouseNumber);
             Controls.Add(LblTxtCustomerStreet);
@@ -292,5 +315,7 @@
         private Label LblTxtCustomerStreet;
         private Label LblTxtCustomerHouseNumber;
         private TextBox TxtCustomerHouseNumber;
+        private TextBox TxtCustomerNr;
+        private Label LblCustomerNr;
     }
 }

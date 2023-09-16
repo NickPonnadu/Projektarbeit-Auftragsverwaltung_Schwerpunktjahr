@@ -35,9 +35,9 @@ public class OrderPositionController : IOrderPositionController
                         Auftragsdatum = o.Date == null ? "" : o.Date.ToString("dd.MM.yyyy"),
                         Kunde = c.Name == null ? "" : c.Name,
                         Artikelbezeichnung = a.ArticleName == null ? "" : a.ArticleName,
-                        Artikelanzahl = op.amount == 0 ? 0 : op.amount,
+                        Artikelanzahl = op.Amount == 0 ? 0 : op.Amount,
                         Artikelbetrag = a.Price == 0 ? 0 : a.Price,
-                        Totalbetrag = (op.amount == 0 ? 0 : op.amount) * (a.Price == 0 ? 0 : a.Price)
+                        Totalbetrag = (op.Amount == 0 ? 0 : op.Amount) * (a.Price == 0 ? 0 : a.Price)
                     };
 
                 var list = orderPositions.ToList();
@@ -74,9 +74,9 @@ public class OrderPositionController : IOrderPositionController
                         Auftragsdatum = o.Date == null ? "" : o.Date.ToString("dd.MM.yyyy"),
                         Kunde = c.Name == null ? "" : c.Name,
                         Artikelbezeichnung = a.ArticleName == null ? "" : a.ArticleName,
-                        Artikelanzahl = op.amount == 0 ? 0 : op.amount,
+                        Artikelanzahl = op.Amount == 0 ? 0 : op.Amount,
                         Artikelbetrag = a.Price == 0 ? 0 : a.Price,
-                        Totalbetrag = (op.amount == 0 ? 0 : op.amount) * (a.Price == 0 ? 0 : a.Price)
+                        Totalbetrag = (op.Amount == 0 ? 0 : op.Amount) * (a.Price == 0 ? 0 : a.Price)
                     };
 
                 switch (columnName)
@@ -135,7 +135,7 @@ public class OrderPositionController : IOrderPositionController
         {
             var orderPosition = new OrderPosition
             {
-                amount = amount,
+                Amount = amount,
                 OrderId = orderId
             };
 
@@ -191,7 +191,7 @@ public class OrderPositionController : IOrderPositionController
             var recordToEdit = db.OrderPositions.FirstOrDefault(r => r.OrderPositionId == orderPositionId);
             if (recordToEdit != null)
             {
-                recordToEdit.amount = amount;
+                recordToEdit.Amount = amount;
                 recordToEdit.OrderId = orderId;
                 db.OrderPositions.Update(recordToEdit);
                 db.SaveChanges();
