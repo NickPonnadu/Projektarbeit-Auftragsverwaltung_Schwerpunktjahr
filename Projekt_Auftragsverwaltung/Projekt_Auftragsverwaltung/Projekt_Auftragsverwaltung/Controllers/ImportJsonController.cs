@@ -1,16 +1,8 @@
-﻿using Projekt_Auftragsverwaltung.Entites;
+﻿using Microsoft.EntityFrameworkCore;
+using Projekt_Auftragsverwaltung.Entites;
 using Projekt_Auftragsverwaltung.Interfaces;
-using Projekt_Auftragsverwaltung.Tables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Projekt_Auftragsverwaltung.Service;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.IO;
-using System.Text.Json.Serialization;
-using System.Windows.Forms;
-using Microsoft.EntityFrameworkCore;
 
 namespace Projekt_Auftragsverwaltung.Controllers
 {
@@ -21,26 +13,27 @@ namespace Projekt_Auftragsverwaltung.Controllers
         private readonly ICustomerController _customerController;
         private readonly IAddressController _addressController;
         private readonly IAddressLocationController _addressLocationController;
+        private readonly RegexValidationService _validationService;
+
         public ImportJsonController(string connectionString, ICustomerController customerController, IAddressController addressController, IAddressLocationController addressLocationController)
         {
             _connectionString = connectionString;
             _customerController = customerController;
             _addressController = addressController;
             _addressLocationController = addressLocationController;
+            _validationService = RegexValidationService.GetInstance();
         }
-
 
         public void ImportCustomersFromJson()
         {
-            using (OpenFileDialog ofd = new OpenFileDialog())
+            using (OpenFileDialog fileDialog = new OpenFileDialog())
             {
-                ofd.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
-                if (ofd.ShowDialog() == DialogResult.OK)
+                fileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+                if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-
-                        string json = File.ReadAllText(ofd.FileName);
+                        string json = File.ReadAllText(fileDialog.FileName);
 
                         var jsonSerializerOptions = new JsonSerializerOptions
                         {
@@ -65,7 +58,7 @@ namespace Projekt_Auftragsverwaltung.Controllers
                                     _customerController.DeleteCustomerWithReturn(importedCustomer.CustomerId);
                             }
 
-                            if (deletedCheck)
+                            if (deletedCheck && _validationService.ValidateCustomerNumber(importedCustomer.CustomerNr))
                             {
                                 _addressLocationController.CreateAddressLocation(
                                                                     importedCustomer.Address.AddressLocation.ZipCode.ToString(),
@@ -80,9 +73,6 @@ namespace Projekt_Auftragsverwaltung.Controllers
                                     importedCustomer.PhoneNumber, importedCustomer.Email, importedCustomer.Password,
                                     importedCustomer.Website, address);
                             }
-
-
-
                         }
                         db.SaveChanges();
                     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Projekt_Auftragsverwaltung.Interfaces;
+using Projekt_Auftragsverwaltung.Service;
 using Projekt_Auftragsverwaltung.Tables;
 using System.Data;
 
@@ -141,6 +142,7 @@ public class CustomerController : ICustomerController
             Password = password,
             AddressId = address.AddressId
         };
+        
         dbContext.Customers.Add(newCustomer);
         dbContext.SaveChanges();
     }

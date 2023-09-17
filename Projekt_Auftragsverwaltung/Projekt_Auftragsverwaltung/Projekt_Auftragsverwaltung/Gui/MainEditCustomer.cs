@@ -13,6 +13,7 @@ namespace Projekt_Auftragsverwaltung
         private readonly IAddressController _addressController;
         private readonly IAddressLocationController _addressLocationController;
         private readonly ICustomerController _customerController;
+        private readonly RegexValidationService _validationService;
         Customer? Customer { get; set; }
 
         public bool EditMode;
@@ -128,6 +129,6 @@ namespace Projekt_Auftragsverwaltung
             CloseForm();
         }
 
-        private readonly RegexValidationService _validationService;
+        
     }
 }

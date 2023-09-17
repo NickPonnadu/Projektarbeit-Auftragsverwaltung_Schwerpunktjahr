@@ -1,6 +1,4 @@
-﻿using Projekt_Auftragsverwaltung.Entites;
-
-namespace Projekt_Auftragsverwaltung.Tables;
+﻿namespace Projekt_Auftragsverwaltung.Tables;
 
 public class Address
 {
