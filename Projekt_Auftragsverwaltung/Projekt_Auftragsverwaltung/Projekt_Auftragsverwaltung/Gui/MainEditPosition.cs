@@ -1,7 +1,6 @@
-﻿
-
-using Projekt_Auftragsverwaltung.Controllers;
+﻿using Projekt_Auftragsverwaltung.Controllers;
 using Projekt_Auftragsverwaltung.Gui;
+using Projekt_Auftragsverwaltung.Interfaces;
 using Projekt_Auftragsverwaltung.Tables;
 
 namespace Projekt_Auftragsverwaltung
@@ -10,13 +9,13 @@ namespace Projekt_Auftragsverwaltung
     public partial class MainEditPosition : FormController
 
     {
-        private readonly OrderPositionController _orderPositionController;
-        private readonly OrderController _orderController;
-        private readonly ArticlePositionController _articlePositionController;
-        private readonly ArticleController _articleController;
+        private readonly IOrderPositionController _orderPositionController;
+        private readonly IOrderController _orderController;
+        private readonly IArticlePositionController _articlePositionController;
+        private readonly IArticleController _articleController;
         OrderPosition? OrderPosition { get; set; }
         public bool EditMode;
-        public MainEditPosition(OrderPositionController orderPositionController, ArticlePositionController articlePositionController, OrderController orderController, ArticleController articleController, OrderPosition? orderPosition = null)
+        public MainEditPosition(IOrderPositionController orderPositionController, IArticlePositionController articlePositionController, IOrderController orderController, IArticleController articleController, OrderPosition? orderPosition = null)
         {
             InitializeComponent();
 

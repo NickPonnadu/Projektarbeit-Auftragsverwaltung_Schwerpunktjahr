@@ -21,6 +21,8 @@ namespace Projekt_Auftragsverwaltung
             _connectionString = connectionString;
         }
 
+        public CompanyContext(){}
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString);

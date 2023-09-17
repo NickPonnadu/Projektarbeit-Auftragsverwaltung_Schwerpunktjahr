@@ -1,10 +1,11 @@
 ﻿using Microsoft.Data.SqlClient;
 using Projekt_Auftragsverwaltung.Tables;
 using System.Data;
+using Projekt_Auftragsverwaltung.Interfaces;
 
 namespace Projekt_Auftragsverwaltung.Controllers;
 
-public class StatisticController
+public class StatisticController : IStatisticController
 {
     public string ConnectionString;
 
