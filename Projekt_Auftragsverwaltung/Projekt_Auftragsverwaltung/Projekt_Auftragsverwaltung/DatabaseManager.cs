@@ -1,9 +1,7 @@
 ﻿namespace Projekt_Auftragsverwaltung
 {
-
     public class DatabaseManager
     {
-
         public static string BuildConnectionString(string serverName, string databaseName)
         {
             return $"Server={serverName}; Database={databaseName}; Trusted_Connection=True; Encrypt=false";
@@ -22,7 +20,6 @@
                 return false;
             }
         }
-
 
         public static bool CheckExistingDB(string connectionString)
         {

@@ -1,6 +1,4 @@
-﻿
-
-using Projekt_Auftragsverwaltung.Controllers;
+﻿using Projekt_Auftragsverwaltung.Controllers;
 using Projekt_Auftragsverwaltung.Gui;
 using Projekt_Auftragsverwaltung.Interfaces;
 using Projekt_Auftragsverwaltung.Tables;
@@ -9,18 +7,22 @@ namespace Projekt_Auftragsverwaltung
 {
 
     public partial class MainEditCustomer : FormController
-
     {
+
         IAddressController _addressController { get; }
         IAddressLocationController _addressLocationController { get; }
         ICustomerController _customerController { get; }
+
         Customer? Customer { get; set; }
 
         public bool EditMode;
 
+
         public MainEditCustomer(IAddressController addressController, IAddressLocationController addressLocationController, ICustomerController customerController, Customer? customer = null )
+
         {
             InitializeComponent();
+            _validationService = RegexValidationService.GetInstance();
 
             Customer = customer;
 
@@ -33,20 +35,22 @@ namespace Projekt_Auftragsverwaltung
                 SetEditModeOn();
             }
             else SetEditModeOff();
-            
+
         }
 
         private void SetEditModeOn()
         {
+
             var addressId = Customer.AddressId;
             var address = _addressController.GetSingleAddress(addressId);
             var addressLocation = _addressLocationController.GetSingleAddressLocation(address.ZipCode);
+
             EditMode = true;
+            TxtCustomerMail.Text = Customer.EMail;
+            TxtCustomerPassword.Text = Customer.Password;
+            TxtCustomerWebsite.Text = Customer.Website;
             TxtCustomerName.Text = Customer.Name;
             TxtCustomerPhoneNumber.Text = Customer.PhoneNumber;
-            TxtCustomerMail.Text = Customer.EMail;
-            TxtCustomerWebsite.Text = Customer.Website;
-            TxtCustomerPassword.Text = Customer.Password;
             TxtCustomerStreet.Text = address.Street;
             TxtCustomerHouseNumber.Text = address.HouseNumber;
             TxtCustomerPostcode.Text = Convert.ToString(addressLocation.ZipCode);
@@ -71,30 +75,37 @@ namespace Projekt_Auftragsverwaltung
 
         private void CmdEditCustomerSave_Click(object sender, EventArgs e)
         {
-            if (EditMode == false)
+            if (!EditMode)
             {
-                _customerController.ReturnCustomers();
-                _addressLocationController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
-                var address = _addressController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
-                _customerController.CreateCustomer(TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text, TxtCustomerWebsite.Text, address);
-                CloseForm();
-            }
-            if (EditMode == true && Customer != null)
-            {
-                _customerController.EditCustomer(Customer.CustomerId, TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerWebsite.Text, TxtCustomerPassword.Text);
+                CustomerController.ReturnCustomers();
+                AddressLocationController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
+                var address = AddressController.CreateAddress(TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, TxtCustomerPostcode.Text);
 
-                var addressLocation = _addressLocationController.GetSingleAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text));
+                if (InputIsValid())
+                {
+                    CustomerController.CreateCustomer(TxtCustomerNr.Text, TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerPassword.Text, TxtCustomerWebsite.Text, address);
+
+                    CloseForm();
+                }
+            }
+            if (EditMode == true && Customer != null && InputIsValid())
+            {
+                CustomerController.EditCustomer(Customer.CustomerNr, Customer.CustomerId, TxtCustomerName.Text, TxtCustomerPhoneNumber.Text, TxtCustomerMail.Text, TxtCustomerWebsite.Text, TxtCustomerPassword.Text);
+
+                var addressLocation = AddressLocationController.GetSingleAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text));
+
                 if (addressLocation != null)
                 {
-                    _addressLocationController.EditAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text), TxtCustomerLocation.Text);
+                    AddressLocationController.EditAddressLocation(Convert.ToInt32(TxtCustomerPostcode.Text), TxtCustomerLocation.Text);
                 }
                 else
                 {
-                    _addressLocationController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
+                    AddressLocationController.CreateAddressLocation(TxtCustomerPostcode.Text, TxtCustomerLocation.Text);
                 }
-                _addressController.EditAddress(Customer.AddressId, TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, Convert.ToInt32(TxtCustomerPostcode.Text));
+                AddressController.EditAddress(Customer.AddressId, TxtCustomerStreet.Text, TxtCustomerHouseNumber.Text, Convert.ToInt32(TxtCustomerPostcode.Text));
 
                 SetEditModeOff();
+
                 CloseForm();
             }
             else if (EditMode == true && Customer == null)
@@ -102,12 +113,19 @@ namespace Projekt_Auftragsverwaltung
                 MessageBox.Show("Falscher EditMode");
             }
         }
-
+        public bool InputIsValid()
+        {
+            return _validationService.ValidateCustomerNumber(TxtCustomerNr.Text) &&
+                _validationService.ValidateEmail(TxtCustomerMail.Text) &&
+                _validationService.ValidateWebsite(TxtCustomerWebsite.Text) &&
+                _validationService.ValidatePassword(TxtCustomerPassword.Text);
+        }
         private void CmdEditCustomerCancel_Click(object sender, EventArgs e)
         {
             SetEditModeOff();
             CloseForm();
         }
 
+        private readonly RegexValidationService _validationService;
     }
 }

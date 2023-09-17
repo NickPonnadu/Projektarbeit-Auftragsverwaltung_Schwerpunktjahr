@@ -5,11 +5,11 @@
         
         public void ClearTextBoxes()
         {
-            foreach (Control c in Controls)
+            foreach (Control controller in Controls)
             {
-                if (c is TextBox)
+                if (controller is TextBox)
                 {
-                    ((TextBox)c).Clear();
+                    ((TextBox)controller).Clear();
                 }
             }
         }

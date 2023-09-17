@@ -118,8 +118,7 @@ public partial class Main : FormController
             var customerId = Convert.ToInt32(rows.Cells[0].Value);
             var customer = _customerController.GetSingleCustomer(customerId);
             EditGuiCustomer.Dispose();
-            EditGuiCustomer = new MainEditCustomer(_addressController, _addressLocationController, _customerController,
-                customer);
+            EditGuiCustomer = new MainEditCustomer(_addressController, _addressLocationController, _customerController, customer);
             EditGuiCustomer.VisibleChanged += UpdateListsEvent;
             EditGuiCustomer.ShowDialog();
             UpdateLists();
@@ -236,8 +235,7 @@ public partial class Main : FormController
 
     private void CmdCustomerSearch_Click(object sender, EventArgs e)
     {
-        var dataFound =
-            _customerController.ReturnCustomersSearch(CmbCustomerSearchProperty.Text, TxtCustomerSearchProperty.Text);
+        var dataFound = _customerController.ReturnCustomersSearch(CmbCustomerSearchProperty.Text, TxtCustomerSearchProperty.Text);
         DGWCustomers.DataSource = dataFound;
     }
 

@@ -12,8 +12,8 @@ using Projekt_Auftragsverwaltung;
 namespace ProjektAuftragsverwaltung.Migrations
 {
     [DbContext(typeof(CompanyContext))]
-    [Migration("20230226134454_MyNewMigration")]
-    partial class MyNewMigration
+    [Migration("20230916113605_AddCustomerNr")]
+    partial class AddCustomerNr
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,10 @@ namespace ProjektAuftragsverwaltung.Migrations
             modelBuilder.Entity("Projekt_Auftragsverwaltung.Tables.Address", b =>
                 {
                     b.Property<int>("AddressId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"));
 
                     b.Property<string>("HouseNumber")
                         .IsRequired()
@@ -51,81 +54,99 @@ namespace ProjektAuftragsverwaltung.Migrations
                         new
                         {
                             AddressId = 1,
-                            HouseNumber = "1",
-                            Street = "Teststraße 1",
-                            ZipCode = 12345
+                            HouseNumber = "42",
+                            Street = "Oberer Graben",
+                            ZipCode = 9000
                         },
                         new
                         {
                             AddressId = 2,
-                            HouseNumber = "2",
-                            Street = "Teststraße 2",
-                            ZipCode = 12345
+                            HouseNumber = "6",
+                            Street = "Vorderbrenden",
+                            ZipCode = 9426
                         },
                         new
                         {
                             AddressId = 3,
-                            HouseNumber = "3",
-                            Street = "Teststraße 3",
-                            ZipCode = 12345
+                            HouseNumber = "36",
+                            Street = "Teufener Strasse",
+                            ZipCode = 9001
                         },
                         new
                         {
                             AddressId = 4,
                             HouseNumber = "4",
-                            Street = "Teststraße 4",
-                            ZipCode = 12345
+                            Street = "Seeblickstrasse",
+                            ZipCode = 9424
                         },
                         new
                         {
                             AddressId = 5,
-                            HouseNumber = "5",
-                            Street = "Teststraße 5",
-                            ZipCode = 12345
+                            HouseNumber = "12",
+                            Street = "Bahnhofsstrasse",
+                            ZipCode = 8000
                         });
                 });
 
             modelBuilder.Entity("Projekt_Auftragsverwaltung.Tables.AddressLocation", b =>
                 {
                     b.Property<int>("ZipCode")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ZipCode"));
 
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("PeriodEnd")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodEnd");
+
+                    b.Property<DateTime>("PeriodStart")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodStart");
+
                     b.HasKey("ZipCode");
 
                     b.ToTable("AddressLocations");
 
+                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("AddressLocationsHistory");
+                                ttb
+                                    .HasPeriodStart("PeriodStart")
+                                    .HasColumnName("PeriodStart");
+                                ttb
+                                    .HasPeriodEnd("PeriodEnd")
+                                    .HasColumnName("PeriodEnd");
+                            }));
+
                     b.HasData(
                         new
                         {
-                            ZipCode = 12345,
-                            Location = "Testort 1"
+                            ZipCode = 9000,
+                            Location = "St. Gallen"
                         },
                         new
                         {
-                            ZipCode = 123456,
-                            Location = "Testort 2"
+                            ZipCode = 9426,
+                            Location = "Lutzenberg"
                         },
                         new
                         {
-                            ZipCode = 123457,
-                            Location = "Testort 3"
+                            ZipCode = 9424,
+                            Location = "Rheineck"
                         },
                         new
                         {
-                            ZipCode = 123458,
-                            Location = "Testort 4"
+                            ZipCode = 9001,
+                            Location = "St. Gallen"
                         },
                         new
                         {
-                            ZipCode = 123459,
-                            Location = "Testort 5"
+                            ZipCode = 8000,
+                            Location = "Zürich"
                         });
                 });
 
@@ -144,6 +165,16 @@ namespace ProjektAuftragsverwaltung.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("PeriodEnd")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodEnd");
+
+                    b.Property<DateTime>("PeriodStart")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodStart");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -153,40 +184,51 @@ namespace ProjektAuftragsverwaltung.Migrations
 
                     b.ToTable("Articles");
 
+                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("ArticlesHistory");
+                                ttb
+                                    .HasPeriodStart("PeriodStart")
+                                    .HasColumnName("PeriodStart");
+                                ttb
+                                    .HasPeriodEnd("PeriodEnd")
+                                    .HasColumnName("PeriodEnd");
+                            }));
+
                     b.HasData(
                         new
                         {
                             ArticleId = 1,
                             ArticleGroupId = 1,
-                            ArticleName = "Artikel 1",
+                            ArticleName = "Handschuhe",
                             Price = 10.0m
                         },
                         new
                         {
                             ArticleId = 2,
-                            ArticleGroupId = 1,
-                            ArticleName = "Artikel 2",
+                            ArticleGroupId = 2,
+                            ArticleName = "Schwamm",
                             Price = 20.0m
                         },
                         new
                         {
                             ArticleId = 3,
                             ArticleGroupId = 2,
-                            ArticleName = "Artikel 3",
+                            ArticleName = "Besen",
                             Price = 30.0m
                         },
                         new
                         {
                             ArticleId = 4,
-                            ArticleGroupId = 2,
-                            ArticleName = "Artikel 4",
+                            ArticleGroupId = 3,
+                            ArticleName = "Hüpfburg",
                             Price = 40.0m
                         },
                         new
                         {
                             ArticleId = 5,
-                            ArticleGroupId = 3,
-                            ArticleName = "Artikel 5",
+                            ArticleGroupId = 1,
+                            ArticleName = "Kettensäge",
                             Price = 50.0m
                         });
                 });
@@ -199,29 +241,64 @@ namespace ProjektAuftragsverwaltung.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticleGroupId"));
 
+                    b.Property<int?>("ArticleGroupId1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PeriodEnd")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodEnd");
+
+                    b.Property<DateTime>("PeriodStart")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodStart");
+
                     b.HasKey("ArticleGroupId");
 
+                    b.HasIndex("ArticleGroupId1");
+
                     b.ToTable("ArticleGroups");
+
+                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("ArticleGroupsHistory");
+                                ttb
+                                    .HasPeriodStart("PeriodStart")
+                                    .HasColumnName("PeriodStart");
+                                ttb
+                                    .HasPeriodEnd("PeriodEnd")
+                                    .HasColumnName("PeriodEnd");
+                            }));
 
                     b.HasData(
                         new
                         {
                             ArticleGroupId = 1,
-                            Name = "Gruppe 1"
+                            Level = 0,
+                            Name = "Werkzeuge"
                         },
                         new
                         {
                             ArticleGroupId = 2,
-                            Name = "Gruppe 2"
+                            Level = 0,
+                            Name = "Hygiene"
                         },
                         new
                         {
                             ArticleGroupId = 3,
-                            Name = "Gruppe 3"
+                            Level = 0,
+                            Name = "Kinder"
                         });
                 });
 
@@ -239,6 +316,16 @@ namespace ProjektAuftragsverwaltung.Migrations
                     b.Property<int>("OrderPositionId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("PeriodEnd")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodEnd");
+
+                    b.Property<DateTime>("PeriodStart")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodStart");
+
                     b.HasKey("ArticlePositionId");
 
                     b.HasIndex("ArticleId");
@@ -246,6 +333,17 @@ namespace ProjektAuftragsverwaltung.Migrations
                     b.HasIndex("OrderPositionId");
 
                     b.ToTable("ArticlePositions");
+
+                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("ArticlePositionsHistory");
+                                ttb
+                                    .HasPeriodStart("PeriodStart")
+                                    .HasColumnName("PeriodStart");
+                                ttb
+                                    .HasPeriodEnd("PeriodEnd")
+                                    .HasColumnName("PeriodEnd");
+                            }));
 
                     b.HasData(
                         new
@@ -291,6 +389,11 @@ namespace ProjektAuftragsverwaltung.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CustomerNr")
+                        .IsRequired()
+                        .HasMaxLength(7)
+                        .HasColumnType("nvarchar(7)");
+
                     b.Property<string>("EMail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -303,6 +406,16 @@ namespace ProjektAuftragsverwaltung.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("PeriodEnd")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodEnd");
+
+                    b.Property<DateTime>("PeriodStart")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodStart");
+
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -313,58 +426,77 @@ namespace ProjektAuftragsverwaltung.Migrations
 
                     b.HasKey("CustomerId");
 
+                    b.HasIndex("AddressId")
+                        .IsUnique();
+
                     b.ToTable("Customers");
+
+                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("CustomersHistory");
+                                ttb
+                                    .HasPeriodStart("PeriodStart")
+                                    .HasColumnName("PeriodStart");
+                                ttb
+                                    .HasPeriodEnd("PeriodEnd")
+                                    .HasColumnName("PeriodEnd");
+                            }));
 
                     b.HasData(
                         new
                         {
                             CustomerId = 1,
                             AddressId = 1,
-                            EMail = "test1@test.com",
-                            Name = "Test Kunde 1",
+                            CustomerNr = "",
+                            EMail = "marco-mayer@gmx.com",
+                            Name = "Marco Mayer",
                             Password = "pass1",
                             PhoneNumber = "0123456789",
-                            Website = "Website1"
+                            Website = "servicesolution.com"
                         },
                         new
                         {
                             CustomerId = 2,
                             AddressId = 2,
-                            EMail = "test2@test.com",
-                            Name = "Test Kunde 2",
+                            CustomerNr = "",
+                            EMail = "ps@gmail.com",
+                            Name = "Peter Steiner",
                             Password = "pass2",
                             PhoneNumber = "9876543210",
-                            Website = "Website2"
+                            Website = "funreisen.ch"
                         },
                         new
                         {
                             CustomerId = 3,
                             AddressId = 3,
-                            EMail = "test3@test.com",
-                            Name = "Test Kunde 3",
+                            CustomerNr = "",
+                            EMail = "jh@gmx.com",
+                            Name = "Julia Heeb",
                             Password = "pass3",
                             PhoneNumber = "1234567890",
-                            Website = "Website3"
+                            Website = "geschenkideen.ch"
                         },
                         new
                         {
                             CustomerId = 4,
                             AddressId = 4,
-                            EMail = "test4@test.com",
-                            Name = "Test Kunde 4",
+                            CustomerNr = "",
+                            EMail = "lärihugi@hotmail.com",
+                            Name = "Larissa Hugentobler",
                             Password = "pass4",
                             PhoneNumber = "0987654321",
-                            Website = "Website4"
+                            Website = "gmx.ch"
                         },
                         new
                         {
                             CustomerId = 5,
                             AddressId = 5,
-                            EMail = "test5@test.com",
-                            Name = "Test Kunde 5",
+                            CustomerNr = "",
+                            EMail = "PCMeier@sunrise.com",
+                            Name = "Pascal Meier",
                             Password = "pass5",
                             PhoneNumber = "1023456789",
-                            Website = "Website5"
+                            Website = "meierbau.ch"
                         });
                 });
 
@@ -382,11 +514,32 @@ namespace ProjektAuftragsverwaltung.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("PeriodEnd")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodEnd");
+
+                    b.Property<DateTime>("PeriodStart")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodStart");
+
                     b.HasKey("OrderId");
 
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
+
+                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("OrdersHistory");
+                                ttb
+                                    .HasPeriodStart("PeriodStart")
+                                    .HasColumnName("PeriodStart");
+                                ttb
+                                    .HasPeriodEnd("PeriodEnd")
+                                    .HasColumnName("PeriodEnd");
+                            }));
 
                     b.HasData(
                         new
@@ -432,6 +585,16 @@ namespace ProjektAuftragsverwaltung.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("PeriodEnd")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodEnd");
+
+                    b.Property<DateTime>("PeriodStart")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodStart");
+
                     b.Property<int>("amount")
                         .HasColumnType("int");
 
@@ -440,6 +603,17 @@ namespace ProjektAuftragsverwaltung.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("OrderPositions");
+
+                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("OrderPositionsHistory");
+                                ttb
+                                    .HasPeriodStart("PeriodStart")
+                                    .HasColumnName("PeriodStart");
+                                ttb
+                                    .HasPeriodEnd("PeriodEnd")
+                                    .HasColumnName("PeriodEnd");
+                            }));
 
                     b.HasData(
                         new
@@ -476,12 +650,6 @@ namespace ProjektAuftragsverwaltung.Migrations
 
             modelBuilder.Entity("Projekt_Auftragsverwaltung.Tables.Address", b =>
                 {
-                    b.HasOne("Projekt_Auftragsverwaltung.Tables.Customer", "Customer")
-                        .WithOne("Address")
-                        .HasForeignKey("Projekt_Auftragsverwaltung.Tables.Address", "AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Projekt_Auftragsverwaltung.Tables.AddressLocation", "AddressLocation")
                         .WithMany("Addresses")
                         .HasForeignKey("ZipCode")
@@ -489,8 +657,6 @@ namespace ProjektAuftragsverwaltung.Migrations
                         .IsRequired();
 
                     b.Navigation("AddressLocation");
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Projekt_Auftragsverwaltung.Tables.Article", b =>
@@ -502,6 +668,13 @@ namespace ProjektAuftragsverwaltung.Migrations
                         .IsRequired();
 
                     b.Navigation("ArticleGroup");
+                });
+
+            modelBuilder.Entity("Projekt_Auftragsverwaltung.Tables.ArticleGroup", b =>
+                {
+                    b.HasOne("Projekt_Auftragsverwaltung.Tables.ArticleGroup", null)
+                        .WithMany("Children")
+                        .HasForeignKey("ArticleGroupId1");
                 });
 
             modelBuilder.Entity("Projekt_Auftragsverwaltung.Tables.ArticlePosition", b =>
@@ -521,6 +694,17 @@ namespace ProjektAuftragsverwaltung.Migrations
                     b.Navigation("Article");
 
                     b.Navigation("OrderPosition");
+                });
+
+            modelBuilder.Entity("Projekt_Auftragsverwaltung.Tables.Customer", b =>
+                {
+                    b.HasOne("Projekt_Auftragsverwaltung.Tables.Address", "Address")
+                        .WithOne("Customer")
+                        .HasForeignKey("Projekt_Auftragsverwaltung.Tables.Customer", "AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("Projekt_Auftragsverwaltung.Tables.Order", b =>
@@ -545,6 +729,12 @@ namespace ProjektAuftragsverwaltung.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("Projekt_Auftragsverwaltung.Tables.Address", b =>
+                {
+                    b.Navigation("Customer")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Projekt_Auftragsverwaltung.Tables.AddressLocation", b =>
                 {
                     b.Navigation("Addresses");
@@ -558,13 +748,12 @@ namespace ProjektAuftragsverwaltung.Migrations
             modelBuilder.Entity("Projekt_Auftragsverwaltung.Tables.ArticleGroup", b =>
                 {
                     b.Navigation("Articles");
+
+                    b.Navigation("Children");
                 });
 
             modelBuilder.Entity("Projekt_Auftragsverwaltung.Tables.Customer", b =>
                 {
-                    b.Navigation("Address")
-                        .IsRequired();
-
                     b.Navigation("Orders");
                 });
 

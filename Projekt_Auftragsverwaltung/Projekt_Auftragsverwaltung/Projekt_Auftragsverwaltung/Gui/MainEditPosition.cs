@@ -35,7 +35,7 @@ namespace Projekt_Auftragsverwaltung
         private void SetEditModeOn()
         {
             EditMode = true;
-            NumOrderPositionQuantity.Value = Convert.ToDecimal(OrderPosition.amount);
+            NumOrderPositionQuantity.Value = Convert.ToDecimal(OrderPosition.Amount);
 
             CmdCreatePositionSave.Text = "Änderungen speichern";
         }

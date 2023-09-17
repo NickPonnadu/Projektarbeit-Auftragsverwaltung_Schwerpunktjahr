@@ -3,7 +3,7 @@
 public class OrderPosition
 {
     public int OrderPositionId { get; set; }
-    public int amount { get; set; }
+    public int Amount { get; set; }
 
 
     public int OrderId { get; set; }

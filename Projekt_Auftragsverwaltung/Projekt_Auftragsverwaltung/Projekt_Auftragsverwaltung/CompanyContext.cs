@@ -14,19 +14,18 @@ namespace Projekt_Auftragsverwaltung
         public DbSet<ArticleGroup> ArticleGroups { get; set; }
         public DbSet<ArticlePosition> ArticlePositions { get; set; }
 
-        public string _ConnectionString;
+        public string _connectionString;
 
         public CompanyContext(string connectionString)
         {
-            _ConnectionString = connectionString;
+            _connectionString = connectionString;
         }
 
         public CompanyContext(){}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_ConnectionString);
-
+            optionsBuilder.UseSqlServer(_connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,32 +33,42 @@ namespace Projekt_Auftragsverwaltung
             modelBuilder.Entity<Address>()
                 .HasKey(b => b.AddressId);
 
-
             modelBuilder.Entity<AddressLocation>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
+
             modelBuilder.Entity<AddressLocation>().HasKey(b => b.ZipCode);
 
             modelBuilder.Entity<AddressLocation>()
                .Property(b => b.ZipCode)
                .ValueGeneratedNever();
+
             modelBuilder.Entity<Article>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
+
             modelBuilder.Entity<Article>()
                 .HasKey(b => b.ArticleId);
             modelBuilder.Entity<ArticleGroup>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
+
             modelBuilder.Entity<ArticleGroup>()
                 .HasKey(b => b.ArticleGroupId);
+
             modelBuilder.Entity<ArticlePosition>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
+
             modelBuilder.Entity<ArticlePosition>()
                 .HasKey(b => b.ArticlePositionId);
+
             modelBuilder.Entity<Customer>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
+
             modelBuilder.Entity<Customer>()
                 .HasKey(b => b.CustomerId);
+
             modelBuilder.Entity<Order>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
+
             modelBuilder.Entity<Order>()
                .HasKey(b => b.OrderId);
+
             modelBuilder.Entity<OrderPosition>(entity => { entity.ToTable(tb => tb.IsTemporal()); });
+
             modelBuilder.Entity<OrderPosition>()
                .HasKey(b => b.OrderPositionId);
-
 
 
             modelBuilder.Entity<Address>()
@@ -116,8 +125,6 @@ namespace Projekt_Auftragsverwaltung
             );
 
 
-
-
             modelBuilder.Entity<Article>().HasData(
                 new Article { ArticleId = 1, ArticleName = "Handschuhe", Price = 10.0M, ArticleGroupId = 1 },
                 new Article { ArticleId = 2, ArticleName = "Schwamm", Price = 20.0M, ArticleGroupId = 2 },
@@ -126,11 +133,13 @@ namespace Projekt_Auftragsverwaltung
                 new Article { ArticleId = 5, ArticleName = "Kettensäge", Price = 50.0M, ArticleGroupId = 1 }
             );
 
+
             modelBuilder.Entity<ArticleGroup>().HasData(
                 new ArticleGroup { ArticleGroupId = 1, Name = "Werkzeuge" },
                 new ArticleGroup { ArticleGroupId = 2, Name = "Hygiene" },
                 new ArticleGroup { ArticleGroupId = 3, Name = "Kinder" }
             );
+
 
             modelBuilder.Entity<ArticlePosition>().HasData(
                 new ArticlePosition { ArticlePositionId = 1, ArticleId = 1, OrderPositionId = 1 },
@@ -140,6 +149,7 @@ namespace Projekt_Auftragsverwaltung
                 new ArticlePosition { ArticlePositionId = 5, ArticleId = 5, OrderPositionId = 5 }
             );
 
+
             modelBuilder.Entity<Customer>().HasData(
                  new Customer { CustomerId = 1, Name = "Marco Mayer", PhoneNumber = "0123456789", EMail = "marco-mayer@gmx.com", Website = "servicesolution.com", Password = "pass1", AddressId = 1 },
                  new Customer { CustomerId = 2, Name = "Peter Steiner", PhoneNumber = "9876543210", EMail = "ps@gmail.com", Website = "funreisen.ch", Password = "pass2", AddressId = 2 },
@@ -147,6 +157,7 @@ namespace Projekt_Auftragsverwaltung
                  new Customer { CustomerId = 4, Name = "Larissa Hugentobler", PhoneNumber = "0987654321", EMail = "lärihugi@hotmail.com", Website = "gmx.ch", Password = "pass4", AddressId = 4 },
                  new Customer { CustomerId = 5, Name = "Pascal Meier", PhoneNumber = "1023456789", EMail = "PCMeier@sunrise.com", Website = "meierbau.ch", Password = "pass5", AddressId = 5 }
              );
+
 
             modelBuilder.Entity<Order>().HasData(
                 new Order { OrderId = 1, CustomerId = 1, Date = new DateTime(2022, 10, 10) },
@@ -156,12 +167,13 @@ namespace Projekt_Auftragsverwaltung
                 new Order { OrderId = 5, CustomerId = 5, Date = new DateTime(2023, 2, 2) }
             );
 
+
             modelBuilder.Entity<OrderPosition>().HasData(
-                new OrderPosition { OrderPositionId = 1, amount = 5, OrderId = 1 },
-                new OrderPosition { OrderPositionId = 2, amount = 10, OrderId = 2 },
-                new OrderPosition { OrderPositionId = 3, amount = 3, OrderId = 3 },
-                new OrderPosition { OrderPositionId = 4, amount = 8, OrderId = 4 },
-                new OrderPosition { OrderPositionId = 5, amount = 15, OrderId = 5 }
+                new OrderPosition { OrderPositionId = 1, Amount = 5, OrderId = 1 },
+                new OrderPosition { OrderPositionId = 2, Amount = 10, OrderId = 2 },
+                new OrderPosition { OrderPositionId = 3, Amount = 3, OrderId = 3 },
+                new OrderPosition { OrderPositionId = 4, Amount = 8, OrderId = 4 },
+                new OrderPosition { OrderPositionId = 5, Amount = 15, OrderId = 5 }
                 );
         }
     }
