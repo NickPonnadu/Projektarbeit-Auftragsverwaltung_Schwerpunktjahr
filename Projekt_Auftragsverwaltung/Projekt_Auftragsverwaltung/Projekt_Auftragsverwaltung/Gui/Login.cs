@@ -77,7 +77,7 @@ namespace Projekt_Auftragsverwaltung
             StatisticController = new StatisticController(DbConnectionString);
             JsonController = new JsonController(DbConnectionString);
             XmlController = new XmlController(DbConnectionString);
-            ImportJsonController = new ImportJsonController(DbConnectionString);
+            ImportJsonController = new ImportJsonController(DbConnectionString, CustomerController,AddressController,AddressLocationController);
             ImportXmlController = new ImportXmlController(DbConnectionString);
             UpdateController = new UpdateController(DbConnectionString);
 

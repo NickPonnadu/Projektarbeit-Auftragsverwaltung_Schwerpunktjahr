@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.IO;
+using System.Text.Json.Serialization;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,10 +18,17 @@ namespace Projekt_Auftragsverwaltung.Controllers
     {
         private readonly string _connectionString;
 
-        public ImportJsonController(string connectionString)
+        private readonly ICustomerController _customerController;
+        private readonly IAddressController _addressController;
+        private readonly IAddressLocationController _addressLocationController;
+        public ImportJsonController(string connectionString, ICustomerController customerController, IAddressController addressController, IAddressLocationController addressLocationController)
         {
             _connectionString = connectionString;
+            _customerController = customerController;
+            _addressController = addressController;
+            _addressLocationController = addressLocationController;
         }
+
 
         public void ImportCustomersFromJson()
         {
@@ -31,57 +39,71 @@ namespace Projekt_Auftragsverwaltung.Controllers
                 {
                     try
                     {
+
                         string json = File.ReadAllText(ofd.FileName);
-                        var customerDtos = JsonSerializer.Deserialize<List<CustomerImportDto>>(json);
+
+                        var jsonSerializerOptions = new JsonSerializerOptions
+                        {
+                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                            PropertyNameCaseInsensitive = true
+                        };
+                        var customerDtos = JsonSerializer.Deserialize<List<CustomerImportDto>>(json, jsonSerializerOptions);
 
                         using var db = new CompanyContext(_connectionString);
+                        if (!customerDtos.Any())
+                        {
+                            return;
+                        }
+
                         foreach (var importedCustomer in customerDtos)
                         {
-                            if (importedCustomer != null && importedCustomer.Address != null)
+                            var existingCustomer = _customerController.GetSingleCustomer(importedCustomer.CustomerId);
+                            var deletedCheck = true;
+                            if (existingCustomer != null)
                             {
-                                Address newAddress = new Address
-                                {
-                                    Street = importedCustomer.Address.Street,
-                                    HouseNumber = "Unknown",
-                                    ZipCode = importedCustomer.Address.PostalCode
-                                };
-
-                                db.Addresses.Add(newAddress);
-                                db.SaveChanges();
-
-                                Customer newCustomer = new Customer
-                                {
-                                    CustomerId = int.Parse(importedCustomer.CustomerNr.Replace("CU", "")),
-                                    Name = importedCustomer.Name,
-                                    EMail = importedCustomer.Email,
-                                    Website = importedCustomer.Website,
-                                    Password = importedCustomer.Password,
-                                    AddressId = newAddress.AddressId
-                                };
-
-                                db.Customers.Add(newCustomer);
+                                deletedCheck =
+                                    _customerController.DeleteCustomerWithReturn(importedCustomer.CustomerId);
                             }
+
+                            if (deletedCheck)
+                            {
+                                _addressLocationController.CreateAddressLocation(
+                                                                    importedCustomer.Address.AddressLocation.ZipCode.ToString(),
+                                                                    importedCustomer.Address.AddressLocation.Location);
+
+
+                                var address = _addressController.CreateAddress(importedCustomer.Address.Street,
+                                    importedCustomer.Address.HouseNumber,
+                                    importedCustomer.Address.AddressLocation.ZipCode.ToString());
+
+                                _customerController.CreateCustomer(importedCustomer.CustomerNr, importedCustomer.Name,
+                                    importedCustomer.PhoneNumber, importedCustomer.Email, importedCustomer.Password,
+                                    importedCustomer.Website, address);
+                            }
+
+
+
                         }
                         db.SaveChanges();
                     }
                     catch (IOException ex)
                     {
-                        Console.WriteLine($"File Read/Write Error: {ex.Message}");
+                        MessageBox.Show($"File Read/Write Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     catch (JsonException ex)
                     {
-                        Console.WriteLine($"JSON Deserialization Error: {ex.Message}");
+                        MessageBox.Show($"JSON Deserialization Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     catch (FormatException ex)
                     {
-                        Console.WriteLine($"Format Conversion Error: {ex.Message}");
+                        MessageBox.Show($"Format Conversion Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     catch (DbUpdateException ex)
                     {
-                        Console.WriteLine($"Database Update Error: {ex.Message}");
+                        MessageBox.Show($"Database Update Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         if (ex.InnerException != null)
                         {
-                            Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                            MessageBox.Show($"Inner Exception: {ex.InnerException.Message}", "Inner Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }

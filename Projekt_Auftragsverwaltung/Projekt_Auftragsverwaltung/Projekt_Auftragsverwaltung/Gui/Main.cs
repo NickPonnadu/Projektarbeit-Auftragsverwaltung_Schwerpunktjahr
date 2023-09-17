@@ -398,20 +398,13 @@ public partial class Main : FormController
     private void CmdImportJson_Click(object sender, EventArgs e)
     {
         _importJsonController.ImportCustomersFromJson();
-        RefreshDataGridView();
+        UpdateLists();
     }
 
     private void CmdImportXML_Click(object sender, EventArgs e)
     {
         _importXmlController.ImportCustomerFromXml();
-        RefreshDataGridView();
+        UpdateLists();
     }
-
-    private void RefreshDataGridView()
-    {
-        DGWCustomers.DataSource = null; // Löscht die aktuelle Datenquelle
-        DGWCustomers.DataSource = _updateController.GetCustomers(); // Setzt die neue Datenquelle
-        DGWCustomers.Refresh(); // Aktualisiert das DataGridView
-    }
-
+    
 }

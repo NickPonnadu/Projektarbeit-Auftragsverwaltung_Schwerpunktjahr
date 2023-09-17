@@ -33,7 +33,37 @@ public class AddressLocationController : IAddressLocationController
                 dbContext.SaveChanges();
             }
         }
+
     }
+
+
+    public AddressLocation CreateAddressLocationWithReturn(string zipCode, string location)
+    {
+        using (var connection = new SqlConnection(_connectionString))
+        {
+            connection.Open();
+            using (var dbContext = new CompanyContext(_connectionString))
+            {
+                var existingRecord =
+                    dbContext.AddressLocations.FirstOrDefault(al => al.ZipCode == Convert.ToInt32(zipCode));
+
+                if (existingRecord != null) return null;
+
+                var newAddressLocation = new AddressLocation
+                {
+                    ZipCode = Convert.ToInt32(zipCode),
+                    Location = location
+                };
+                dbContext.AddressLocations.Add(newAddressLocation);
+                dbContext.SaveChanges();
+                return newAddressLocation;
+            }
+
+        }
+
+    }
+
+
 
     public void EditAddressLocation(int zipCode, string location = "")
     {

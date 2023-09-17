@@ -1,4 +1,6 @@
-﻿namespace Projekt_Auftragsverwaltung.Tables;
+﻿using Projekt_Auftragsverwaltung.Entites;
+
+namespace Projekt_Auftragsverwaltung.Tables;
 
 public class Address
 {
@@ -8,4 +10,6 @@ public class Address
     public int ZipCode { get; set; }
     public AddressLocation AddressLocation { get; set; }
     public Customer Customer { get; set; }
+
+   
 }

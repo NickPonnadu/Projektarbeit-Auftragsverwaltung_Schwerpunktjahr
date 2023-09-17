@@ -32,14 +32,21 @@ public class JsonController : IJsonController
 
         var customers = db.Customers.Select(c => new
         {
-            customerNr = "CU" + c.CustomerId,
+            customerId = c.CustomerId,
+            customerNr = c.CustomerNr,
             name = c.Name,
             address = new
             {
                 street = c.Address.Street,
-                postalCode = c.Address.ZipCode
+                houseNumber = c.Address.HouseNumber,
+                addressLocation = new
+                {
+                    location = c.Address.AddressLocation.Location,
+                    zipCode = c.Address.AddressLocation.ZipCode
+                }
             },
             email = c.EMail,
+            phoneNumber = c.PhoneNumber,
             website = c.Website,
             password = HashPassword(c.Password)
         }).ToList();

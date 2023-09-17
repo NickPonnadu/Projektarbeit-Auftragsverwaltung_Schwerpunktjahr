@@ -166,9 +166,10 @@ public class CustomerController : ICustomerController
     {
         using var db = new CompanyContext(_connectionString);
         var hasOrders = db.Orders.Any(o => o.CustomerId == customerId);
+        var customerName = GetSingleCustomer(customerId).Name;
         if (hasOrders)
         {
-            MessageBox.Show("Kunde hat laufende Aufträge und kann deshalb nicht gelöscht werden!");
+            MessageBox.Show($"Kunde {customerName} hat laufende Aufträge und kann deshalb nicht gelöscht werden!");
         }
         else
         {
@@ -185,6 +186,36 @@ public class CustomerController : ICustomerController
                 db.Addresses.Remove(address);
                 db.SaveChanges();
             }
+        }
+    }
+
+    public bool DeleteCustomerWithReturn(int customerId)
+    {
+        using var db = new CompanyContext(_connectionString);
+        var hasOrders = db.Orders.Any(o => o.CustomerId == customerId);
+        var customerName = GetSingleCustomer(customerId).Name;
+        if (hasOrders)
+        {
+            MessageBox.Show($"Kunde {customerName} hat laufende Aufträge und kann deshalb nicht gelöscht werden!");
+            return false;
+        }
+        else
+        {
+            var customer = db.Customers.FirstOrDefault(c => c.CustomerId == customerId);
+            var address = db.Addresses.FirstOrDefault(a => a.AddressId == customer.AddressId);
+            if (customer != null)
+            {
+                db.Customers.Remove(customer);
+                db.SaveChanges();
+            }
+
+            if (address != null)
+            {
+                db.Addresses.Remove(address);
+                db.SaveChanges();
+            }
+
+            return true;
         }
     }
 
