@@ -40,14 +40,14 @@ namespace Projekt_Auftragsverwaltung.Controllers
                     try
                     {
 
-                        string json = File.ReadAllText(ofd.FileName);
+                        string jsonFile = File.ReadAllText(ofd.FileName);
 
                         var jsonSerializerOptions = new JsonSerializerOptions
                         {
                             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                             PropertyNameCaseInsensitive = true
                         };
-                        var customerDtos = JsonSerializer.Deserialize<List<CustomerImportDto>>(json, jsonSerializerOptions);
+                        var customerDtos = JsonSerializer.Deserialize<List<CustomerImportDTO>>(jsonFile, jsonSerializerOptions);
 
                         using var db = new CompanyContext(_connectionString);
                         if (!customerDtos.Any())
