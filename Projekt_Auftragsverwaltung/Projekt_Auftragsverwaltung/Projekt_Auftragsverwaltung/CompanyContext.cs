@@ -151,11 +151,11 @@ namespace Projekt_Auftragsverwaltung
 
 
             modelBuilder.Entity<Customer>().HasData(
-                 new Customer { CustomerId = 1, Name = "Marco Mayer", PhoneNumber = "0123456789", EMail = "marco-mayer@gmx.com", Website = "servicesolution.com", Password = "pass1", AddressId = 1 },
-                 new Customer { CustomerId = 2, Name = "Peter Steiner", PhoneNumber = "9876543210", EMail = "ps@gmail.com", Website = "funreisen.ch", Password = "pass2", AddressId = 2 },
-                 new Customer { CustomerId = 3, Name = "Julia Heeb", PhoneNumber = "1234567890", EMail = "jh@gmx.com", Website = "geschenkideen.ch", Password = "pass3", AddressId = 3 },
-                 new Customer { CustomerId = 4, Name = "Larissa Hugentobler", PhoneNumber = "0987654321", EMail = "lärihugi@hotmail.com", Website = "gmx.ch", Password = "pass4", AddressId = 4 },
-                 new Customer { CustomerId = 5, Name = "Pascal Meier", PhoneNumber = "1023456789", EMail = "PCMeier@sunrise.com", Website = "meierbau.ch", Password = "pass5", AddressId = 5 }
+                 new Customer { CustomerId = 1, Name = "Marco Mayer", CustomerNr = "CU00001", PhoneNumber = "0123456789", EMail = "marco-mayer@gmx.com", Website = "servicesolution.com", Password = "pass1", AddressId = 1 },
+                 new Customer { CustomerId = 2, Name = "Peter Steiner", CustomerNr = "CU00002", PhoneNumber = "9876543210", EMail = "ps@gmail.com", Website = "funreisen.ch", Password = "pass2", AddressId = 2 },
+                 new Customer { CustomerId = 3, Name = "Julia Heeb", CustomerNr = "CU00003", PhoneNumber = "1234567890", EMail = "jh@gmx.com", Website = "geschenkideen.ch", Password = "pass3", AddressId = 3 },
+                 new Customer { CustomerId = 4, Name = "Larissa Hugentobler", CustomerNr = "CU00004", PhoneNumber = "0987654321", EMail = "lärihugi@hotmail.com", Website = "gmx.ch", Password = "pass4", AddressId = 4 },
+                 new Customer { CustomerId = 5, Name = "Pascal Meier", CustomerNr = "CU00005", PhoneNumber = "1023456789", EMail = "PCMeier@sunrise.com", Website = "meierbau.ch", Password = "pass5", AddressId = 5 }
              );
 
 

@@ -1,17 +1,26 @@
-﻿using Projekt_Auftragsverwaltung.Tables;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Projekt_Auftragsverwaltung.Entites
+﻿namespace Projekt_Auftragsverwaltung.Entites
 {
-    public class CustomerImportDto
+    public class CustomerImportDTO
     {
+        private string _customerNr;
         public int CustomerId { get; set; }
-        public string CustomerNr { get; set; }
+        public string CustomerNr 
+        {
+            get { return _customerNr; }
+            set
+            {
+                var validator = RegexValidationService.GetInstance();
+
+                    if (validator.ValidateCustomerNumber(value))
+                    {
+                        _customerNr = value;
+                    }
+                    else
+                    {
+                        throw new InvalidDataException("Ungültige Kundennummer");
+                    }
+            }
+        }
         public string Name { get; set; }
         public AddressImportDto Address { get; set; }
         public string Email { get; set; }
