@@ -1,26 +1,11 @@
-﻿namespace Projekt_Auftragsverwaltung.Entites
+﻿using Projekt_Auftragsverwaltung.Interfaces;
+
+namespace Projekt_Auftragsverwaltung.Entites
 {
     public class CustomerJsonDto
     {
-        private string _customerNr;
         public int CustomerId { get; set; }
-        public string CustomerNr 
-        {
-            get { return _customerNr; }
-            set
-            {
-                var validator = RegexValidationService.GetInstance();
-
-                    if (validator.ValidateCustomerNumber(value))
-                    {
-                        _customerNr = value;
-                    }
-                    else
-                    {
-                        throw new InvalidDataException("Ungültige Kundennummer");
-                    }
-            }
-        }
+        public string CustomerNr { get; set; }
         public string Name { get; set; }
         public AddressJsonDto Address { get; set; }
         public string Email { get; set; }
@@ -41,6 +26,6 @@
     {
         public string Location { get; set; }
         public int ZipCode { get; set; }
-        
+
     }
 }

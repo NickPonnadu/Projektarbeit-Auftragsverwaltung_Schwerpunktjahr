@@ -41,7 +41,7 @@ namespace Projekt_Auftragsverwaltung.Controllers
                             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                             PropertyNameCaseInsensitive = true
                         };
-                        var customerDtos = JsonSerializer.Deserialize<List<CustomerJsonDto>>(json, jsonSerializerOptions);
+                        var customerDtos = JsonSerializer.Deserialize<List<CustomerJsonDto>>(jsonFile, jsonSerializerOptions);
 
                         using var db = new CompanyContext(_connectionString);
                         if (!customerDtos.Any())

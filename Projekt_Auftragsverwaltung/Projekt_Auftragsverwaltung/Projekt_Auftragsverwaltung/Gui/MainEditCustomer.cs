@@ -119,11 +119,10 @@ namespace Projekt_Auftragsverwaltung
         public bool InputIsValid()
         {
             return _validationService.ValidateCustomerNumber(TxtCustomerNr.Text) &&
-                _validationService.ValidateEmail(TxtCustomerMail.Text) &&
-                _validationService.ValidateWebsite(TxtCustomerWebsite.Text) &&
-                _validationService.ValidatePassword(TxtCustomerPassword.Text) &&
-                _validationService.ValidateZipCode(TxtCustomerPostcode.Text) &&
-                _validationService.ValidatePhoneNumber(TxtCustomerPhoneNumber.Text);
+                   _validationService.ValidateEmail(TxtCustomerMail.Text) &&
+                   _validationService.ValidateWebsite(TxtCustomerWebsite.Text) &&
+                   _validationService.ValidatePassword(TxtCustomerPassword.Text);
+
         }
         private void CmdEditCustomerCancel_Click(object sender, EventArgs e)
         {
