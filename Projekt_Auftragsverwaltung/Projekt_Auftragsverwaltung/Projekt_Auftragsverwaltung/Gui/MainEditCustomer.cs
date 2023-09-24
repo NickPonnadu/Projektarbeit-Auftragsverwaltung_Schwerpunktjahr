@@ -121,7 +121,9 @@ namespace Projekt_Auftragsverwaltung
             return _validationService.ValidateCustomerNumber(TxtCustomerNr.Text) &&
                 _validationService.ValidateEmail(TxtCustomerMail.Text) &&
                 _validationService.ValidateWebsite(TxtCustomerWebsite.Text) &&
-                _validationService.ValidatePassword(TxtCustomerPassword.Text);
+                _validationService.ValidatePassword(TxtCustomerPassword.Text) &&
+                _validationService.ValidateZipCode(TxtCustomerPostcode.Text) &&
+                _validationService.ValidatePhoneNumber(TxtCustomerPhoneNumber.Text);
         }
         private void CmdEditCustomerCancel_Click(object sender, EventArgs e)
         {

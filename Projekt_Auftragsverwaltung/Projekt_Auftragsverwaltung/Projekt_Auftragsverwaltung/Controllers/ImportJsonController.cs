@@ -34,7 +34,7 @@ namespace Projekt_Auftragsverwaltung.Controllers
                     try
                     {
 
-                        string json = File.ReadAllText(ofd.FileName);
+                        string jsonFile = File.ReadAllText(ofd.FileName);
 
                         var jsonSerializerOptions = new JsonSerializerOptions
                         {
