@@ -21,7 +21,8 @@ public partial class Main : FormController
     private readonly IJsonController _jsonController;
     private readonly IImportJsonController _importJsonController;
     private readonly IImportXmlController _importXmlController;
-    private readonly IUpdateController _updateController;
+    private readonly IRegexValidationService _regexValidationService;
+
     public Form EditGuiArticle;
     public Form EditGuiArticleGroup;
     public Form EditGuiCustomer;
@@ -33,7 +34,7 @@ public partial class Main : FormController
         IArticlePositionController articlePositionController, ICustomerController customerController,
         IOrderController orderController, IOrderPositionController orderPositionController,
         IStatisticController statisticController, IAddressLocationController addressLocationController,
-        IAddressController addressController, IJsonController jsonController, IXmlController xmlController, IImportJsonController importJsonController, IImportXmlController importXmlController, IUpdateController updateController)
+        IAddressController addressController, IJsonController jsonController, IXmlController xmlController, IImportJsonController importJsonController, IImportXmlController importXmlController, IUpdateController updateController, IRegexValidationService regexValidationService)
     {
         _articleController = articleController;
         _articleGroupController = articleGroupController;
@@ -48,11 +49,12 @@ public partial class Main : FormController
         _xmlController = xmlController;
         _importJsonController = importJsonController;
         _importXmlController = importXmlController;
-        _updateController = updateController;
+        _regexValidationService = regexValidationService;
+
         InitializeComponent();
 
         EditGuiArticleGroup = new MainEditArticleGroup(_articleGroupController);
-        EditGuiCustomer = new MainEditCustomer(_addressController, _addressLocationController, _customerController);
+        EditGuiCustomer = new MainEditCustomer(_addressController, _addressLocationController, _customerController, _regexValidationService);
         EditGuiArticle = new MainEditArticle(_articleGroupController, _articleController);
         EditGuiPosition = new MainEditPosition(_orderPositionController, _articlePositionController, _orderController,
             _articleController);
@@ -66,7 +68,6 @@ public partial class Main : FormController
         EditGuiPosition.VisibleChanged += UpdateListsEvent;
         UpdateLists();
         SetDataBindings();
-        _updateController = updateController;
     }
 
     private void CmdCreateArticleGroup_Click(object sender, EventArgs e)
@@ -118,7 +119,7 @@ public partial class Main : FormController
             var customerId = Convert.ToInt32(rows.Cells[0].Value);
             var customer = _customerController.GetSingleCustomer(customerId);
             EditGuiCustomer.Dispose();
-            EditGuiCustomer = new MainEditCustomer(_addressController, _addressLocationController, _customerController, customer);
+            EditGuiCustomer = new MainEditCustomer(_addressController, _addressLocationController, _customerController, _regexValidationService, customer);
             EditGuiCustomer.VisibleChanged += UpdateListsEvent;
             EditGuiCustomer.ShowDialog();
             UpdateLists();
@@ -406,5 +407,5 @@ public partial class Main : FormController
         _importXmlController.ImportCustomerFromXml();
         UpdateLists();
     }
-    
+
 }

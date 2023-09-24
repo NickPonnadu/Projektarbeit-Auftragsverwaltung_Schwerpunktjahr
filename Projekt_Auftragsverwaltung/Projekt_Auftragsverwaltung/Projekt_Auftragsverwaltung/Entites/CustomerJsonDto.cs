@@ -8,27 +8,27 @@ using System.Threading.Tasks;
 
 namespace Projekt_Auftragsverwaltung.Entites
 {
-    public class CustomerImportDto
+    public class CustomerJsonDto
     {
         public int CustomerId { get; set; }
         public string CustomerNr { get; set; }
         public string Name { get; set; }
-        public AddressImportDto Address { get; set; }
+        public AddressJsonDto Address { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Website { get; set; }
         public string Password { get; set; }
     }
 
-    public class AddressImportDto
+    public class AddressJsonDto
     {
         public string Street { get; set; }
         public string HouseNumber { get; set; }
-        public AddressLocationDto AddressLocation { get; set; }
+        public AddressLocationJsonDto AddressLocation { get; set; }
 
     }
 
-    public class AddressLocationDto
+    public class AddressLocationJsonDto
     {
         public string Location { get; set; }
         public int ZipCode { get; set; }

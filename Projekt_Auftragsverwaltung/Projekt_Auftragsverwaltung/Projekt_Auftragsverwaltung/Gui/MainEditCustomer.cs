@@ -13,16 +13,17 @@ namespace Projekt_Auftragsverwaltung
         private readonly IAddressController _addressController;
         private readonly IAddressLocationController _addressLocationController;
         private readonly ICustomerController _customerController;
+        private readonly IRegexValidationService _validationService;
         Customer? Customer { get; set; }
 
         public bool EditMode;
 
 
-        public MainEditCustomer(IAddressController addressController, IAddressLocationController addressLocationController, ICustomerController customerController, Customer? customer = null )
+        public MainEditCustomer(IAddressController addressController, IAddressLocationController addressLocationController, ICustomerController customerController, IRegexValidationService regexValidationService, Customer? customer = null)
 
         {
             InitializeComponent();
-            _validationService = RegexValidationService.GetInstance();
+            _validationService = regexValidationService;
 
             Customer = customer;
 
@@ -128,6 +129,6 @@ namespace Projekt_Auftragsverwaltung
             CloseForm();
         }
 
-        private readonly RegexValidationService _validationService;
+
     }
 }

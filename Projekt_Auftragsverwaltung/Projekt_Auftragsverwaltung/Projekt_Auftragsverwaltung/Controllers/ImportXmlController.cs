@@ -1,25 +1,32 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Projekt_Auftragsverwaltung.Entites;
 using Projekt_Auftragsverwaltung.Interfaces;
-using Projekt_Auftragsverwaltung.Tables;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Linq;
+using System.Xml.Serialization;
+
+
 
 namespace Projekt_Auftragsverwaltung.Controllers
 {
     public class ImportXmlController : IImportXmlController
     {
         private readonly string _connectionString;
+        private readonly ICustomerController _customerController;
+        private readonly IAddressController _addressController;
+        private readonly IAddressLocationController _addressLocationController;
+        private readonly IRegexValidationService _regexValidationService;
 
-        public ImportXmlController(string connectionString)
+
+
+        public ImportXmlController(string connectionString, ICustomerController customerController, IAddressController addressController, IAddressLocationController addressLocationController, IRegexValidationService regexValidationService)
         {
             _connectionString = connectionString;
+            _customerController = customerController;
+            _addressController = addressController;
+            _addressLocationController = addressLocationController;
+            _regexValidationService = regexValidationService;
         }
+
+
 
         public void ImportCustomerFromXml()
         {
@@ -30,61 +37,73 @@ namespace Projekt_Auftragsverwaltung.Controllers
                 {
                     try
                     {
-                        XElement xelement = XElement.Load(ofd.FileName);
-                        IEnumerable<XElement> customers = xelement.Elements("Kunde");
+                        XmlSerializer serializer = new XmlSerializer(typeof(List<CustomerXmlDto>));
+                        using FileStream fs = new FileStream(ofd.FileName, FileMode.Open);
+                        var customerDtos = (List<CustomerXmlDto>)serializer.Deserialize(fs);
+                        
 
                         using var db = new CompanyContext(_connectionString);
-
-                        foreach (var customerElement in customers)
+                        if (!customerDtos.Any())
                         {
-                            Address newAddress = new Address
-                            {
-                                Street = (string)customerElement.Element("Address")?.Element("Street"),
-                                HouseNumber = "Unknown",
-                                ZipCode = (int?)customerElement.Element("Address")?.Element("PostalCode") ?? 0
-                            };
-
-                            db.Addresses.Add(newAddress);
-                            db.SaveChanges();
-
-                            Customer newCustomer = new Customer
-                            {
-                                CustomerId = int.Parse(((string)customerElement.Attribute("CustomerNr"))?.Replace("CU", "") ?? "0"),
-                                Name = (string)customerElement.Element("Name"),
-                                EMail = (string)customerElement.Element("EMail"),
-                                Website = (string)customerElement.Element("Website"),
-                                Password = (string)customerElement.Element("Password"),
-                                AddressId = newAddress.AddressId
-                            };
-
-                            db.Customers.Add(newCustomer);
+                            return;
                         }
+                        
+                        foreach (var importedCustomer in customerDtos)
+                        {
+                            var existingCustomer = _customerController.GetSingleCustomer(importedCustomer.CustomerId);
 
+                            if (_regexValidationService.ValidateCustomerNumber(importedCustomer.CustomerNr)
+                                && _regexValidationService.ValidateEmail(importedCustomer.Email)
+                                && _regexValidationService.ValidatePassword(importedCustomer.Password)
+                                && _regexValidationService.ValidateWebsite(importedCustomer.Website))
+
+                            {
+                                if (existingCustomer != null)
+                                {
+                                    _customerController.EditCustomer(importedCustomer.CustomerNr, importedCustomer.CustomerId, importedCustomer.Name, importedCustomer.PhoneNumber, importedCustomer.Email, importedCustomer.Website, importedCustomer.Password);
+
+                                    _addressLocationController.CreateAddressLocation(importedCustomer.Address.AddressLocation.ZipCode.ToString(), importedCustomer.Address.AddressLocation.Location);
+
+                                    _addressController.EditAddress(existingCustomer.AddressId,
+                                        importedCustomer.Address.Street, importedCustomer.Address.HouseNumber,
+                                        importedCustomer.Address.AddressLocation.ZipCode);
+
+                                }
+                                else
+                                {
+                                    _addressLocationController.CreateAddressLocation(
+                                        importedCustomer.Address.AddressLocation.ZipCode.ToString(),
+                                        importedCustomer.Address.AddressLocation.Location);
+
+
+                                    var address = _addressController.CreateAddress(importedCustomer.Address.Street,
+                                        importedCustomer.Address.HouseNumber,
+                                        importedCustomer.Address.AddressLocation.ZipCode.ToString());
+
+                                    _customerController.CreateCustomer(importedCustomer.CustomerNr, importedCustomer.Name,
+                                        importedCustomer.PhoneNumber, importedCustomer.Email, importedCustomer.Password,
+                                        importedCustomer.Website, address);
+                                }
+                            }
+                            
+                        }
                         db.SaveChanges();
                     }
-                    catch (XmlException ex)
+                    catch (IOException ex)
                     {
-                        // Handle XML format or parsing errors
-                        Console.WriteLine($"XML Error: {ex.Message}");
+                        MessageBox.Show($"File Read/Write Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    catch (FormatException ex)
+                    catch (InvalidOperationException ex)
                     {
-                        // Handle type conversion errors (like parsing strings to int)
-                        Console.WriteLine($"Format Error: {ex.Message}");
+                        MessageBox.Show($"XML Deserialization Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     catch (DbUpdateException ex)
                     {
-                        // Handle database errors
-                        Console.WriteLine(ex.Message);
+                        MessageBox.Show($"Database Update Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         if (ex.InnerException != null)
                         {
-                            Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                            MessageBox.Show($"Inner Exception: {ex.InnerException.Message}", "Inner Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        // General catch block for unexpected errors
-                        Console.WriteLine($"Unexpected Error: {ex.Message}");
                     }
                 }
             }

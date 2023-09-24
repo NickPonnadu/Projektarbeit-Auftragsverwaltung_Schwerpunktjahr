@@ -1,22 +1,14 @@
-﻿using System.Text;
+﻿using Projekt_Auftragsverwaltung.Interfaces;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Projekt_Auftragsverwaltung.Service
 {
-    public class RegexValidationService
+    public class RegexValidationService : IRegexValidationService
     {
-        private static RegexValidationService? _instance;
-        private RegexValidationService() { }
+       public RegexValidationService() { }
 
-        public static RegexValidationService GetInstance()
-        {
-            if (_instance == null)
-            {
-                _instance = new RegexValidationService();
-            }
-            return _instance;
-        }
-
+        
         public bool ValidateCustomerNumber(string input)
         {
             return Validate(input, CUSTOMERNUMBER_VALIDATION_PATTER, "KundenNr");

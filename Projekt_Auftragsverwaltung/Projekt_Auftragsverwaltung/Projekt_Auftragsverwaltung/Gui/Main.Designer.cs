@@ -127,7 +127,7 @@
             TabControl.Location = new Point(11, 12);
             TabControl.Name = "TabControl";
             TabControl.SelectedIndex = 0;
-            TabControl.Size = new Size(1441, 793);
+            TabControl.Size = new Size(1878, 793);
             TabControl.TabIndex = 24;
             TabControl.Selecting += Select_Statistics;
             // 
@@ -150,8 +150,8 @@
             Kunden.Controls.Add(LblKunden);
             Kunden.Location = new Point(4, 29);
             Kunden.Name = "Kunden";
-            Kunden.Padding = new Padding(3, 3, 3, 3);
-            Kunden.Size = new Size(1433, 760);
+            Kunden.Padding = new Padding(3);
+            Kunden.Size = new Size(1870, 760);
             Kunden.TabIndex = 4;
             Kunden.Text = "Kunden";
             Kunden.UseVisualStyleBackColor = true;
@@ -250,7 +250,7 @@
             DGWCustomers.RowTemplate.Height = 29;
             DGWCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DGWCustomers.ShowEditingIcon = false;
-            DGWCustomers.Size = new Size(1350, 500);
+            DGWCustomers.Size = new Size(1558, 500);
             DGWCustomers.TabIndex = 33;
             // 
             // CmdSearchResetCustomer
@@ -306,10 +306,10 @@
             Artikelgruppen.Controls.Add(LblArticleGroupSearch);
             Artikelgruppen.Controls.Add(LblArticleGroups);
             Artikelgruppen.Location = new Point(4, 29);
-            Artikelgruppen.Margin = new Padding(5, 5, 5, 5);
+            Artikelgruppen.Margin = new Padding(5);
             Artikelgruppen.Name = "Artikelgruppen";
-            Artikelgruppen.Padding = new Padding(5, 5, 5, 5);
-            Artikelgruppen.Size = new Size(1433, 760);
+            Artikelgruppen.Padding = new Padding(5);
+            Artikelgruppen.Size = new Size(1870, 760);
             Artikelgruppen.TabIndex = 0;
             Artikelgruppen.Text = "Artikelgruppen";
             Artikelgruppen.UseVisualStyleBackColor = true;
@@ -317,7 +317,7 @@
             // 
             // CmdTreeView
             // 
-            CmdTreeView.Location = new Point(1274, 149);
+            CmdTreeView.Location = new Point(1663, 149);
             CmdTreeView.Margin = new Padding(3, 4, 3, 4);
             CmdTreeView.Name = "CmdTreeView";
             CmdTreeView.Size = new Size(111, 69);
@@ -388,7 +388,7 @@
             DGWArticleGroups.RowHeadersWidth = 51;
             DGWArticleGroups.RowTemplate.Height = 29;
             DGWArticleGroups.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DGWArticleGroups.Size = new Size(1200, 500);
+            DGWArticleGroups.Size = new Size(1523, 500);
             DGWArticleGroups.TabIndex = 6;
             // 
             // TxtArticleGroupSearchName
@@ -431,8 +431,8 @@
             Artikel.Controls.Add(LblArticle);
             Artikel.Location = new Point(4, 29);
             Artikel.Name = "Artikel";
-            Artikel.Padding = new Padding(3, 3, 3, 3);
-            Artikel.Size = new Size(1433, 760);
+            Artikel.Padding = new Padding(3);
+            Artikel.Size = new Size(1870, 760);
             Artikel.TabIndex = 2;
             Artikel.Text = "Artikel";
             Artikel.UseVisualStyleBackColor = true;
@@ -458,7 +458,7 @@
             DGWArticles.RowHeadersWidth = 51;
             DGWArticles.RowTemplate.Height = 29;
             DGWArticles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DGWArticles.Size = new Size(1200, 500);
+            DGWArticles.Size = new Size(1432, 500);
             DGWArticles.TabIndex = 63;
             // 
             // TxtSearchArticleProperty
@@ -551,8 +551,8 @@
             Aufträge.Controls.Add(label5);
             Aufträge.Location = new Point(4, 29);
             Aufträge.Name = "Aufträge";
-            Aufträge.Padding = new Padding(3, 3, 3, 3);
-            Aufträge.Size = new Size(1433, 760);
+            Aufträge.Padding = new Padding(3);
+            Aufträge.Size = new Size(1870, 760);
             Aufträge.TabIndex = 1;
             Aufträge.Text = "Aufträge";
             Aufträge.UseVisualStyleBackColor = true;
@@ -578,7 +578,7 @@
             DGWOrders.RowHeadersWidth = 51;
             DGWOrders.RowTemplate.Height = 29;
             DGWOrders.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DGWOrders.Size = new Size(1200, 500);
+            DGWOrders.Size = new Size(1518, 500);
             DGWOrders.TabIndex = 72;
             // 
             // TxtSearchOrderProperty
@@ -671,8 +671,8 @@
             Positionen.Controls.Add(label10);
             Positionen.Location = new Point(4, 29);
             Positionen.Name = "Positionen";
-            Positionen.Padding = new Padding(3, 3, 3, 3);
-            Positionen.Size = new Size(1433, 760);
+            Positionen.Padding = new Padding(3);
+            Positionen.Size = new Size(1870, 760);
             Positionen.TabIndex = 3;
             Positionen.Text = "Positionen";
             Positionen.UseVisualStyleBackColor = true;
@@ -698,7 +698,7 @@
             DGWPositions.RowHeadersWidth = 51;
             DGWPositions.RowTemplate.Height = 29;
             DGWPositions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DGWPositions.Size = new Size(1200, 500);
+            DGWPositions.Size = new Size(1498, 500);
             DGWPositions.TabIndex = 81;
             // 
             // TxtSearchPositionProperty
@@ -783,8 +783,8 @@
             Jahresvergleich.Controls.Add(DGWStatistic);
             Jahresvergleich.Location = new Point(4, 29);
             Jahresvergleich.Name = "Jahresvergleich";
-            Jahresvergleich.Padding = new Padding(3, 3, 3, 3);
-            Jahresvergleich.Size = new Size(1433, 760);
+            Jahresvergleich.Padding = new Padding(3);
+            Jahresvergleich.Size = new Size(1870, 760);
             Jahresvergleich.TabIndex = 5;
             Jahresvergleich.Text = "Jahresvergleich";
             Jahresvergleich.UseVisualStyleBackColor = true;
@@ -813,14 +813,14 @@
             DGWStatistic.ReadOnly = true;
             DGWStatistic.RowHeadersWidth = 51;
             DGWStatistic.RowTemplate.Height = 25;
-            DGWStatistic.Size = new Size(504, 603);
+            DGWStatistic.Size = new Size(718, 603);
             DGWStatistic.TabIndex = 0;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1507, 805);
+            ClientSize = new Size(2010, 899);
             Controls.Add(TabControl);
             Name = "Main";
             Text = "Auftragsverwaltung";

@@ -1,16 +1,7 @@
-﻿using Projekt_Auftragsverwaltung.Entites;
+﻿using Microsoft.EntityFrameworkCore;
+using Projekt_Auftragsverwaltung.Entites;
 using Projekt_Auftragsverwaltung.Interfaces;
-using Projekt_Auftragsverwaltung.Tables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.IO;
-using System.Text.Json.Serialization;
-using System.Windows.Forms;
-using Microsoft.EntityFrameworkCore;
 
 namespace Projekt_Auftragsverwaltung.Controllers
 {
@@ -21,12 +12,15 @@ namespace Projekt_Auftragsverwaltung.Controllers
         private readonly ICustomerController _customerController;
         private readonly IAddressController _addressController;
         private readonly IAddressLocationController _addressLocationController;
-        public ImportJsonController(string connectionString, ICustomerController customerController, IAddressController addressController, IAddressLocationController addressLocationController)
+        private readonly IRegexValidationService _regexValidationService;
+
+        public ImportJsonController(string connectionString, ICustomerController customerController, IAddressController addressController, IAddressLocationController addressLocationController, IRegexValidationService regexValidationService)
         {
             _connectionString = connectionString;
             _customerController = customerController;
             _addressController = addressController;
             _addressLocationController = addressLocationController;
+            _regexValidationService = regexValidationService;
         }
 
 
@@ -47,7 +41,7 @@ namespace Projekt_Auftragsverwaltung.Controllers
                             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                             PropertyNameCaseInsensitive = true
                         };
-                        var customerDtos = JsonSerializer.Deserialize<List<CustomerImportDto>>(json, jsonSerializerOptions);
+                        var customerDtos = JsonSerializer.Deserialize<List<CustomerJsonDto>>(json, jsonSerializerOptions);
 
                         using var db = new CompanyContext(_connectionString);
                         if (!customerDtos.Any())
@@ -58,30 +52,40 @@ namespace Projekt_Auftragsverwaltung.Controllers
                         foreach (var importedCustomer in customerDtos)
                         {
                             var existingCustomer = _customerController.GetSingleCustomer(importedCustomer.CustomerId);
-                            var deletedCheck = true;
-                            if (existingCustomer != null)
+                            
+                            if (_regexValidationService.ValidateCustomerNumber(importedCustomer.CustomerNr)
+                                && _regexValidationService.ValidateEmail(importedCustomer.Email)
+                                && _regexValidationService.ValidatePassword(importedCustomer.Password)
+                                && _regexValidationService.ValidateWebsite(importedCustomer.Website))
+
                             {
-                                deletedCheck =
-                                    _customerController.DeleteCustomerWithReturn(importedCustomer.CustomerId);
+                                if (existingCustomer != null)
+                                {
+                                    _customerController.EditCustomer(importedCustomer.CustomerNr, importedCustomer.CustomerId, importedCustomer.Name, importedCustomer.PhoneNumber, importedCustomer.Email, importedCustomer.Website, importedCustomer.Password);
+
+                                    _addressLocationController.CreateAddressLocation(importedCustomer.Address.AddressLocation.ZipCode.ToString(), importedCustomer.Address.AddressLocation.Location);
+
+                                    _addressController.EditAddress(existingCustomer.AddressId,
+                                        importedCustomer.Address.Street, importedCustomer.Address.HouseNumber,
+                                        importedCustomer.Address.AddressLocation.ZipCode);
+
+                                }
+                                else
+                                {
+                                    _addressLocationController.CreateAddressLocation(
+                                        importedCustomer.Address.AddressLocation.ZipCode.ToString(),
+                                        importedCustomer.Address.AddressLocation.Location);
+
+
+                                    var address = _addressController.CreateAddress(importedCustomer.Address.Street,
+                                        importedCustomer.Address.HouseNumber,
+                                        importedCustomer.Address.AddressLocation.ZipCode.ToString());
+
+                                    _customerController.CreateCustomer(importedCustomer.CustomerNr, importedCustomer.Name,
+                                        importedCustomer.PhoneNumber, importedCustomer.Email, importedCustomer.Password,
+                                        importedCustomer.Website, address);
+                                }
                             }
-
-                            if (deletedCheck)
-                            {
-                                _addressLocationController.CreateAddressLocation(
-                                                                    importedCustomer.Address.AddressLocation.ZipCode.ToString(),
-                                                                    importedCustomer.Address.AddressLocation.Location);
-
-
-                                var address = _addressController.CreateAddress(importedCustomer.Address.Street,
-                                    importedCustomer.Address.HouseNumber,
-                                    importedCustomer.Address.AddressLocation.ZipCode.ToString());
-
-                                _customerController.CreateCustomer(importedCustomer.CustomerNr, importedCustomer.Name,
-                                    importedCustomer.PhoneNumber, importedCustomer.Email, importedCustomer.Password,
-                                    importedCustomer.Website, address);
-                            }
-
-
 
                         }
                         db.SaveChanges();

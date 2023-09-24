@@ -1,5 +1,6 @@
 ﻿using Projekt_Auftragsverwaltung.Controllers;
 using Projekt_Auftragsverwaltung.Interfaces;
+using Projekt_Auftragsverwaltung.Service;
 
 namespace Projekt_Auftragsverwaltung
 {
@@ -25,6 +26,7 @@ namespace Projekt_Auftragsverwaltung
         private IImportJsonController ImportJsonController;
         private IImportXmlController ImportXmlController;
         private IUpdateController UpdateController;
+        private IRegexValidationService RegexValidationService;
 
         public Login()
         {
@@ -77,9 +79,10 @@ namespace Projekt_Auftragsverwaltung
             StatisticController = new StatisticController(DbConnectionString);
             JsonController = new JsonController(DbConnectionString);
             XmlController = new XmlController(DbConnectionString);
-            ImportJsonController = new ImportJsonController(DbConnectionString, CustomerController,AddressController,AddressLocationController);
-            ImportXmlController = new ImportXmlController(DbConnectionString);
             UpdateController = new UpdateController(DbConnectionString);
+            RegexValidationService = new RegexValidationService();
+            ImportJsonController = new ImportJsonController(DbConnectionString, CustomerController, AddressController, AddressLocationController, RegexValidationService);
+            ImportXmlController = new ImportXmlController(DbConnectionString,CustomerController,AddressController,AddressLocationController,RegexValidationService);
 
         }
 
@@ -88,7 +91,7 @@ namespace Projekt_Auftragsverwaltung
             if (Connection)
             {
                 Hide();
-                MainGui = new Main(ArticleController, ArticleGroupController, ArticlePositionController, CustomerController, OrderController, OrderPositionController, StatisticController, AddressLocationController, AddressController, JsonController, XmlController, ImportJsonController, ImportXmlController, UpdateController);
+                MainGui = new Main(ArticleController, ArticleGroupController, ArticlePositionController, CustomerController, OrderController, OrderPositionController, StatisticController, AddressLocationController, AddressController, JsonController, XmlController, ImportJsonController, ImportXmlController, UpdateController, RegexValidationService);
 
                 MainGui.Show();
             }

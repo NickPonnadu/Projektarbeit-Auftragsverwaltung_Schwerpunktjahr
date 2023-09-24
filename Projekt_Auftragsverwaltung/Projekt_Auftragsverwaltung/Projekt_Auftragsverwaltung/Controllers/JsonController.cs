@@ -60,7 +60,7 @@ public class JsonController : IJsonController
             sfd.FileName = "export";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                File.WriteAllText(sfd.FileName, json);
+                File.WriteAllText(sfd.FileName, json,Encoding.UTF8);
             }
         }
     }
