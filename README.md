@@ -3,6 +3,9 @@
 E-Mail-Validierung nach RFC 5322
 Diese Validierung prüft, ob eine gegebene E-Mail-Adresse den RFC 5322-Standards entspricht, der die Spezifikation für gültige E-Mail-Adressen darstellt. Hier sind einige Beispiele für gültige und ungültige E-Mail-Adressen und eine Beschreibung, wie sie von der Validierung behandelt werden:
 
+RegEx E Mail Validierung: (?<=\s)("?)[\w\-+][\w\-+]*(\.[\w\-+]+)*\1@([\w\-]{1,10}(\.[\w\-]{1,10})*(\.[\w\-]{1,3})|\[([1-9]|([1-9]\d)|(1\d{2})|(2[0-4]\d)|25[0-5])(\.(25[0-5]|([1-9]?\d)|(1\d{2})|(2[0-4]\d))){3}(?![\.\d])\])$
+
+
 Gültige E-Mail-Adressen
 1. Einfache E-Mail-Adresse:
 Beispiel: user@example.com
